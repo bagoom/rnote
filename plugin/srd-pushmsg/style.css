@@ -1,0 +1,72 @@
+@charset "utf-8";
+
+.memo{
+  position: fixed;
+  z-index: 9999;
+  top:22px;
+  right: 100px;
+}
+
+#ol_arm {z-index:10001;position:relative;cursor:pointer}
+#ol_arm #arm_cnt {color:#fff;vertical-align:top; font-size: 11px; position: absolute; top: 0px; right:-17px;  padding:3px 6px; border-radius: 4px;}
+#ol_arm #arm_cnt.arm1 {font-weight:bold}
+#ol_arm #arm_cnt.arm0{background: #eee;color: #757575;}
+#ol_arm #dd_arm {display:none;z-index:100;position:absolute;top:43px;left:50%;margin:0;padding:0; margin-left: -100px; width:200px;background:#fff;list-style:none;line-height:1.2em; border:0; border-radius: 5px; box-shadow: 0 7px 15px rgba(0,0,0,0.1);
+}
+#ol_arm dd {position:relative;margin:0;border:0;}
+#arm_title  {
+	background:#3b4db7;
+	font-size: 15px;
+	color:#fff;
+	text-align:center;
+	height:50px;
+	line-height: 50px;
+	border-radius: 5px 5px 0 0;
+}
+#ol_arm dd a.redirect_link {
+	display:block;
+	padding:15px 25px 15px 10px;
+	background:#f7f7f7;
+	font-size: 14px;
+	color:#666;
+	line-height:18px;
+	border-bottom:1px solid #e1e8ed;
+	transition: all 0.5s;
+}
+#ol_arm dd a.redirect_link:hover{
+	color:#444;
+	background: #e2e6fc;
+}
+#ol_arm dd a.redirect_link:focus, #hd #hd_wrapper #tnb #ol_arm dd a:hover {background:#d9e1e5;color:#000}
+#ol_arm .arm_time {
+	display:block;
+	margin:3px 0 0;
+	color:#5666c9;
+}
+#ol_arm dd .arm_del {
+	display:inline-block;
+	position:absolute;
+	top:13px;
+	right:13px;
+	padding:0;
+	width:auto;
+	height:15px;
+	font-size:15px;
+}
+
+#ol_arm #arm_all a {display:block;padding:7px 0;background:#fff;color:#69797c;text-align:center;margin:0; border-radius: 5px; font-size: 13px;}
+#ol_arm #arm_empty {padding:20px 0;width:100%;text-align:center; font-size: 16px; color: #444;}
+/*tnb*/
+#tnb{float:right;display:inline-block}
+/*#tnb ul li{float:left;color:#757575;padding-left:10px;height:36px;line-height:36px;position:relative}*/
+#tnb ul li{float:left;color:#fff;padding-left:5px;position:relative;padding-top:7px; font-size: 25px; position: relative;
+transition: all 0.4s;}
+#tnb ul li:hover{
+	font-size: 28px;
+}
+#tnb ul li:after{display: block; clear: both;}
+#tnb ul li a{color:#757575}
+#tnb ul li a:hover{text-decoration:none;}
+#tnb ul li span.tnb_nb{background:#eee;}
+#tnb ul li span.read1{background:#ff8888;color:#fff;font-weight:bold}
+#tnb ul li span.nb_nb_new{background:#c2002f;color:#fff}

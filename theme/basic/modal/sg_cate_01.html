@@ -1,0 +1,91 @@
+    <div class="form-group">
+        <label class="col-sm-2 col-sm-2 control-label1 continue">매물명</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="name" tabindex="0"  autofocus/>
+            <span class="help-block">매물명을 입력 해 주세요.</span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 col-sm-2 control-label1">매물위치</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" >
+            <span class="help-block">매물위치를 입력 해 주세요.</span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-6 col-sm-6 control-label2">보증금</label>
+        <label class="col-sm-6 col-sm-6 control-label2">월세</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control"  placeholder="만원" >
+        </div>
+        <div class="col-sm-6">
+            <input type="text" class="form-control"  placeholder="만원">
+        </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-6 col-sm-6 control-label2">권리금</label>
+      <label class="col-sm-6 col-sm-6 control-label2">관리비</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control"  placeholder="만원">
+        </div>
+        <div class="col-sm-6">
+            <input type="text" class="form-control"  placeholder="만원">
+        </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-6 col-sm-6 control-label2">방구조</label>
+      <label class="col-sm-6 col-sm-6 control-label2">방향</label>
+        <div class="col-sm-6">
+            <select class="form-control">
+              <option value="">원룸(오픈형)</option>
+              <option value="">원룸(복층형)</option>
+              <option value="">투룸(오픈형)</option>
+            </select>
+        </div>
+        <div class="col-sm-6">
+          <select class="form-control">
+            <option value="">동향</option>
+            <option value="">서향</option>
+            <option value="">남향</option>
+            <option value="">북향</option>
+          </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-6 col-sm-6 control-label2">평수</label>
+      <label class="col-sm-6 col-sm-6 control-label2">층수</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control"  placeholder="m2">
+        </div>
+        <div class="col-sm-6">
+            <input type="text" class="form-control"  placeholder="층">
+        </div>
+    </div>
+
+    <div class="modal-list-btn">
+      <button type="button" class="btn btn-primary sg_cate_list left">목록</button>
+    </div>
+
+
+
+    <script>
+    $(".sg_cate_list").click(function(){
+
+      $.ajax({
+      type : "POST",
+      url : "modal/sg_cate_list.html",
+      dataType : "text",
+      error : function() {
+          alert('통신실패!!');
+      },
+      success : function(data) {
+          $('#Context').html(data);
+      }
+    });
+     })
+    </script>
