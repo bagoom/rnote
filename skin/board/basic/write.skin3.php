@@ -477,7 +477,7 @@ input[type="text"],input[type="number"],input[type="tel"]{
                                     <tbody>
                                       <tr>
                                         <th>실인수가</th>
-                                        <td ><input type="text" name="wr_silinsu"  id="wr_silinsu" value="<?php echo $subject ?>"  tabindex="1" readonly /></td>
+                                        <td ><input type="text" name="wr_silinsu"  id="wr_silinsu" value="<?php echo $write[wr_silinsu] ?>"  tabindex="1" readonly /></td>
                                         <th>수익률</th>
                                         <td><input type="text" name="wr_profit_rate" value="<?php echo $write[wr_profit_rate] ?>" id="wr_profit_rate"  tabindex="32" placeholder="%" readonly></td>
                                       </tr>
@@ -501,7 +501,7 @@ input[type="text"],input[type="number"],input[type="tel"]{
                                         <th>건물층수</th>
                                         <td > <input type="text" name="wr_floor" value="<?php echo $write[wr_floor] ?>" id="wr_floor"  tabindex="33" placeholder=""></td>
                                         <th>연면적</th>
-                                        <td><input type="text" name="wr_floor" value="<?php echo $write[wr_floor] ?>" id="wr_floor"  tabindex="34" placeholder=""></td>
+                                        <td><input type="text" name="wr_gross_area" value="<?php echo $write[wr_gross_area] ?>" id="wr_gross_area"  tabindex="34" placeholder=""></td>
                                       </tr>
                                       <tr>
                                         <th >메모</th>
@@ -552,14 +552,14 @@ input[type="text"],input[type="number"],input[type="tel"]{
 
 
 
-    <!-- <div class="modal-footer">
+    <div class="modal-footer">
       <? if($w == "u"){ ?>
       <input type="submit" value="매물수정" id="btn_submit" accesskey="s" class="btn btn-primary" style="width:100%; padding:13px; text-align:center; margin-top:10px; margin-left:0;">
       <?}else {?>
       <input type="submit" value="매물등록" id="btn_submit" accesskey="s" class="btn btn-primary" style="width:100%; padding:13px; text-align:center; margin-top:10px; margin-left:0;">
       <?}?>
 
-    </div> -->
+    </div>
     <!-- <div class="btn_confirm">
         <input type="submit" value="작성완료" id="btn_submit" accesskey="s" class="btn_submit">
         <a href="./board.php?bo_table=<?php echo $bo_table ?>" class="btn_cancel">취소</a>

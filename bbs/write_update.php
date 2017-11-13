@@ -32,9 +32,9 @@ if (isset($_POST['wr_subject'])) {
     $wr_subject = preg_replace("#[\\\]+$#", "", $wr_subject);
 }
 
-if ($wr_subject == '') {
-    $msg[] = '<strong>제목</strong>을 입력하세요.';
-}
+// if ($wr_subject == '') {
+//     $msg[] = '<strong>제목</strong>을 입력하세요.';
+// }
 
 $wr_content = '';
 if (isset($_POST['wr_content'])) {
@@ -202,8 +202,8 @@ if ($w == '' || $w == 'r') {
     set_session("ss_datetime", G5_SERVER_TIME);
 }
 
-if (!isset($_POST['wr_subject']) || !trim($_POST['wr_subject']))
-    alert('제목을 입력하여 주십시오.');
+// if (!isset($_POST['wr_subject']) || !trim($_POST['wr_subject']))
+//     alert('제목을 입력하여 주십시오.');
 
 if ($w == '' || $w == 'r') {
 
@@ -266,6 +266,9 @@ if ($w == '' || $w == 'r') {
                      wr_total_rfee = '$wr_total_rfee',
                      wr_rent_deposit = '$wr_rent_deposit',
                      wr_profit_rate = '$wr_profit_rate',
+                     wr_mon_income = '$wr_mon_income',
+                     wr_silinsu = '$wr_silinsu',
+                     wr_gross_area = '$wr_gross_area',
                      wr_m_rate = '$wr_m_rate',
                      wr_mt_cost = '$wr_mt_cost',
                      wr_premium_o = '$wr_premium_o',
@@ -424,6 +427,9 @@ if ($w == '' || $w == 'r') {
                          wr_total_rfee = '$wr_total_rfee',
                          wr_rent_deposit = '$wr_rent_deposit',
                          wr_profit_rate = '$wr_profit_rate',
+                         wr_mon_income = '$wr_mon_income',
+                         wr_silinsu = '$wr_silinsu',
+                         wr_gross_area = '$wr_gross_area',
                          wr_m_rate = '$wr_m_rate',
                          wr_mt_cost = '$wr_mt_cost',
                          wr_premium_o = '$wr_premium_o',
