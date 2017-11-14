@@ -18,11 +18,10 @@ include_once("$board_skin_path/lib/skin.lib.php");
   overflow: hidden;
   margin: 0 auto;
 }
-/*.board_search li{
-  width: 33.333%;
-  float: left;
-  text-align: center;
-}*/
+.list_search_wrap li{
+  /*border-bottom:1px solid #d1d1d1;*/
+  overflow: hidden;
+}
 .board_search li:last-child{
   border: 0;
 }
@@ -32,74 +31,63 @@ include_once("$board_skin_path/lib/skin.lib.php");
   color: #222 !important;
 }
 
-.board_search .input_range, .input_box,.input_box2{
+.board_search .input_range, .input_box{
   position: relative;
   float: left;
-  padding:15px;
-  max-height: 45px;
-  background: rgba(247, 247, 247,1);
-  cursor: pointer;
+  width:33.333%;
+  /*max-height: 45px;*/
   /*border-top: 3px solid #3b4db7;*/
-}
-.input_box:first-child{
-  margin-left: 15px;
-}
-
-.board_search li:first-child div{
-  display: inline-block;
 }
 
 .board_search input[type=text]{
   width: 100%;
-  height: 35px;
-  margin: 10px 0;
+  height: 50px;
+  margin: 5px 0;
   text-align: center;
   font-size: 16px;
   font-weight: bold;
-  background: transparent;
+  background: #fff;
   color: #222;
-  border:1px solid #ddd;
+  border:1px solid #e1e1e1;
   /*border-right:1px solid #e0e0e0;*/
 }
-.board_search .range input[type=text]{
-  width: 50%;
-  float: left;
-  margin-top: 5px;
 
-}
-
-.input_range input[type=text]{
-  width: 47%;
-  float: left;
-  padding-right:0;
-}
-.input_box2 input[type=submit]{
-  background: transparent;
-  border:0;
-}
-.range_min,.range_max{
-  width: 50%;
-  float: left;
-  margin-bottom: 0;
-  text-align: center;
-}
 #my_popup{
-  position: absolute;
-  width:300px;
-  top:53px;
-  left:0 !important;
+  /*position: absolute;*/
   text-align: left;
-  padding : 15px;
-  background: #fff;
-  box-shadow: 0 3px 5px rgba(0,0,0,0.2);
-  z-index:10;
+  padding : 0px 15px;
+  overflow: hidden;
+
 }
-#my_popup input[type=submit]{
-  width: 100%;
-  background: #3b4db7;
-  color: #fff;
-  border:0;
-  padding: 10px;
+
+.input_box p{
+  width: 20%;
+  height: 50px;
+  line-height: 50px;
+  margin: 5px 0;
+  text-align: center;
+  float: left;
+  color: #222;
+  background: #fff;
+  border:1px solid #dee3e6;
+  border-width: 1px 0 1px 1px;
+  border-radius: 5px 0 0 5px;
+}
+.range_p{
+  border-radius:0 !important;
+}
+.input_box input[type=text]{
+  width: 80%;
+  float: left;
+  border-left: 1px solid #dee3e6;
+  border-radius: 0 5px 5px 0;
+}
+.range input[type=text]{
+  width: 30% !important;
+  float: left;
+}
+.range input[type=text]:first-child{
+  border-radius: 0!important;
 }
 .search_list i{
   font-size: 12px;
@@ -107,15 +95,43 @@ include_once("$board_skin_path/lib/skin.lib.php");
   padding-right: 25px;
   border-right: 1px solid #d1d1d1;
 }
-.check_list_wrap{
-  top:15px ;
+
+.search_btn_wrap{
+  width: 600px;
+  margin: 0 auto;
 }
+.input_box2{
+  width: 50%;
+  height:45px;
+  margin-top: 10px;
+  float: left;
+  padding:15px;
+  color: #fff;
+  background: #222;
+  border: 1px solid #f5f9fc;
+}
+.input_box2 input[type=submit]{
+  background: transparent;
+  border:0;
+  color: #fff;
+}
+.job{
+  background: #e6eaec;
+  color: #222;
+  border: 1px solid #d9dde0;
+  height:45px;
+  margin:5px  0!important;
+  line-height: 45px !important;
+  padding:0;
+}
+
 </style>
 
 
 <div class="search_wrap " style="text-align:center;">
 
   <div class="board_search" >
+  <div class="list_search_wrap">
   <form name="fsearch" method="get">
   <input type="hidden" name="bo_table" value="<?=$bo_table?>"/>
   <input type="hidden" name="wr_sale_type" value="<?=$wr_sale_type?>"/>
@@ -127,159 +143,185 @@ include_once("$board_skin_path/lib/skin.lib.php");
   <input type="hidden" name="wr_office_permission" value="0"/>
     <?}?>
 
-      <div class="input_box ">
-       <span class="search_list">매물명  <i class="fa fa-caret-down" aria-hidden="true"></i></span>
-        <div id="my_popup" style="display:none;">
-          <p>매물명</p>
-          <input type="text" name="wr_subject"   value='<?=$_GET['wr_subject']?>' placeholder="매물명">
+
+      <ul>
+        <li>
+          <div class="input_box ">
+           <!-- <span class="search_list">매물명  <i class="fa fa-caret-down" aria-hidden="true"></i></span> -->
+            <div id="my_popup" >
+              <p>매물명</p>
+              <input type="text" name="wr_subject"   value='<?=$_GET['wr_subject']?>' >
+            </div>
+          </div>
+
+          <div class="input_box ">
+           <!-- <span class="search_list">상권명 <i class="fa fa-caret-down" aria-hidden="true"></i></span> -->
+            <div id="my_popup" >
+              <p>상권명</p>
+              <input type="text" name="wr_sale_area" value='<?=$_GET['wr_sale_area']?>' >
+              <!-- <button class="my_popup_close">Close</button> -->
+            </div>
+          </div>
+
+          <div class="input_box ">
+           <!-- <span class="search_list">주소 <i class="fa fa-caret-down" aria-hidden="true"></i></span> -->
+            <div id="my_popup" >
+              <p>주소</p>
+              <input type="text" name="wr_address" value='<?=$_GET['wr_address']?>' >
+              <!-- <button class="my_popup_close">Close</button> -->
+            </div>
+          </div>
 
 
-          <!-- <button class="my_popup_close">Close</button> -->
-        </div>
+        </li>
+        <li>
+          <div class="input_box range">
+           <!-- <span class="search_list">층수 <i class="fa fa-caret-down" aria-hidden="true"></i></span> -->
+            <div id="my_popup" >
+              <p>층수</p>
+              <input type="text" name="wr_floor_min" value="<?=$_GET['wr_floor_min']?>" style="border-radius:0; border-right:0;" >
+              <p class="range_p">~</p>
+              <input type="text"  name="wr_floor_max" value='<?=$_GET['wr_floor_max']?>'>
+              <!-- <button class="my_popup_close">Close</button> -->
+            </div>
+          </div>
+
+          <div class="input_box range">
+            <div id="my_popup" >
+              <p>면적</p>
+              <input type="text" name="wr_area_p_min" value='<?=$_GET['wr_area_p_min']?>' style="border-radius:0; border-right:0;" >
+              <p class="range_p">~</p>
+              <input type="text" name="wr_area_p_max" value='<?=$_GET['wr_area_p_max']?>'>
+              <!-- <button class="my_popup_close">Close</button> -->
+            </div>
+          </div>
+
+          <div class="input_box range">
+            <div id="my_popup" >
+              <p>보증금</p>
+              <input type="text" name="wr_rent_deposit_min" value='<?=$_GET['wr_rent_deposit_min']?>' style="border-radius:0; border-right:0;" >
+              <p class="range_p">~</p>
+              <input type="text" name="wr_rent_deposit_max" value='<?=$_GET['wr_rent_deposit_max']?>'>
+              <!-- <button class="my_popup_close">Close</button> -->
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="input_box range">
+            <div id="my_popup" >
+              <p>임대료</p>
+              <input type="text" name="wr_m_rate_min" value='<?=$_GET['wr_m_rate_min']?>' style="border-radius:0; border-right:0;" >
+              <p class="range_p">~</p>
+              <input type="text" name="wr_m_rate_max" value='<?=$_GET['wr_m_rate_max']?>'>
+            </div>
+          </div>
+
+
+          <div class="input_box range">
+            <div id="my_popup" >
+              <p>권리금</p>
+              <input type="text" name="wr_premium_o_min" value='<?=$_GET['wr_premium_o_min']?>' style="border-radius:0; border-right:0;" >
+              <p class="range_p">~</p>
+              <input type="text" name="wr_premium_o_max" value='<?=$_GET['wr_premium_o_max']?>'>
+            </div>
+          </div>
+
+          <div class="input_box range">
+            <div id="my_popup" >
+              <p>합예산</p>
+              <!-- <input type="text" name="wr_rent_deposit_min" value='<?=$_GET['wr_rent_deposit_min']?>' style="border-right:0;" >
+              <input type="text" name="wr_rent_deposit_max" value='<?=$_GET['wr_rent_deposit_max']?>'> -->
+              <!-- <button class="my_popup_close">Close</button> -->
+            </div>
+          </div>
+          </li>
+          <li>
+          <div class="input_box ">
+           <!-- <span class="search_list">담당자명 <i class="fa fa-caret-down" aria-hidden="true"></i></span> -->
+            <div id="my_popup" >
+              <p>담당자명</p>
+              <input type="text" name="wr_writer" value='<?=$_GET['wr_writer']?>' >
+              <!-- <button class="my_popup_close">Close</button> -->
+            </div>
+          </div>
+
+          <div class="input_box">
+            <div id="my_popup">
+            <div class="job" id="trigger-overlay"> 추천업종
+          <i class="fa fa-caret-down" aria-hidden="true" style="font-size: 12px; padding-left: 5px; "></i></div>
+          <ul id="wr_rec_job">
+          </ul>
+          <input type="hidden" id="search_box" name="wr_rec_sectors" value="<?=$write[wr_rec_sectors]?>"/>
+
+          <div class="overlay overlay-hugeinc" id="overlay" style="position:relative;" >
+
+      <div class="check_list_wrap" style="top:15px !important; width:500px;" >
+      <input  type="checkbox" name="d" value="0" data-labelauty="음식점 "/>
+      <input  type="checkbox" name="d" value="0" data-labelauty="고깃집 "/>
+      <input  type="checkbox" name="d" value="0" data-labelauty="횟집 "/>
+      <input  type="checkbox" name="d" value="0" data-labelauty="퓨전주점 "/>
+      <input  type="checkbox" name="d" value="0" data-labelauty="소주방 "/>
+      <input  type="checkbox" name="d" value="0" data-labelauty="휴게음식점 "/>
+
+      <input  type="checkbox" name="d" value="0" data-labelauty="카페 "/>
+      <input  type="checkbox" name="d" value="0" data-labelauty="테이크아웃 "/>
+      <input  type="checkbox" name="d" value="0" data-labelauty="분식 "/>
+      <input  type="checkbox" name="d" value="0" data-labelauty="미용 "/>
+      <input  type="checkbox" name="d" value="0" data-labelauty="네일 "/>
+      <input  type="checkbox" name="d" value="0" data-labelauty="뷰티 "/>
+
+      <input  type="checkbox" name="d" value="0" data-labelauty="판매 "/>
+      <input  type="checkbox" name="d" value="0" data-labelauty="휴대폰 "/>
+      <input  type="checkbox" name="d" value="0" data-labelauty="화장품 "/>
+      <input  type="checkbox" name="d" value="0" data-labelauty="의류 "/>
+      <input  type="checkbox" name="d" value="0" data-labelauty="잡화 "/>
+      <input  type="checkbox" name="d" value="0" data-labelauty="편의점 "/>
+
+      <input  type="checkbox" name="d" value="0" data-labelauty="마트 "/>
+      <input  type="checkbox" name="d" value="0" data-labelauty="오락스포츠 "/>
+      <input  type="checkbox" name="d" value="0" data-labelauty="헬스 "/>
+      <input  type="checkbox" name="d" value="0" data-labelauty="골프 "/>
+      <input  type="checkbox" name="d" value="0" data-labelauty="당구장 "/>
+      <input  type="checkbox" name="d" value="0" data-labelauty="노래연습장 "/>
+
+      <input  type="checkbox" name="d" value="0" data-labelauty="단란유흥 "/>
+      <input  type="checkbox" name="d" value="0" data-labelauty="BAR "/>
+      <input  type="checkbox" name="d" value="0" data-labelauty="스포츠마사지 "/>
+      <input  type="checkbox" name="d" value="0" data-labelauty="자동차 "/>
+      <input  type="checkbox" name="d" value="0" data-labelauty="학원 "/>
+      <input  type="checkbox" name="d" value="0" data-labelauty="병원 "/>
+
+      <input  type="checkbox" name="d" value="0" data-labelauty="사무실 "/>
+      <input  type="checkbox" name="d" value="0" data-labelauty="다용도 "/>
+      <input  type="checkbox" name="d" value="0" data-labelauty="숙박 "/>
+      <input  type="checkbox" name="d" value="0" data-labelauty="고수익양도양수 "/>
+      <input  type="checkbox" name="d" value="0" data-labelauty="프랜차이즈신규 "/>
+      <input  type="checkbox" name="d" value="0" data-labelauty="대형매장 "/>
       </div>
+      <button type="button" id="overlay-close" class="overlay-close" style="bottom:-590px !important; width:500px !important;">확인</button>
+      </div>
+          </div>
+    </div>
+          <script>
+            $(document).ready(function(){
+              $(":checkbox").labelauty();
+              $(":radio").labelauty();
+              $('#tab label').remove();
+            });
 
-
-      <div style="width:125px; float:left; ">
-        <div class="job" id="trigger-overlay" style="margin:0; padding:15px; font-size:13px; background:#f7f7f7; color:#323e51; "> 추천업종
-      <i class="fa fa-caret-down" aria-hidden="true" style="font-size: 12px; padding-left: 5px; padding-right:25px; border-right: 1px solid #d1d1d1;"></i></div>
-      <ul id="wr_rec_job">
+          </script>
+        </li>
       </ul>
-      <input type="hidden" id="search_box" name="wr_rec_sectors" value="<?=$write[wr_rec_sectors]?>"/>
 
-      <div class="overlay overlay-hugeinc" id="overlay" style="position:relative;" >
 
-  <div class="check_list_wrap" style="top:15px !important; width:500px;" >
-  <input  type="checkbox" name="d" value="0" data-labelauty="음식점 "/>
-  <input  type="checkbox" name="d" value="0" data-labelauty="고깃집 "/>
-  <input  type="checkbox" name="d" value="0" data-labelauty="횟집 "/>
-  <input  type="checkbox" name="d" value="0" data-labelauty="퓨전주점 "/>
-  <input  type="checkbox" name="d" value="0" data-labelauty="소주방 "/>
-  <input  type="checkbox" name="d" value="0" data-labelauty="휴게음식점 "/>
-
-  <input  type="checkbox" name="d" value="0" data-labelauty="카페 "/>
-  <input  type="checkbox" name="d" value="0" data-labelauty="테이크아웃 "/>
-  <input  type="checkbox" name="d" value="0" data-labelauty="분식 "/>
-  <input  type="checkbox" name="d" value="0" data-labelauty="미용 "/>
-  <input  type="checkbox" name="d" value="0" data-labelauty="네일 "/>
-  <input  type="checkbox" name="d" value="0" data-labelauty="뷰티 "/>
-
-  <input  type="checkbox" name="d" value="0" data-labelauty="판매 "/>
-  <input  type="checkbox" name="d" value="0" data-labelauty="휴대폰 "/>
-  <input  type="checkbox" name="d" value="0" data-labelauty="화장품 "/>
-  <input  type="checkbox" name="d" value="0" data-labelauty="의류 "/>
-  <input  type="checkbox" name="d" value="0" data-labelauty="잡화 "/>
-  <input  type="checkbox" name="d" value="0" data-labelauty="편의점 "/>
-
-  <input  type="checkbox" name="d" value="0" data-labelauty="마트 "/>
-  <input  type="checkbox" name="d" value="0" data-labelauty="오락스포츠 "/>
-  <input  type="checkbox" name="d" value="0" data-labelauty="헬스 "/>
-  <input  type="checkbox" name="d" value="0" data-labelauty="골프 "/>
-  <input  type="checkbox" name="d" value="0" data-labelauty="당구장 "/>
-  <input  type="checkbox" name="d" value="0" data-labelauty="노래연습장 "/>
-
-  <input  type="checkbox" name="d" value="0" data-labelauty="단란유흥 "/>
-  <input  type="checkbox" name="d" value="0" data-labelauty="BAR "/>
-  <input  type="checkbox" name="d" value="0" data-labelauty="스포츠마사지 "/>
-  <input  type="checkbox" name="d" value="0" data-labelauty="자동차 "/>
-  <input  type="checkbox" name="d" value="0" data-labelauty="학원 "/>
-  <input  type="checkbox" name="d" value="0" data-labelauty="병원 "/>
-
-  <input  type="checkbox" name="d" value="0" data-labelauty="사무실 "/>
-  <input  type="checkbox" name="d" value="0" data-labelauty="다용도 "/>
-  <input  type="checkbox" name="d" value="0" data-labelauty="숙박 "/>
-  <input  type="checkbox" name="d" value="0" data-labelauty="고수익양도양수 "/>
-  <input  type="checkbox" name="d" value="0" data-labelauty="프랜차이즈신규 "/>
-  <input  type="checkbox" name="d" value="0" data-labelauty="대형매장 "/>
-  </div>
-  <button type="button" id="overlay-close" class="overlay-close" style="bottom:-590px !important; width:500px !important;">확인</button>
-      </div>
-</div>
-      <script>
-        $(document).ready(function(){
-          $(":checkbox").labelauty();
-          $(":radio").labelauty();
-          $('#tab label').remove();
-        });
-
-      </script>
-
-          <!-- <button class="my_popup_close">Close</button> -->
-
-      <div class="input_box ">
-       <span class="search_list">상권명 <i class="fa fa-caret-down" aria-hidden="true"></i></span>
-        <div id="my_popup" style="display:none;">
-          <p>상권명</p>
-          <input type="text" name="wr_sale_area" value='<?=$_GET['wr_sale_area']?>' placeholder="상권명">
-          <!-- <button class="my_popup_close">Close</button> -->
-        </div>
-      </div>
-
-      <div class="input_box ">
-       <span class="search_list">주소 <i class="fa fa-caret-down" aria-hidden="true"></i></span>
-        <div id="my_popup" style="display:none;">
-          <p>주소</p>
-          <input type="text" name="wr_address" value='<?=$_GET['wr_address']?>' placeholder="주소">
-          <!-- <button class="my_popup_close">Close</button> -->
-        </div>
-      </div>
-
-      <div class="input_box ">
-       <span class="search_list">담당자명 <i class="fa fa-caret-down" aria-hidden="true"></i></span>
-        <div id="my_popup" style="display:none;">
-          <p>담당자명</p>
-          <input type="text" name="wr_writer" value='<?=$_GET['wr_writer']?>' placeholder="담당자명">
-          <!-- <button class="my_popup_close">Close</button> -->
-        </div>
-      </div>
-
-      <div class="input_box range">
-       <span class="search_list">층수 <i class="fa fa-caret-down" aria-hidden="true"></i></span>
-        <div id="my_popup" style="display:none;">
-          <p>층수</p>
-          <p class="range_min">최소</p><p class="range_max">최대</p>
-          <input type="text" name="wr_floor_min" value="<?=$_GET['wr_floor_min']?>" style="border-right:0;" >
-          <input type="text"  name="wr_floor_max" value='<?=$_GET['wr_floor_max']?>'>
-          <!-- <button class="my_popup_close">Close</button> -->
-        </div>
-      </div>
-
-      <div class="input_box range">
-       <span class="search_list">면적 <i class="fa fa-caret-down" aria-hidden="true"></i></span>
-        <div id="my_popup" style="display:none;">
-          <p>면적</p>
-          <p class="range_min">최소</p><p class="range_max">최대</p>
-          <input type="text" name="wr_area_p_min" value='<?=$_GET['wr_area_p_min']?>' style="border-right:0;" >
-          <input type="text" name="wr_area_p_max" value='<?=$_GET['wr_area_p_max']?>'>
-          <!-- <button class="my_popup_close">Close</button> -->
-        </div>
-      </div>
-
-      <div class="input_box range">
-       <span class="search_list">매물금액 <i class="fa fa-caret-down" aria-hidden="true"></i></span>
-        <div id="my_popup" style="display:none;">
-          <p>매물금액</p>
-          <p class="range_min">보증금최소</p><p class="range_max">보증금최대</p>
-          <input type="text" name="wr_rent_deposit_min" value='<?=$_GET['wr_rent_deposit_min']?>' style="border-right:0;" >
-          <input type="text" name="wr_rent_deposit_max" value='<?=$_GET['wr_rent_deposit_max']?>'>
-          <p class="range_min">임대료최소</p><p class="range_max">임대료최대</p>
-          <input type="text" name="wr_m_rate_min" value='<?=$_GET['wr_m_rate_min']?>' style="border-right:0;" >
-          <input type="text" name="wr_m_rate_max" value='<?=$_GET['wr_m_rate_max']?>'>
-          <p class="range_min">권리금최소</p><p class="range_max">권리금최대</p>
-          <input type="text" name="wr_premium_o_min" value='<?=$_GET['wr_premium_o_min']?>' style="border-right:0;" >
-          <input type="text" name="wr_premium_o_max" value='<?=$_GET['wr_premium_o_max']?>'>
-          <p class="range_min">합예산최소</p><p class="range_max">합예산최대</p>
-          <!-- <input type="text" name="wr_rent_deposit_min" value='<?=$_GET['wr_rent_deposit_min']?>' style="border-right:0;" >
-          <input type="text" name="wr_rent_deposit_max" value='<?=$_GET['wr_rent_deposit_max']?>'> -->
-          <!-- <button class="my_popup_close">Close</button> -->
-        </div>
-      </div>
-
-      <div class="input_box2"  style="background:#e2215e !important">
+    <div class="search_btn_wrap">
+      <div class="input_box2" style="border-right:0;">
        <span class="search_list"  >검색초기화</span>
       </div>
       <div class="input_box2" >
         <input type="submit" value="검색"  class="btn-default" >
       </div>
+    </div>
 
 
 
@@ -288,6 +330,7 @@ include_once("$board_skin_path/lib/skin.lib.php");
 </div> -->
 <input type="submit" value="검색" style="background:transparent; border:1px solid #aaa; color:#fff; padding:15px; width:150px; font-size:16px; text-align:center; float:left; display:none;">
   </form>
+  </div>
   </div>
 
 
@@ -551,6 +594,12 @@ include_once("$board_skin_path/lib/skin.lib.php");
               <span class="s1">사무실매물등록하기</span>
               <span class="s2">즐겨찾기등록하기</span>
               <?}}?>
+              <!-- <?if (!$gr_cp && !$gr_admin) {}else{?>
+              <span class="s1">사무실매물로수락</span>
+              <?}?>
+              <?if (!$gr_cp && !$gr_admin) {}else{?>
+              <span data-target="#layerpop" data-toggle="modal">거절하기</span>
+              <?}?> -->
               <span class="s3">매매완료등록하기</span>
 
             </div>
@@ -587,19 +636,19 @@ $(".tr:even").css("background", "white");
 
 
 // 검색창 클릭 팝업
-$(".input_box").on('click',function(e){
-  $('.drop-down-open').hide();
-	myDropDown = $(this).find('#my_popup');
-	if( myDropDown.is(':visible') ) {
-		$(myDropDown).removeClass('drop-down-open');
-		myDropDown.hide();
-	} else {
-		myDropDown.fadeIn();
-    $(this).find('input[type=text]').first().focus();
-    $(myDropDown).addClass('drop-down-open');
-	}
-	return false;
-});
+// $(".input_box").on('click',function(e){
+//   $('.drop-down-open').hide();
+// 	myDropDown = $(this).find('#my_popup');
+// 	if( myDropDown.is(':visible') ) {
+// 		$(myDropDown).removeClass('drop-down-open');
+// 		myDropDown.hide();
+// 	} else {
+// 		myDropDown.fadeIn();
+//     $(this).find('input[type=text]').first().focus();
+//     $(myDropDown).addClass('drop-down-open');
+// 	}
+// 	return false;
+// });
 
 $('body').click(function(event) {
 	$('.drop-down-open').hide();

@@ -569,34 +569,24 @@ li{
 /*------------- pc list-------------*/
 .board_search{
   position: absolute;
-  top: 120px;
+  top: 75px;
   width: 100%;
-  background: #f7f7f7;
+  background: #f5f9fc;
+  border-bottom: 4px solid #3b4db7;
   /*box-shadow: 0 4px 5px rgba(0,0,0,0.1);*/
-  border-bottom:1px solid #3b4db7;
   z-index: 10;
+}
+.list_search_wrap{
+  width: 980px;
+  height: 330px;
+  margin: 0 auto;
+  padding: 20px;
 }
 .submit_box{
   overflow: hidden;
 
 }
-.input_box2  {
-  background: #3b4db7 !important;
-  color: #fff;
-}
 
-.input_box2 input[type='submit']{
-  color:#fff;
-}
-.search_wrap{
-  width: 100%;
-  padding-top:70px;
-  min-height: 120px;
-  /*background: #3b4db7;*/
-  /*background: #222;*/
-  background: url(../../img/list_img/list_img.jpg) ;
-  background-position: center center;
-}
 .list_style_memo.active{
   border-bottom:1px solid #000;
 }
@@ -1097,8 +1087,8 @@ color: #fff;
   font-weight: bolder;
 }
 .black-bg {
-  margin-top: 20px;
-    background: transparent;
+  /*padding: 10px 0;*/
+    background: #222;
     /*border-bottom:3px solid #3b4db7;*/
 }
 
@@ -1538,7 +1528,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 /* MAIN CHART CONFIGURATION */
 
 .main-list-wrap {
-  margin-top: 30px;
+  margin-top: 400px;
 	padding: 30px;
   overflow: hidden;
 }

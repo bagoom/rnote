@@ -140,7 +140,7 @@ if(!defined('G5_IS_ADMIN'))
 
           <li>
           <?if ($wr_important == '2' && $wr_sale_type== '1' || $wr_sale_type == '2'){ ?>
-              <a href="#" style="letter-spacing:.5px; background:#3b4db7!important;">My Note</a>
+              <a href="#" style="letter-spacing:.5px; background:#222!important;">My Note</a>
           <?}else{?>
               <a href="#" style="letter-spacing:.5px; ">My Note</a>
             <?}?>
@@ -196,7 +196,7 @@ if(!defined('G5_IS_ADMIN'))
 
           <li>
             <?if ($wr_important == '1'  && $wr_office_permission == '2'){ ?>
-                <a href="#" style="letter-spacing:.5px; background:#3b4db7!important;">Office Note</</a>
+                <a href="#" style="letter-spacing:.5px; background:#222!important;">Office Note</</a>
             <?}else{?>
                 <a href="#" style="letter-spacing:.5px;">Office Note</a>
               <?}?>
@@ -227,7 +227,7 @@ if(!defined('G5_IS_ADMIN'))
 
           <li>
             <?if ($wr_sale_type == '3'){ ?>
-                <a href="#" style="letter-spacing:.5px; background:#3b4db7!important;">거래종료</</a>
+                <a href="#" style="letter-spacing:.5px; background:#222!important;">거래종료</</a>
             <?}else{?>
                 <a href="#" style="letter-spacing:.5px;">거래종료</a>
               <?}?>
@@ -257,7 +257,7 @@ if(!defined('G5_IS_ADMIN'))
 
           <li>
             <?if ($wr_important == '2' && $wr_important == '1'){ ?>
-                <a href="#" style="letter-spacing:.5px; background:#3b4db7!important;">즐겨찾기</</a>
+                <a href="#" style="letter-spacing:.5px; background:#222!important;">즐겨찾기</</a>
             <?}else{?>
                 <a href="#" style="letter-spacing:.5px;">즐겨찾기</a>
               <?}?>
@@ -350,7 +350,11 @@ if(!defined('G5_IS_ADMIN'))
     <?}else{?>
       <a href="<?php echo G5_BBS_URL ?>/member_confirm.php?url=register_form.php"><li>정보수정</li></a>
       <?}?>
-    <a href="<?php echo G5_BBS_URL ?>/logout.php"><li>로그아웃</li></a>
+      <? if ($is_member){ ?>
+        <a href="<?php echo G5_BBS_URL ?>/logout.php"><li>로그아웃</li></a>
+      <?}else{?>
+        <a href="<?php echo G5_URL ?>"><li>로그인</li></a>
+      <?}?>
   </ul>
 </div>
 <? if ($gr_admin){?>
@@ -394,7 +398,7 @@ if(!defined('G5_IS_ADMIN'))
         if(g5_bo_table) {
           // $("#menubar-menus > li > a").css({'color':'#eee',});
           $(".header").css({'min-height':'75px'});
-          $(".black-bg").css({'background':'transparent', "border-bottom": "0px solid #ddd"});
+          $(".black-bg").css({'background':'#3b4db7', "border-bottom": "0px solid #ddd"});
         }
         $(".user_info").click(function(){
            $(".user_info ul").fadeToggle(300);
