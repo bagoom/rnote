@@ -137,9 +137,11 @@ include_once("$board_skin_path/lib/skin.lib.php");
   <input type="hidden" name="wr_sale_type" value="<?=$wr_sale_type?>"/>
   <input type="hidden" name="wr_important" value="<?=$wr_important?>"/>
   <input type="hidden" name="board_list" value="<?=$board_list?>"/>
-  <?if ($wr_important == 1){ ?>
+  <?if ($wr_important == 1 && $gr_admin){ ?>
+  <input type="hidden" name="wr_office_permission" value=""/>
+  <?}elseif( $wr_important == 1){?>
   <input type="hidden" name="wr_office_permission" value="2"/>
-  <?}elseif( $wr_important == 2){?>
+    <?}elseif( $wr_important == 2){?>
   <input type="hidden" name="wr_office_permission" value="0"/>
     <?}?>
 
@@ -460,17 +462,27 @@ include_once("$board_skin_path/lib/skin.lib.php");
                       <div class="tbody">
                               <?php
                               for ($i=0; $i<count($list); $i++) {
+
                                ?>
 
                        <div class="td_chk " style="display:none; ">
                          <input type="checkbox" name="chk_wr_id[]" class="import_chk" style="display:none;" value="<?php echo $list[$i]['wr_id'] ?>" id="chk_wr_id_<?php echo $i ?>" >
                          <label for="chk_wr_id_<?php echo $i ?>"> <p><i class="fa fa-check"></i></p></label>
                        </div>
-                      <div class="tr" id="list_link"onClick=location.href="<?php echo $list[$i]['href'] ?>" style="position:relative">
 
-                        <div class="td">
-                          <?= $list[$i]['num']?>
-                        </div>
+
+                        <div class="tr" id="list_link"onClick=location.href="<?php echo $list[$i]['href'] ?>" style="position:relative">
+                          <? if ($list[$i]['wr_office_permission'] == '1'){ ?>
+                            <div class="td" style="background:#f7d6d6;">
+                              <?= $list[$i]['num']?>
+                              <p style="font-size:11px; margin-top:5px; margin-bottom:0;">미승인매물</p>
+                            </div>
+                          <? }else{ ?>
+                            <div class="td">
+                              <?= $list[$i]['num']?>
+                            </div>
+                            <?}?>
+
                         <div class="td" style="font-weight:600; background:#edf1f4; ">
                           <?php echo $list[$i]['subject'] ?>
                         </div>
@@ -585,6 +597,34 @@ include_once("$board_skin_path/lib/skin.lib.php");
                 <?php } ?>
               </div>
 
+              <div class="modal fade" id="layerpop" >
+                <div class="modal-dialog">
+                  <div class="modal-content" style="min-width:500px !important; width:500px; margin:0 auto;">
+                    <!-- header -->
+                    <div class="modal-header">
+                      <!-- 닫기(x) 버튼 -->
+                      <button type="button" class="close" data-dismiss="modal">×</button>
+                      <!-- header title -->
+                      <h4 class="modal-title">사무실 매물 승인 거절</h4>
+                    </div>
+                    <!-- body -->
+                    <div class="modal-body" style="padding-top:35px;">
+                          <select  name="confirm_unaccept" class="select" style="width:100%; height:50px;" >
+                            <option value="타인이 등록한 물건">타인이 등록한 매물</option>
+                            <option value="주소및 정보불량">주소및 정보불량</option>
+                            <option value="이미 수락한 매물">이미 수락한 매물</option>
+                            <option value="기타사유입력" >기타사유입력</option>
+                          </select>
+                          <input type="text" name="confirm_unaccept2" class="etc" style="display:none; width:100%; height:50px; margin-top:5px; text-align:center;"/>
+                    </div>
+                    <!-- Footer -->
+                    <div class="modal-footer" style="padding:15px;">
+                      <button type="button" class="btn btn-default s2" data-dismiss="modal">승인거절</button>
+                      <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
                       </form>
 
@@ -594,12 +634,13 @@ include_once("$board_skin_path/lib/skin.lib.php");
               <span class="s1">사무실매물등록하기</span>
               <span class="s2">즐겨찾기등록하기</span>
               <?}}?>
-              <!-- <?if (!$gr_cp && !$gr_admin) {}else{?>
-              <span class="s1">사무실매물로수락</span>
+              <? if ($gr_admin){?>
+              <?if (!$gr_cp && !$gr_admin) {}else{?>
+              <span class="s4">사무실매물로수락</span>
               <?}?>
               <?if (!$gr_cp && !$gr_admin) {}else{?>
               <span data-target="#layerpop" data-toggle="modal">거절하기</span>
-              <?}?> -->
+              <?}}?>
               <span class="s3">매매완료등록하기</span>
 
             </div>
@@ -788,15 +829,20 @@ for (var i = 0; i < target.length; i++) {
   });
 
   $(".s2").click(function(){
-      $("#fboardlist").attr("action", "./bookmark.php");
+      $("#fboardlist").attr("action", "./office_delete.php");
       $("#fboardlist").submit();
-
   });
 
   $(".s3").click(function(){
     $("#fboardlist").attr("action", "./sale_success.php");
     $("#fboardlist").submit();
   });
+  $(".s4").click(function(){
+    $("#fboardlist").attr("action", "./office_update.php");
+    $("#fboardlist").submit();
+  });
+
+
 
 //  리스트 형태 메모지형 , 리스트형으로 변경
    $(".list_style_memo").click(function(){

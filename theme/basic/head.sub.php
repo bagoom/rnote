@@ -149,10 +149,12 @@ if(!defined('G5_IS_ADMIN'))
 
 
             <? if ($gr_admin){ ?>
-              <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_id']?>&board_list=1&wr_sale_type=1&wr_important=2&wr_writer=<?=$member[mb_name]?>">
+              <a href="<?php echo G5_BBS_URL ?>/board.php?bo_table=<?=$member['mb_id'] ?>
+               &board_list=1&wr_sale_type=1&wr_important=2&wr_writer=<?=$member[mb_name] ?> ">
+
             <?}else{ ?>
               <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_id']?>&board_list=1&wr_sale_type=1&wr_important=2">
-            <?} ?>
+            <?php } ?>
             <div>
                 <p class="icon_02">원룸/오피스텔</p>
             </div>
@@ -196,7 +198,7 @@ if(!defined('G5_IS_ADMIN'))
 
           <li>
             <?if ($wr_important == '1'  && $wr_office_permission == '2'){ ?>
-                <a href="#" style="letter-spacing:.5px; background:#222!important;">Office Note</</a>
+                <a href="#" style="letter-spacing:.5px; background:#222!important;">Office Note</a>
             <?}else{?>
                 <a href="#" style="letter-spacing:.5px;">Office Note</a>
               <?}?>
@@ -207,11 +209,17 @@ if(!defined('G5_IS_ADMIN'))
                 <p class="icon_02">원룸/오피스텔</p>
             </div>
             </a>
+            <? if ($gr_admin){ ?>
+            <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_1']?>&board_list=3&wr_important=1&wr_sale_type=1">
+          <?}else { ?>
             <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_1']?>&board_list=3&wr_important=1&wr_sale_type=1&wr_office_permission=2">
+          <?}?>
             <div>
                 <p class="icon_02"> 상가</p>
             </div>
             </a>
+
+
             <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_1']?>&board_list=2&wr_important=1&wr_sale_type=1&wr_office_permission=2">
             <div>
                 <p class="icon_02"> 아파트</p>
