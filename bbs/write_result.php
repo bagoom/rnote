@@ -160,9 +160,15 @@ include_once(G5_PATH.'/head.sub.php');
 <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$bo_table?>&wr_sale_type=1&board_list=<?=$board_list?>&wr_important=<?=$write['wr_important']?>&wr_id=<?=$write['wr_id']?>">
 <span class="">등록한매물확인하기</span>
 </a>
-<a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$bo_table?>&wr_sale_type=1&board_list=<?=$board_list?>">
+<? if($gr_admin){ ?>
+  <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$bo_table?>&wr_sale_type=1&board_list=<?=$board_list?>&wr_important=<?=$write['wr_important']?>&wr_office_permission=<?$write['wr_office_permission']?>&wr_writer=<?=$member[mb_name]?>">
+  <span class="">매물리스트로가기</span>
+  </a>
+  <?}else{?>
+<a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$bo_table?>&wr_sale_type=1&board_list=<?=$board_list?>&wr_important=<?=$write['wr_important']?>&wr_office_permission=<?$write['wr_office_permission']?>">
 <span class="">매물리스트로가기</span>
 </a>
+<?}?>
 <a href="#" class="sg_cate_list"  data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false">
 <span class="sg_cate_03">계속등록하기</span>
 </a>

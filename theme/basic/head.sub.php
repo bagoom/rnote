@@ -210,7 +210,7 @@ if(!defined('G5_IS_ADMIN'))
             </div>
             </a>
             <? if ($gr_admin){ ?>
-            <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_1']?>&board_list=3&wr_important=1&wr_sale_type=1">
+            <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_1']?>&board_list=3&wr_important=1&wr_sale_type=1&wr_office_permission=">
           <?}else { ?>
             <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_1']?>&board_list=3&wr_important=1&wr_sale_type=1&wr_office_permission=2">
           <?}?>
@@ -379,7 +379,7 @@ if(!defined('G5_IS_ADMIN'))
       <input type="hidden" name="wr_office_permission" value="1">
       <input type="hidden" name="office_write" value="1">
       <input type="hidden" name="bo_table" value="<?=$member['mb_id']?>">
-      <input type="submit" value="사무실매물승인" style="background:#fff; color:#323e51; font-size:16px; border:0; padding:15px 0;">
+      <!-- <input type="submit" value="사무실매물승인" style="background:#fff; color:#323e51; font-size:16px; border:0; padding:15px 0;"> -->
     </form>
     <a href="<?php echo G5_BBS_URL?>/group_confirm.php?bo_table=<?=$member['mb_id']?>"><li>직원신청현황</li></a>
     <a href="<?php echo G5_BBS_URL?>/group_member_list.php?bo_table=<?=$member['mb_id']?>"><li>직원목록</li></a>

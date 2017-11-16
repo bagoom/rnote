@@ -10,6 +10,11 @@ $mb = get_member($mb_id);
 // include_once('./admin.head.php');
 
 ?>
+<style>
+.main-list-wrap{
+  margin-top: 150px ;
+}
+</style>
 
 <div class="search_wrap">
 
