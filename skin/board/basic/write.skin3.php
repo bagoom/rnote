@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="<?php G5_PATH?>/assets/css/style2.css">
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script src="<?php G5_PATH?>/assets/js/modernizr.custom.js"></script>
 <script src="<?php G5_PATH?>/assets/js/jquery-labelauty.js"></script>
@@ -198,21 +197,21 @@ input[type="text"],input[type="number"],input[type="tel"]{
                                   </tr>
                                   <tr>
                                     <th>보증금</th>
-                                    <td><input type="number" name="wr_rent_deposit"  tabindex="6" value="<?php echo $write[wr_rent_deposit]  ?>"  id="wr_rent_deposit" placeholder="만원" required></td>
+                                    <td><input type="text" name="wr_rent_deposit"  tabindex="6" value="<?php echo $write[wr_rent_deposit]  ?>"  id="wr_rent_deposit" placeholder="만원" required></td>
                                     <th>임대료</th>
-                                    <td><input type="number" name="wr_m_rate" value="<?php echo $write[wr_m_rate] ?>" id="wr_m_rate" tabindex="7"  placeholder="만원"></td>
+                                    <td><input type="text" name="wr_m_rate" value="<?php echo $write[wr_m_rate] ?>" id="wr_m_rate" tabindex="7"  placeholder="만원"></td>
                                   </tr>
                                   <tr>
                                     <th>권리금</th>
-                                    <td><input type="number" name="wr_premium_o" value="<?=$write[wr_premium_o] ?>" id="wr_premium_o"  tabindex="8" placeholder="만원" required></td>
+                                    <td><input type="text" name="wr_premium_o" value="<?=$write[wr_premium_o] ?>" id="wr_premium_o"  tabindex="8" placeholder="만원" required></td>
                                     <th>권리금<br>절충가</th>
-                                    <td><input type="number"  name="wr_premium_b" tabindex="9" value="<?php echo $write[wr_premium_b] ?>" id="wr_premium_b"  placeholder="만원"></td>
+                                    <td><input type="text"  name="wr_premium_b" tabindex="9" value="<?php echo $write[wr_premium_b] ?>" id="wr_premium_b"  placeholder="만원"></td>
                                   </tr>
                                   <tr>
                                     <th>임차인<br>연락처</th>
-                                    <td ><input type="tel" name="wr_renter_contact" required tabindex="10" value="<?=$write[wr_renter_contact] ?>" id="wr_renter_contact"  placeholder="숫자만입력"></td>
+                                    <td ><input type="text" name="wr_renter_contact" required tabindex="10" value="<?=$write[wr_renter_contact] ?>" id="wr_renter_contact"  placeholder="숫자만입력"></td>
                                     <th>건물주<br>연락처</th>
-                                    <td ><input type="tel"  name="wr_lessor_contact" tabindex="11" value="<?=$write[wr_lessor_contact] ?>" id="wr_lessor_contact"  placeholder="숫자만입력"></td>
+                                    <td ><input type="text"  name="wr_lessor_contact" tabindex="11" value="<?=$write[wr_lessor_contact] ?>" id="wr_lessor_contact"  placeholder="숫자만입력"></td>
                                   </tr>
 
                                 </tbody>

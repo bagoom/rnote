@@ -73,6 +73,7 @@ if($config['cf_add_meta'])
 <link href="<?php echo G5_URL ?>/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css" href="<?php echo G5_URL ?>/assets/css/zabuto_calendar.css">
 <link rel="stylesheet" type="text/css" href="<?php echo G5_URL ?>/assets/js/gritter/css/jquery.gritter.css" />
+<link rel="stylesheet" href="<?php G5_PATH?>/assets/css/style2.css">
 <link rel="stylesheet" type="text/css" href="<?php echo G5_URL ?>/assets/lineicons/style.css">
 <link rel="stylesheet" href="https://cdn.rawgit.com/studio392/NanumSquareRound/master/NanumSquareRound.css" />
 <!-- Custom styles for this template -->

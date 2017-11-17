@@ -6,7 +6,7 @@
 	top: 45%;
 	left: 0;
 	z-index: 999999;
-	background: #222;
+	/*background: #222;*/
 	/*background: rgba(32, 197, 186,0.9);*/
 }
 .check_list_wrap{
@@ -32,7 +32,7 @@
 }
 .rec_close{
 	position: absolute;
-	top: -10px;
+	top: -40px;
 	right: 0;
 	width: 177px;
 	height: 40px;

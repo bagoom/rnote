@@ -1,5 +1,5 @@
 
-
+$(function() { $("input:text, input:tel").keydown(function(evt) { if (evt.keyCode == 13) return false; }); });
 
 
 

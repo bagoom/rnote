@@ -3,7 +3,7 @@
 // add_stylesheet('css 구문', 출력순서); 숫자가 작을 수록 먼저 출력됨
 include_once("$board_skin_path/lib/skin.lib.php");
 ?>
-<link rel="stylesheet" href="<?php G5_PATH?>/assets/css/style2.css">
+
 <script src="<?php G5_PATH?>/assets/js/modernizr.custom.js"></script>
 <script src="<?php G5_PATH?>/assets/js/jquery-labelauty.js"></script>
 <link rel="stylesheet" type="text/css" href="<?php G5_PATH?>/assets/css/jquery-labelauty.css">
@@ -59,7 +59,12 @@ include_once("$board_skin_path/lib/skin.lib.php");
   overflow: hidden;
 
 }
-
+.open{
+  height:545px;
+}
+.check_list_wrap{
+  padding:0;
+}
 .input_box p{
   width: 20%;
   height: 50px;
@@ -103,14 +108,22 @@ include_once("$board_skin_path/lib/skin.lib.php");
 .input_box2{
   width: 50%;
   height:45px;
+  line-height: 45px;
   margin-top: 10px;
   float: left;
-  padding:15px;
   color: #fff;
   background: #222;
   border: 1px solid #f5f9fc;
+  cursor: pointer;
+}
+.search_list{
+  width:100%;
+  height:45px;
+  display: block;
 }
 .input_box2 input[type=submit]{
+  width: 100%;
+  height: 45px;
   background: transparent;
   border:0;
   color: #fff;
@@ -231,8 +244,9 @@ include_once("$board_skin_path/lib/skin.lib.php");
           <div class="input_box range">
             <div id="my_popup" >
               <p>합예산</p>
-              <!-- <input type="text" name="wr_rent_deposit_min" value='<?=$_GET['wr_rent_deposit_min']?>' style="border-right:0;" >
-              <input type="text" name="wr_rent_deposit_max" value='<?=$_GET['wr_rent_deposit_max']?>'> -->
+              <input type="text" name="wr_sum_pay_min" value='<?=$_GET['wr_sum_pay_min']?>' style="border-right:0;" >
+              <p class="range_p">~</p>
+              <input type="text" name="wr_sum_pay_max" value='<?=$_GET['wr_sum_pay_max']?>'>
               <!-- <button class="my_popup_close">Close</button> -->
             </div>
           </div>
@@ -254,10 +268,11 @@ include_once("$board_skin_path/lib/skin.lib.php");
           <ul id="wr_rec_job">
           </ul>
           <input type="hidden" id="search_box" name="wr_rec_sectors" value="<?=$write[wr_rec_sectors]?>"/>
+          </div>
+          </div>
+          <div class="overlay overlay-hugeinc" id="overlay" style="position:relative;width:97%;margin:0 auto; margin-top:70px;" >
 
-          <div class="overlay overlay-hugeinc" id="overlay" style="position:relative;" >
-
-      <div class="check_list_wrap" style="top:15px !important; width:500px;" >
+      <div class="check_list_wrap" style="top:0px !important; width:100%;" >
       <input  type="checkbox" name="d" value="0" data-labelauty="음식점 "/>
       <input  type="checkbox" name="d" value="0" data-labelauty="고깃집 "/>
       <input  type="checkbox" name="d" value="0" data-labelauty="횟집 "/>
@@ -300,10 +315,8 @@ include_once("$board_skin_path/lib/skin.lib.php");
       <input  type="checkbox" name="d" value="0" data-labelauty="프랜차이즈신규 "/>
       <input  type="checkbox" name="d" value="0" data-labelauty="대형매장 "/>
       </div>
-      <button type="button" id="overlay-close" class="overlay-close" style="bottom:-590px !important; width:500px !important;">확인</button>
+      <button type="button" id="overlay-close" class="overlay-close" style="bottom:0px !important; width:100% !important;">확인</button>
       </div>
-          </div>
-    </div>
           <script>
             $(document).ready(function(){
               $(":checkbox").labelauty();
