@@ -117,22 +117,31 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
 
                       <section id="bo_v_atc">
                           <div class="col-lg-12" style="margin-bottom:25px; overflow:hidden;">
-                           <!-- <a href="../bbs/write.php?w=u&bo_table=<?echo $bo_table?>&board_list= <?echo $view[board_list] ?>&wr_id=<?echo $view[wr_id]?>" class="btn btn-theme02 right" style="width:130px; padding-left:12px;">수정</a> -->
-                           <?php if ($gr_admin && $wr_important == 1){?>
-                             <button class="btn btn-theme02 right sg_cate_list2" style="width:130px; padding-left:12px;" type="button" data-toggle="modal" data-target="#myModal"data-backdrop="static" data-keyboard="false">
-                              수정
-                             </button>
-                              <?php if ($delete_href) { ?><a href="<?php echo $delete_href ?>" class="btn btn-theme04 right" onclick="del(this.href); return false;" style="width:130px; padding-left:12px;">삭제</a><?php } ?>
-                           <?}else if($wr_important == 2) {?>
-                             <button class="btn btn-theme02 right sg_cate_list2" style="width:130px; padding-left:12px;" type="button" data-toggle="modal" data-target="#myModal"data-backdrop="static" data-keyboard="false">
-                              수정
-                             </button>
-                              <?php if ($delete_href) { ?><a href="<?php echo $delete_href ?>" class="btn btn-theme04 right" onclick="del(this.href); return false;" style="width:130px; padding-left:12px;">삭제</a><?php } ?>
-
-                             <?}?>
-
+                          <!--수정/삭제버튼 11-17일 변경-->
+                          <?=$GET_['office_write']?>
+                          <? if($gr_admin){ ?>
+                            <button class="btn btn-theme03 right  config" type="button"  style="margin-right:10px;">
+                              <i class="fa fa-cog" aria-hidden="true" value="중요매물등록"  style="font-size:18px; "></i>
+                              매물관리설정
+                            </button>
+                          <?}else if($gr_cp && $wr_important == 2){ ?>
+                            <button class="btn btn-theme03 right  config" type="button"  style="margin-right:10px;">
+                              <i class="fa fa-cog" aria-hidden="true" value="중요매물등록"  style="font-size:18px; "></i>
+                              매물관리설정
+                            </button>
+                          <?}?>
                           </div>
-
+      <form name="fboardlist" id="fboardlist" action="./copy_update.php"  method="post">
+        <input type="hidden" name="bo_table" value="<?php echo $bo_table ?>">
+        <input type="hidden" name="board_list" value="<?php echo $board_list ?>">
+        <input type="hidden" name="sfl" value="<?php echo $sfl ?>">
+        <input type="hidden" name="stx" value="<?php echo $stx ?>">
+        <input type="hidden" name="spt" value="<?php echo $spt ?>">
+        <input type="hidden" name="sca" value="<?php echo $sca ?>">
+        <input type="hidden" name="sst" value="<?php echo $sst ?>">
+        <input type="hidden" name="sod" value="<?php echo $sod ?>">
+        <input type="hidden" name="sw" value="">
+        <input type="hidden" name="wr_id" value="<?=$wr_id?>">
                         <div class="col-lg-1"></div>
                        <div class="col-lg-4" >
                         <div class="info_body">
@@ -258,6 +267,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                             </li>
                             </div>
                        </div>
+                     </form>
                       </div>
                             <div class="col-lg-6" >
                               <div class="col-lg-1"></div>
@@ -277,40 +287,33 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
 
                       </section>
 
-                      <?php
-                      include_once(G5_SNS_PATH."/view.sns.skin.php");
-                      ?>
+                      <div class="chk_confirm_wrap" >
+                        <span class="s1">사무실매물등록</span>
+                        <span class="s2">즐겨찾기등록</span>
+                        <span class="s3">거래종료</span>
+                        <span class="s4"  data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false">수정</span>
+                        <span class="s5"><a href="<?php echo $delete_href ?>"  onclick="del(this.href); return false;" style="color:#fff;">삭제</a></span>
+                      </div>
 
 <script>
-<?php if ($board['bo_download_point'] < 0) { ?>
-$(function() {
-    $("a.view_file_download").click(function() {
-        if(!g5_is_member) {
-            alert("다운로드 권한이 없습니다.\n회원이시라면 로그인 후 이용해 보십시오.");
-            return false;
-        }
 
-        var msg = "파일을 다운로드 하시면 포인트가 차감(<?php echo number_format($board['bo_download_point']) ?>점)됩니다.\n\n포인트는 게시물당 한번만 차감되며 다음에 다시 다운로드 하셔도 중복하여 차감하지 않습니다.\n\n그래도 다운로드 하시겠습니까?";
 
-        if(confirm(msg)) {
-            var href = $(this).attr("href")+"&js=on";
-            $(this).attr("href", href);
+  $(".config").click(function(){
+  $(".chk_confirm_wrap").fadeToggle(300,"swing");
+  });
 
-            return true;
-        } else {
-            return false;
-        }
-    });
-});
-<?php } ?>
+  $(".s1").click(function(){
+      $("#fboardlist").submit();
+  });
+  $(".s2").click(function(){
+      $("#fboardlist").attr("action", "./bookmark.php");
+      $("#fboardlist").submit();
+  });
+  $(".s3").click(function(){
+    $("#fboardlist").attr("action", "./sale_success.php");
+    $("#fboardlist").submit();
+  });
 
-function board_move(href)
-{
-    window.open(href, "boardmove", "left=50, top=50, width=500, height=550, scrollbars=1");
-}
-</script>
-
-<script>
 
 $(".wr_writer").click(function(){
   $(".wr_writer_contact").slideToggle(200);
@@ -332,7 +335,7 @@ $('#rent').hide();
 
 
 var bourl = "../bbs/write_modal.php?w=u&bo_table=<?echo $bo_table?>&board_list= <?echo $view[board_list] ?>&wr_id=<?echo $view[wr_id]?>";
-$(".sg_cate_list2").click(function(){
+$(".s4").click(function(){
   $.ajax({
   type : "POST",
   url : bourl,

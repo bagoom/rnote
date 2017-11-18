@@ -150,7 +150,9 @@ if ($count_write > 0 || $count_comment > 0)
 delete_cache_latest($bo_table);
 
 if (!$gr_admin)
-  goto_url(G5_HTTP_BBS_URL.'/board.php?bo_table='.$bo_table.'&wr_sale_type=1&board_list='.$write[board_list].'&wr_writer='.$member[mb_nick]);
+  goto_url(G5_HTTP_BBS_URL.'/board.php?bo_table='.$bo_table.'&wr_sale_type=1&board_list='.$write[board_list].'&wr_writer='.$member[mb_nick].'&wr_important='.$write[wr_important]);
+else if($gr_admin && $write[wr_important] ==1)
+    goto_url(G5_HTTP_BBS_URL.'/board.php?bo_table='.$bo_table.'&wr_sale_type='.$write[wr_sale_type]. '&board_list='.$write[board_list].'&wr_important='.$write[wr_important]);
 else
     goto_url(G5_HTTP_BBS_URL.'/board.php?bo_table='.$bo_table.'&wr_sale_type='.$write[wr_sale_type]. '&board_list='.$write[board_list].'&wr_important='.$write[wr_important].'&wr_office_permission='.$write[wr_office_permission].'&wr_writer='.$member[mb_nick]);
 ?>

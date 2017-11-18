@@ -1,7 +1,15 @@
 
 $(function() { $("input:text, input:tel").keydown(function(evt) { if (evt.keyCode == 13) return false; }); });
 
-
+// $("input:text").on('keyup', function(){
+//놔뚜지일단 17일
+//   if(isNaN($("#wr_year_int").val())){
+//     $("#wr_year_int").val(" ");
+//     console.log("true");``
+//   }else{
+//       console.log("false");
+//   }
+// });
 
     // 매매탭에서 항목추가 스크립트
     var rand = $('.rand_wrap');
@@ -9,11 +17,15 @@ $(function() { $("input:text, input:tel").keydown(function(evt) { if (evt.keyCod
     var cloneList = [];
 
     $(".sale_rand_add").click(function(){
-      var clone =  rand.clone().insertAfter('.sale_rand_wrap');
-    clone.addClass('clone'+cloneNumber);
+      if ($(".rand_wrap").hasClass("clone"+(cloneNumber-1))){
+        var clone =  rand.clone().insertAfter('.rand_wrap'+'.clone'+(cloneNumber-1));
+      }else{
+        var clone =  rand.clone().insertAfter('.rand_wrap');
+      }
+      clone.addClass('clone'+cloneNumber);
      $('.clone'+cloneNumber +  ' input').val('');
       $('.rand_wrap').css("border-top","2px solid #555");
-      $('.clone'+cloneNumber).css({"display":"table-footer-group", "margin": "5px"});
+      $('.clone'+cloneNumber).css({"display":"table-header-group", "margin": "5px"});
       $('.sale_rand_wrap .rand_wrap:last-child').css("border-bottom","none");
 
           $(".box_del").click(function(){
@@ -220,7 +232,7 @@ function Profit_Rate() {
 
     });
     // 추천업종 팝업창 수정 스크립트
-    $("#overlay-close").click(function(){
+    $("#overlay-close,.rec_close").click(function(){
     $('#wr_rec_job li').remove();
     var test = $("[aria-checked=true]").children('.labelauty-checked');
     var test_html = test.html();

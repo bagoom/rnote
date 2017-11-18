@@ -331,7 +331,11 @@ input[type="text"],input[type="number"],input[type="tel"]{
                                   </tr>
                                   <tr>
                                     <th>주소</th>
-                                    <td colspan="3" ><input type="text" name="wr_subject"  value="<?php echo $subject ?>"  tabindex="1" /></td>
+                                    <td colspan="3" >
+                                      <input id="wr_address2" name="wr_address" style="border:0px solid #EEE;"type="text" tabindex="2"  value="<?=$write[wr_address] ?>" date-role="none" placeholder="도로명 또는 주소를 입력하세요."style="float: left; margin-right: 6px; margin-bottom:5px;" onkeyup="javascript:searchPosition2('wr_address2');" onfocus="if(this.value =='도로명 또는 주소를 입력하세요.') this.value='';" onblur="if(this.value =='') this.value='도로명 또는 주소를 입력하세요.';" value="도로명 또는 주소를 입력하세요.">
+                                      <input id="house_reg_road_addr" style="border:1px solid #EEE; border-width:1px 0 0 0" name="house_reg_road_addr"  value="<?php echo $nh[nh_road_addr]?>" type="hidden" date-role="none"  >
+                                      <div id="searchResultBody2" class="col-xs-12" onmouseover="MM_showHideLayers2('searchResultBody2','','show')" style="display: none;position:relative; top:0px; background-color: #222; ">
+                                    </td>
                                   </tr>
                                   <tr>
                                     <th >매도인연락처</th>
@@ -346,12 +350,11 @@ input[type="text"],input[type="number"],input[type="tel"]{
                               </div>
 
                               <table class="write_table">
-                                <tbody class="sale_rand_wrap rand_wrap_basic">
+                                <tbody class="sale_rand_wrap rand_wrap_basic" style="display:table-header-group;">
                                   <tr>
                                     <th>지번</th>
                                     <td colspan="3">
-                                      <input id="wr_address2" name="wr_address" style="border:0px solid #EEE;"type="text" tabindex="13"  value="<?=$write[wr_address] ?>" date-role="none" placeholder="도로명 또는 주소를 입력하세요."style="float: left; margin-right: 6px; margin-bottom:5px;" onkeyup="javascript:searchPosition2('wr_address2');" onfocus="if(this.value =='도로명 또는 주소를 입력하세요.') this.value='';" onblur="if(this.value =='') this.value='도로명 또는 주소를 입력하세요.';" value="도로명 또는 주소를 입력하세요.">
-                                      <div id="searchResultBody2" class="col-xs-12" onmouseover="MM_showHideLayers2('searchResultBody2','','show')" style="display: none;position:relative; top:0px; background-color: #222; ">
+
                                       </div>
                                     </td>
                                   </tr>
@@ -584,7 +587,6 @@ $("textarea#wr_memo").on('keydown keyup', function () {
 });
 
 
-
 function include(arr, obj) {
 for(var i=0; i<=arr.length-1; i++) {
     if (arr[i] == obj) return true;
@@ -632,7 +634,7 @@ for (var i = 0; i < target.length; i++) {
 // });
 $(".rec_close").click(function(){
   $(".overlay-hugeinc").removeClass("open");
-  console.log("ddd");
+  // history.go(-1)
 })
 $("#overlay-close").click(function(){
 $('#wr_rec_job li').remove();
@@ -646,7 +648,7 @@ list.push(test[i].innerHTML)
 $('#wr_rec_job').append('<li>'+ list[i] + '</li>')
 $("#search_box").val(test.text());
 }
-history.go(-1)
+// history.go(-1)
 });
 
 function valchange() {

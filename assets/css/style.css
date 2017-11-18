@@ -151,6 +151,12 @@ a, a:hover, a:focus {
 .check_list_wrap{
   top:0px !important;
 }
+.open{
+  height:545px;
+}
+.check_list_wrap{
+  padding:0;
+}
 .overlay .overlay-close{
   width:100% !important;
   border-radius: 0 !important;
@@ -675,6 +681,7 @@ li{
   display: table;
   margin: 0 auto;
 }
+
 .pg_page,.pg_current{
   padding:10px;
   background: #000;
@@ -813,7 +820,8 @@ li{
 .btn-theme04:focus,
 .btn-theme04:active,
 .btn-theme04.active,
-.open .dropdown-toggle.btn-theme04 {
+
+ .dropdown-toggle.btn-theme04 {
   color: #fff;
   background-color: #da4453;
   border-color: #da4453;

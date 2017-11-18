@@ -59,12 +59,7 @@ include_once("$board_skin_path/lib/skin.lib.php");
   overflow: hidden;
 
 }
-.open{
-  height:545px;
-}
-.check_list_wrap{
-  padding:0;
-}
+
 .input_box p{
   width: 20%;
   height: 50px;
@@ -525,10 +520,11 @@ include_once("$board_skin_path/lib/skin.lib.php");
                         </div>
                           </span>
                         <div class="td">
+                          <?php  if($sale == '1' || $sale == '3') {?>
                           <span class="commaN">
-                          <?php  if($sale == '1' || $sale == '3') echo $list[$i]['wr_premium_o']; else{?>
-                        </span>
-                          <? echo $list[$i]['wr_address']; }?>
+                           <?=$list[$i]['wr_premium_o']?>
+                          </span>
+                        <? }else{echo $list[$i]['wr_address']; }?>
                         </div>
                         <? if ($sale == '2'){ ?>
                         <? if( $_GET[wr_important] == 1 ){ ?>
@@ -740,7 +736,7 @@ for (var i = 0; i < target.length; i++) {
 $('.wrapper').css("height", $(document).height() );
 $('.td_chk').css("width", $(".tr").innerWidth() );
 $('.td_chk label').css("height", $(".tr").innerHeight() );
-
+$('.td_chk label').css("height", $(this).parents(".td_chk").siblings(".tr"))
 $(function() {
     $("p.holder + input").focus(function() {
       console.log($(this).val())
@@ -779,7 +775,6 @@ function numberWithCommas(x) {
 // 추천업종 팝업창 수정 스크립트
 $("#overlay-close").click(function(){
 $('#wr_rec_job li').remove();
-console.log("dddd")
 var test = $("[aria-checked=true]").children('.labelauty-checked');
 var test_html = test.html();
 
