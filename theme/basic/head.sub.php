@@ -407,7 +407,7 @@ if(!defined('G5_IS_ADMIN'))
         if(g5_bo_table) {
           // $("#menubar-menus > li > a").css({'color':'#eee',});
           $(".header").css({'min-height':'75px'});
-          $(".black-bg").css({'background':'#3b4db7', "border-bottom": "0px solid #ddd"});
+          $(".black-bg").css({'background':'transparent', "border-bottom": "0px solid #ddd"});
         }
         $(".user_info").click(function(){
            $(".user_info ul").fadeToggle(300);
