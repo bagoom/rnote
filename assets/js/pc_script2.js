@@ -113,12 +113,12 @@ $('.sale_rand_wrap ').find('input[name="wr_area_m"]').on('keyup', function(){
 });
 //  연순수익=연임대수익-연이자
 
-$('#wr_year_rate,#wr_year_int').on('keyup', function(){
-    $('#wr_year_income').val(parseInt($("#wr_year_rate").val())-parseInt($("#wr_year_int").val()))
-});
-$('#wr_loan2').on('blur', function(){
-    $('#wr_year_income').val(parseInt($("#wr_year_rate").val())-parseInt($("#wr_year_int").val()))
-});
+// $('#wr_year_rate,#wr_year_int').on('keyup', function(){
+//     $('#wr_year_income').val(parseInt($("#wr_year_rate").val())-parseInt($("#wr_year_int").val()))
+// });
+// $('#wr_loan2').on('blur', function(){
+//     $('#wr_year_income').val(parseInt($("#wr_year_rate").val())-parseInt($("#wr_year_int").val()))
+// });
 
  // 매도가 입력시 매도가 나누기 총면적으로 평당가격 입력
 $('#wr_sale_price2').on('keyup', function(){
@@ -140,15 +140,14 @@ $(cal_target).on('keyup', function(){
   if($('#wr_int_rate2').val() == ''){
     $('#wr_year_int').val(parseInt($('#wr_loan2').val())*0.04);
     $('#wr_mon_int').val(parseInt($('#wr_year_int').val())/12);
-    $('#wr_year_income').val(parseInt($("#wr_year_rate").val())-parseInt($("#wr_year_int").val()))
+    // $('#wr_year_income').val(parseInt($("#wr_year_rate").val())-parseInt($("#wr_year_int").val()))
 
   }else{
     $('#wr_year_int').val(parseInt($('#wr_loan2').val())*($("#wr_int_rate2").val()*0.01));
     $('#wr_mon_int').val(parseInt($('#wr_year_int').val())/12);
-    $('#wr_year_income').val(parseInt($("#wr_year_rate").val())-parseInt($("#wr_year_int").val()))
   }
   $('#wr_mon_income').val(parseInt($("#wr_total_rfee2").val())-parseInt($("#wr_mon_int").val()))
-
+  $('#wr_year_income').val(parseInt($("#wr_year_rate").val())-parseInt($("#wr_year_int").val()))
   $('#wr_m_rate_guess').val((parseInt($("#wr_total_rfee2").val())*200)+parseInt($("#wr_sale_deposit").val()))
   $('#wr_year_rate').val(parseInt($("#wr_total_rfee2").val())*12)
   $('#wr_silinsu').val($("#wr_sale_price2").val()-$("#wr_sale_deposit").val()-$("#wr_loan2").val())

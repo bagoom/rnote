@@ -62,7 +62,7 @@ input[type="text"],input[type="number"],input[type="tel"]{
                         <div class="tab-content">
                           <div class="tab-pane active" id="rent" >
                             <!-- 게시물 작성/수정 시작 { -->
-                            <form name="fwrite" id="fwrite" action="<?php echo $action_url ?>" onsubmit="return fwrite_submit(this);" method="post" enctype="multipart/form-data" autocomplete="off" style="width:100%">
+                            <form name="fwrite" id="fwrite" action="<?php echo $action_url ?>" method="post" enctype="multipart/form-data" autocomplete="off" style="width:100%">
                             <input type="hidden" name="uid" value="<?php echo get_uniqid(); ?>">
                             <input type="hidden" name="w" value="<?php echo $w ?>">
                             <input type="hidden" name="bo_table" value="<?php echo $bo_table ?>">
@@ -113,7 +113,7 @@ input[type="text"],input[type="number"],input[type="tel"]{
                                   <tr>
                                     <th>추천업종</th>
                                     <td>
-                                      <div class="job" id="trigger-overlay" tabindex="0"> 추천업종
+                                      <div class="job" id="trigger-overlay" tabindex="0" style="background:#3b4db7!important"> 추천업종
                                     </div>
                                     <ul id="wr_rec_job">
                                     </ul>
@@ -279,7 +279,6 @@ input[type="text"],input[type="number"],input[type="tel"]{
                                 </tbody>
                               </table>
 
-
                         <div class="modal-footer">
                           <!-- <input type="submit" value="매물등록" id="btn_submit" accesskey="s" class="btn btn-primary sg_cate_list" style="width:30%; padding:13px; text-align:center;"> -->
 
@@ -298,7 +297,7 @@ input[type="text"],input[type="number"],input[type="tel"]{
 
 <!----------------- 매매 내용 ---------------->
                           <div class="tab-pane" id="sale">
-                            <form name="fwrite" id="fwrite" action="<?php echo $action_url ?>" onsubmit="return fwrite_submit(this);" method="post" enctype="multipart/form-data" autocomplete="off" style="width:100%">
+                            <form name="fwrite" id="fwrite" action="<?php echo $action_url ?>"  method="post" enctype="multipart/form-data" autocomplete="off" style="width:100%">
                               <input type="hidden" name="uid" value="<?php echo get_uniqid(); ?>">
                               <input type="hidden" name="w" value="<?php echo $w ?>">
                               <input type="hidden" name="bo_table" value="<?php echo $bo_table ?>">

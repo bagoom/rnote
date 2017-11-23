@@ -53,7 +53,7 @@ $(function() {
 
 
 
-$('.wrapper').css("height", $(document).height() );
+// $('.wrapper').css("height", $(document).height() );
 
 
 
@@ -123,10 +123,7 @@ $('.wrapper').css("height", $(document).height() );
 </script>
 
 <script>
-var bourl1 = "<?echo G5_BBS_URL?>/write_modal.php?bo_table="+$("#bo_table").val()+"&board_list=1";
-var bourl2 = "<?echo G5_BBS_URL?>/write_modal.php?bo_table="+$("#bo_table").val()+"&board_list=2";
-var bourl3 = "<?echo G5_BBS_URL?>/write_modal.php?bo_table="+$("#bo_table").val()+"&board_list=3";
-var bourl4 = "<?echo G5_BBS_URL?>/write_modal.php?bo_table="+$("#bo_table").val()+"&board_list=4";
+var bourl1 = "<?echo G5_BBS_URL?>/write_modal.php?bo_table="+$("#bo_table").val()+"&board_list=<?=$member[mb_3]?>";
 
 
 
@@ -166,47 +163,47 @@ $(".sg_cate_01").click(function(){
 });
  })
 
- $(".sg_cate_02").click(function(){
-   $.ajax({
-   type : "POST",
-   url : bourl2,
-   dataType : "text",
-   error : function() {
-       alert('통신실패!!');
-   },
-   success : function(data) {
-       $('#Context').html(data);
-   }
-});
-  })
-
-  $(".sg_cate_03").click(function(){
-    $.ajax({
-    type : "POST",
-    url : bourl3,
-    dataType : "text",
-    error : function() {
-        alert('통신실패!!');
-    },
-    success : function(data) {
-        $('#Context').html(data);
-    }
-});
-   })
-
-   $(".sg_cate_04").click(function(){
-     $.ajax({
-     type : "POST",
-     url : bourl4,
-     dataType : "text",
-     error : function() {
-         alert('통신실패!!');
-     },
-     success : function(data) {
-         $('#Context').html(data);
-     }
- });
-    })
+//  $(".sg_cate_02").click(function(){
+//    $.ajax({
+//    type : "POST",
+//    url : bourl2,
+//    dataType : "text",
+//    error : function() {
+//        alert('통신실패!!');
+//    },
+//    success : function(data) {
+//        $('#Context').html(data);
+//    }
+// });
+//   })
+//
+//   $(".sg_cate_03").click(function(){
+//     $.ajax({
+//     type : "POST",
+//     url : bourl3,
+//     dataType : "text",
+//     error : function() {
+//         alert('통신실패!!');
+//     },
+//     success : function(data) {
+//         $('#Context').html(data);
+//     }
+// });
+//    })
+//
+//    $(".sg_cate_04").click(function(){
+//      $.ajax({
+//      type : "POST",
+//      url : bourl4,
+//      dataType : "text",
+//      error : function() {
+//          alert('통신실패!!');
+//      },
+//      success : function(data) {
+//          $('#Context').html(data);
+//      }
+//  });
+//     })
 </script>
 </body>
 

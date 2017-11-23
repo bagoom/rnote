@@ -143,56 +143,142 @@ if(!defined('G5_IS_ADMIN'))
           <?if ($wr_important == '2' && $wr_sale_type== '1' || $wr_sale_type == '2'){ ?>
 
               <? if ($gr_admin){ ?>
-                <a href="<?php echo G5_BBS_URL ?>/board.php?bo_table=<?=$member[mb_id] ?>
-                 &board_list=<?=$member[mb_3]?>&wr_sale_type=1&wr_important=2&wr_writer=<?=$member[mb_name] ?>" style="letter-spacing:.5px; background:#222!important;">My Note</a>
+                <a href="<?php G5_BBS_URL ?>/board.php?bo_table=<?=$member['mb_id'] ?>
+                 &board_list=1&wr_sale_type=1&wr_important=2&wr_writer=<?=$member['mb_name'] ?>" style="letter-spacing:.5px; background:#222!important;">My Note</a>
               <?}else{ ?>
-                <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_id']?>&board_list=<?=$member[mb_3]?>&wr_sale_type=1&wr_important=2" style="letter-spacing:.5px; background:#222!important;">My Note</a>
+                <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_id']?>&board_list=1&wr_sale_type=1&wr_important=2"></a>
               <?}?>
 
           <?}else{?>
-              <a href="<?php echo G5_BBS_URL ?>/board.php?bo_table=<?=$member[mb_id] ?>&board_list=<?=$member[mb_3]?>&wr_sale_type=1&wr_important=2&wr_writer=<?=$member[mb_name] ?>" style="letter-spacing:.5px; ">My Note</a>
+              <a href="<?php echo G5_BBS_URL ?>/board.php?bo_table=<?=$member[mb_id] ?>
+               &board_list=1&wr_sale_type=1&wr_important=2&wr_writer=<?=$member[mb_name] ?>" style="letter-spacing:.5px; ">My Note</a>
             <?}?>
 
 
           </li>
 
           <li>
-
-            <?if ($wr_important == '1'  && $wr_office_permission == null){ ?>
-
-                <? if ($gr_admin){ ?>
-                  <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_1']?>&board_list=<?=$member[mb_3]?>&wr_important=1&wr_sale_type=1&wr_office_permission=" style="letter-spacing:.5px; background:#222!important;">Office Note</a>
-                <?}else{ ?>
-                  <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_1']?>&board_list=<?=$member[mb_3]?>&wr_important=1&wr_sale_type=1&wr_office_permission=2" style="letter-spacing:.5px; background:#222!important;">Office Note</a>
-                <?}?>
-
+            <?if ($wr_important == '1'  && $wr_office_permission == '2'){ ?>
+                <a href="#" style="letter-spacing:.5px; background:#222!important;">Office Note</a>
             <?}else{?>
-                <? if ($gr_admin){ ?>
-                  <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_1']?>&board_list=<?=$member[mb_3]?>&wr_important=1&wr_sale_type=1&wr_office_permission=" style="letter-spacing:.5px;">Office Note</a>
-                <?}else{ ?>
-                  <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_1']?>&board_list=<?=$member[mb_3]?>&wr_important=1&wr_sale_type=1&wr_office_permission=2" style="letter-spacing:.5px;">Office Note</a>
-                <?}}?>
+                <a href="#" style="letter-spacing:.5px;">Office Note</a>
+              <?}?>
+
+          <div class="sub-menu">
+            <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_1']?>&board_list=1&wr_important=1&wr_sale_type=1&wr_office_permission=2">
+            <div>
+                <p class="icon_02">원룸/오피스텔</p>
+            </div>
+            </a>
+            <? if ($gr_admin){ ?>
+            <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_1']?>&board_list=3&wr_important=1&wr_sale_type=1&wr_office_permission=">
+          <?}else { ?>
+            <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_1']?>&board_list=3&wr_important=1&wr_sale_type=1&wr_office_permission=2">
+          <?}?>
+            <div>
+                <p class="icon_02"> 상가</p>
+            </div>
+            </a>
+
+
+            <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_1']?>&board_list=2&wr_important=1&wr_sale_type=1&wr_office_permission=2">
+            <div>
+                <p class="icon_02"> 아파트</p>
+            </div>
+            </a>
+            <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_1']?>&board_list=4&wr_important=1&wr_sale_type=1&wr_office_permission=2">
+            <div>
+                <p class="icon_02"> 토지</p>
+            </div>
+            </a>
+          </div>
           </li>
 
           <li>
             <?if ($wr_sale_type == '3'){ ?>
-                  <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<?=$member['mb_id']?>&board_list=<?=$member[mb_3]?>&wr_important=&wr_sale_type=3" style="letter-spacing:.5px; background:#222!important;">거래종료</a>
+                <a href="#" style="letter-spacing:.5px; background:#222!important;">거래종료</</a>
             <?}else{?>
-                  <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<?=$member['mb_id']?>&board_list=<?=$member[mb_3]?>&wr_important=&wr_sale_type=3" style="letter-spacing:.5px;">거래종료</a>
-            <?}?>
+                <a href="#" style="letter-spacing:.5px;">거래종료</a>
+              <?}?>
+          <div class="sub-menu">
+            <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<?=$member['mb_id']?>&board_list=1&wr_important=2&wr_sale_type=3">
+            <div>
+                <p class="icon_02">원룸/오피스텔</p>
+            </div>
+            </a>
+            <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<?=$member['mb_id']?>&board_list=3&wr_important=2&wr_sale_type=3">
+            <div>
+                <p class="icon_02"> 상가</p>
+            </div>
+            </a>
+            <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<?=$member['mb_id']?>&board_list=2&wr_important=2&wr_sale_type=3">
+            <div>
+                <p class="icon_02"> 아파트</p>
+            </div>
+            </a>
+            <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<?=$member['mb_id']?>&board_list=4&wr_important=2&wr_sale_type=3">
+            <div>
+                <p class="icon_02"> 토지</p>
+            </div>
+            </a>
+          </div>
           </li>
 
           <li>
             <?if ($wr_important == '2' && $wr_important == '1'){ ?>
-                  <a href="<?php echo G5_BBS_URL?>/bookmark.php?bo_table=<? echo $member['mb_id']?>&board_list=<?=$member[mb_3]?>&wr_bookmark=1" style="letter-spacing:.5px; background:#222!important;">즐겨찾기</a>
+                <a href="#" style="letter-spacing:.5px; background:#222!important;">즐겨찾기</</a>
             <?}else{?>
-                  <a href="<?php echo G5_BBS_URL?>/bookmark.php?bo_table=<? echo $member['mb_id']?>&board_list=<?=$member[mb_3]?>&wr_bookmark=1" style="letter-spacing:.5px;">즐겨찾기</a>
-            <?}?>
+                <a href="#" style="letter-spacing:.5px;">즐겨찾기</a>
+              <?}?>
+          <div class="sub-menu">
+            <a href="<?php echo G5_BBS_URL?>/bookmark.php?bo_table=<? echo $member['mb_id']?>&sfl=board_list&stx=1&wr_bookmark=1">
+            <div>
+                <p class="icon_02">원룸/오피스텔</p>
+            </div>
+            </a>
+            <a href="<?php echo G5_BBS_URL?>/bookmark.php?bo_table=<? echo $member['mb_id']?>&sfl=board_list&stx=3&wr_bookmark=1">
+            <div>
+                <p class="icon_02"> 상가</p>
+            </div>
+            </a>
+            <a href="<?php echo G5_BBS_URL?>/bookmark.php?bo_table=<? echo $member['mb_id']?>&sfl=board_list&stx=2&wr_bookmark=1">
+            <div>
+                <p class="icon_02"> 아파트</p>
+            </div>
+            </a>
+            <a href="<?php echo G5_BBS_URL?>/bookmark.php?bo_table=<? echo $member['mb_id']?>&sfl=board_list&stx=4&wr_bookmark=1">
+            <div>
+                <p class="icon_02"> 토지</p>
+            </div>
+            </a>
+
+          </div>
           </li>
-
-
           <li>
-            <a  style="letter-spacing:.5px;" class="sg_cate_01" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false">매물등록</a>
+          <a href="#" >매물등록</a>
+          <div class="sub-menu">
+            <a href="#" class="sg_cate_list"  data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false">
+            <div>
+                <p class="icon_02 sg_cate_01">원룸/오피스텔</p>
+            </div>
+            </a>
+            <a href="#" class="sg_cate_list"  data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false">
+            <div>
+                <p class="icon_02 sg_cate_03"> 상가</p>
+            </div>
+          </a>
+            <a href="#" class="sg_cate_list"  data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false">
+            <div>
+                <p class="icon_02 sg_cate_02"> 아파트</p>
+            </div>
+            </a>
+            <a href="#" class="sg_cate_list"  data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false">
+            <div>
+                <p class="icon_02 sg_cate_04"> 토지</p>
+            </div>
+            </a>
+
+          </div>
           </li>
           </ul>
           </div>
@@ -281,7 +367,7 @@ if(!defined('G5_IS_ADMIN'))
         if(g5_bo_table) {
           // $("#menubar-menus > li > a").css({'color':'#eee',});
           $(".header").css({'min-height':'75px'});
-          $(".black-bg").css({'background':'transparent'});
+          $(".black-bg").css({'background':'transparent', "border-bottom": "0px solid #ddd"});
         }
         $(".user_info").click(function(){
            $(".user_info ul").fadeToggle(300);

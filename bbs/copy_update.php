@@ -12,8 +12,9 @@ else {
 }
 $wr_id_list=explode(",",$wr_id_list);
 
-for ($i=0; $i<count($wr_id_list); $i++) {
 
+
+for ($i=0; $i<count($wr_id_list); $i++) {
 $get_sql ="select gr_id from `g5_group_member` where mb_id = '$member[mb_id]' ";
 $resc = mysqli_fetch_row(sql_query($get_sql));
 if ($resc[0]){
@@ -24,7 +25,6 @@ $group_table = "g5_write_".$member[mb_id];
 }
 // 원본 테이블은 '나의매물' g5_write_mb_id
 // 대상 테이블은 '중요매물'  g5_write_gr_id
-// echo $wr_id_list[$i] ;
 $sql="select wr_id  FROM $group_table order by wr_id desc limit 1";
 $result = mysqli_fetch_row(sql_query($sql));
 $max_id = $result[0];
@@ -38,10 +38,6 @@ $keyword = "wr_num,wr_reply,wr_parent,	wr_is_comment,wr_datetime,wr_subject,wr_w
 
 $temp = "select * FROM $write_table where wr_id = '$wr_id_list[$i]' order by  wr_id desc";
 $col = mysqli_fetch_row(sql_query($temp));
-// print_r (array_values($col));
-// echo $col[1];
-
-// select * from `$write_table` where wr_id = '$wr_id_list[$i]'
 sql_query("insert into `$group_table` ($keyword) values(
                                                                                   '$next_wr_num',
                                                                                   '$col[2]',
@@ -124,19 +120,10 @@ sql_query("insert into `$group_table` ($keyword) values(
                                                                                   '$col[79]'
 )");
 sql_query("update $group_table set wr_parent =  wr_id ");
-
-// sql_query("insert into `$group_table` select * from `$write_table` where wr_id = '$wr_id_list[$i]' ");
-// echo $group_tabel;
-// echo $wr_id;
-// sql_query("update $group_table set wr_important = '1', wr_id = $max_id+1,wr_num = $next_wr_num, wr_parent = wr_id  where wr_id = '$wr_id_list[$i]' ");
-}
-// alert("중요매물 등록이 완료 되었습니다.");
-
-
+} //for exit
 alert("사무실로 매물이 등록 되었습니다 승인을 기다려 주세요.");
 if($resc[0])
 location.reload(true);
-// goto_url(G5_HTTP_BBS_URL.'/board.php?bo_table='.$member['mb_id'].'&board_list=&wr_sale_type=1&wr_office_permission=2');
 else
 goto_url(G5_HTTP_BBS_URL.'/board.php?bo_table='.$member['mb_id'].'&sfl=wr_important&stx=1&wr_sale_type=1&wr_office_permission=2');
 ?>

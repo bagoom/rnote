@@ -796,7 +796,7 @@ else{
     alert("매물수정이 완료 되었습니다.");
     goto_url(G5_HTTP_BBS_URL.'/board.php?bo_table='.$bo_table.$qstr.'&wr_important='.$wr_important.'&wr_id='.$wr_id);
   }else{
-    goto_url(G5_HTTP_BBS_URL.'/write_result.php?bo_table='.$bo_table.'&board_list='.$board_list.'&wr_id='.$wr_id);
+    goto_url(G5_HTTP_BBS_URL.'/write_result.php?bo_table='.$bo_table.'&board_list='.$board_list.'&wr_id='.$wr_id.'&wr_sale_type='.$wr_sale_type);
   }
 
   // else if( !$gr_admin && ($_POST["wr_type"]) == "rent") {

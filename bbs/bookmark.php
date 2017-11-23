@@ -83,6 +83,6 @@ include_once($board_skin_path.'/bookmark.skin.php');
 if (G5_IS_MOBILE) {
   include_once(G5_THEME_MOBILE_PATH.'/tail.php');
 }else{
-include_once(G5_PATH.'/tail.sub.php');
+// include_once(G5_PATH.'/tail.sub.php');
 }
 ?>

@@ -56,7 +56,7 @@ input[type=text],input[type=password]{
   display: block;
   margin: 0 auto;
 }
-input[type=checkbox]{
+input[type=radio]{
   display: none;
 }
 .reg_step{
@@ -90,7 +90,7 @@ label:hover{
   background: rgba(255,255,255,0.3);
   cursor: pointer;
 }
-input[type=checkbox]:checked + label{
+input[type=radio]:checked + label{
   background: #3b4db7;
 }
 .btn_confirm{
@@ -144,11 +144,11 @@ input[type=checkbox]:checked + label{
             <div id="suggesstion-box" style="display:none;">ddd</div>
 
 
-          <p class="holder">비밀번호</p>
-          <input type="password"  name="mb_password"style="border-top:1px solid #fff; "  id="reg_mb_password" <?php echo $required ?> class="frm_input minlength_3 <?php echo $required ?>" maxlength="20">
+            <p class="holder">비밀번호</p>
+            <input type="password"  name="mb_password"style="border-top:1px solid #fff; "  id="reg_mb_password" <?php echo $required ?> class="frm_input minlength_3 <?php echo $required ?>" maxlength="20">
 
-          <p class="holder">비밀번호확인</p>
-        <input type="password"style="border-top:1px solid #fff; " name="mb_password_re" id="reg_mb_password_re" <?php echo $required ?> class="frm_input minlength_3 <?php echo $required ?>" maxlength="20">
+            <p class="holder">비밀번호확인</p>
+          <input type="password"style="border-top:1px solid #fff; " name="mb_password_re" id="reg_mb_password_re" <?php echo $required ?> class="frm_input minlength_3 <?php echo $required ?>" maxlength="20">
 
     </div> <!-- col-md !-->
         </div>
@@ -199,16 +199,16 @@ input[type=checkbox]:checked + label{
         <div class="caption">3. 메인화면 메뉴 선택</div>
         <div class="reg_step" style="padding:0;">
 
-          <input type="checkbox" name="mb_3" value="1" <?php if( $member["mb_3"] == "1" ) { echo "checked=true";}?> id="menu_select01">
+          <input type="radio" name="mb_3" value="1" <?php if( $member["mb_3"] == "1" ) { echo "checked=true";}?> id="menu_select01">
           <label for="menu_select01">아파트/오피스텔</label>
 
-          <input type="checkbox" name="mb_4" value="1" <?php if( $member["mb_4"] == "1" ) { echo "checked=true";}?> id="menu_select02">
+          <input type="radio" name="mb_3" value="2" <?php if( $member["mb_3"] == "2" ) { echo "checked=true";}?>id="menu_select02">
           <label for="menu_select02">원룸</label>
 
-          <input type="checkbox" name="mb_5" value="1" <?php if( $member["mb_5"] == "1" ) { echo "checked=true";}?> id="menu_select03">
+          <input type="radio" name="mb_3" value="3" <?php if( $member["mb_3"] == "3" ) { echo "checked=true";}?> id="menu_select03">
           <label for="menu_select03">상가</label>
 
-          <input type="checkbox" name="mb_6" value="1" <?php if( $member["mb_6"] == "1" ) { echo "checked=true";}?> id="menu_select04">
+          <input type="radio" name="mb_3" value="4" <?php if( $member["mb_3"] == "4" ) { echo "checked=true";}?> id="menu_select04">
           <label for="menu_select04">토지</label>
 
       </div> <!-- col-md !-->
@@ -286,7 +286,6 @@ input[type=checkbox]:checked + label{
             $(this).prev('p.holder').removeClass('active');
         });
     });
-
 
     $(function() {
         $("#reg_zip_find").css("display", "inline-block");

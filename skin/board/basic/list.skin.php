@@ -361,12 +361,16 @@ include_once("$board_skin_path/lib/skin.lib.php");
             <input type="hidden" name="bo_table" value="<?=$bo_table?>" />
             <input type="hidden" name="board_list" value="<?=$board_list?>" />
             <input type="hidden" name="wr_important" value="<?=$wr_important?>" />
+            <input type="hidden" name="wr_office_permission" value="2" />
             <!-- <input type="submit" name="wr_sale_type" value="1" /> -->
             <button class="btn btn-theme03 left rent" name="wr_sale_type" type="submit" value="1"style="padding-left:12px;">
              임대
             </button>
             <button class="btn btn-theme03 left sale" name="wr_sale_type" type="submit" value="2"style="padding-left:12px;">
              매매
+            </button>
+            <button class="btn btn-theme03 left office_no_permission" name="wr_writer" type="submit" value="<?=$member[mb_name]?>"style="padding-left:12px;">
+             미승인매물
             </button>
             <span class="btn btn-theme03 left list_style_memo active"style="padding-left:12px;"> 메모지형 </span>
             <span class="btn btn-theme03 left list_style_list " style="padding-left:12px;"> 리스트형</span>
@@ -453,8 +457,7 @@ include_once("$board_skin_path/lib/skin.lib.php");
                       <a href="<?php echo $list[$i]['href'] ?>">
                       <div class="list_item " style="width:100%;">
                         <div class="list_num"><?= $list[$i]['num']?></div>
-
-                      <ul>
+                      <ul style="overflow:hidden;">
                       <li class="list_subject">
                         <?php echo $list[$i]['subject'] ?>
                       </li>
@@ -462,7 +465,7 @@ include_once("$board_skin_path/lib/skin.lib.php");
                         <span style=""><?php echo $list[$i]['wr_address'] ?></span>
                       </li>
                       <li class="list_address" style="border-bottom: 3px solid ; padding-bottom:20px; ">
-                        <span class="sale_area"><?php echo $list[$i]['wr_sale_area'] ?></span>
+                        <span class="sale_area"><?php echo $list[$i]['wr_sale_area'] ?> - <?=$list[$i]['wr_writer']?></span>
                       </li>
 
                       <li class="list_sub_info" style="border-left: 1px solid #ddd;"><p>보증금</p> <?=$list[$i]['wr_rent_deposit'] ?></li>
@@ -479,7 +482,13 @@ include_once("$board_skin_path/lib/skin.lib.php");
                       <li class="list_sub_info"><p>등록일</p> <?php echo $list[$i]['datetime2'] ?></li>
 
                     </ul>
+                    <? if ($list[$i]['wr_office_permission'] == '1'){ ?>
+                    <div class="list_num_prev">
+                    <p style="margin:0;">미승인매물</p>
                     </div>
+                    <? }else{}?>
+                    </div>
+
                   </a>
                   </div>
                 <?php } ?>
@@ -848,9 +857,13 @@ for (var i = 0; i < target.length; i++) {
     $("#fboardlist").attr("action", "./office_update.php");
     $("#fboardlist").submit();
   });
+  $(".office_no_permission").click(function(){
+    $("input[name=wr_office_permission]").val("1");
+    $("#fboardlist").submit();
+  });
 
 
-
+  $('.td_chk2').css("width", $(".list_item").outerWidth() );
 //  리스트 형태 메모지형 , 리스트형으로 변경
    $(".list_style_memo").click(function(){
      $(this).addClass("active");
@@ -877,11 +890,12 @@ for (var i = 0; i < target.length; i++) {
     });
 
     var config = $(".config");
-    $(config).click(function(){
+    $(".config").click(function(){
     $(".td_chk,.td_chk2,.chk_confirm_wrap").fadeToggle(300,"swing");
     if( $(".chk_confirm_wrap").css("display") == "block"){
       $(".chk_confirm_wrap").css('display', 'none');
     }
+
     if($(".import_chk").is(":checked")){
       $(".chk_confirm_wrap").css('display', 'block');
     }

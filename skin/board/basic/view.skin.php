@@ -288,7 +288,9 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                       </section>
 
                       <div class="chk_confirm_wrap" >
+                        <?if ($gr_admin && $wr_important == 1){}else{ ?>
                         <span class="s1">사무실매물등록</span>
+                        <?}?>
                         <span class="s2">즐겨찾기등록</span>
                         <span class="s3">거래종료</span>
                         <span class="s4"  data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false">수정</span>

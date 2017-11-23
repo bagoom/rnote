@@ -106,7 +106,7 @@
 }
 </style>
 
-
+<div id="bookmark_wrap">
 <div id="map_area_all">
 
 <div id="map_area"></div>
@@ -141,7 +141,7 @@
 
 
 </div>
-
+</div>
 
 
 <script>
@@ -158,8 +158,9 @@ $(this).on('click', function(){
 
 var positions = [];
 var center_position = [];
-$('#map_area_all,#map_board').css("height", $(document).height()-60);
-$('#map_area_all,#map_board').css("max-height","780px");
+// $('#map_area_all,#map_board,#bookmark_wrap').css("height", $(document).height()-60);
+$('#map_area_all,#map_board,#bookmark_wrap').css('height',$(window).height());
+// $('#map_area_all,#map_board').css("max-height","780px");
 <? for ($i=0; $i<count($list); $i++) {?>
   var title = "<?=$list[$i][wr_subject]?>";
   var posx = <?=$list[$i][wr_posx]?>;
