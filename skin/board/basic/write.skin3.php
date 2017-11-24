@@ -60,7 +60,7 @@ input[type="text"],input[type="number"],input[type="tel"]{
 
 <!----------------- 임대 내용 ---------------->
                         <div class="tab-content">
-                          <div class="tab-pane active" id="rent" >
+                          <div class="tab-pane " id="rent" >
                             <!-- 게시물 작성/수정 시작 { -->
                             <form name="fwrite" id="fwrite" action="<?php echo $action_url ?>" method="post" enctype="multipart/form-data" autocomplete="off" style="width:100%">
                             <input type="hidden" name="uid" value="<?php echo get_uniqid(); ?>">
@@ -98,7 +98,7 @@ input[type="text"],input[type="number"],input[type="tel"]{
                                   <tr>
                                     <th>주소</th>
                                     <td><div class="col-xs-12" style="position: relative; padding:0;">
-                                      <input id="wr_address" name="wr_address" style="border:0px solid #EEE;" required type="text" tabindex="2"  value="<?=$write[wr_address] ?>" date-role="none" placeholder="도로명 또는 주소를 입력하세요."style="float: left; margin-right: 6px; margin-bottom:5px;"  onkeyup="javascript:searchPosition('wr_address');" onfocus="if(this.value =='도로명 또는 주소를 입력하세요.') this.value='';" onblur="if(this.value =='') this.value='도로명 또는 주소를 입력하세요.';" value="도로명 또는 주소를 입력하세요.">
+                                      <input id="wr_address" name="wr_address" required type="text" tabindex="2"  value="<?=$write[wr_address] ?>" date-role="none" placeholder="도로명 또는 주소를 입력하세요."style="float: left; margin-right: 6px; margin-bottom:5px;"  onkeyup="javascript:searchPosition('wr_address');" onfocus="if(this.value =='도로명 또는 주소를 입력하세요.') this.value='';" onblur="if(this.value =='') this.value='도로명 또는 주소를 입력하세요.';" value="도로명 또는 주소를 입력하세요.">
 
                                     <input id="house_reg_road_addr" style="border:1px solid #EEE; border-width:1px 0 0 0" name="house_reg_road_addr"  value="<?php echo $nh[nh_road_addr]?>" type="hidden" date-role="none"  >
                                     </div>
@@ -326,13 +326,15 @@ input[type="text"],input[type="number"],input[type="tel"]{
                                 <tbody>
                                   <tr>
                                     <th>매물명</th>
-                                    <td colspan="3"><input type="text" name="wr_subject"  value="<?php echo $subject ?>"  tabindex="1" /></td>
+                                    <td colspan="3" ><input type="text" name="wr_subject" maxlength="15" value="<?php echo $subject ?>" tabindex="1"   required /></td>
+
+                                    
                                   </tr>
                                   <tr>
                                     <th>주소</th>
                                     <td colspan="3" >
-                                      <input id="wr_address2" name="wr_address" style="border:0px solid #EEE;"type="text" tabindex="2"  value="<?=$write[wr_address] ?>" date-role="none" placeholder="도로명 또는 주소를 입력하세요."style="float: left; margin-right: 6px; margin-bottom:5px;" onkeyup="javascript:searchPosition2('wr_address2');" onfocus="if(this.value =='도로명 또는 주소를 입력하세요.') this.value='';" onblur="if(this.value =='') this.value='도로명 또는 주소를 입력하세요.';" value="도로명 또는 주소를 입력하세요.">
-                                      <input id="house_reg_road_addr" style="border:1px solid #EEE; border-width:1px 0 0 0" name="house_reg_road_addr"  value="<?php echo $nh[nh_road_addr]?>" type="hidden" date-role="none"  >
+                                      <input id="wr_address2" name="wr_address" type="text" tabindex="2"  value="<?=$write[wr_address] ?>" date-role="none" placeholder="도로명 또는 주소를 입력하세요."style="float: left; margin-right: 6px; margin-bottom:5px;" onkeyup="javascript:searchPosition2('wr_address2');" onfocus="if(this.value =='도로명 또는 주소를 입력하세요.') this.value='';" onblur="if(this.value =='') this.value='도로명 또는 주소를 입력하세요.';" value="도로명 또는 주소를 입력하세요.">
+                                      <input id="house_reg_road_addr"  name="house_reg_road_addr"  value="<?php echo $nh[nh_road_addr]?>" type="hidden" date-role="none"  >
                                       <div id="searchResultBody2" class="col-xs-12" onmouseover="MM_showHideLayers2('searchResultBody2','','show')" style="display: none;position:relative; top:0px; background-color: #222; ">
                                     </td>
                                   </tr>
@@ -368,7 +370,7 @@ input[type="text"],input[type="number"],input[type="tel"]{
                                 <tbody class="rand_wrap " style="display:none;">
                                   <tr>
                                     <th>지번</th>
-                                    <td colspan="3"><input type="text" name="wr_subject"  value="<?php echo $subject ?>"  tabindex="1" /></td>
+                                    <td colspan="3"><input type="text" name="222"  value="<?php echo $subject ?>"  tabindex="1" /></td>
                                   </tr>
                                   <tr class="sale_rand">
                                     <th>면적</th>
@@ -578,6 +580,18 @@ input[type="text"],input[type="number"],input[type="tel"]{
 
 <script src="<?php G5_PATH?>/assets/js/pc_script2.js"></script>
 <script>
+
+  if( "<?=$write[wr_sale_type]?>" == "1"){
+  $("#rent").addClass("active");
+  $("#rent").show();
+  }else if("<?=$write[wr_sale_type]?>" == "2"){
+    $("#sale").addClass("active");
+    $("#sale").show();
+  }else{
+    $("#rent").addClass("active");
+  $("#rent").show();
+  }
+
 
 $(function() { $("input:text").keydown(function(evt) { if (evt.keyCode == 13) return false; }); });
 

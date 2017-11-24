@@ -135,7 +135,11 @@ if ($board['bo_use_signature'] && $view['mb_id']) {
     $signature = conv_content($signature, 1);
 }
 
-include_once($board_skin_path.'/view.skin.php');
+if ($wr_sale_type == '2'){
+    include_once($board_skin_path.'/sale_view.skin.php');
+}else{
+    include_once($board_skin_path.'/view.skin.php');
+}
 
 @include_once($board_skin_path.'/view.tail.skin.php');
 ?>
