@@ -242,6 +242,7 @@ if ($w == '' || $w == 'r') {
                      wr_reply = '$wr_reply',
                      wr_subject = '$wr_subject',
                      wr_writer = '$wr_writer',
+                     wr_writer_id = '$member[mb_id]',
                      wr_hp = '$wr_hp',
                      wr_sale_type = '$wr_sale_type',
                      wr_content = '$wr_content',

@@ -15,7 +15,7 @@ $wr_id_list=explode(",",$wr_id_list);
 
 for ($i=0; $i<count($wr_id_list); $i++) {
 
-sql_query("update $write_table set wr_sale_type = '3' , wr_important = '2' where wr_id = '$wr_id_list[$i]' ");
+sql_query("update $write_table set wr_sold_out = '1' where wr_id = '$wr_id_list[$i]' ");
 
 }
 alert("매매완료 등록이 완료 되었습니다.");

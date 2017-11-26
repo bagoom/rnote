@@ -143,14 +143,21 @@ if(!defined('G5_IS_ADMIN'))
           <?if ($wr_important == '2' && $wr_sale_type== '1' || $wr_sale_type == '2'){ ?>
 
               <? if ($gr_admin){ ?>
-                <a href="<?php echo G5_BBS_URL ?>/board.php?bo_table=<?=$member[mb_id] ?>
-                 &board_list=<?=$member[mb_3]?>&wr_sale_type=1&wr_important=2&wr_writer=<?=$member[mb_name] ?>" style="letter-spacing:.5px; background:#222!important;">My Note</a>
+                <a href="<?php echo G5_BBS_URL ?>/board.php?bo_table=<?=$member[mb_id] ?>&board_list=<?=$member[mb_3]?>&wr_sale_type=1&wr_important=2&wr_writer=<?=$member[mb_name] ?>" style="letter-spacing:.5px; background:#222!important;">My Note</a>
               <?}else{ ?>
-                <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_id']?>&board_list=<?=$member[mb_3]?>&wr_sale_type=1&wr_important=2" style="letter-spacing:.5px; background:#222!important;">My Note</a>
+                <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_id']?>&board_list=<?=$member[mb_3]?>&wr_sale_type=1" style="letter-spacing:.5px; background:#222!important;">My Note</a>
               <?}?>
 
           <?}else{?>
-              <a href="<?php echo G5_BBS_URL ?>/board.php?bo_table=<?=$member[mb_id] ?>&board_list=<?=$member[mb_3]?>&wr_sale_type=1&wr_important=2&wr_writer=<?=$member[mb_name] ?>" style="letter-spacing:.5px; ">My Note</a>
+
+            <? if ($gr_admin){ ?>
+                <a href="<?php echo G5_BBS_URL ?>/board.php?bo_table=<?=$member[mb_id] ?>&board_list=<?=$member[mb_3]?>&wr_sale_type=1&wr_important=2&wr_writer=<?=$member[mb_name] ?>" style="letter-spacing:.5px; ">My Note</a>
+              <?}else{ ?>
+                <a href="<?php echo G5_BBS_URL ?>/board.php?bo_table=<?=$member[mb_id] ?>&board_list=<?=$member[mb_3]?>&wr_sale_type=1&wr_writer=<?=$member[mb_name] ?>" style="letter-spacing:.5px; ">My Note</a>
+              <?}?>
+
+
+              
             <?}?>
 
 
@@ -175,10 +182,10 @@ if(!defined('G5_IS_ADMIN'))
           </li>
 
           <li>
-            <?if ($wr_sale_type == '3'){ ?>
-                  <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<?=$member['mb_id']?>&board_list=<?=$member[mb_3]?>&wr_important=&wr_sale_type=3" style="letter-spacing:.5px; background:#222!important;">거래종료</a>
+            <?if ($wr_sold_out == '3'){ ?>
+                  <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<?=$member['mb_id']?>&board_list=<?=$member[mb_3]?>&wr_important=&wr_sold_out=1&wr_sale_type=1" style="letter-spacing:.5px; background:#222!important;">거래종료</a>
             <?}else{?>
-                  <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<?=$member['mb_id']?>&board_list=<?=$member[mb_3]?>&wr_important=&wr_sale_type=3" style="letter-spacing:.5px;">거래종료</a>
+                  <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<?=$member['mb_id']?>&board_list=<?=$member[mb_3]?>&wr_important=&wr_sold_out=1&wr_sale_type=1" style="letter-spacing:.5px;">거래종료</a>
             <?}?>
           </li>
 

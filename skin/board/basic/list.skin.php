@@ -352,8 +352,13 @@ include_once("$board_skin_path/lib/skin.lib.php");
             <input type="hidden" name="board_list" value="<?=$board_list?>" />
             <input type="hidden" name="wr_important" value="<?=$wr_important?>" />
             <? if ($wr_important == 1){ ?>
+            <? if ($gr_admin){ ?>
+            <input type="hidden" name="wr_office_permission" value="0" />
+            <?}else if (!$gr_admin && $wr_office_permission == "2" ) {?>
             <input type="hidden" name="wr_office_permission" value="1" />
-            <?}?>
+            <?}else{ ?>
+           <input type="hidden" name="wr_office_permission" value="2" />
+            <?}}?>
 
             <!-- <input type="submit" name="wr_sale_type" value="1" /> -->
             <button class="btn btn-theme03 left rent" name="wr_sale_type" type="submit" value="1"style="padding-left:12px;">
@@ -362,13 +367,14 @@ include_once("$board_skin_path/lib/skin.lib.php");
             <button class="btn btn-theme03 left sale" name="wr_sale_type" type="submit" value="2"style="padding-left:12px;">
              매매
             </button>
+            <?if ($wr_important == 1){ ?>
             <button class="btn btn-theme03 left office_no_permission" name="wr_writer" type="submit" value="<?=$member[mb_name]?>"style="padding-left:12px;">
              미승인매물
             </button>
+            <?}?>
             <span class="btn btn-theme03 left list_style_list active" style="padding-left:12px;"> 리스트형</span>
             <span class="btn btn-theme03 left list_style_memo "style="padding-left:12px;"> 메모지형 </span>
           </form>
-
 
 
 
@@ -387,7 +393,7 @@ include_once("$board_skin_path/lib/skin.lib.php");
               <i class="fa fa-cog" aria-hidden="true" value="중요매물등록"  style="font-size:18px; "></i>
               매물관리설정
             </button>
-          <?}else if($gr_cp && $wr_important == 2){ ?>
+          <?}else if($gr_cp && $wr_writer == $member[mb_name]){ ?>
             <button class="btn btn-theme03 right  config" type="button"  style="margin-right:10px;">
               <i class="fa fa-cog" aria-hidden="true" value="중요매물등록"  style="font-size:18px; "></i>
               매물관리설정
@@ -674,7 +680,7 @@ include_once("$board_skin_path/lib/skin.lib.php");
               <span class="s1">사무실매물등록하기</span>
               <span class="s2">즐겨찾기등록하기</span>
               <?}}?>
-              <? if ($gr_admin){?>
+              <? if ($gr_admin && $wr_important == 1){?>
               <?if (!$gr_cp && !$gr_admin) {}else{?>
               <span class="s4">사무실매물로수락</span>
               <?}?>

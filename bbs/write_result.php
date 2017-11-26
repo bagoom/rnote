@@ -117,7 +117,7 @@ include_once(G5_PATH.'/head.sub.php');
   <span class="">매물리스트로가기</span>
   </a>
   <?}else{?>
-<a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_id']?>&board_list=<?=$member[mb_3]?>&wr_sale_type=1&wr_important=2">
+<a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_id']?>&board_list=<?=$member[mb_3]?>&wr_sale_type=1">
 <span class="">매물리스트로가기</span>
 </a>
 <?}?>

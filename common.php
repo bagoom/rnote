@@ -430,7 +430,7 @@ $gr_admin = $gr_info['gr_id'];
 $gr_subject = $gr_info['gr_subject'];
 $gr_write_permission = $gr_info['gr_write_permission'];
 
-$result3 = sql_fetch("select count(*) as cnt from `g5_write_$member[mb_id]`a ,g5_member b where b.mb_id = '$member[mb_id]' and wr_important = '2' ");
+$result3 = sql_fetch("select count(*) as cnt from `g5_write_$member[mb_id]`a ,g5_member b where b.mb_id = '$member[mb_id]'  ");
 $write_count = $result3[cnt];
 $join_gr_info = sql_fetch(" select * from {$g5['group_table']} where gr_id = '$gr_cp' ");
 

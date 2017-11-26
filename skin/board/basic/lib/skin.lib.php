@@ -270,6 +270,10 @@ $arr_search = array();
 		$arr_search[name][] = "wr_sale_type";
 		$arr_search[val][] = $_GET["wr_sale_type"];
 	}
+    if(($_GET["wr_sold_out"])) {
+        $arr_search[name][] = "wr_sold_out";
+        $arr_search[val][] = $_GET["wr_sold_out"];
+    }
   if(($_GET["wr_writer"])) {
     $arr_search[name][] = "wr_writer";
     $arr_search[val][] = $_GET["wr_writer"];
@@ -623,22 +627,26 @@ if($page_rows > 0) {
 // $write_pages = get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, './board.php?bo_table='.$bo_table.$qstr.'&board_list='.$board_list.'&wr_important='.$wr_important.'&wr_sale_type='.$wr_sale_type.'&wr_office_permission=2&wr_subject='.$wr_subject.'&wr_sale_area='.$wr_sale_area.'&wr_floor='.$wr_floor.'&wr_floor_min='.$wr_floor_min.'&wr_address='.$wr_address.'&wr_writer='.$wr_writer.'&wr_floor_max='.$wr_floor_max.'&wr_area_p_min='.$wr_area_p_min.'&wr_area_p_max='.$wr_area_p_max.'&wr_rent_deposit_min='.$wr_rent_deposit_min.'&wr_rent_deposit_max='.$wr_rent_deposit_max.'&wr_m_rate_min='.$wr_m_rate_min.'&wr_m_rate_max='.$wr_m_rate_max.'&wr_premium_o_min='.$wr_premium_o_min.'&wr_premium_o_max='.$wr_premium_o_max.
 // '&wr_rec_sectors='.$wr_rec_sectors.'&amp;page=');
 // }
-if($gr_admin){
-$write_pages = get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, './board.php?bo_table='.$bo_table.$qstr.'&office_write=1&board_list='.$board_list.'&wr_sale_type='.$wr_sale_type.'&wr_important='.$wr_important.'&wr_office_permission=&wr_subject='.$wr_subject.'&wr_sale_area='.$wr_sale_area.'&wr_floor='.$wr_floor.'&wr_floor_min='.$wr_floor_min.'&wr_address='.$wr_address.'&wr_writer='.$wr_writer.'&wr_floor_max='.$wr_floor_max.'&wr_area_p_min='.$wr_area_p_min.'&wr_area_p_max='.$wr_area_p_max.'&wr_rent_deposit_min='.$wr_rent_deposit_min.'&wr_rent_deposit_max='.$wr_rent_deposit_max.'&wr_m_rate_min='.$wr_m_rate_min.'&wr_m_rate_max='.$wr_m_rate_max.'&wr_premium_o_min='.$wr_premium_o_min.'&wr_premium_o_max='.$wr_premium_o_max.'&wr_sum_pay_min='.$wr_sum_pay_min.'&wr_sum_pay_max='.$wr_sum_pay_max.'&wr_rec_sectors='.$wr_rec_sectors.'&amp;page=');
+if($gr_admin && $wr_important == '2'){
+    $write_pages = get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, './board.php?bo_table='.$bo_table.$qstr.'&board_list='.$board_list.'&wr_important='.$wr_important.'&wr_sale_type='.$wr_sale_type.'&wr_subject='.$wr_subject.'&wr_sale_area='.$wr_sale_area.'&wr_floor='.$wr_floor.'&wr_floor_min='.$wr_floor_min.'&wr_office_permission=0&wr_address='.$wr_address.'&wr_writer='.$wr_writer.'&wr_floor_max='.$wr_floor_max.'&wr_area_p_min='.$wr_area_p_min.'&wr_area_p_max='.$wr_area_p_max.'&wr_rent_deposit_min='.$wr_rent_deposit_min.'&wr_rent_deposit_max='.$wr_rent_deposit_max.'&wr_m_rate_min='.$wr_m_rate_min.'&wr_m_rate_max='.$wr_m_rate_max.'&wr_premium_o_min='.$wr_premium_o_min.'&wr_premium_o_max='.$wr_premium_o_max.'&wr_sum_pay_min='.$wr_sum_pay_min.'&wr_sum_pay_max='.$wr_sum_pay_max.
+    '&wr_rec_sectors='.$wr_rec_sectors.'&amp;page=');
 }
 
-else if($gr_admin && $wr_important == '2'){
-$write_pages = get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, './board.php?bo_table='.$bo_table.$qstr.'&board_list='.$board_list.'&wr_important='.$wr_important.'&wr_sale_type='.$wr_sale_type.'&wr_subject='.$wr_subject.'&wr_sale_area='.$wr_sale_area.'&wr_floor='.$wr_floor.'&wr_floor_min='.$wr_floor_min.'&wr_office_permission=0&wr_address='.$wr_address.'&wr_writer='.$wr_writer.'&wr_floor_max='.$wr_floor_max.'&wr_area_p_min='.$wr_area_p_min.'&wr_area_p_max='.$wr_area_p_max.'&wr_rent_deposit_min='.$wr_rent_deposit_min.'&wr_rent_deposit_max='.$wr_rent_deposit_max.'&wr_m_rate_min='.$wr_m_rate_min.'&wr_m_rate_max='.$wr_m_rate_max.'&wr_premium_o_min='.$wr_premium_o_min.'&wr_premium_o_max='.$wr_premium_o_max.'&wr_sum_pay_min='.$wr_sum_pay_min.'&wr_sum_pay_max='.$wr_sum_pay_max.
+else if($gr_admin && $wr_sold_out == '1'){
+$write_pages = get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, './board.php?bo_table='.$bo_table.$qstr.'&board_list='.$board_list.'&wr_important='.$wr_important.'&wr_sale_type='.$wr_sale_type.'&wr_sold_out='.$wr_sold_out.'&wr_subject='.$wr_subject.'&wr_sale_area='.$wr_sale_area.'&wr_floor='.$wr_floor.'&wr_floor_min='.$wr_floor_min.'&wr_office_permission=0&wr_address='.$wr_address.'&wr_writer='.$wr_writer.'&wr_floor_max='.$wr_floor_max.'&wr_area_p_min='.$wr_area_p_min.'&wr_area_p_max='.$wr_area_p_max.'&wr_rent_deposit_min='.$wr_rent_deposit_min.'&wr_rent_deposit_max='.$wr_rent_deposit_max.'&wr_m_rate_min='.$wr_m_rate_min.'&wr_m_rate_max='.$wr_m_rate_max.'&wr_premium_o_min='.$wr_premium_o_min.'&wr_premium_o_max='.$wr_premium_o_max.'&wr_sum_pay_min='.$wr_sum_pay_min.'&wr_sum_pay_max='.$wr_sum_pay_max.
 '&wr_rec_sectors='.$wr_rec_sectors.'&amp;page=');
-}
+} 
 
 else if(!$gr_admin && $wr_important == '2'){
-$write_pages = get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, './board.php?bo_table='.$bo_table.$qstr.'&board_list='.$board_list.'&wr_important='.$wr_important.'&wr_sale_type='.$wr_sale_type.'&wr_subject='.$wr_subject.'&wr_sale_area='.$wr_sale_area.'&wr_floor='.$wr_floor.'&wr_floor_min='.$wr_floor_min.'&wr_address='.$wr_address.'&wr_writer='.$wr_writer.'&wr_floor_max='.$wr_floor_max.'&wr_area_p_min='.$wr_area_p_min.'&wr_area_p_max='.$wr_area_p_max.'&wr_rent_deposit_min='.$wr_rent_deposit_min.'&wr_rent_deposit_max='.$wr_rent_deposit_max.'&wr_m_rate_min='.$wr_m_rate_min.'&wr_m_rate_max='.$wr_m_rate_max.'&wr_premium_o_min='.$wr_premium_o_min.'&wr_premium_o_max='.$wr_premium_o_max.'&wr_sum_pay_min='.$wr_sum_pay_min.'&wr_sum_pay_max='.$wr_sum_pay_max.
+$write_pages = get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, './board.php?bo_table='.$bo_table.$qstr.'&board_list='.$board_list.'&wr_important='.$wr_important.'&wr_sale_type='.$wr_sale_type.'&wr_sold_out='.$wr_sold_out.'&wr_subject='.$wr_subject.'&wr_sale_area='.$wr_sale_area.'&wr_floor='.$wr_floor.'&wr_floor_min='.$wr_floor_min.'&wr_address='.$wr_address.'&wr_writer='.$wr_writer.'&wr_floor_max='.$wr_floor_max.'&wr_area_p_min='.$wr_area_p_min.'&wr_area_p_max='.$wr_area_p_max.'&wr_rent_deposit_min='.$wr_rent_deposit_min.'&wr_rent_deposit_max='.$wr_rent_deposit_max.'&wr_m_rate_min='.$wr_m_rate_min.'&wr_m_rate_max='.$wr_m_rate_max.'&wr_premium_o_min='.$wr_premium_o_min.'&wr_premium_o_max='.$wr_premium_o_max.'&wr_sum_pay_min='.$wr_sum_pay_min.'&wr_sum_pay_max='.$wr_sum_pay_max.
 '&wr_rec_sectors='.$wr_rec_sectors.'&amp;page=');
 }
 else if(!$gr_admin && $wr_important == '1'){
 $write_pages = get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, './board.php?bo_table='.$bo_table.$qstr.'&board_list='.$board_list.'&wr_important='.$wr_important.'&wr_sale_type='.$wr_sale_type.'&wr_subject='.$wr_subject.'&wr_sale_area='.$wr_sale_area.'&wr_floor='.$wr_floor.'&wr_floor_min='.$wr_floor_min.'&wr_office_permission=2&wr_address='.$wr_address.'&wr_writer='.$wr_writer.'&wr_floor_max='.$wr_floor_max.'&wr_area_p_min='.$wr_area_p_min.'&wr_area_p_max='.$wr_area_p_max.'&wr_rent_deposit_min='.$wr_rent_deposit_min.'&wr_rent_deposit_max='.$wr_rent_deposit_max.'&wr_m_rate_min='.$wr_m_rate_min.'&wr_m_rate_max='.$wr_m_rate_max.'&wr_premium_o_min='.$wr_premium_o_min.'&wr_premium_o_max='.$wr_premium_o_max.'&wr_sum_pay_min='.$wr_sum_pay_min.'&wr_sum_pay_max='.$wr_sum_pay_max.
 '&wr_rec_sectors='.$wr_rec_sectors.'&amp;page=');
+}else{
+    $write_pages = get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, './board.php?bo_table='.$bo_table.$qstr.'&board_list='.$board_list.'&wr_important='.$wr_important.'&wr_sale_type='.$wr_sale_type.'&wr_sold_out='.$wr_sold_out.'&wr_subject='.$wr_subject.'&wr_sale_area='.$wr_sale_area.'&wr_floor='.$wr_floor.'&wr_floor_min='.$wr_floor_min.'&wr_address='.$wr_address.'&wr_writer='.$wr_writer.'&wr_floor_max='.$wr_floor_max.'&wr_area_p_min='.$wr_area_p_min.'&wr_area_p_max='.$wr_area_p_max.'&wr_rent_deposit_min='.$wr_rent_deposit_min.'&wr_rent_deposit_max='.$wr_rent_deposit_max.'&wr_m_rate_min='.$wr_m_rate_min.'&wr_m_rate_max='.$wr_m_rate_max.'&wr_premium_o_min='.$wr_premium_o_min.'&wr_premium_o_max='.$wr_premium_o_max.'&wr_sum_pay_min='.$wr_sum_pay_min.'&wr_sum_pay_max='.$wr_sum_pay_max.
+    '&wr_rec_sectors='.$wr_rec_sectors.'&amp;page=');
 }
 $list_href = '';
 $prev_part_href = '';
