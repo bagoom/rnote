@@ -1,5 +1,6 @@
 CREATE TABLE `__TABLE_NAME__` (
   `wr_id` int(11) NOT NULL AUTO_INCREMENT,
+  `wr_o_id` int(11) NOT NULL AUTO_INCREMENT,
   `wr_num` int(11) NOT NULL DEFAULT '0',
   `wr_reply` varchar(10) NOT NULL,
   `wr_parent` int(11) NOT NULL DEFAULT '0',
@@ -13,6 +14,7 @@ CREATE TABLE `__TABLE_NAME__` (
   `wr_sold_out` int(2) NOT NULL DEFAULT '0',
   `wr_content` text NOT NULL,
   `wr_address` varchar(255) NOT NULL,
+  `wr_address_sale` varchar(255) NOT NULL,
   `wr_district` varchar(255) NOT NULL,
   `wr_sale_area` varchar(255) NOT NULL,
   `wr_floor` varchar(255) NOT NULL,

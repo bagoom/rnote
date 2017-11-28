@@ -39,13 +39,16 @@ $msg_wdate = G5_TIME_YMDHIS;
 // echo $col[1];
 
 //
-$sql2 = "select wr_writer,wr_subject from `$write_table` where wr_id = '$wr_id_list[$i]' ";
+$sql2 = "select wr_writer,wr_subject,wr_writer_id,wr_o_id from `$write_table` where wr_id = '$wr_id_list[$i]' ";
 $result2 = sql_query($sql2);
 while($row = mysqli_fetch_array($result2)) {
 $sql3 = "select mb_id from `g5_member` where mb_name = '$row[wr_writer]'";
 $id_list = sql_query($sql3);
 
-// echo $row[wr_subject].'<br>';
+// 승인거절 시 office 테이블에 해당 매물의 wr_o_id와 
+// 작성자아이디 테이블의 wr_id가 같으면 wr_important = 2로 업데이트  
+sql_query("update `g5_write_$row[wr_writer_id]` set wr_important =  2 where wr_id = '$row[wr_o_id]' ");
+
 
 if($confirm_unaccept2){
   $confirm_unaccept = $confirm_unaccept2;

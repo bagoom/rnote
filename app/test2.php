@@ -14,12 +14,12 @@ mysqli_set_charset($con,"utf8");
 // print_r ($emparray);
 // echo "</br>";
 
-$sql="select mb_id from `g5_member` where mb_id = 'e0rua' ";
+$sql="select mb_id from `g5_member` where mb_id != 'admin' ";
 $result = sql_query($sql);
 print_r ($result);
 
 for ($i=0; $row=sql_fetch_array($result); $i++) {
-   $sql2 = "update `g5_write_$row[mb_id]` set wr_writer_id = '$row[mb_id]' where wr_writer_id =0 ";
+   $sql2 = "ALTER TABLE `g5_write_$row[mb_id]` ADD `wr_address_sale` VARCHAR(255) NOT NULL AFTER `wr_address`";
    echo $sql2;
    echo '<br>';
    sql_query($sql2);

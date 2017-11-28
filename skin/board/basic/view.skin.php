@@ -124,7 +124,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                               <i class="fa fa-cog" aria-hidden="true" value="중요매물등록"  style="font-size:18px; "></i>
                               매물관리설정
                             </button>
-                          <?}else if($gr_cp && $wr_important == 2){ ?>
+                          <?}else if($gr_cp && $bo_table == "$member[mb_id]"){ ?>
                             <button class="btn btn-theme03 right  config" type="button"  style="margin-right:10px;">
                               <i class="fa fa-cog" aria-hidden="true" value="중요매물등록"  style="font-size:18px; "></i>
                               매물관리설정
@@ -179,7 +179,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
 
                             <div class="info_bot">
                               <li>관리번호<span><?=$view['wr_code'];?></li>
-                          <? if($_GET['wr_important'] == 1){ ?>
+                          <? if($view['wr_writer'] !== $member['mb_name']){ ?>
 
                           <!-- 임차인연락처가 있을경우 -->
                           <?if ($gr_admin&& $view['wr_renter_contact']){?>

@@ -441,7 +441,7 @@ include_once("$board_skin_path/lib/skin.lib.php");
                           <input type="hidden" name="sod" value="<?php echo $sod ?>">
                           <input type="hidden" name="page" value="<?php echo $page ?>">
                           <input type="hidden" name="sw" value="">
-                  <div class="board_list_box col-xs-12 col-md-12" id="list_style_list">
+                  <div class="board_list_box col-xs-12 col-md-12" id="list_style_list" style="padding:0;">
                     <div class="table">
                       <div class="thead">
                         <? $sale = $_GET['wr_sale_type'] ;?>

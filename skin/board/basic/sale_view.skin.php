@@ -147,8 +147,13 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                        <div class="col-lg-4" >
                         <div class="info_body">
                           <div class="info_head">
+                          <?$wr_area_p_sale=explode(",",$view['wr_area_p']);
+                              $wr_area_m_sale=explode(",",$view['wr_area_m']);
+                              $wr_address_sale=explode(",",$view['wr_address_sale']);
+                              // $wr_area_p_sale = count($wr_area_p_sale);
+                          ?>
                             <h2 style="margin-top:5px;"><?=$view['wr_subject'];?></h2>
-                            <h4><?=$view['wr_address'];?> 외 ()필지</h4>
+                            <h4><?=$view['wr_address'];?> 외 (<?=count($wr_area_p_sale);?>)필지 </h4>
                             <h4>지목 <?=$view[wr_rand_type]?> / 지역지구 <?=$view[wr_zoning_district]?></h4>
                             <h4>건물층수 <?=$view[wr_floor]?>층 / 연면적 <?=$view[wr_gross_area]?>평</h4>
                           </div> 
@@ -157,8 +162,17 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                             <div class="info_top">
                               <ul>
                                 <? $m2 = $view['wr_area_p'] *3.3;?>
-                                <li>대지면적<span><?=$view[wr_area_p_all]?>평(<?=$view[wr_area_m_all] ?>m2)</span></li>
-                               
+                                <li class="wr_writer">대지면적
+                                <span>
+                                <?=$view[wr_area_p_all]?>평(<?=$view[wr_area_m_all] ?>m2)
+                                <i class="fa fa-caret-square-o-down" aria-hidden="true"></i>
+                                </span>
+                                </li> 
+                                <div class="wr_sale_area" style="display:none;">
+                                <? for ($i=0; $i<count($wr_area_p_sale); $i++) { ?>
+                                <li > <?=$wr_address_sale[$i]?>  <?=$wr_area_p_sale[$i]?>평 <?=$wr_area_m_sale[$i]?>㎡ </li>
+                                <?}?>
+                                </div>
                               </ul>
                             </div>
 
@@ -340,7 +354,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
 
 
 $(".wr_writer").click(function(){
-  $(".wr_writer_contact").slideToggle(200);
+  $(".wr_sale_area").slideToggle(200);
 })
 
 if (<?=$write["wr_sale_type"]?> == "1"){

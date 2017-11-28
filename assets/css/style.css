@@ -723,8 +723,10 @@ li{
 
 /*Theme Buttom*/
 .btn-theme03{
-  color: #323e51;
-  background: transparent;
+  color: #777;
+  width: 120px;
+  border: 1px solid #bbb;
+  background: #d1d1d1;
   height: 44px;
   padding:12px;
   padding-bottom: 10px;
@@ -785,7 +787,6 @@ li{
   background-color: #3847a2;
   border-color: #3847a2;
 }
-}
 
 .btn-theme03 {
   color: #323e51;
@@ -809,11 +810,11 @@ li{
 .btn-theme03:active,
 .btn-theme03.active,
 .open .dropdown-toggle.btn-theme03 {
-  font-weight: bold;
-  border-bottom: 2px solid #3b4db7;
-  background-color: transparent;
+  border: 1px solid #bbb;
+  background-color: #d5d5d5;
   border-radius: 0;
   box-shadow: none;
+  margin-right:  10px;
 }
 
 .btn-theme04 {

@@ -314,8 +314,8 @@ input[type="text"],input[type="number"],input[type="tel"]{
                               <input type="hidden" name="sst" value="<?php echo $sst ?>">
                               <input type="hidden" name="sod" value="<?php echo $sod ?>">
                               <input type="hidden" name="page" value="<?php echo $page ?>">
-                              <input type="hidden" name="wr_posx" id="wr_posx" value="<?=$write[wr_posx]?>">
-                              <input type="hidden" name="wr_posy" id="wr_posy" value="<?=$write[wr_posy]?>">
+                              <input type="hidden" name="wr_posx" id="wr_posx2" value="<?=$write[wr_posx]?>">
+                              <input type="hidden" name="wr_posy" id="wr_posy2" value="<?=$write[wr_posy]?>">
 
 
                               <div class="form-title" style="margin-top:0;">
@@ -351,32 +351,34 @@ input[type="text"],input[type="number"],input[type="tel"]{
                               </div>
 
                               <table class="write_table">
-                                <tbody class="sale_rand_wrap rand_wrap_basic" style="display:table-header-group;">
+                                <tbody class="sale_rand_wrap rand_wrap_basic" style="display:table-header-group;" >
                                   <tr>
                                     <th>지번</th>
                                     <td colspan="3">
-
+                                      <input type="text" name="wr_address_sale99" value="<?=$write[wr_address_sale]?>">
                                       </div>
                                     </td>
                                   </tr>
                                   <tr>
                                     <th>면적</th>
-                                    <td><input type="text" name="wr_area_p" id="wr_area_p2"  value="<?php echo $write[wr_area_p] ?>"    tabindex="21" placeholder="평"/></td>
+                                    <td><input type="text" name="wr_area_p99" id="wr_area_p2"  value="<?php echo $write[wr_area_p] ?>"    tabindex="21" placeholder="평"/></td>
                                     <th style="text-align:center;"><i class="fa fa-arrows-h" aria-hidden="true"></i></th>
-                                    <td><input type="text" name="wr_area_m" id="wr_area_m2" value="<?php echo $write[wr_area_m] ?>"   tabindex="22" placeholder="㎡"/></td>
+                                    <td><input type="text" name="wr_area_m99" id="wr_area_m2" value="<?php echo $write[wr_area_m] ?>"   tabindex="22" placeholder="㎡"/></td>
                                   </tr>
                                 </tbody>
 
-                                <tbody class="rand_wrap " style="display:none;">
+                                <tbody class="rand_wrap " style="display:none;" id="doo">
                                   <tr>
                                     <th>지번</th>
-                                    <td colspan="3"><input type="text" name="222"  value="<?php echo $subject ?>"  tabindex="1" /></td>
+                                    <td colspan="3"><input type="text" name="wr_address_sale" id="wr_address_sale3" value=""  tabindex="1" /></td>
                                   </tr>
                                   <tr class="sale_rand">
                                     <th>면적</th>
-                                    <td><input type="number" name="wr_area_p" id="wr_area_p3"  value="<?php echo $write[wr_area_p] ?>"  tabindex="21" placeholder="평"/></td>
+                                    <td>
+                                    <input type="text" name="wr_area_p" id="wr_area_p3"  value=""  tabindex="21" placeholder="평"/>
+                                    </td>
                                     <th style="text-align:center;"><i class="fa fa-arrows-h" aria-hidden="true"></i></th>
-                                    <td><input type="number" name="wr_area_m" id="wr_area_m3" value="<?php echo $write[wr_area_m] ?>"  tabindex="22" placeholder="㎡" /></td>
+                                    <td><input type="text" name="wr_area_m" id="wr_area_m3" value=""  tabindex="22" placeholder="㎡" /></td>
                                   </tr>
                                 </tbody>
 

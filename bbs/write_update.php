@@ -8,6 +8,41 @@ check_write_token($bo_table);
 
 $g5['title'] = '게시글 저장';
 
+
+// 클론된 평수의 값을 멀티벨류값으로 저장
+$multivalues = array();
+for ($i=99; $i<120; $i++ ){
+    if (${"wr_area_p" . $i}){
+        array_push($multivalues,${"wr_area_p" . $i});
+    }
+}
+// 클론된 m2의 값을 멀티벨류값으로 저장
+$multivalues2 = array();
+for ($i=99; $i<120; $i++ ){
+    if (${"wr_area_m" . $i}){
+        array_push($multivalues2,${"wr_area_m" . $i});
+    }
+}
+// 클론된 address_sale의 값을 멀티벨류값으로 저장
+$multivalues3 = array();
+for ($i=99; $i<120; $i++ ){
+    if (${"wr_address_sale" . $i}){
+        array_push($multivalues3,${"wr_address_sale" . $i});
+    }
+}
+
+if ($wr_sale_type == "1"){
+    $wr_area_p_sale = $wr_area_p;
+    $wr_area_m_sale = $wr_area_m;
+    $wr_address_sale = $wr_address_sale;
+}else if ($wr_sale_type =="2"){
+    $wr_area_p_sale = implode(",",$multivalues);
+    $wr_area_m_sale = implode(",",$multivalues2);
+    $wr_address_sale = implode(",",$multivalues3);
+}
+
+
+
 $msg = array();
 
 if($board['bo_use_category']) {
@@ -238,7 +273,8 @@ if ($w == '' || $w == 'r') {
     }
 
     $sql = " insert into $write_table
-                set wr_num = '$wr_num',
+                set  wr_o_id = wr_id,
+                    wr_num = '$wr_num',
                      wr_reply = '$wr_reply',
                      wr_subject = '$wr_subject',
                      wr_writer = '$wr_writer',
@@ -247,12 +283,13 @@ if ($w == '' || $w == 'r') {
                      wr_sale_type = '$wr_sale_type',
                      wr_content = '$wr_content',
                      wr_address = '$wr_address',
+                     wr_address_sale = '$wr_address_sale',
                      wr_district = '$wr_district',
                      wr_floor = '$wr_floor',
                      wr_sale_area = '$wr_sale_area',
                      wr_rent_p = '$wr_rent_p',
-                     wr_area_p = '$wr_area_p',
-                     wr_area_m = '$wr_area_m',
+                     wr_area_p = '$wr_area_p_sale',
+                     wr_area_m = '$wr_area_m_sale',
                      wr_area_p_all = '$wr_area_p_all',
                      wr_area_m_all = '$wr_area_m_all',
                      wr_sale_price = '$wr_sale_price',
@@ -313,8 +350,9 @@ if ($w == '' || $w == 'r') {
                      wr_datetime = '".G5_TIME_YMDHIS."' ";
 
     sql_query($sql);
-
+    
     $wr_id = sql_insert_id();
+    sql_query("update $write_table set wr_o_id =  wr_id where wr_id = '$wr_id' ");
 // echo $sql();
     // 부모 아이디에 UPDATE
     sql_query(" update $write_table set wr_parent = '$wr_id' where wr_id = '$wr_id' ");
@@ -408,12 +446,13 @@ if ($w == '' || $w == 'r') {
                          wr_sale_type = '$wr_sale_type',
                          wr_content = '$wr_content',
                          wr_address = '$wr_address',
+                         wr_address_sale = '$wr_address_sale',
                          wr_district = '$wr_district',
                          wr_floor = '$wr_floor',
                          wr_sale_area = '$wr_sale_area',
                          wr_rent_p = '$wr_rent_p',
-                         wr_area_p = '$wr_area_p',
-                         wr_area_m = '$wr_area_m',
+                         wr_area_p = '$wr_area_p_sale',
+                         wr_area_m = '$wr_area_m_sale',
                          wr_area_p_all = '$wr_area_p_all',
                          wr_area_m_all = '$wr_area_m_all',
                          wr_sale_price = '$wr_sale_price',
@@ -791,26 +830,11 @@ delete_cache_latest($bo_table);
 if ($file_upload_msg)
     alert($file_upload_msg, G5_HTTP_BBS_URL.'/board.php?bo_table='.$bo_table.'&amp;wr_id='.$wr_id.$qstr);
 else{
-  if($write_again == "계속등록"){
-    goto_url(G5_HTTP_BBS_URL.'/write.php?bo_table='.$bo_table.$qstr.'&board_list='.$board_list);
-  }elseif($w == "u"){
+    if($w == "u"){
     alert("매물수정이 완료 되었습니다.");
     goto_url(G5_HTTP_BBS_URL.'/board.php?bo_table='.$bo_table.$qstr.'&wr_important='.$wr_important.'&wr_id='.$wr_id);
-  }else{
+     }else{
     goto_url(G5_HTTP_BBS_URL.'/write_result.php?bo_table='.$bo_table.'&board_list='.$board_list.'&wr_id='.$wr_id.'&wr_sale_type='.$wr_sale_type);
-  }
-
-  // else if( !$gr_admin && ($_POST["wr_type"]) == "rent") {
-  //   goto_url(G5_HTTP_BBS_URL.'/board.php?bo_table='.$bo_table.'&wr_sale_type=1&wr_writer='.$member['mb_nick'].'&board_list='.$board_list);
-  // }
-  // else if( !$gr_admin && ($_POST["wr_type"]) == "sale"){
-  //   goto_url(G5_HTTP_BBS_URL.'/board.php?bo_table='.$bo_table.'&wr_sale_type=2&wr_writer='.$member['mb_nick'].'&board_list='.$board_list);
-  // }
-
-  if($gr_admin && ($_POST["wr_type"]) == "rent"){
-    goto_url(G5_HTTP_BBS_URL.'/board.php?bo_table='.$bo_table.'&wr_sale_type=1&wr_writer='.$member['mb_nick'].'&board_list='.$board_list.'&wr_important=2');
-  }else if($gr_admin && ($_POST["wr_type"]) == "sale") {
-    goto_url(G5_HTTP_BBS_URL.'/board.php?bo_table='.$bo_table.'&wr_sale_type=2&wr_writer='.$member['mb_nick'].'&board_list='.$board_list.'&wr_important=2');
-  }
+    }
     }
 ?>

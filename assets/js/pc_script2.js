@@ -23,6 +23,13 @@ $(function() { $("input:text, input:tel").keydown(function(evt) { if (evt.keyCod
         var clone =  rand.clone().insertAfter('.rand_wrap');
       }
       clone.addClass('clone'+cloneNumber);
+      var area_p = $(clone).find("#wr_area_p3").attr("name","wr_area_p" + cloneNumber);
+      var area_m = $(clone).find("#wr_area_m3").attr("name","wr_area_m" + cloneNumber);
+      var wr_address_sale = $(clone).find("#wr_address_sale3").attr("name","wr_address_sale" + cloneNumber);
+      
+     
+
+
      $('.clone'+cloneNumber +  ' input').val('');
       $('.rand_wrap').css("border-top","2px solid #555");
       $('.clone'+cloneNumber).css({"display":"table-header-group", "margin": "5px"});
@@ -64,7 +71,7 @@ $(function() { $("input:text, input:tel").keydown(function(evt) { if (evt.keyCod
       var sum2=0;
 
       $(".rand_wrap, .rand_wrap_basic").each(function(){
-        $(this).find('input[name="wr_area_p"]').each(function()  {
+        $(this).find('#wr_area_p2,#wr_area_m2,#wr_area_p3,#wr_area_m3').each(function()  {
           if(!isNaN(this.value)&&this.value.length!=0)
           {
             val_change = parseFloat(this.value*3.3).toFixed(1)
@@ -244,6 +251,24 @@ function Profit_Rate() {
     $("#search_box").val(test.text());
     }
     });
+
+
+
+    //매매 항목추가 수정 스크립트
+    $("body").ready(function(){
+      var wr_address_sale_val = $("input[name='wr_address_sale99']").val().split(',');
+      for(var i = 0; i< wr_address_sale_val.length-1; i++){
+        console.log(wr_address_sale_val.length);
+        $('#doo').clone().insertAfter('.rand_wrap');
+        $('.rand_wrap').css("border-top","2px solid #555");
+        var doo_len = $('#doo');
+        doo_len.show();
+        // $("#search_box").val(test.text());
+        // console.log(wr_address_sale_val)
+      }
+
+    })
+    
 
 
 

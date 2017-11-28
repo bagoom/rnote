@@ -64,11 +64,11 @@ function get_sql_search3($search_ca_name, $search_field, $search_text, $search_o
 
         // 평수 범위검색
        if($_GET["wr_area_p_min"] && $_GET["wr_area_p_max"]) {
-          $str = append_sql2($str, " and ", " wr_area_p between '$_GET[wr_area_p_min]' and '$_GET[wr_area_p_max]'");
+          $str = append_sql2($str, " and ", " wr_area_p+0 between '$_GET[wr_area_p_min]' and '$_GET[wr_area_p_max]'");
         }elseif ($_GET["wr_area_p_min"]){
-          $str = append_sql2($str, " and ", " wr_area_p >= '$_GET[wr_area_p_min]' ");
+          $str = append_sql2($str, " and ", " wr_area_p+0 >= '$_GET[wr_area_p_min]' ");
         }elseif ($_GET["wr_area_p_max"]){
-          $str = append_sql2($str, " and ", " wr_area_p <= '$_GET[wr_area_p_max]' ");
+          $str = append_sql2($str, " and ", " wr_area_p+0 <= '$_GET[wr_area_p_max]' ");
         }
 
         // 월세 범위검색

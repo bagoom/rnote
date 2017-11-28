@@ -6,7 +6,7 @@ if ($wr_id)
 else {
     $comma = '';
     for ($i=0; $i<count($_POST['chk_wr_id']); $i++) {
-        $wr_id_list .= $comma . $_POST['chk_wr_id'][$i];
+        $wr_id_list .= $comma . $_POST['chk_wr_id'][$i]; 
         $comma = ',';
     }
 }
@@ -19,7 +19,7 @@ sql_query("update $write_table set wr_sold_out = '1' where wr_id = '$wr_id_list[
 
 }
 alert("매매완료 등록이 완료 되었습니다.");
-
+ 
 ?>
 
 <script>
