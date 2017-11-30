@@ -4,7 +4,9 @@ include_once(G5_LIB_PATH.'/thumbnail.lib.php');
 // add_stylesheet('css 구문', 출력순서); 숫자가 작을 수록 먼저 출력됨
 add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0);
 ?>
+<link rel="stylesheet" type="text/css" href="<?php G5_PATH?>/assets/css/map_style.css">
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=322cba0807c729368c6cc0ec6e84585c"></script>
+
 <!-- <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=306678a15ccad514fa75a3b1ae02b091"></script> -->
 <?$pagetype = 'view';?>
 <?global $pagetype;?>
@@ -42,6 +44,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
   text-align: right;
   line-height: 27px;
 }
+
 </style>
 <script src="<?php echo G5_JS_URL; ?>/viewimageresize.js"></script>
 
@@ -279,6 +282,19 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                             </div>
                             </div>
 
+
+                            <div class="map_wrap">
+    <div id="mapWrapper" style="width:50%;height:300px;float:left">
+        <div id="map" style="width:100%;height:100%"></div> <!-- 지도를 표시할 div 입니다 -->
+    </div>
+    <div id="rvWrapper" style="width:50%;height:300px;float:left">
+        <div id="roadview" style="width:100%;height:100%"></div> <!-- 로드뷰를 표시할 div 입니다 -->
+    </div>
+</div>
+
+
+                            
+
                           <!-- 본문 내용 시작 { -->
 
 
@@ -286,17 +302,52 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                           <!-- } 본문 내용 끝 -->
 
                       </section>
+                      
 
+                      <div class="modal fade" id="layerpop" >
+                        <div class="modal-dialog">
+                          <div class="modal-content" style="min-width:500px !important; width:500px; margin:0 auto;">
+                            <!-- header -->
+                            <div class="modal-header">
+                              <!-- 닫기(x) 버튼 -->
+                              <button type="button" class="close" data-dismiss="modal">×</button>
+                              <!-- header title -->
+                              <h4 class="modal-title">사무실 매물 승인 거절</h4>
+                            </div>
+                            <!-- body -->
+                            <div class="modal-body" style="padding-top:35px;">
+                                  <select  name="confirm_unaccept" class="select" style="width:100%; height:50px;" >
+                                    <option value="타인이 등록한 물건">타인이 등록한 매물</option>
+                                    <option value="주소및 정보불량">주소및 정보불량</option>
+                                    <option value="이미 수락한 매물">이미 수락한 매물</option>
+                                    <option value="기타사유입력" >기타사유입력</option>
+                                  </select>
+                                  <input type="text" name="confirm_unaccept2" class="etc" style="display:none; width:100%; height:50px; margin-top:5px; text-align:center;"/>
+                            </div>
+                            <!-- Footer -->
+                            <div class="modal-footer" style="padding:15px;">
+                              <button type="button" class="btn btn-default s2" data-dismiss="modal">승인거절</button>
+                              <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      
                       <div class="chk_confirm_wrap" >
                         <?if ($gr_admin && $wr_important == 1){}else{ ?>
                         <span class="s1">사무실매물등록</span>
                         <?}?>
+                        <?if ($gr_admin && $view[wr_office_permission]=='1') {?>
+                        <span class="s6" >사무실매물로수락</span>
+                        <span data-target="#layerpop" data-toggle="modal" class="s5">거절하기</span>
+                        <?}else{}?>
                         <span class="s2">즐겨찾기등록</span>
-                        <span class="s3">거래종료</span>
-                        <span class="s4"  data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false">수정</span>
+                        <span class="s3">거래종료등록</span>
+                        <span class="s4"><a href=" ../bbs/write.php?w=u&bo_table=<?echo $bo_table?>&board_list= <?echo $view[board_list] ?>&wr_id=<?echo $view[wr_id]?>" style="color:#fff;">수정</a></span>
                         <span class="s5"><a href="<?php echo $delete_href ?>"  onclick="del(this.href); return false;" style="color:#fff;">삭제</a></span>
                       </div>
-
+                     
 <script>
 
 
@@ -313,6 +364,10 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
   });
   $(".s3").click(function(){
     $("#fboardlist").attr("action", "./sale_success.php");
+    $("#fboardlist").submit();
+  });
+  $(".s6").click(function(){
+    $("#fboardlist").attr("action", "./office_update.php");
     $("#fboardlist").submit();
   });
 
@@ -336,8 +391,8 @@ $('#rent').hide();
 
 
 
-var bourl = "../bbs/write_modal.php?w=u&bo_table=<?echo $bo_table?>&board_list= <?echo $view[board_list] ?>&wr_id=<?echo $view[wr_id]?>";
-$(".s4").click(function(){
+var bourl = "../bbs/write.php?w=u&bo_table=<?echo $bo_table?>&board_list= <?echo $view[board_list] ?>&wr_id=<?echo $view[wr_id]?>";
+$(".ddds4").click(function(){
   $.ajax({
   type : "POST",
   url : bourl,
@@ -346,7 +401,7 @@ $(".s4").click(function(){
       alert('통신실패!!');
   },
   success : function(data) {
-      $('#Context').html(data);
+      $('#bo_v_atc').html(data);
   }
 });
  })
@@ -375,30 +430,6 @@ $(function() {
     $("#bo_v_atc").viewimageresize();
 });
 
-function excute_good(href, $el, $tx)
-{
-    $.post(
-        href,
-        { js: "on" },
-        function(data) {
-            if(data.error) {
-                alert(data.error);
-                return false;
-            }
-
-            if(data.count) {
-                $el.find("strong").text(number_format(String(data.count)));
-                if($tx.attr("id").search("nogood") > -1) {
-                    $tx.text("이 글을 비추천하셨습니다.");
-                    $tx.fadeIn(200).delay(2500).fadeOut(200);
-                } else {
-                    $tx.text("이 글을 추천하셨습니다.");
-                    $tx.fadeIn(200).delay(2500).fadeOut(200);
-                }
-            }
-        }, "json"
-    );
-}
 </script>
 
 
@@ -406,41 +437,157 @@ function excute_good(href, $el, $tx)
 var posx = <?=$view[wr_posx]?>;
 var posy = <?=$view[wr_posy]?>;
 
-var container = document.getElementById('map_area'); //지도를 담을 영역의 DOM 레퍼런스
-var options = { //지도를 생성할 때 필요한 기본 옵션
-	center: new daum.maps.LatLng(posy, posx), //지도의 중심좌표.
-	level: 3 //지도의 레벨(확대, 축소 정도)
-};
 
-var map = new daum.maps.Map(container, options); //지도 생성 및 객체 리턴
 
-// 지도에 마커를 생성하고 표시한다
-	var marker = new daum.maps.Marker({
-	    position: new daum.maps.LatLng(posy, posx), // 마커의 좌표
-	    map: map // 마커를 표시할 지도 객체
-	});
+/*
+   * 아래부터 실제 지도와 로드뷰 map walker를 생성 및 제어하는 로직
+   */
+  var mapContainer = document.getElementById('map_area'), // 지도를 표시할 div 
+      mapCenter = new daum.maps.LatLng(posy, posx), // 지도의 가운데 좌표
+      mapOption = {
+          center: mapCenter, // 지도의 중심좌표
+          level: 3 // 지도의 확대 레벨
+      };
+  
+  // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+  var map = new daum.maps.Map(mapContainer, mapOption);
+  
+  // 로드뷰 도로를 지도위에 올린다.
+  map.addOverlayMapTypeId(daum.maps.MapTypeId.ROADVIEW);
+  
+  var roadviewContainer = document.getElementById('roadview'); // 로드뷰를 표시할 div
+  var roadview = new daum.maps.Roadview(roadviewContainer); // 로드뷰 객체
+  var roadviewClient = new daum.maps.RoadviewClient(); // 좌표로부터 로드뷰 파노ID를 가져올 로드뷰 helper객체
+  
+  // 지도의 중심좌표와 가까운 로드뷰의 panoId를 추출하여 로드뷰를 띄운다.
+  roadviewClient.getNearestPanoId(mapCenter, 50, function(panoId) {
+      roadview.setPanoId(panoId, mapCenter); // panoId와 중심좌표를 통해 로드뷰 실행
+  });
+  
+  var mapWalker = null;
+  
+  // 로드뷰의 초기화 되었을때 map walker를 생성한다.
+  daum.maps.event.addListener(roadview, 'init', function() {
+  
+      // map walker를 생성한다. 생성시 지도의 중심좌표를 넘긴다.
+      mapWalker = new MapWalker(mapCenter);
+      mapWalker.setMap(map); // map walker를 지도에 설정한다.
+  
+      // 로드뷰가 초기화 된 후, 추가 이벤트를 등록한다.
+      // 로드뷰를 상,하,좌,우,줌인,줌아웃을 할 경우 발생한다.
+      // 로드뷰를 조작할때 발생하는 값을 받아 map walker의 상태를 변경해 준다.
+      daum.maps.event.addListener(roadview, 'viewpoint_changed', function(){
+  
+          // 이벤트가 발생할 때마다 로드뷰의 viewpoint값을 읽어, map walker에 반영
+          var viewpoint = roadview.getViewpoint();
+          mapWalker.setAngle(viewpoint.pan);
+  
+      });
+  
+      // 로드뷰내의 화살표나 점프를 하였을 경우 발생한다.
+      // position값이 바뀔 때마다 map walker의 상태를 변경해 준다.
+      daum.maps.event.addListener(roadview, 'position_changed', function(){
+  
+          // 이벤트가 발생할 때마다 로드뷰의 position값을 읽어, map walker에 반영 
+          var position = roadview.getPosition();
+          mapWalker.setPosition(position);
+          map.setCenter(position);
+  
+      });
+  });
 
-  //로드뷰를 표시할 div
-		var roadviewContainer = document.getElementById('roadview');
-    // 로드뷰 위치
-		var rvPosition = new daum.maps.LatLng(posy, posx);
 
-    //로드뷰 객체를 생성한다
-		var roadview = new daum.maps.Roadview(roadviewContainer, {
-			pan: 90, // 로드뷰 처음 실행시에 바라봐야 할 수평 각
-			tilt: 1, // 로드뷰 처음 실행시에 바라봐야 할 수직 각
-			zoom: -1 // 로드뷰 줌 초기값
-		});
-    //좌표로부터 로드뷰 파노ID를 가져올 로드뷰 helper객체를 생성한다
-		var roadviewClient = new daum.maps.RoadviewClient();
-		// 특정 위치의 좌표와 가까운 로드뷰의 panoId를 추출하여 로드뷰를 띄운다
-		roadviewClient.getNearestPanoId(rvPosition, 70, function(panoId) {
-			// panoId와 중심좌표를 통해 로드뷰를 실행한다
-		    roadview.setPanoId(panoId, rvPosition);
-		});
-		// 로드뷰 초기화가 완료되었을 때 로드뷰에 마커나 커스텀오버레이를 표시한다
-		daum.maps.event.addListener(roadview, 'init', function() {
-		});
 
+
+//지도위에 현재 로드뷰의 위치와, 각도를 표시하기 위한 map walker 아이콘 생성 클래스
+function MapWalker(position){
+  
+      //커스텀 오버레이에 사용할 map walker 엘리먼트
+      var content = document.createElement('div');
+      var figure = document.createElement('div');
+      var angleBack = document.createElement('div');
+  
+      //map walker를 구성하는 각 노드들의 class명을 지정 - style셋팅을 위해 필요
+      content.className = 'MapWalker';
+      figure.className = 'figure';
+      angleBack.className = 'angleBack';
+  
+      content.appendChild(angleBack);
+      content.appendChild(figure);
+  
+      // 커스텀 오버레이 객체를 사용하여, map walker 아이콘을 생성
+      var walker = new daum.maps.CustomOverlay({
+          position: new daum.maps.LatLng(posy, posx), // 마커의 좌표
+          content: content,
+          draggable: true,
+          yAnchor: 1
+      });
+
+
+      this.walker = walker;
+      this.content = content;
+  
+  
+
+  //마커에 dragend 이벤트를 할당합니다
+daum.maps.event.addListener(walker, 'dragend', function(mouseEvent) {
+    var position = walker.getPosition(); //현재 마커가 놓인 자리의 좌표
+    toggleRoadview(position); //로드뷰를 토글합니다
+});
+
+//지도에 클릭 이벤트를 할당합니다
+daum.maps.event.addListener(map, 'click', function(mouseEvent){
+    // 현재 클릭한 부분의 좌표를 리턴 
+    var position = mouseEvent.latLng; 
+    walker.setPosition(position);
+    toggleRoadview(position); //로드뷰를 토글합니다
+});
+
+//로드뷰 toggle함수
+function toggleRoadview(position){
+
+    //전달받은 좌표(position)에 가까운 로드뷰의 panoId를 추출하여 로드뷰를 띄웁니다
+    roadviewClient.getNearestPanoId(position, 50, function(panoId) {
+        if (panoId === null) {
+            roadviewContainer.style.display = 'none'; //로드뷰를 넣은 컨테이너를 숨깁니다
+            mapWrapper.style.width = '100%';
+            map.relayout();
+        } else {
+            map.relayout(); //지도를 감싸고 있는 영역이 변경됨에 따라, 지도를 재배열합니다
+            roadviewContainer.style.display = 'block'; //로드뷰를 넣은 컨테이너를 보이게합니다
+            roadview.setPanoId(panoId, position); //panoId를 통한 로드뷰 실행
+            roadview.relayout(); //로드뷰를 감싸고 있는 영역이 변경됨에 따라, 로드뷰를 재배열합니다
+        }
+    });
+}
+
+}
+  //로드뷰의 pan(좌우 각도)값에 따라 map walker의 백그라운드 이미지를 변경 시키는 함수
+  //background로 사용할 sprite 이미지에 따라 계산 식은 달라 질 수 있음
+  MapWalker.prototype.setAngle = function(angle){
+  
+      var threshold = 22.5; //이미지가 변화되어야 되는(각도가 변해야되는) 임계 값
+      for(var i=0; i<16; i++){ //각도에 따라 변화되는 앵글 이미지의 수가 16개
+          if(angle > (threshold * i) && angle < (threshold * (i + 1))){
+              //각도(pan)에 따라 아이콘의 class명을 변경
+              var className = 'm' + i;
+              this.content.className = this.content.className.split(' ')[0];
+              this.content.className += (' ' + className);
+              break;
+          }
+      }
+  };
+  
+  //map walker의 위치를 변경시키는 함수
+  MapWalker.prototype.setPosition = function(position){
+      this.walker.setPosition(position);
+  };
+  
+  //map walker를 지도위에 올리는 함수
+  MapWalker.prototype.setMap = function(map){
+      this.walker.setMap(map);
+  };
+  
+  
 </script>
 <!-- } 게시글 읽기 끝 -->

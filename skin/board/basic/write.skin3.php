@@ -12,6 +12,10 @@ $board_list=3;
 
 
 <style>
+
+.black-bg{
+  background: #222!important;
+}
 .option_toggle{
   background: #000;
   color: #fff;
@@ -46,13 +50,24 @@ input[type="text"],input[type="number"],input[type="tel"]{
 
 </style>
 
-<section id="bo_w">
 
+<div class="write_header">
+<h2>매물<?if($w=='u') echo "수정"; else echo"등록";?></h2>
+<p>RNote 매물 <?if($w=='u') echo "수정"; else echo"등록";?> 페이지 입니다.</p>
 
+</div>
+<section id="bo_w" style="width: 1100px ;margin:0 auto; background:#fff;  border:1px solid #e1e1e1; margin-top:70px; margin-bottom:100px;">
+
+<!-- <h2 style="text-align:center;"><span style="border-bottom:3px solid #222; padding:10px;">매물등록</span></h2> -->
     <div class="tbl_frm01 tbl_wrap">
                 <div id="autosave_wrapper">
 <!----------------- 탭버튼 ---------------->
-
+                <div id="tab" class="btn-group" data-toggle="buttons" style="width:100%; margin-bottom:50px ;">
+                <a href="#rent" class="btn btn-primary active rent" data-toggle="tab" style="width:50%; padding:20px; border-radius:0; margin-left:0.5px; ">
+                            <input type="radio" />임대</a>
+                <a href="#sale" class="btn btn-primary sale" data-toggle="tab" style="width:50%; padding:20px; border-radius:0; border-left:1px solid #eee; ">
+                            <input type="radio" />매매</a>
+              </div>
 
 
 
@@ -93,7 +108,7 @@ input[type="text"],input[type="number"],input[type="tel"]{
                                 <tbody>
                                   <tr>
                                     <th>매물명</th>
-                                    <td><input type="text" name="wr_subject" maxlength="15" value="<?php echo $subject ?>" tabindex="1"   required autofocus/></td>
+                                    <td><input type="text" name="wr_subject" maxlength="10" value="<?php echo $subject ?>" tabindex="1"   required autofocus/></td>
                                   </tr>
                                   <tr>
                                     <th>주소</th>
@@ -185,7 +200,6 @@ input[type="text"],input[type="number"],input[type="tel"]{
                               <div class="form-title">
                                 매물정보
                               </div>
-
                             <table class="write_table">
                                 <tbody>
                                   <tr>
@@ -283,7 +297,7 @@ input[type="text"],input[type="number"],input[type="tel"]{
                           <!-- <input type="submit" value="매물등록" id="btn_submit" accesskey="s" class="btn btn-primary sg_cate_list" style="width:30%; padding:13px; text-align:center;"> -->
 
                           <? if($w == "u"){ ?>
-                          <input type="submit" value="매물수정" name="write_again" id="btn_submit" accesskey="s" class="btn btn-primary" style="width:100%; padding:13px; text-align:center; margin-top:10px; margin-left:0;">
+                            <input type="submit" value="매물등록" id="btn_submit" accesskey="s" class="btn btn-primary" style="width:100%; padding:13px; text-align:center; margin-top:10px; margin-left:0;">
                           <?}else {?>
                           <input type="submit" value="매물등록" id="btn_submit" accesskey="s" class="btn btn-primary" style="width:100%; padding:13px; text-align:center; margin-top:10px; margin-left:0;">
                           <?}?>
@@ -326,7 +340,7 @@ input[type="text"],input[type="number"],input[type="tel"]{
                                 <tbody>
                                   <tr>
                                     <th>매물명</th>
-                                    <td colspan="3" ><input type="text" name="wr_subject" maxlength="15" value="<?php echo $subject ?>" tabindex="1"   required /></td>
+                                    <td colspan="3" ><input type="text" name="wr_subject" maxlength="10" value="<?php echo $subject ?>" tabindex="1"   required /></td>
 
                                     
                                   </tr>
@@ -557,14 +571,6 @@ input[type="text"],input[type="number"],input[type="tel"]{
 
 
 
-    <div class="modal-footer">
-      <? if($w == "u"){ ?>
-      <input type="submit" value="매물수정" id="btn_submit" accesskey="s" class="btn btn-primary" style="width:100%; padding:13px; text-align:center; margin-top:10px; margin-left:0;">
-      <?}else {?>
-      <input type="submit" value="매물등록" id="btn_submit" accesskey="s" class="btn btn-primary" style="width:100%; padding:13px; text-align:center; margin-top:10px; margin-left:0;">
-      <?}?>
-
-    </div>
     <!-- <div class="btn_confirm">
         <input type="submit" value="작성완료" id="btn_submit" accesskey="s" class="btn_submit">
         <a href="./board.php?bo_table=<?php echo $bo_table ?>" class="btn_cancel">취소</a>
@@ -583,11 +589,13 @@ input[type="text"],input[type="number"],input[type="tel"]{
 <script src="<?php G5_PATH?>/assets/js/pc_script2.js"></script>
 <script>
 
-  if( "<?=$write[wr_sale_type]?>" == "1"){
-  $("#rent").addClass("active");
+  if( "<?=$wr_sale_type?>" == "1"){
+  $(".rent").addClass("active");
+  $(".sale").removeClass("active");
   $("#rent").show();
-  }else if("<?=$write[wr_sale_type]?>" == "2"){
-    $("#sale").addClass("active");
+  }else if("<?=$wr_sale_type?>" == "2"){
+    $(".sale").addClass("active");
+    $(".rent").removeClass("active");
     $("#sale").show();
   }else{
     $("#rent").addClass("active");
@@ -679,20 +687,7 @@ function valchange() {
     $(".option_contents").toggle();
         });
 
-        $(".sg_cate_list").click(function(){
-
-          $.ajax({
-          type : "POST",
-          url : "../skin/board/basic/modal/sg_cate_list.html",
-          dataType : "text",
-          error : function() {
-              alert('통신실패!!');
-          },
-          success : function(data) {
-              $('#Context').html(data);
-          }
-        });
-         })
+      
 
 
 

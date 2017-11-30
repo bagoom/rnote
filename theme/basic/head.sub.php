@@ -1,6 +1,9 @@
 <?php
 // 이 파일은 새로운 파일 생성시 반드시 포함되어야 함
+// include G5_BBS_PATH.'/newwin.inc.php';
+
 if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
+
 if($member[mb_id])
 {
     $checktime = mktime(date("H"),date("i")-10,date("s"),date("m"),date("d"),date("Y")); // 시간지정
@@ -95,6 +98,8 @@ var g5_bo_table  = "<?php echo isset($bo_table)?$bo_table:''; ?>";
 var g5_sca       = "<?php echo isset($sca)?$sca:''; ?>";
 var g5_editor    = "<?php echo ($config['cf_editor'] && $board['bo_use_dhtml_editor'])?$config['cf_editor']:''; ?>";
 var g5_cookie_domain = "<?php echo G5_COOKIE_DOMAIN ?>";
+var wr_office_permission = "<?php echo $wr_office_permission ?>";
+var gr_admin = "<?php echo $gr_admin ?>";
 
 
 
@@ -107,13 +112,12 @@ var g5_admin_url = "<?php echo G5_ADMIN_URL; ?>";
 </script>
 
 
-<script src="<?php echo G5_URL ?>/assets/js/jquery.js"></script>
+<!-- <script src="<?php echo G5_URL ?>/assets/js/jquery.js"></script> -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="<?php echo G5_JS_URL ?>/jquery.menu.js?ver=<?php echo G5_JS_VER; ?>"></script>
+<!-- <script src="<?php echo G5_JS_URL ?>/jquery.menu.js?ver=<?php echo G5_JS_VER; ?>"></script> -->
 <script src="<?php echo G5_JS_URL ?>/common.js?ver=<?php echo G5_JS_VER; ?>"></script>
 <script src="<?php echo G5_JS_URL ?>/wrest.js?ver=<?php echo G5_JS_VER; ?>"></script>
 <script src="<?php echo G5_URL ?>/assets/js/bootstrap.min.js"></script>
-<script src="<?php echo G5_URL ?>/assets/js/bootstrap-range.js"></script>
 
 <?php
 
@@ -140,18 +144,17 @@ if(!defined('G5_IS_ADMIN'))
               </a>
 
           <li>
-          <?if ($wr_important == '2' && $wr_sale_type== '1' || $wr_sale_type == '2'){ ?>
-
+          <?if (!$wr_important && $wr_writer == $member[mb_name] && $is_member){ ?>
               <? if ($gr_admin){ ?>
-                <a href="<?php echo G5_BBS_URL ?>/board.php?bo_table=<?=$member[mb_id] ?>&board_list=<?=$member[mb_3]?>&wr_sale_type=1&wr_important=2&wr_writer=<?=$member[mb_name] ?>" style="letter-spacing:.5px; background:#222!important;">My Note</a>
+                <a href="<?php echo G5_BBS_URL ?>/board.php?bo_table=<?=$member[mb_id] ?>&board_list=<?=$member[mb_3]?>&wr_sale_type=1&wr_writer=<?=$member[mb_name] ?>" style="letter-spacing:.5px; background:#222!important;">My Note</a>
               <?}else{ ?>
-                <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_id']?>&board_list=<?=$member[mb_3]?>&wr_sale_type=1" style="letter-spacing:.5px; background:#222!important;">My Note</a>
+                <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_id']?>&board_list=<?=$member[mb_3]?>&wr_sale_type=1&wr_writer=<?=$member[mb_name] ?>" style="letter-spacing:.5px; background:#222!important;">My Note</a>
               <?}?>
 
           <?}else{?>
 
             <? if ($gr_admin){ ?>
-                <a href="<?php echo G5_BBS_URL ?>/board.php?bo_table=<?=$member[mb_id] ?>&board_list=<?=$member[mb_3]?>&wr_sale_type=1&wr_important=2&wr_writer=<?=$member[mb_name] ?>" style="letter-spacing:.5px; ">My Note</a>
+                <a href="<?php echo G5_BBS_URL ?>/board.php?bo_table=<?=$member[mb_id] ?>&board_list=<?=$member[mb_3]?>&wr_sale_type=1&wr_writer=<?=$member[mb_name] ?>" style="letter-spacing:.5px; ">My Note</a>
               <?}else{ ?>
                 <a href="<?php echo G5_BBS_URL ?>/board.php?bo_table=<?=$member[mb_id] ?>&board_list=<?=$member[mb_3]?>&wr_sale_type=1&wr_writer=<?=$member[mb_name] ?>" style="letter-spacing:.5px; ">My Note</a>
               <?}?>
@@ -165,7 +168,7 @@ if(!defined('G5_IS_ADMIN'))
 
           <li>
 
-            <?if ($wr_important == '1'  && $wr_office_permission == null){ ?>
+            <?if ($wr_important == '1' ){ ?>
 
                 <? if ($gr_admin){ ?>
                   <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_1']?>&board_list=<?=$member[mb_3]?>&wr_important=1&wr_sale_type=1&wr_office_permission=" style="letter-spacing:.5px; background:#222!important;">Office Note</a>
@@ -194,18 +197,13 @@ if(!defined('G5_IS_ADMIN'))
                   <a href="<?php echo G5_BBS_URL?>/bookmark.php?bo_table=<? echo $member['mb_id']?>&board_list=<?=$member[mb_3]?>&wr_bookmark=1" style="letter-spacing:.5px; background:#222!important;">즐겨찾기</a>
             <?}else{?>
                   <a href="<?php echo G5_BBS_URL?>/bookmark.php?bo_table=<? echo $member['mb_id']?>&board_list=<?=$member[mb_3]?>&wr_bookmark=1" style="letter-spacing:.5px;">즐겨찾기</a>
-            <?}?>
-          </li>
-
-
-          <li>
-            <a  style="letter-spacing:.5px;" class="sg_cate_01" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false">매물등록</a>
+            <?}?> 
           </li>
           </ul>
           </div>
         </header>
 
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
@@ -223,11 +221,11 @@ if(!defined('G5_IS_ADMIN'))
               </div>
               <div class="modal-body"  id="Context">
                 <!-- 모달창 내용 -->
-              </div>
+              <!-- </div>
 
             </div>
           </div>
-        </div>
+        </div> -->
 
 <div class="user_info">
   <i class="fa fa-user" aria-hidden="true"></i>

@@ -336,7 +336,7 @@ include_once("$board_skin_path/lib/skin.lib.php");
 <div class="col-lg-12 main-list-wrap" >
 
   <div class="page_href">HOME >
-    <? if ($wr_important == '2' && $wr_sale_type == '1'){ ?>
+    <? if ($wr_writer == $member[mb_name] && !$wr_important == 1){ ?>
     <span><strong>My Note</strong></span>
     <?}else if ($wr_important == '1') {?>
     <span><strong>Office Note</strong></span>
@@ -347,34 +347,55 @@ include_once("$board_skin_path/lib/skin.lib.php");
     <?}?>
   </div>
           <div class="content_header">
-            <form method = "get">
-            <input type="hidden" name="bo_table" value="<?=$bo_table?>" />
-            <input type="hidden" name="board_list" value="<?=$board_list?>" />
-            <input type="hidden" name="wr_important" value="<?=$wr_important?>" />
-            <? if ($wr_important == 1){ ?>
-            <? if ($gr_admin){ ?>
-            <input type="hidden" name="wr_office_permission" value="0" />
-            <?}else if (!$gr_admin && $wr_office_permission == "2" ) {?>
-            <input type="hidden" name="wr_office_permission" value="1" />
-            <?}else{ ?>
-           <input type="hidden" name="wr_office_permission" value="2" />
-            <?}}?>
+            <?if ($wr_writer == $member[mb_name] && !$wr_important == 1) { ?>
+                <?if ($gr_admin ){ ?>
+                <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$member[mb_id]?>&board_list=<?$member[mb_3]?>&wr_sale_type=1&wr_writer=<?=$member[mb_name]?>" class="btn btn-theme03 left rent" style="padding-left:12px;">
+                임대
+                </a> 
 
-            <!-- <input type="submit" name="wr_sale_type" value="1" /> -->
-            <button class="btn btn-theme03 left rent" name="wr_sale_type" type="submit" value="1"style="padding-left:12px;">
-             임대
-            </button>
-            <button class="btn btn-theme03 left sale" name="wr_sale_type" type="submit" value="2"style="padding-left:12px;">
-             매매
-            </button>
+                <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$member[mb_id]?>&board_list=<?$member[mb_3]?>&wr_sale_type=2&wr_writer=<?=$member[mb_name]?>" class="btn btn-theme03 left sale" style="padding-left:12px;">
+                매매
+                </a>
+                <?}else if(!$gr_admin){ ?>
+                <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$member[mb_id]?>&board_list=<?$member[mb_3]?>&wr_sale_type=1&wr_writer=<?=$member[mb_name]?>" class="btn btn-theme03 left rent" style="padding-left:12px;">
+                임대
+                </a>
+
+                <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$member[mb_id]?>&board_list=<?$member[mb_3]?>&wr_sale_type=2&wr_writer=<?=$member[mb_name]?>" class="btn btn-theme03 left sale" style="padding-left:12px;">
+                매매
+                </a>
+
+
+                  <?}}else if($wr_important == 1 ){?>
+                    <?if ($gr_admin ){ ?>
+                    <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$member[mb_id]?>&board_list=<?$member[mb_3]?>&wr_sale_type=1&wr_writer=<?=$member[mb_name]?>" class="btn btn-theme03 left rent" style="padding-left:12px;">
+                임대
+                </a> 
+
+                <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$member[mb_id]?>&board_list=<?$member[mb_3]?>&wr_sale_type=2&wr_writer=<?=$member[mb_name]?>" class="btn btn-theme03 left sale" style="padding-left:12px;">
+                매매
+                </a>
+                <?}else if(!$gr_admin){ ?>
+                <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$gr_cp?>&board_list=<?$member[mb_3]?>&wr_sale_type=1&wr_important=1&wr_office_permission=2" class="btn btn-theme03 left rent" style="padding-left:12px;">
+                임대
+                </a>
+         
+                <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$gr_cp?>&board_list=<?$member[mb_3]?>&wr_sale_type=2&wr_important=1&wr_office_permission=2" class="btn btn-theme03 left sale" style="padding-left:12px;">
+                매매
+                </a>
+                <?} }?>
             <?if ($wr_important == 1){ ?>
-            <button class="btn btn-theme03 left office_no_permission" name="wr_writer" type="submit" value="<?=$member[mb_name]?>"style="padding-left:12px;">
+            <?if ($gr_admin){ ?>
+            <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$member[mb_id]?>&board_list=<?$member[mb_3]?>&wr_important=1&wr_sale_type=1&wr_office_permission=1" class="btn btn-theme03 left permission" style="padding-left:12px;">
              미승인매물
-            </button>
-            <?}?>
+            </a>
+            <?}else{ ?>
+              <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$gr_cp?>&board_list=<?$member[mb_3]?>&wr_important=1&wr_sale_type=1&wr_office_permission=1&wr_writer=<?=$member[mb_name]?>" class="btn btn-theme03 left permission" style="padding-left:12px;">
+             미승인매물
+            </a>
+            <?}}?>
             <span class="btn btn-theme03 left list_style_list active" style="padding-left:12px;"> 리스트형</span>
-            <span class="btn btn-theme03 left list_style_memo "style="padding-left:12px;"> 메모지형 </span>
-          </form>
+            <!-- <span class="btn btn-theme03 left list_style_memo "style="padding-left:12px;"> 메모지형 </span> -->
 
 
 
@@ -387,26 +408,27 @@ include_once("$board_skin_path/lib/skin.lib.php");
           <!-- Button trigger modal -->
 
 <?=$GET_['office_write']?>
-
+              
           <? if($gr_admin){ ?>
-            <button class="btn btn-theme03 right  config" type="button"  style="margin-right:10px;">
+            <button class="btn btn-theme03 right  config active" type="button"  style="margin-right:10px;">
               <i class="fa fa-cog" aria-hidden="true" value="중요매물등록"  style="font-size:18px; "></i>
               매물관리설정
             </button>
-          <?}else if($gr_cp && $wr_writer == $member[mb_name]){ ?>
-            <button class="btn btn-theme03 right  config" type="button"  style="margin-right:10px;">
+          <?}else if($gr_cp && $wr_writer == $member[mb_name] || $wr_sold_out){ ?>
+            <button class="btn btn-theme03 right  config active" type="button"  style="margin-right:10px;">
               <i class="fa fa-cog" aria-hidden="true" value="중요매물등록"  style="font-size:18px; "></i>
               매물관리설정
             </button>
           <?}?>
 
-          <? if ( $_GET[wr_important] == 1 ){
-          }else{ ?>
-          <!-- <button class="btn btn-theme03 right sg_cate_list"  type="button" data-toggle="modal" data-target="#myModal"data-backdrop="static" data-keyboard="false">
-            <i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:18px; "></i>
+          <? if ( !$_GET[wr_important] == 1 && !$wr_sold_out == 1){?>
+            <a href="<?echo G5_BBS_URL?>/write.php?bo_table=<?=$bo_table?>&board_list=<?=$member[mb_3]?>" class="btn btn-theme03 right sg_cate_list active">
+          <i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:18px; "></i>
            매물등록하기
-          </button> -->
-          <?}?>
+          </a> 
+          <?}else{} ?>
+          
+          
           </div>
 
 
@@ -483,15 +505,21 @@ include_once("$board_skin_path/lib/skin.lib.php");
 
                        <div class="td_chk " style="display:none; ">
                          <input type="checkbox" name="chk_wr_id[]" class="import_chk" style="display:none;" value="<?php echo $list[$i]['wr_id'] ?>" id="chk_wr_id_<?php echo $i ?>" >
-                         <label for="chk_wr_id_<?php echo $i ?>"> <p><i class="fa fa-check"></i></p></label>
+                         <label for="chk_wr_id_<?php echo $i ?>"> 
+                         <p>
+                         <i class="fa fa-check"></i>
+                         <i class="fa fa-times" aria-hidden="true" style="display:none; "> <span style="font-size:16px;"> 해당매물은 승인된 매물이므로 거래종료 등록만 가능합니다.</span></i>
+                         </p>
+                         </label>
                        </div>
 
 
                         <div class="tr" id="list_link"onClick=location.href="<?php echo $list[$i]['href'] ?>" style="position:relative">
                           <? if ($list[$i]['wr_office_permission'] == '1'){ ?>
-                            <div class="td" style="background:#f7d6d6;">
+                            <div class="td" style=" position:relative;">
                               <?= $list[$i]['num']?>
-                              <p style="font-size:11px; margin-top:5px; margin-bottom:0;">미승인매물</p>
+                              <p class="permission_disable"style="font-size:7px; ">미승인
+                              </p>
                             </div>
                           <? }else{ ?>
                             <div class="td">
@@ -682,12 +710,12 @@ include_once("$board_skin_path/lib/skin.lib.php");
               <?}}?>
               <? if ($gr_admin && $wr_important == 1){?>
               <?if (!$gr_cp && !$gr_admin) {}else{?>
-              <span class="s4">사무실매물로수락</span>
+              <span class="s4" style="display:none;">사무실매물로수락</span>
               <?}?>
               <?if (!$gr_cp && !$gr_admin) {}else{?>
-              <span data-target="#layerpop" data-toggle="modal">거절하기</span>
+              <span data-target="#layerpop" data-toggle="modal" style="display:none;" class="s5">거절하기</span>
               <?}}?>
-              <span class="s3">매매완료등록하기</span>
+              <span class="s3">거래종료등록하기</span>
 
             </div>
 </div>
@@ -718,20 +746,7 @@ include_once("$board_skin_path/lib/skin.lib.php");
 <script src="<?php G5_PATH?>/assets/js/demo3.js"></script>
 <script type="application/javascript">
 $(".tr:even").css("background", "white");
-// 검색창 클릭 팝업
-// $(".input_box").on('click',function(e){
-//   $('.drop-down-open').hide();
-// 	myDropDown = $(this).find('#my_popup');
-// 	if( myDropDown.is(':visible') ) {
-// 		$(myDropDown).removeClass('drop-down-open');
-// 		myDropDown.hide();
-// 	} else {
-// 		myDropDown.fadeIn();
-//     $(this).find('input[type=text]').first().focus();
-//     $(myDropDown).addClass('drop-down-open');
-// 	}
-// 	return false;
-// });
+
 $('body').click(function(event) {
 	$('.drop-down-open').hide();
 });
@@ -875,23 +890,68 @@ for (var i = 0; i < target.length; i++) {
      $('#list_style_list').show();
      $('#list_style_memo').hide();
    });
-    $( document ).ready(function() {
-    if (<?=$_GET["wr_sale_type"]?> == "1"){
+
+    //버튼 active 활성화 클래스 추가
+    if (<?=$wr_sale_type?> == "1"){
     $(".rent").addClass("active");
-    }else if(<?=$_GET["wr_sale_type"]?> == "2"){
+    }else if(<?=$wr_sale_type?> == "2"){
     $(".sale").addClass("active");
     }
-    });
+    
+    if(wr_office_permission == "1" ){
+    $(".permission").addClass("active");
+    }
     var config = $(".config");
     $(config).click(function(){
-    $(".td_chk,.td_chk2,.chk_confirm_wrap").fadeToggle(300,"swing");
+    $(".td_chk,.td_chk2").fadeToggle(300,"swing");
+    $(".chk_confirm_wrap").fadeToggle(300,"swing");
     if( $(".chk_confirm_wrap").css("display") == "block"){
       $(".chk_confirm_wrap").css('display', 'none');
     }
     if($(".import_chk").is(":checked")){
       $(".chk_confirm_wrap").css('display', 'block');
+      console.log($("dddd"))
     }
     });
+
+
+    // tr체크시 미승인 매물일 경우에만 수락하기, 거절하기 버튼 띄우기
+    $(".td_chk input[type=checkbox]").change(function(){
+      var ddd = $(".td_chk input[type=checkbox]:checked + label").parents(".td_chk ").next(".tr").find("p");
+      var check_target = $(this).next().parents(".td_chk ").next(".tr").find("p");
+      var check_wrong = $(this).next().find(".fa-times") ;
+
+      if(check_target.length == 1){
+        console.log(ddd.length)
+      if($(ddd).length >0){
+          $(".s4").show();
+          $(".s5").show();
+          
+      }else if ($(ddd).length==0){
+        $(".s4").hide();
+        $(".s5").hide();
+      }
+      }else if(check_target.length == 0 && gr_admin){
+        console.log(check_target.length)
+        $(".s4").hide();
+        $(".s5").hide();
+        $(check_wrong).show();
+        $($(this).next().find(".fa-check")).hide();
+        if($(ddd).length >0){
+          $(".s4").show();
+          $(".s5").show();
+        }else if ($(ddd).length==0){
+          $(".s4").hide();
+         $(".s5").hide();
+      }
+      }
+
+  
+    });
+
+
+
+
 // 중요매물 클릭후 체크하면 클래스 추가 스크립트
     $(".import_chk").change(function(){
        if($(".import_chk").is(":checked")){

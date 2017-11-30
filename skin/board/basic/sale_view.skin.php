@@ -329,7 +329,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                         <?}?>
                         <span class="s2">즐겨찾기등록</span>
                         <span class="s3">거래종료</span>
-                        <span class="s4"  data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false">수정</span>
+                        <span class="s4"><a href=" ../bbs/write.php?w=u&bo_table=<?echo $bo_table?>&board_list= <?echo $view[board_list] ?>&wr_id=<?echo $view[wr_id]?>&wr_sale_type=<?=$wr_sale_type?>" style="color:#fff;">수정</a></span>
                         <span class="s5"><a href="<?php echo $delete_href ?>"  onclick="del(this.href); return false;" style="color:#fff;">삭제</a></span>
                       </div>
 
@@ -372,8 +372,8 @@ $('#rent').hide();
 
 
 
-var bourl = "../bbs/write_modal.php?w=u&bo_table=<?echo $bo_table?>&board_list= <?echo $view[board_list] ?>&wr_id=<?echo $view[wr_id]?>";
-$(".s4").click(function(){
+var bourl = "../bbs/write.php?w=u&bo_table=<?echo $bo_table?>&board_list= <?echo $view[board_list] ?>&wr_id=<?echo $view[wr_id]?>";
+$(".dddds4").click(function(){
   $.ajax({
   type : "POST",
   url : bourl,
@@ -382,7 +382,7 @@ $(".s4").click(function(){
       alert('통신실패!!');
   },
   success : function(data) {
-      $('#Context').html(data);
+      $('#bo_v_atc').html(data);
   }
 });
  })

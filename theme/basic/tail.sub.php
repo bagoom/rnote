@@ -119,7 +119,8 @@ $(function() {
 
 
 
-  $("#visual_wrap").css("height",$(document).height())
+  // $("#visual_wrap").css("height",$(document).height()-250)
+  // $("#main_contents").css("height",$(document).height()-700)
 </script>
 
 <script>

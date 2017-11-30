@@ -256,15 +256,21 @@ function Profit_Rate() {
 
     //매매 항목추가 수정 스크립트
     $("body").ready(function(){
+      var cloneNumber = 100;
       var wr_address_sale_val = $("input[name='wr_address_sale99']").val().split(',');
-      for(var i = 0; i< wr_address_sale_val.length-1; i++){
+      for(var i = 0; i< wr_address_sale_val.length; i++){
         console.log(wr_address_sale_val.length);
-        $('#doo').clone().insertAfter('.rand_wrap');
+       var clone = $('#doo').clone()
+       if (i ==0 ){
+        clone.insertAfter('.rand_wrap_basic');
+       }
+       else{
+        clone.insertAfter('.rand_wrap.clone'+cloneNumber.toString());
+       }
+       clone.addClass("clone"+cloneNumber);
         $('.rand_wrap').css("border-top","2px solid #555");
-        var doo_len = $('#doo');
-        doo_len.show();
-        // $("#search_box").val(test.text());
-        // console.log(wr_address_sale_val)
+        $('#doo').show(); 
+        cloneNumber ++;
       }
 
     })

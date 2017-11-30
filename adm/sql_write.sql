@@ -12,6 +12,7 @@ CREATE TABLE `__TABLE_NAME__` (
   `wr_hp` varchar(13) NOT NULL,
   `wr_sale_type` int(11) NOT NULL DEFAULT '0',
   `wr_sold_out` int(2) NOT NULL DEFAULT '0',
+  `wr_sold_out_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `wr_content` text NOT NULL,
   `wr_address` varchar(255) NOT NULL,
   `wr_address_sale` varchar(255) NOT NULL,

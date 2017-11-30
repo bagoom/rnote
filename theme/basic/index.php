@@ -11,12 +11,12 @@ include_once(G5_THEME_PATH.'/head.php');
 ?>
 <link href="<?php echo G5_URL?>/assets/icon_font/css/fontello.css" rel="stylesheet">
 <style>
-/*li i{
+#main_contents li i{
   width:40px;
-  font-size: 25px;
-  color: rgba(255,255,255,0.7);
+  font-size: 35px;
+  color: rgba(255,255,255,0.6);
   padding-top:6px;
-}*/
+}
 .black-bg{
   background: transparent;
 }
@@ -65,7 +65,7 @@ include_once(G5_THEME_PATH.'/head.php');
             </section>
 
 
-              <!-- <section id="main_contents">
+              <section id="main_contents">
                   <div class="main_con_wrap table" style="box-shadow:none;">
                     <ul>
                       <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_id']?>&sfl=board_list&stx=1">
@@ -77,36 +77,25 @@ include_once(G5_THEME_PATH.'/head.php');
                       <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_id']?>&sfl=board_list&stx=2">
                         <li>
                           <i class="icon-residential-area-outlined"></i>
-                            <p class="icon_03"> 아파트</p>
+                            <p class="icon_02"> 아파트</p>
                         </li>
                       </a>
                       <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_id']?>&sfl=board_list&stx=3&wr_sale_type=1&wr_writer=<?=$member[mb_id]?>">
                         <li>
                           <i class="icon-money-outlined"></i>
-                            <p class="icon_04"> 상가</p>
+                            <p class="icon_02"> 상가</p>
                         </li>
                       </a>
                       <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_id']?>&sfl=board_list&stx=1">
                         <li>
                           <i class="icon-layout-outlined"></i>
-                            <p class="icon_05"> 토지</p>
+                            <p class="icon_02"> 토지</p>
                         </li>
                       </a>
-                      <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_id']?>&sfl=board_list&stx=1">
-                        <li>
-                          <i class="fa fa-star-o"></i>
-                            <p class="icon_05"> 즐겨찾기</p>
-                        </li>
-                      </a>
-                      <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_id']?>&sfl=board_list&stx=1">
-                        <li>
-                          <i class="fa fa-star-o"></i>
-                            <p class="icon_05"> 즐겨찾기</p>
-                        </li>
-                      </a>
+                
                     </ul>
                   </div>
-              </section> -->
+              </section>
 </div>
 
 

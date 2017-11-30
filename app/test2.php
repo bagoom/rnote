@@ -19,7 +19,7 @@ $result = sql_query($sql);
 print_r ($result);
 
 for ($i=0; $row=sql_fetch_array($result); $i++) {
-   $sql2 = "ALTER TABLE `g5_write_$row[mb_id]` ADD `wr_address_sale` VARCHAR(255) NOT NULL AFTER `wr_address`";
+   $sql2 = "ALTER TABLE `g5_write_$row[mb_id]` ADD `wr_sold_out_date` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' AFTER `wr_sold_out`;";
    echo $sql2;
    echo '<br>';
    sql_query($sql2);

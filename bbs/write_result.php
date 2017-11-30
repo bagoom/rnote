@@ -67,6 +67,7 @@ include_once(G5_PATH.'/head.sub.php');
 }
 
 .write_result_form{
+  height: 650px;
   margin-top:50px;
   padding: 150px;
   text-align: center;
@@ -105,25 +106,51 @@ include_once(G5_PATH.'/head.sub.php');
 
 
 <div class="write_result_form">
-
-
 <p>매물등록이 완료 되었습니다.</p>
 <div class="btn_wrap">
+
+<? if($wr_sale_type=='1') { ?>
 <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$bo_table?>&wr_sale_type=1&board_list=<?=$board_list?>&wr_important=<?=$write['wr_important']?>&wr_id=<?=$write['wr_id']?>">
 <span class="">등록한매물확인하기</span>
 </a>
-<? if($gr_admin){ ?>
-  <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$bo_table?>&wr_sale_type=<?=$wr_sale_type?>&board_list=<?=$board_list?>&wr_important=<?=$write['wr_important']?>&wr_office_permission=<?$write['wr_office_permission']?>&wr_writer=<?=$member[mb_name]?>">
-  <span class="">매물리스트로가기</span>
-  </a>
-  <?}else{?>
-<a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_id']?>&board_list=<?=$member[mb_3]?>&wr_sale_type=1">
-<span class="">매물리스트로가기</span>
+<?} else if($wr_sale_type=='2'){?>
+  <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$bo_table?>&wr_sale_type=2&board_list=<?=$board_list?>&wr_important=<?=$write['wr_important']?>&wr_id=<?=$write['wr_id']?>">
+<span class="">등록한매물확인하기</span>
 </a>
 <?}?>
-<a href="#" class="sg_cate_list"  data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false">
-<span class="sg_cate_03">계속등록하기</span>
+
+
+
+
+<? if($gr_admin){ 
+if ($wr_sale_type=='1') {?>
+
+  <a href="<?php echo G5_BBS_URL ?>/board.php?bo_table=<?=$member[mb_id] ?>&board_list=<?=$member[mb_3]?>&wr_sale_type=1&wr_writer=<?=$member[mb_name] ?>">
+  <span class="">매물리스트로가기</span>
+  </a>
+  <?}else if($wr_sale_type=='2'){?>
+    <a href="<?php echo G5_BBS_URL ?>/board.php?bo_table=<?=$member[mb_id] ?>&board_list=<?=$member[mb_3]?>&wr_sale_type=2&wr_writer=<?=$member[mb_name] ?>">
+  <span class="">매물리스트로가기</span>
+  </a>
+
+<?}}else{?>
+
+<? if ($wr_sale_type=='1') {?>
+<a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_id']?>&board_list=<?=$member[mb_3]?>&wr_sale_type=1&wr_writer=<?=$member[mb_name] ?>">
+<span class="">매물리스트로가기</span>
 </a>
+<? }else if ($wr_sale_type=='2') {?>
+  <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_id']?>&board_list=<?=$member[mb_3]?>&wr_sale_type=2&wr_writer=<?=$member[mb_name] ?>">
+<span class="">매물리스트로가기</span>
+</a>
+<?}}?>
+
+
+<a href="<?echo G5_BBS_URL?>/write.php?bo_table=<?=$bo_table?>&board_list=<?=$member[mb_3]?>">
+<span class="sg_cate_03">계속등록하기</span>
+</a> 
+
+
 </div> <!-- btn_wrap -->
 </div> <!-- write_result_form -->
 
@@ -136,19 +163,19 @@ include_once(G5_PATH.'/head.sub.php');
 
 
   <script type="application/javascript">
-    var bourl1 = "<?echo G5_BBS_URL?>/write_modal.php?bo_table="+$("#bo_table").val()+"&board_list=<?=$member[mb_3]?>";
-    $(".sg_cate_03").click(function(){
-      $.ajax({
-      type : "POST",
-      url : bourl1,
-      dataType : "text",
-      error : function() {
-          alert('통신실패!!');
-      },
-      success : function(data) {
-          $('#Context').html(data);
-      }});
-       })
+    // var bourl1 = "<?echo G5_BBS_URL?>/write_modal.php?bo_table="+$("#bo_table").val()+"&board_list=<?=$member[mb_3]?>";
+    // $(".sg_cate_03").click(function(){
+    //   $.ajax({
+    //   type : "POST",
+    //   url : bourl1,
+    //   dataType : "text",
+    //   error : function() {
+    //       alert('통신실패!!');
+    //   },
+    //   success : function(data) {
+    //       $('#Context').html(data);
+    //   }});
+    //    })
 
 
 

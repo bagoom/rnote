@@ -421,7 +421,7 @@ if (G5_IS_MOBILE)
 include_once(G5_THEME_MOBILE_PATH.'/head.php');
 
 else{
-include_once(G5_PATH.'/head.sub.php');
+// include_once(G5_PATH.'/head.sub.php');
 @include_once ($board_skin_path.'/write.head.skin.php');
 include_once('./board_head.php');
 }
@@ -691,6 +691,6 @@ $action_url = https_url(G5_BBS_DIR)."/write_update.php";
 if (G5_IS_MOBILE) {
   include_once(G5_THEME_MOBILE_PATH.'/tail.php');
 }else{
-include_once(G5_PATH.'/tail.sub.php');
+// include_once(G5_PATH.'/tail.sub.php');
 }
 ?>
