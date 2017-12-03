@@ -78,7 +78,6 @@ if($config['cf_add_meta'])
 <link rel="stylesheet" type="text/css" href="<?php echo G5_URL ?>/assets/js/gritter/css/jquery.gritter.css" />
 <link rel="stylesheet" href="<?php G5_PATH?>/assets/css/style2.css">
 <link rel="stylesheet" type="text/css" href="<?php echo G5_URL ?>/assets/lineicons/style.css">
-<link rel="stylesheet" href="https://cdn.rawgit.com/studio392/NanumSquareRound/master/NanumSquareRound.css" />
 <!-- Custom styles for this template -->
 <link href="<?php echo G5_URL ?>/assets/css/style.css" rel="stylesheet">
 <link href="<?php echo G5_URL ?>/assets/css/style-responsive.css" rel="stylesheet">
@@ -144,19 +143,19 @@ if(!defined('G5_IS_ADMIN'))
               </a>
 
           <li>
-          <?if (!$wr_important && $wr_writer == $member[mb_name] && $is_member){ ?>
+          <?if (!$wr_important && $wr_writer_id == $member[mb_id] && $is_member){ ?>
               <? if ($gr_admin){ ?>
-                <a href="<?php echo G5_BBS_URL ?>/board.php?bo_table=<?=$member[mb_id] ?>&board_list=<?=$member[mb_3]?>&wr_sale_type=1&wr_writer=<?=$member[mb_name] ?>" style="letter-spacing:.5px; background:#222!important;">My Note</a>
+                <a href="<?php echo G5_BBS_URL ?>/board.php?bo_table=<?=$member[mb_id] ?>&board_list=<?=$member[mb_3]?>&wr_sale_type=1&wr_writer_id=<?=$member[mb_id] ?>" style="letter-spacing:.5px; background:#222!important;">My Note</a>
               <?}else{ ?>
-                <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_id']?>&board_list=<?=$member[mb_3]?>&wr_sale_type=1&wr_writer=<?=$member[mb_name] ?>" style="letter-spacing:.5px; background:#222!important;">My Note</a>
+                <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_id']?>&board_list=<?=$member[mb_3]?>&wr_sale_type=1&wr_writer_id=<?=$member[mb_id] ?>" style="letter-spacing:.5px; background:#222!important;">My Note</a>
               <?}?>
 
           <?}else{?>
 
             <? if ($gr_admin){ ?>
-                <a href="<?php echo G5_BBS_URL ?>/board.php?bo_table=<?=$member[mb_id] ?>&board_list=<?=$member[mb_3]?>&wr_sale_type=1&wr_writer=<?=$member[mb_name] ?>" style="letter-spacing:.5px; ">My Note</a>
+                <a href="<?php echo G5_BBS_URL ?>/board.php?bo_table=<?=$member[mb_id] ?>&board_list=<?=$member[mb_3]?>&wr_sale_type=1&wr_writer_id=<?=$member[mb_id] ?>" style="letter-spacing:.5px; ">My Note</a>
               <?}else{ ?>
-                <a href="<?php echo G5_BBS_URL ?>/board.php?bo_table=<?=$member[mb_id] ?>&board_list=<?=$member[mb_3]?>&wr_sale_type=1&wr_writer=<?=$member[mb_name] ?>" style="letter-spacing:.5px; ">My Note</a>
+                <a href="<?php echo G5_BBS_URL ?>/board.php?bo_table=<?=$member[mb_id] ?>&board_list=<?=$member[mb_3]?>&wr_sale_type=1&wr_writer_id=<?=$member[mb_id] ?>" style="letter-spacing:.5px; ">My Note</a>
               <?}?>
 
 

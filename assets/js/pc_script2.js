@@ -1,20 +1,18 @@
 
-$(function() { $("input:text, input:tel").keydown(function(evt) { if (evt.keyCode == 13) return false; }); });
+$(function() { $("input:text").keydown(function(evt) { if (evt.keyCode == 13) return false; }); });
 
-// $("input:text").on('keyup', function(){
-//놔뚜지일단 17일
-//   if(isNaN($("#wr_year_int").val())){
-//     $("#wr_year_int").val(" ");
-//     console.log("true");``
-//   }else{
-//       console.log("false");
-//   }
-// });
+
 
     // 매매탭에서 항목추가 스크립트
+ 
     var rand = $('.rand_wrap');
     var cloneNumber = 100;
     var cloneList = [];
+
+    setTimeout(function(){
+    var cloneLength = $('tbody[class*="clone"]').length
+    cloneNumber = 100 + cloneLength
+  }, 1500)
 
     $(".sale_rand_add").click(function(){
       if ($(".rand_wrap").hasClass("clone"+(cloneNumber-1))){
@@ -36,6 +34,7 @@ $(function() { $("input:text, input:tel").keydown(function(evt) { if (evt.keyCod
       $('.sale_rand_wrap .rand_wrap:last-child').css("border-bottom","none");
 
           $(".box_del").click(function(){
+            console.log(clone);
               clone.remove();
           });
 
@@ -258,32 +257,34 @@ function Profit_Rate() {
     $("body").ready(function(){
       var cloneNumber = 100;
       var wr_address_sale_val = $("input[name='wr_address_sale99']").val().split(',');
+
       for(var i = 0; i< wr_address_sale_val.length; i++){
-        console.log(wr_address_sale_val.length);
        var clone = $('#doo').clone()
        if (i ==0 ){
         clone.insertAfter('.rand_wrap_basic');
+        $(".rand_wrap_basic input[name='wr_address_sale99']").val(wr_address_sale_val[i])
        }
        else{
-        clone.insertAfter('.rand_wrap.clone'+cloneNumber.toString());
-       }
-       clone.addClass("clone"+cloneNumber);
-        $('.rand_wrap').css("border-top","2px solid #555");
-        $('#doo').show(); 
-        cloneNumber ++;
+        clone.insertAfter($('.rand_wrap.clone'+(cloneNumber-1)));
       }
 
+
+      clone.removeClass("clone100");
+      clone.addClass("clone"+cloneNumber);
+      $(".clone"+cloneNumber+" input[name='wr_address_sale100']").attr("name","wr_address_sale");
+      $(".clone"+cloneNumber+" input[name='wr_address_sale']").attr("name","wr_address_sale"+cloneNumber);
+      var clone_child = $(".clone"+cloneNumber+ " #wr_address_sale3")
+
+      clone_child.val(wr_address_sale_val[i+1])
+
+      $('.rand_wrap').css("border-top","2px solid #555");
+      $('.clone'+(cloneNumber-1)).show(); 
+      cloneNumber ++;
+    }
+
+      clone.remove();
+     
+     
     })
     
 
-
-
-  // $('#wr_rent_p').on('keydown', function(){
-  //     $('#wr_mt_cost').val(parseInt($(this).val())*parseInt($("#wr_mt_cost_p").val()))
-  // });
-
-
-
-    $(".option_toggle").click(function(){
-    $(".option_contents").toggle();
-        });

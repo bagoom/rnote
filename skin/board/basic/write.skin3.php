@@ -297,7 +297,7 @@ input[type="text"],input[type="number"],input[type="tel"]{
                           <!-- <input type="submit" value="매물등록" id="btn_submit" accesskey="s" class="btn btn-primary sg_cate_list" style="width:30%; padding:13px; text-align:center;"> -->
 
                           <? if($w == "u"){ ?>
-                            <input type="submit" value="매물등록" id="btn_submit" accesskey="s" class="btn btn-primary" style="width:100%; padding:13px; text-align:center; margin-top:10px; margin-left:0;">
+                            <input type="submit" value="매물수정" id="btn_submit" accesskey="s" class="btn btn-primary" style="width:100%; padding:13px; text-align:center; margin-top:10px; margin-left:0;">
                           <?}else {?>
                           <input type="submit" value="매물등록" id="btn_submit" accesskey="s" class="btn btn-primary" style="width:100%; padding:13px; text-align:center; margin-top:10px; margin-left:0;">
                           <?}?>
@@ -383,7 +383,7 @@ input[type="text"],input[type="number"],input[type="tel"]{
 
                                 <tbody class="rand_wrap " style="display:none;" id="doo">
                                   <tr>
-                                    <th>지번</th>
+                                    <th style="position:relative;">지번 <div class="box_del">x</div></th>
                                     <td colspan="3"><input type="text" name="wr_address_sale" id="wr_address_sale3" value=""  tabindex="1" /></td>
                                   </tr>
                                   <tr class="sale_rand">
@@ -393,6 +393,7 @@ input[type="text"],input[type="number"],input[type="tel"]{
                                     </td>
                                     <th style="text-align:center;"><i class="fa fa-arrows-h" aria-hidden="true"></i></th>
                                     <td><input type="text" name="wr_area_m" id="wr_area_m3" value=""  tabindex="22" placeholder="㎡" /></td>
+                                    
                                   </tr>
                                 </tbody>
 
@@ -571,10 +572,16 @@ input[type="text"],input[type="number"],input[type="tel"]{
 
 
 
-    <!-- <div class="btn_confirm">
-        <input type="submit" value="작성완료" id="btn_submit" accesskey="s" class="btn_submit">
-        <a href="./board.php?bo_table=<?php echo $bo_table ?>" class="btn_cancel">취소</a>
-    </div> -->
+                                  <div class="modal-footer">
+                                  <!-- <input type="submit" value="매물등록" id="btn_submit" accesskey="s" class="btn btn-primary sg_cate_list" style="width:30%; padding:13px; text-align:center;"> -->
+        
+                                  <? if($w == "u"){ ?>
+                                    <input type="submit" value="매물수정" id="btn_submit" accesskey="s" class="btn btn-primary" style="width:100%; padding:13px; text-align:center; margin-top:10px; margin-left:0;">
+                                  <?}else {?>
+                                  <input type="submit" value="매물등록" id="btn_submit" accesskey="s" class="btn btn-primary" style="width:100%; padding:13px; text-align:center; margin-top:10px; margin-left:0;">
+                                  <?}?>
+        
+                                </div>
 </form>
 </div>
   </div>
@@ -683,9 +690,6 @@ function valchange() {
 };
 
 
-    $(".option_toggle").click(function(){
-    $(".option_contents").toggle();
-        });
 
       
 

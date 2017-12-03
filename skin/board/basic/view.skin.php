@@ -344,7 +344,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                         <?}else{}?>
                         <span class="s2">즐겨찾기등록</span>
                         <span class="s3">거래종료등록</span>
-                        <span class="s4"><a href=" ../bbs/write.php?w=u&bo_table=<?echo $bo_table?>&board_list= <?echo $view[board_list] ?>&wr_id=<?echo $view[wr_id]?>" style="color:#fff;">수정</a></span>
+                        <span class="s4"><a href=" <?echo G5_HTTP_BBS_URL?>/write.php?bo_table=<?echo $bo_table?>&board_list= <?echo $view[board_list] ?>&wr_id=<?echo $view[wr_id]?>&w=u" style="color:#fff;">수정</a></span>
                         <span class="s5"><a href="<?php echo $delete_href ?>"  onclick="del(this.href); return false;" style="color:#fff;">삭제</a></span>
                       </div>
                      

@@ -1,6 +1,5 @@
 <?
 // 추가 및 변경 함수 시작
-
 // $arr_search = array();
 // for($j = 1; $j < 11; $j++){
 // 	if($_GET["wr_".$j] && strlen($_GET["wr_".$j]) > 0){
@@ -15,6 +14,7 @@ function get_sql_search3($search_ca_name, $search_field, $search_text, $search_o
     global $g5;
     global $gr_admin;
     global $wr_important;
+    global $wr_sold_out;
 
     $str = "";
 
@@ -44,12 +44,16 @@ function get_sql_search3($search_ca_name, $search_field, $search_text, $search_o
 
 
         else if(strlen($search_arr[val][$j]) > 0 && $search_arr[val][$j] ){
-         if($gr_admin && $wr_important){
-            $str = append_sql2($str, " and ", " {$search_arr[name][$j]}  like '%{$search_arr[val][$j]}%' ");
-            }else if($gr_admin && !$wr_important)
-            $str = append_sql2($str, " and ", "wr_office_permission = '' and {$search_arr[name][$j]}  like '%{$search_arr[val][$j]}%' ");
-            else{
-            $str = append_sql2($str, " and ", " {$search_arr[name][$j]}  like '%{$search_arr[val][$j]}%' ");
+         if($gr_admin && $wr_important && !$wr_sold_out){
+            $str = append_sql2($str, " and ", "wr_sold_out !=1 and {$search_arr[name][$j]}  like '%{$search_arr[val][$j]}%' ");
+            }else if($gr_admin && !$wr_important && !$wr_sold_out){
+            $str = append_sql2($str, " and ", "wr_sold_out !=1 and wr_office_permission = '' and {$search_arr[name][$j]}  like '%{$search_arr[val][$j]}%' ");
+            // 거래종료 필터 쿼리
+            }else if($wr_sold_out == "1"){
+                $str = append_sql2($str, " and ", "wr_sold_out = '1' and {$search_arr[name][$j]}  like '%{$search_arr[val][$j]}%' ");
+            
+            }else{
+            $str = append_sql2($str, " and ", "wr_sold_out !=1 and {$search_arr[name][$j]}  like '%{$search_arr[val][$j]}%' ");
              }
 				}
 
@@ -284,6 +288,10 @@ $arr_search = array();
     $arr_search[name][] = "wr_writer";
     $arr_search[val][] = $_GET["wr_writer"];
   }
+  if(($_GET["wr_writer_id"])) {
+    $arr_search[name][] = "wr_writer_id";
+    $arr_search[val][] = $_GET["wr_writer_id"];
+  }
   if(($_POST["wr_writer"])) {
     $arr_search[name][] = "wr_writer";
     $arr_search[val][] = $_POST["wr_writer"];
@@ -297,7 +305,6 @@ $arr_search = array();
     $arr_search[name][] = "wr_office_permisson";
     $arr_search[val][] = $_GET["wr_office_permisson"];
   }
-  echo $_GET["wr_writer"];
   if(($_GET["wr_bookmark"])) {
     $arr_search[name][] = "wr_bookmark";
     $arr_search[val][] = $_GET["wr_bookmark"];
@@ -336,21 +343,21 @@ if (!$board['bo_use_list_view']) {
         $sql_search = " and " . $sql_search;
 
     // 윗글을 얻음
-    $sql = " select wr_id, wr_subject from {$write_table} where wr_is_comment = 0 and wr_num = '{$write['wr_num']}' and wr_reply < '{$write['wr_reply']}' {$sql_search} order by wr_num desc, wr_reply desc limit 1 ";
+    // $sql = " select wr_id, wr_subject from {$write_table} where wr_is_comment = 0 and wr_num = '{$write['wr_num']}' and wr_reply < '{$write['wr_reply']}' {$sql_search} order by wr_num desc, wr_reply desc limit 1 ";
     $prev = sql_fetch($sql);
     // 위의 쿼리문으로 값을 얻지 못했다면
     if (!$prev['wr_id'])     {
-        $sql = " select wr_id, wr_subject from {$write_table} where wr_is_comment = 0 and wr_num < '{$write['wr_num']}' {$sql_search} order by wr_num desc, wr_reply desc limit 1 ";
-        $prev = sql_fetch($sql);
+        // $sql = " select wr_id, wr_subject from {$write_table} where wr_is_comment = 0 and wr_num < '{$write['wr_num']}' {$sql_search} order by wr_num desc, wr_reply desc limit 1 ";
+        // $prev = sql_fetch($sql);
     }
 
     // 아래글을 얻음
-    $sql = " select wr_id, wr_subject from {$write_table} where wr_is_comment = 0 and wr_num = '{$write['wr_num']}' and wr_reply > '{$write['wr_reply']}' {$sql_search} order by wr_num, wr_reply limit 1 ";
-    $next = sql_fetch($sql);
+    // $sql = " select wr_id, wr_subject from {$write_table} where wr_is_comment = 0 and wr_num = '{$write['wr_num']}' and wr_reply > '{$write['wr_reply']}' {$sql_search} order by wr_num, wr_reply limit 1 ";
+    // $next = sql_fetch($sql);
     // 위의 쿼리문으로 값을 얻지 못했다면
     if (!$next['wr_id']) {
-        $sql = " select wr_id, wr_subject from {$write_table} where wr_is_comment = 0 and wr_num > '{$write['wr_num']}' {$sql_search} order by wr_num, wr_reply limit 1 ";
-        $next = sql_fetch($sql);
+        // $sql = " select wr_id, wr_subject from {$write_table} where wr_is_comment = 0 and wr_num > '{$write['wr_num']}' {$sql_search} order by wr_num, wr_reply limit 1 ";
+        // $next = sql_fetch($sql);
     }
 }
 
@@ -468,7 +475,7 @@ if ($sca || $stx || count($arr_search) > 0) {
 		$sql_search = get_sql_search3($sca, $sfl, $stx, $sop, $se_arr);
 
     // 가장 작은 번호를 얻어서 변수에 저장 (하단의 페이징에서 사용)
-    $sql = " select MIN(wr_num) as min_wr_num from {$write_table} ";
+    $sql = " select MIN(wr_num) as min_wr_num from {$write_table}  ";
     $row = sql_fetch($sql);
     $min_spt = (int)$row['min_wr_num'];
 
@@ -505,51 +512,10 @@ $i = 0;
 $notice_count = 0;
 $notice_array = array();
 
-// 공지 처리
-if (!$sca && !$stx) {
-    $arr_notice = explode(',', trim($board['bo_notice']));
-    $from_notice_idx = ($page - 1) * $page_rows;
-    if($from_notice_idx < 0)
-        $from_notice_idx = 0;
-    $board_notice_count = count($arr_notice);
 
-    for ($k=0; $k<$board_notice_count; $k++) {
-        if (trim($arr_notice[$k]) == '') continue;
-
-        $row = sql_fetch(" select * from {$write_table} where wr_id = '{$arr_notice[$k]}' ");
-
-        if (!$row['wr_id']) continue;
-
-        $notice_array[] = $row['wr_id'];
-
-        if($k < $from_notice_idx) continue;
-
-        $list[$i] = get_list($row, $board, $board_skin_url, G5_IS_MOBILE ? $board['bo_mobile_subject_len'] : $board['bo_subject_len']);
-        $list[$i]['is_notice'] = true;
-
-        $i++;
-        $notice_count++;
-
-        if($notice_count >= $list_page_rows)
-            break;
-    }
-}
 $total_page  = ceil($total_count / $page_rows);  // 전체 페이지 계산
 $from_record = ($page - 1) * $page_rows; // 시작 열을 구함
 
-// 공지글이 있으면 변수에 반영
-if(!empty($notice_array)) {
-    $from_record -= count($notice_array);
-
-    if($from_record < 0)
-        $from_record = 0;
-
-    if($notice_count > 0)
-        $page_rows -= $notice_count;
-
-    if($page_rows < 0)
-        $page_rows = $list_page_rows;
-}
 
 // 관리자라면 CheckBox 보임
 $is_checkbox = false;
@@ -601,8 +567,14 @@ if($_GET[wr_area_p_min] || $_GET[wr_area_p_max]){
 if($_GET[wr_premium_o_min] || $_GET[wr_premium_o_max]){
 	$sql_order = " order by wr_id desc ";
 }
+
+// 기본 리스트 쿼리 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 if ($sca || $stx || count($arr_search) > 0) {
-	 $sql = " select wr_id wr_parent from {$write_table} where {$sql_search} {$sql_order} limit {$from_record}, $page_rows ";
+    if($wr_sold_out == '1'){
+        $sql = " select wr_id wr_parent from {$write_table} where {$sql_search} {$sql_order} limit {$from_record}, $page_rows "; 
+    }else{
+     $sql = " select wr_id wr_parent from {$write_table} where {$sql_search} {$sql_order} limit {$from_record}, $page_rows ";
+    }
 } else {
     $sql = " select * from {$write_table} where wr_is_comment = 0 ";
     if(!empty($notice_array))
@@ -640,36 +612,36 @@ if($page_rows > 0) {
 // '&wr_rec_sectors='.$wr_rec_sectors.'&amp;page=');
 // }
 if($gr_admin && $wr_important == '2'){
-    $write_pages = get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, './board.php?bo_table='.$bo_table.$qstr.'&board_list='.$board_list.'&wr_important='.$wr_important.'&wr_sale_type='.$wr_sale_type.'&wr_subject='.$wr_subject.'&wr_sale_area='.$wr_sale_area.'&wr_floor='.$wr_floor.'&wr_floor_min='.$wr_floor_min.'&wr_office_permission=0&wr_address='.$wr_address.'&wr_writer='.$wr_writer.'&wr_floor_max='.$wr_floor_max.'&wr_area_p_min='.$wr_area_p_min.'&wr_area_p_max='.$wr_area_p_max.'&wr_rent_deposit_min='.$wr_rent_deposit_min.'&wr_rent_deposit_max='.$wr_rent_deposit_max.'&wr_m_rate_min='.$wr_m_rate_min.'&wr_m_rate_max='.$wr_m_rate_max.'&wr_premium_o_min='.$wr_premium_o_min.'&wr_premium_o_max='.$wr_premium_o_max.'&wr_sum_pay_min='.$wr_sum_pay_min.'&wr_sum_pay_max='.$wr_sum_pay_max.
+    $write_pages = get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, './board.php?bo_table='.$bo_table.$qstr.'&board_list='.$board_list.'&wr_important='.$wr_important.'&wr_sale_type='.$wr_sale_type.'&wr_subject='.$wr_subject.'&wr_sale_area='.$wr_sale_area.'&wr_floor='.$wr_floor.'&wr_floor_min='.$wr_floor_min.'&wr_office_permission=0&wr_address='.$wr_address.'&wr_writer_id='.$wr_writer_id.'&wr_floor_max='.$wr_floor_max.'&wr_area_p_min='.$wr_area_p_min.'&wr_area_p_max='.$wr_area_p_max.'&wr_rent_deposit_min='.$wr_rent_deposit_min.'&wr_rent_deposit_max='.$wr_rent_deposit_max.'&wr_m_rate_min='.$wr_m_rate_min.'&wr_m_rate_max='.$wr_m_rate_max.'&wr_premium_o_min='.$wr_premium_o_min.'&wr_premium_o_max='.$wr_premium_o_max.'&wr_sum_pay_min='.$wr_sum_pay_min.'&wr_sum_pay_max='.$wr_sum_pay_max.
     '&wr_rec_sectors='.$wr_rec_sectors.'&amp;page=');
 }
 
 if($gr_admin && $wr_important == '1'){
-    $write_pages = get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, './board.php?bo_table='.$bo_table.$qstr.'&board_list='.$board_list.'&wr_important='.$wr_important.'&wr_sale_type='.$wr_sale_type.'&wr_subject='.$wr_subject.'&wr_sale_area='.$wr_sale_area.'&wr_floor='.$wr_floor.'&wr_floor_min='.$wr_floor_min.'&wr_office_permission='.$wr_office_permission.'&wr_address='.$wr_address.'&wr_writer='.$wr_writer.'&wr_floor_max='.$wr_floor_max.'&wr_area_p_min='.$wr_area_p_min.'&wr_area_p_max='.$wr_area_p_max.'&wr_rent_deposit_min='.$wr_rent_deposit_min.'&wr_rent_deposit_max='.$wr_rent_deposit_max.'&wr_m_rate_min='.$wr_m_rate_min.'&wr_m_rate_max='.$wr_m_rate_max.'&wr_premium_o_min='.$wr_premium_o_min.'&wr_premium_o_max='.$wr_premium_o_max.'&wr_sum_pay_min='.$wr_sum_pay_min.'&wr_sum_pay_max='.$wr_sum_pay_max.
+    $write_pages = get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, './board.php?bo_table='.$bo_table.$qstr.'&board_list='.$board_list.'&wr_important='.$wr_important.'&wr_sale_type='.$wr_sale_type.'&wr_subject='.$wr_subject.'&wr_sale_area='.$wr_sale_area.'&wr_floor='.$wr_floor.'&wr_floor_min='.$wr_floor_min.'&wr_office_permission='.$wr_office_permission.'&wr_address='.$wr_address.'&wr_writer_id='.$wr_writer_id.'&wr_floor_max='.$wr_floor_max.'&wr_area_p_min='.$wr_area_p_min.'&wr_area_p_max='.$wr_area_p_max.'&wr_rent_deposit_min='.$wr_rent_deposit_min.'&wr_rent_deposit_max='.$wr_rent_deposit_max.'&wr_m_rate_min='.$wr_m_rate_min.'&wr_m_rate_max='.$wr_m_rate_max.'&wr_premium_o_min='.$wr_premium_o_min.'&wr_premium_o_max='.$wr_premium_o_max.'&wr_sum_pay_min='.$wr_sum_pay_min.'&wr_sum_pay_max='.$wr_sum_pay_max.
     '&wr_rec_sectors='.$wr_rec_sectors.'&amp;page=');
 }
 
 
 else if($gr_admin && $wr_sold_out == '1'){
-$write_pages = get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, './board.php?bo_table='.$bo_table.$qstr.'&board_list='.$board_list.'&wr_important='.$wr_important.'&wr_sale_type='.$wr_sale_type.'&wr_sold_out='.$wr_sold_out.'&wr_subject='.$wr_subject.'&wr_sale_area='.$wr_sale_area.'&wr_floor='.$wr_floor.'&wr_floor_min='.$wr_floor_min.'&wr_office_permission=0&wr_address='.$wr_address.'&wr_writer='.$wr_writer.'&wr_floor_max='.$wr_floor_max.'&wr_area_p_min='.$wr_area_p_min.'&wr_area_p_max='.$wr_area_p_max.'&wr_rent_deposit_min='.$wr_rent_deposit_min.'&wr_rent_deposit_max='.$wr_rent_deposit_max.'&wr_m_rate_min='.$wr_m_rate_min.'&wr_m_rate_max='.$wr_m_rate_max.'&wr_premium_o_min='.$wr_premium_o_min.'&wr_premium_o_max='.$wr_premium_o_max.'&wr_sum_pay_min='.$wr_sum_pay_min.'&wr_sum_pay_max='.$wr_sum_pay_max.
+$write_pages = get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, './board.php?bo_table='.$bo_table.$qstr.'&board_list='.$board_list.'&wr_important='.$wr_important.'&wr_sale_type='.$wr_sale_type.'&wr_sold_out='.$wr_sold_out.'&wr_subject='.$wr_subject.'&wr_sale_area='.$wr_sale_area.'&wr_floor='.$wr_floor.'&wr_floor_min='.$wr_floor_min.'&wr_office_permission=0&wr_address='.$wr_address.'&wr_writer_id='.$wr_writer_id.'&wr_floor_max='.$wr_floor_max.'&wr_area_p_min='.$wr_area_p_min.'&wr_area_p_max='.$wr_area_p_max.'&wr_rent_deposit_min='.$wr_rent_deposit_min.'&wr_rent_deposit_max='.$wr_rent_deposit_max.'&wr_m_rate_min='.$wr_m_rate_min.'&wr_m_rate_max='.$wr_m_rate_max.'&wr_premium_o_min='.$wr_premium_o_min.'&wr_premium_o_max='.$wr_premium_o_max.'&wr_sum_pay_min='.$wr_sum_pay_min.'&wr_sum_pay_max='.$wr_sum_pay_max.
 '&wr_rec_sectors='.$wr_rec_sectors.'&amp;page=');
 } 
 
 else if(!$gr_admin && $wr_important == '2'){
-$write_pages = get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, './board.php?bo_table='.$bo_table.$qstr.'&board_list='.$board_list.'&wr_important='.$wr_important.'&wr_sale_type='.$wr_sale_type.'&wr_sold_out='.$wr_sold_out.'&wr_subject='.$wr_subject.'&wr_sale_area='.$wr_sale_area.'&wr_floor='.$wr_floor.'&wr_floor_min='.$wr_floor_min.'&wr_address='.$wr_address.'&wr_writer='.$wr_writer.'&wr_floor_max='.$wr_floor_max.'&wr_area_p_min='.$wr_area_p_min.'&wr_area_p_max='.$wr_area_p_max.'&wr_rent_deposit_min='.$wr_rent_deposit_min.'&wr_rent_deposit_max='.$wr_rent_deposit_max.'&wr_m_rate_min='.$wr_m_rate_min.'&wr_m_rate_max='.$wr_m_rate_max.'&wr_premium_o_min='.$wr_premium_o_min.'&wr_premium_o_max='.$wr_premium_o_max.'&wr_sum_pay_min='.$wr_sum_pay_min.'&wr_sum_pay_max='.$wr_sum_pay_max.
+$write_pages = get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, './board.php?bo_table='.$bo_table.$qstr.'&board_list='.$board_list.'&wr_important='.$wr_important.'&wr_sale_type='.$wr_sale_type.'&wr_sold_out='.$wr_sold_out.'&wr_subject='.$wr_subject.'&wr_sale_area='.$wr_sale_area.'&wr_floor='.$wr_floor.'&wr_floor_min='.$wr_floor_min.'&wr_address='.$wr_address.'&wr_writer_id='.$wr_writer_id.'&wr_floor_max='.$wr_floor_max.'&wr_area_p_min='.$wr_area_p_min.'&wr_area_p_max='.$wr_area_p_max.'&wr_rent_deposit_min='.$wr_rent_deposit_min.'&wr_rent_deposit_max='.$wr_rent_deposit_max.'&wr_m_rate_min='.$wr_m_rate_min.'&wr_m_rate_max='.$wr_m_rate_max.'&wr_premium_o_min='.$wr_premium_o_min.'&wr_premium_o_max='.$wr_premium_o_max.'&wr_sum_pay_min='.$wr_sum_pay_min.'&wr_sum_pay_max='.$wr_sum_pay_max.
 '&wr_rec_sectors='.$wr_rec_sectors.'&amp;page=');
  
 }else if(!$gr_admin && $wr_important == '1' && $wr_office_permission == '1'){
-    $write_pages = get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, './board.php?bo_table='.$bo_table.$qstr.'&board_list='.$board_list.'&wr_important='.$wr_important.'&wr_sale_type='.$wr_sale_type.'&wr_subject='.$wr_subject.'&wr_sale_area='.$wr_sale_area.'&wr_floor='.$wr_floor.'&wr_floor_min='.$wr_floor_min.'&wr_office_permission=1&wr_address='.$wr_address.'&wr_writer='.$wr_writer.'&wr_floor_max='.$wr_floor_max.'&wr_area_p_min='.$wr_area_p_min.'&wr_area_p_max='.$wr_area_p_max.'&wr_rent_deposit_min='.$wr_rent_deposit_min.'&wr_rent_deposit_max='.$wr_rent_deposit_max.'&wr_m_rate_min='.$wr_m_rate_min.'&wr_m_rate_max='.$wr_m_rate_max.'&wr_premium_o_min='.$wr_premium_o_min.'&wr_premium_o_max='.$wr_premium_o_max.'&wr_sum_pay_min='.$wr_sum_pay_min.'&wr_sum_pay_max='.$wr_sum_pay_max.
+    $write_pages = get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, './board.php?bo_table='.$bo_table.$qstr.'&board_list='.$board_list.'&wr_important='.$wr_important.'&wr_sale_type='.$wr_sale_type.'&wr_subject='.$wr_subject.'&wr_sale_area='.$wr_sale_area.'&wr_floor='.$wr_floor.'&wr_floor_min='.$wr_floor_min.'&wr_office_permission=1&wr_address='.$wr_address.'&wr_writer_id='.$wr_writer_id.'&wr_floor_max='.$wr_floor_max.'&wr_area_p_min='.$wr_area_p_min.'&wr_area_p_max='.$wr_area_p_max.'&wr_rent_deposit_min='.$wr_rent_deposit_min.'&wr_rent_deposit_max='.$wr_rent_deposit_max.'&wr_m_rate_min='.$wr_m_rate_min.'&wr_m_rate_max='.$wr_m_rate_max.'&wr_premium_o_min='.$wr_premium_o_min.'&wr_premium_o_max='.$wr_premium_o_max.'&wr_sum_pay_min='.$wr_sum_pay_min.'&wr_sum_pay_max='.$wr_sum_pay_max.
     '&wr_rec_sectors='.$wr_rec_sectors.'&amp;page=');
 
 }else if(!$gr_admin && $wr_important == '1'){
-$write_pages = get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, './board.php?bo_table='.$bo_table.$qstr.'&board_list='.$board_list.'&wr_important='.$wr_important.'&wr_sale_type='.$wr_sale_type.'&wr_subject='.$wr_subject.'&wr_sale_area='.$wr_sale_area.'&wr_floor='.$wr_floor.'&wr_floor_min='.$wr_floor_min.'&wr_office_permission=2&wr_address='.$wr_address.'&wr_writer='.$wr_writer.'&wr_floor_max='.$wr_floor_max.'&wr_area_p_min='.$wr_area_p_min.'&wr_area_p_max='.$wr_area_p_max.'&wr_rent_deposit_min='.$wr_rent_deposit_min.'&wr_rent_deposit_max='.$wr_rent_deposit_max.'&wr_m_rate_min='.$wr_m_rate_min.'&wr_m_rate_max='.$wr_m_rate_max.'&wr_premium_o_min='.$wr_premium_o_min.'&wr_premium_o_max='.$wr_premium_o_max.'&wr_sum_pay_min='.$wr_sum_pay_min.'&wr_sum_pay_max='.$wr_sum_pay_max.
+$write_pages = get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, './board.php?bo_table='.$bo_table.$qstr.'&board_list='.$board_list.'&wr_important='.$wr_important.'&wr_sale_type='.$wr_sale_type.'&wr_subject='.$wr_subject.'&wr_sale_area='.$wr_sale_area.'&wr_floor='.$wr_floor.'&wr_floor_min='.$wr_floor_min.'&wr_office_permission=2&wr_address='.$wr_address.'&wr_writer_id='.$wr_writer_id.'&wr_floor_max='.$wr_floor_max.'&wr_area_p_min='.$wr_area_p_min.'&wr_area_p_max='.$wr_area_p_max.'&wr_rent_deposit_min='.$wr_rent_deposit_min.'&wr_rent_deposit_max='.$wr_rent_deposit_max.'&wr_m_rate_min='.$wr_m_rate_min.'&wr_m_rate_max='.$wr_m_rate_max.'&wr_premium_o_min='.$wr_premium_o_min.'&wr_premium_o_max='.$wr_premium_o_max.'&wr_sum_pay_min='.$wr_sum_pay_min.'&wr_sum_pay_max='.$wr_sum_pay_max.
 '&wr_rec_sectors='.$wr_rec_sectors.'&amp;page=');
 
 
 }else{
-    $write_pages = get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, './board.php?bo_table='.$bo_table.$qstr.'&board_list='.$board_list.'&wr_important='.$wr_important.'&wr_sale_type='.$wr_sale_type.'&wr_sold_out='.$wr_sold_out.'&wr_subject='.$wr_subject.'&wr_sale_area='.$wr_sale_area.'&wr_floor='.$wr_floor.'&wr_floor_min='.$wr_floor_min.'&wr_address='.$wr_address.'&wr_writer='.$wr_writer.'&wr_floor_max='.$wr_floor_max.'&wr_area_p_min='.$wr_area_p_min.'&wr_area_p_max='.$wr_area_p_max.'&wr_rent_deposit_min='.$wr_rent_deposit_min.'&wr_rent_deposit_max='.$wr_rent_deposit_max.'&wr_m_rate_min='.$wr_m_rate_min.'&wr_m_rate_max='.$wr_m_rate_max.'&wr_premium_o_min='.$wr_premium_o_min.'&wr_premium_o_max='.$wr_premium_o_max.'&wr_sum_pay_min='.$wr_sum_pay_min.'&wr_sum_pay_max='.$wr_sum_pay_max.
+    $write_pages = get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, './board.php?bo_table='.$bo_table.$qstr.'&board_list='.$board_list.'&wr_important='.$wr_important.'&wr_sale_type='.$wr_sale_type.'&wr_sold_out='.$wr_sold_out.'&wr_subject='.$wr_subject.'&wr_sale_area='.$wr_sale_area.'&wr_floor='.$wr_floor.'&wr_floor_min='.$wr_floor_min.'&wr_address='.$wr_address.'&wr_writer_id='.$wr_writer_id.'&wr_floor_max='.$wr_floor_max.'&wr_area_p_min='.$wr_area_p_min.'&wr_area_p_max='.$wr_area_p_max.'&wr_rent_deposit_min='.$wr_rent_deposit_min.'&wr_rent_deposit_max='.$wr_rent_deposit_max.'&wr_m_rate_min='.$wr_m_rate_min.'&wr_m_rate_max='.$wr_m_rate_max.'&wr_premium_o_min='.$wr_premium_o_min.'&wr_premium_o_max='.$wr_premium_o_max.'&wr_sum_pay_min='.$wr_sum_pay_min.'&wr_sum_pay_max='.$wr_sum_pay_max.
     '&wr_rec_sectors='.$wr_rec_sectors.'&amp;page=');
 }
 $list_href = '';

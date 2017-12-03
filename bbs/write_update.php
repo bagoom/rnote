@@ -826,15 +826,15 @@ delete_cache_latest($bo_table);
 // }
 
 
-
+print_r ($_POST);
 if ($file_upload_msg)
     alert($file_upload_msg, G5_HTTP_BBS_URL.'/board.php?bo_table='.$bo_table.'&amp;wr_id='.$wr_id.$qstr);
 else{
 
     
     if($w == "u"){ 
-    alert("매물 수정이 완료 되었습니다.");
-    goto_url(G5_HTTP_BBS_URL.'/board.php?bo_table='.$bo_table.$qstr.'&wr_important='.$wr_important.'&wr_id='.$wr_id);
+        alert("매물수정이 완료 되었습니다.", G5_HTTP_BBS_URL.'/board.php?bo_table='.$bo_table.$qstr.'&wr_important='.$wr_important.'&wr_sale_type='.$wr_sale_type.'&wr_id='.$wr_id); 
+        // goto_url(G5_HTTP_BBS_URL.'/board.php?bo_table='.$bo_table.$qstr.'&wr_important='.$wr_important.'&wr_id='.$wr_id);
      }else{
     goto_url(G5_HTTP_BBS_URL.'/write_result.php?bo_table='.$bo_table.'&board_list='.$board_list.'&wr_id='.$wr_id.'&wr_sale_type='.$wr_sale_type);
     }

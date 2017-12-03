@@ -1,6 +1,6 @@
 <?php
-if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
-
+// if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
+include_once('./_common.php');
 if(!$is_admin)
     alert('접근 권한이 없습니다.', G5_URL);
 
@@ -17,6 +17,8 @@ else // 일괄삭제
     $tmp_array = $_POST['chk_wr_id'];
 
 $chk_count = count($tmp_array);
+
+
 
 if($chk_count > (G5_IS_MOBILE ? $board['bo_mobile_page_rows'] : $board['bo_page_rows']))
     alert('올바른 방법으로 이용해 주십시오.');
@@ -156,5 +158,10 @@ if ($count_write > 0 || $count_comment > 0)
 
 delete_cache_latest($bo_table);
 
-goto_url(G5_HTTP_BBS_URL.'/board.php?bo_table='.$bo_table.'&amp;page='.$page.$qstr);
+if($wr_sold_out == '1'){
+goto_url(G5_HTTP_BBS_URL.'/board.php?bo_table='.$bo_table.'&board_list='.$board_list.'&wr_sale_type='.$wr_sale_type.'&wr_sold_out=1');
+}else{
+goto_url(G5_HTTP_BBS_URL.'/board.php?bo_table='.$bo_table.'&board_list='.$board_list.'&wr_sale_type='.$wr_sale_type.'&wr_writer_id='.$member[mb_id]);
+}
+
 ?>

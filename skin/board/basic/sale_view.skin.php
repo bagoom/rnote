@@ -124,7 +124,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                               <i class="fa fa-cog" aria-hidden="true" value="중요매물등록"  style="font-size:18px; "></i>
                               매물관리설정
                             </button>
-                          <?}else if($gr_cp && $wr_important == 2){ ?>
+                          <?}else if($gr_cp && $bo_table == "$member[mb_id]"){ ?>
                             <button class="btn btn-theme03 right  config" type="button"  style="margin-right:10px;">
                               <i class="fa fa-cog" aria-hidden="true" value="중요매물등록"  style="font-size:18px; "></i>
                               매물관리설정
@@ -152,8 +152,9 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                               $wr_address_sale=explode(",",$view['wr_address_sale']);
                               // $wr_area_p_sale = count($wr_area_p_sale);
                           ?>
+                 
                             <h2 style="margin-top:5px;"><?=$view['wr_subject'];?></h2>
-                            <h4><?=$view['wr_address'];?> 외 (<?=count($wr_area_p_sale);?>)필지 </h4>
+                            <h4><?=$view['wr_address'];?> 외 (<?=count($wr_address_sale);?>)필지 </h4>
                             <h4>지목 <?=$view[wr_rand_type]?> / 지역지구 <?=$view[wr_zoning_district]?></h4>
                             <h4>건물층수 <?=$view[wr_floor]?>층 / 연면적 <?=$view[wr_gross_area]?>평</h4>
                           </div> 
@@ -169,7 +170,8 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                                 </span>
                                 </li> 
                                 <div class="wr_sale_area" style="display:none;">
-                                <? for ($i=0; $i<count($wr_area_p_sale); $i++) { ?>
+                                <? for ($i=0; $i<count($wr_address_sale); $i++) { ?>
+
                                 <li > <?=$wr_address_sale[$i]?>  <?=$wr_area_p_sale[$i]?>평 <?=$wr_area_m_sale[$i]?>㎡ </li>
                                 <?}?>
                                 </div>
@@ -192,7 +194,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                             <!-- 임대현황 -->
                             <div class="info_top">
                               <ul>
-                                <li>보증금<span><?=$view['wr_loan'];?><span class="info_sm_span"> 만원</span> 임대료<span class="info_sm_span"> 만원</span></span></li>
+                                <li>보증금/임대료<span><?=$view['wr_sale_deposit'];?><span class="info_sm_span"> 만원</span> /<?=$view['wr_total_rfee'];?><span class="info_sm_span"> 만원</span></span></li>
                                 <li>연임대수익<span><?=$view['wr_mon_int'];?><span class="info_sm_span"> 만원</span><span class="info_sm_span"> 만원</span></span></li>
                               </ul>
                             </div> 

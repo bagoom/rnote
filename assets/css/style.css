@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'NanumSquareRound';
+  src: url(../fonts/NanumSquareR.eot);
+  src: url(../fonts/NanumSquareR.eot?#iefix) format('embedded-opentype'),
+       url(../fonts/NanumSquareR.woff) format('woff'),
+       url(../fonts/NanumSquareR.ttf) format('truetype');
+ }
+
 body {
     color: #323e51;
     /*background: #fff;*/
@@ -451,11 +459,13 @@ li{
   text-align: center;
 }
 .box_del{
-  background: #E6324B;
-  border: 0;
-  border-radius: 50%;
-  color: #fff;
-  margin-top: 8px;
+  position: absolute;
+  top:60px;
+  left:-75px; 
+  padding:10px;
+  background: #E6324B; 
+  border: 0; 
+  color: #fff; 
 }
 #wr_rec_job li{
   width: 33.333%;

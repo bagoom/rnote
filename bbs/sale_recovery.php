@@ -15,10 +15,10 @@ $wr_id_list=explode(",",$wr_id_list);
 
 for ($i=0; $i<count($wr_id_list); $i++) {
 
-sql_query("update $write_table set wr_sold_out = '1' , wr_sold_out_date = '".G5_TIME_YMDHIS."' where wr_id = '$wr_id_list[$i]' ");
+sql_query("update $write_table set wr_sold_out = '' , wr_sold_out_date = '' where wr_id = '$wr_id_list[$i]' ");
 
 }
-alert("거래종료 등록이 완료 되었습니다.");
+alert("마이노트 등록이 완료 되었습니다.");
  
 ?>
 
