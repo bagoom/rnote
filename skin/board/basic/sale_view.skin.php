@@ -154,7 +154,10 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                           ?>
                  
                             <h2 style="margin-top:5px;"><?=$view['wr_subject'];?></h2>
-                            <h4><?=$view['wr_address'];?> 외 (<?=count($wr_address_sale);?>)필지 </h4>
+                            <h4><?=$view['wr_address'];?>
+                            <?if (count($wr_address_sale) > 1) {?>                           
+                             외 (<?=count($wr_address_sale);?>)필지 </h4>
+                             <?}?>
                             <h4>지목 <?=$view[wr_rand_type]?> / 지역지구 <?=$view[wr_zoning_district]?></h4>
                             <h4>건물층수 <?=$view[wr_floor]?>층 / 연면적 <?=$view[wr_gross_area]?>평</h4>
                           </div> 
@@ -165,14 +168,14 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                                 <? $m2 = $view['wr_area_p'] *3.3;?>
                                 <li class="wr_writer">대지면적
                                 <span>
-                                <?=$view[wr_area_p_all]?>평(<?=$view[wr_area_m_all] ?>m2)
-                                <i class="fa fa-caret-square-o-down" aria-hidden="true"></i>
+                                <?=$view[wr_area_p_all]?>평(<?=$view[wr_area_m_all] ?>㎡)
+                                <i class="fa fa-angle-down" aria-hidden="true"></i>
                                 </span>
                                 </li> 
                                 <div class="wr_sale_area" style="display:none;">
                                 <? for ($i=0; $i<count($wr_address_sale); $i++) { ?>
 
-                                <li > <?=$wr_address_sale[$i]?>  <?=$wr_area_p_sale[$i]?>평 <?=$wr_area_m_sale[$i]?>㎡ </li>
+                                <li style="font-size:14px; background:#fff; margin:5px 0; border:1px solid #eee; padding:10px;"> <?=$wr_address_sale[$i]?>  <?=$wr_area_p_sale[$i]?>평 <?=$wr_area_m_sale[$i]?>㎡ </li>
                                 <?}?>
                                 </div>
                               </ul>
@@ -181,110 +184,34 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                             <!-- 가격정보 -->
                             <div class="info_top">
                               <ul>
-                                <li>총매도가<span><?=$view[wr_sale_price]?><span class="info_sm_span"> 만원</span> (<?=$view[wr_p_sale_price]?><span class="info_sm_span"> 만원</span>/py)</span></li>
+                                <li>총매도가<span><?=$view[wr_sale_price]?><span class="info_sm_span">만원</span> <span class="info_sm_span">(평당</span><?=$view[wr_p_sale_price]?><span class="info_sm_span">만원)</span></li>
                               </ul> 
-                            </div> 
-                            <!-- 대출관계 -->
-                            <div class="info_top">
                               <ul>
-                                <li>대출금<span><?=$view['wr_loan'];?><span class="info_sm_span"> 만원</span> (<?=$view[wr_p_sale_price]?><span class="info_sm_span"> 만원</span>)</span></li>
-                                <li>이자<span><?=$view['wr_mon_int'];?><span class="info_sm_span"> 만원</span> <?=$view['wr_year_int'];?><span class="info_sm_span"> 만원</span></span></li>
+                                <li>대출금<span><?=$view['wr_loan'];?><span class="info_sm_span"> 만원 (금리</span><? $int_rate = ($view[wr_int_rate] == '0') ?  "4" : $view[wr_int_rate] ?><?=$int_rate?><span class="info_sm_span">%)</span></span></li>
+                                <li>이자<span><span class="info_sm_span">월</span><?=$view['wr_mon_int'];?><span class="info_sm_span">만원 (연</span><?=$view['wr_year_int'];?><span class="info_sm_span">만원)</span></span></li>
                               </ul>
                             </div>
                             <!-- 임대현황 -->
                             <div class="info_top">
                               <ul>
-                                <li>보증금/임대료<span><?=$view['wr_sale_deposit'];?><span class="info_sm_span"> 만원</span> /<?=$view['wr_total_rfee'];?><span class="info_sm_span"> 만원</span></span></li>
-                                <li>연임대수익<span><?=$view['wr_mon_int'];?><span class="info_sm_span"> 만원</span><span class="info_sm_span"> 만원</span></span></li>
+                                <li>보증금/임대료<span><?=$view['wr_sale_deposit'];?><span class="info_sm_span">만원</span><span class="info_sm_span"> </span><?=$view['wr_total_rfee'];?><span class="info_sm_span">만원</span></span></li>
+                                <li>연임대수익<span><?=$view['wr_year_rate'];?><span class="info_sm_span">만원</span></li>
                               </ul>
                             </div> 
                             <!-- 수익성 -->
-                            <div class="info_top">
+                            <div class="info_top profit_rate">
                               <ul>
-                                <li>실인수가<span><?=$view['wr_silinsu'];?><span class="info_sm_span"> 만원</span> 임대료</span></li>
-                                <li>연간순수익<span><?=$view['wr_year_income'];?><span class="info_sm_span"> 만원</span></span></li>
-                                <li>수익률<span><?=$view['wr_profit_rate'];?><span class="info_sm_span"> 만원</span></span></li>
+                                <li>실인수가<span><?=$view['wr_silinsu'];?><span class="info_sm_span">만원</span></span></li>
+                                <li>연간순수익<span><?=$view['wr_year_income'];?><span class="info_sm_span">만원(월순수익</span><?=$view[wr_mon_income]?><span class="info_sm_span">만원)</span>
+                                
+                                </li>
+                                <li>수익률<span><?=$view['wr_profit_rate'];?><span class="info_sm_span">%</span></span></li>
                               </ul>
                             </div> 
 
-                            <div class="info_mid">
-                              <?  $str = $view['wr_rec_sectors'];
-                                    $str2 = explode(' ', $str);
-                                    $str3 = sizeof($str2)-1 ; ?>
-                              <li>추천업종  <ul class="rec_list_wrap"><?for ($i = 0 ; $i < $str3 ; $i++){
-                                echo '<li class="rec_list">'.$str2[$i].'</li>';
-                              }?></div></li>
-                            </div>
+               
 
-                            <div class="info_bot">
-                              <li>관리번호<span><?=$view['wr_code'];?></li>
-                          <? if($_GET['wr_important'] == 1){ ?>
-                          <!-- 임차인연락처가 있을경우 -->
-                          <?if ($gr_admin&& $view['wr_renter_contact']){?>
-                                <li>임차인연락처<span><?=$view['wr_renter_contact'];?></li>
-                                <li class="wr_writer">담당자
-                                <span><?=$view['wr_writer']?>
-                                <i class="fa fa-caret-square-o-down" aria-hidden="true"></i>
-                                </span></li>
-                                <li class="wr_writer_contact">담당자연락처 <span>  <?=$view['wr_hp']?></span> </li>
-
-                            <!-- 임대인연락처가 있을경우 -->
-                            <?}else if($gr_admin&& $view['wr_lessor_contact']){?>
-                                <li>임대인연락처<span><?=$view['wr_lessor_contact'];?></li>
-                                  <li class="wr_writer">담당자
-                                  <span><?=$view['wr_writer']?>
-                                  <i class="fa fa-caret-square-o-down" aria-hidden="true"></i>
-                                  </span></li>
-                                <li class="wr_writer_contact">담당자연락처 <span>  <?=$view['wr_hp']?></span> </li>
-
-                            <!-- 직원일경우 -->
-                            <?}else if(!$gr_admin){?>
-                              <li class="wr_writer">담당자
-                              <span><?=$view['wr_writer']?>
-                              <i class="fa fa-caret-square-o-down" aria-hidden="true"></i>
-                              </span></li>
-                                <li class="wr_writer_contact">담당자연락처 <span>  <?=$view['wr_hp']?></span> </li>
-                              <?}?>
-
-                              <?}else{ ?>
-                                <? if($view['wr_renter_contact']){  ?>
-                              <li>임차인연락처<span><?=$view['wr_renter_contact'];?></li>
-                                <?}?>
-                                <? if($view['wr_lessor_contact']){  ?>
-                              <li>임대인연락처<span><?=$view['wr_lessor_contact'];?></li>
-                                <?}}?>
-                              <li>관리비<span>
-                                <? if (!$view['wr_mt_cost']){
-                                  echo "-";
-                                }else{?>
-                                  <? $slice = $view['wr_mt_cost'];
-                                  if (strlen($slice) == 7){
-                                      $mt_cost = substr($slice, 0, 3);
-                                      echo $mt_cost.'만원';
-
-                                    }
-                                  else if(strlen($slice) == 6){
-                                      $mt_cost = substr($slice, 0, 2);
-                                      $mt_cost2 = substr($slice, 2, 1);
-                                      if ($mt_cost2 == '0'){
-                                      echo $mt_cost.'만원';
-                                    }else{
-                                      echo $mt_cost.'만'.$mt_cost2.'천원';
-                                    }
-                                    }
-                                  else if(strlen($slice) == 5){
-                                      $mt_cost = substr($slice, 0, 1);
-                                      $mt_cost2 = substr($slice, 1, 1);
-                                      if ($mt_cost2 == '0'){
-                                      echo $mt_cost.'만원';
-                                    }else{
-                                      echo $mt_cost.'만'.$mt_cost2.'천원';
-                                    }
-                                    }
-                                  ?>
-                              <? }?></span></li>
-                              <li>기타지출<span><?=$view['wr_extra_exp'];?></span></li>
-                              <li style="margin-top:15px; padding-top:15px; border-top:2px solid #444">메모<span class="wr_memo"><?=nl2br($view['wr_memo']);?></span></li>
+                              <li style="margin-top:15px; padding-top:15px;">메모<span class="wr_memo"><?=nl2br($view['wr_memo']);?></span></li>
                               <li>
                                 <?php
                                 // 파일 출력

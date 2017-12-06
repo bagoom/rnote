@@ -73,15 +73,15 @@ $(function() { $("input:text").keydown(function(evt) { if (evt.keyCode == 13) re
         $(this).find('#wr_area_p2,#wr_area_m2,#wr_area_p3,#wr_area_m3').each(function()  {
           if(!isNaN(this.value)&&this.value.length!=0)
           {
-            val_change = parseFloat(this.value*3.3).toFixed(1)
-            sum+=parseFloat(this.value);
-            sum2+=parseFloat(val_change);
+            val_change = parseFloat($("#wr_area_p2").val()*3.3).toFixed(1)
+            sum=parseInt($("#wr_area_p2").val());
+            sum2=parseFloat(val_change);
           }
         });
 
       });
-      $("#wr_area_p_all").val(sum.toFixed(1));
-      $("#wr_area_m_all").val(sum2.toFixed(1));
+     $("#wr_area_p_all").val(sum)
+      $("#wr_area_m_all").val(sum2)
       $('#wr_p_sale_price').val(($("#wr_sale_price2").val()/$("#wr_area_p_all").val()).toFixed(1))
       $('.clone'+(cloneNumber-1) +  ' .sale_rand #wr_area_m3').val(val_change);
 
@@ -93,12 +93,11 @@ $(function() { $("input:text").keydown(function(evt) { if (evt.keyCode == 13) re
       var sum2=0;
 
       $(".rand_wrap, .rand_wrap_basic").each(function(){
-        $(this).find('input[name="wr_area_m"]').each(function()  {
+        $(this).find('input[id="wr_area_m2"]').each(function()  {
           if(!isNaN(this.value)&&this.value.length!=0)
           {
             val_change = parseFloat(this.value/3.3).toFixed(1)
-            sum+=parseFloat(this.value)
-            sum2+= parseFloat(val_change)
+          
           }
         });
 
@@ -107,9 +106,10 @@ $(function() { $("input:text").keydown(function(evt) { if (evt.keyCode == 13) re
       $("#wr_area_m_all").val(sum)
       $('#wr_p_sale_price').val(($("#wr_sale_price2").val()/$("#wr_area_p_all").val()).toFixed(1))
       $('.clone'+(cloneNumber-1) +  ' .sale_rand #wr_area_p3').val(val_change);
+      sum+=parseFloat(this.value)
+      sum2+= parseFloat(val_change)
 
   }
-
 
 $('.sale_rand_wrap ').find('input[name="wr_area_p"]').on('keyup', function(){
     $('#wr_area_p_all').val(parseFloat($(this).val()).toFixed(1))
@@ -119,12 +119,6 @@ $('.sale_rand_wrap ').find('input[name="wr_area_m"]').on('keyup', function(){
 });
 //  연순수익=연임대수익-연이자
 
-// $('#wr_year_rate,#wr_year_int').on('keyup', function(){
-//     $('#wr_year_income').val(parseInt($("#wr_year_rate").val())-parseInt($("#wr_year_int").val()))
-// });
-// $('#wr_loan2').on('blur', function(){
-//     $('#wr_year_income').val(parseInt($("#wr_year_rate").val())-parseInt($("#wr_year_int").val()))
-// });
 
  // 매도가 입력시 매도가 나누기 총면적으로 평당가격 입력
 $('#wr_sale_price2').on('keyup', function(){
@@ -146,18 +140,18 @@ $(cal_target).on('keyup', function(){
   if($('#wr_int_rate2').val() == ''){
     $('#wr_year_int').val(parseInt($('#wr_loan2').val())*0.04);
     $('#wr_mon_int').val(parseInt($('#wr_year_int').val())/12);
-    // $('#wr_year_income').val(parseInt($("#wr_year_rate").val())-parseInt($("#wr_year_int").val()))
+    $('#wr_year_income').val(parseInt($("#wr_year_rate").val())-parseInt($("#wr_year_int").val()))
 
   }else{
     $('#wr_year_int').val(parseInt($('#wr_loan2').val())*($("#wr_int_rate2").val()*0.01));
     $('#wr_mon_int').val(parseInt($('#wr_year_int').val())/12);
   }
-  $('#wr_mon_income').val(parseInt($("#wr_total_rfee2").val())-parseInt($("#wr_mon_int").val()))
-  $('#wr_year_income').val(parseInt($("#wr_year_rate").val())-parseInt($("#wr_year_int").val()))
-  $('#wr_m_rate_guess').val((parseInt($("#wr_total_rfee2").val())*200)+parseInt($("#wr_sale_deposit").val()))
   $('#wr_year_rate').val(parseInt($("#wr_total_rfee2").val())*12)
-  $('#wr_silinsu').val($("#wr_sale_price2").val()-$("#wr_sale_deposit").val()-$("#wr_loan2").val())
   Profit_Rate();
+  $('#wr_year_income').val(parseInt($("#wr_year_rate").val())-parseInt($("#wr_year_int").val()))
+  $('#wr_mon_income').val(parseInt($("#wr_total_rfee2").val())-parseInt($("#wr_mon_int").val()))
+  $('#wr_m_rate_guess').val((parseInt($("#wr_total_rfee2").val())*200)+parseInt($("#wr_sale_deposit").val()))
+  $('#wr_silinsu').val($("#wr_sale_price2").val()-$("#wr_sale_deposit").val()-$("#wr_loan2").val())
   });
 
 
@@ -175,10 +169,10 @@ function Profit_Rate() {
     // console.log($('#wr_profit_rate').val());
 }
 
-    $('#wr_int_rate2').on('keyup', function(){
-    $('#wr_year_int').val(parseInt($('#wr_loan2').val())*(parseInt($('#wr_int_rate2').val())/100));
-    $('#wr_mon_int').val(parseInt($('#wr_year_int').val())/12);
-  });
+  //   $('#wr_int_rate2').on('keyup', function(){
+  //   $('#wr_year_int').val(parseInt($('#wr_loan2').val())*(parseInt($('#wr_int_rate2').val())/100));
+  //   $('#wr_mon_int').val(parseInt($('#wr_year_int').val())/12);
+  // });
 
 // wr_profit_rate :
 // (wr_year_rate - wr_year_int)x100 / (wr_sale_price - wr_loan2 - wr_sale_deposit)
@@ -257,12 +251,16 @@ function Profit_Rate() {
     $("body").ready(function(){
       var cloneNumber = 100;
       var wr_address_sale_val = $("input[name='wr_address_sale99']").val().split(',');
+      var wr_area_p_val = $("input[name='wr_area_p99']").val().split(',');
+      var wr_area_m_val = $("input[name='wr_area_m99']").val().split(',');
 
       for(var i = 0; i< wr_address_sale_val.length; i++){
        var clone = $('#doo').clone()
        if (i ==0 ){
         clone.insertAfter('.rand_wrap_basic');
         $(".rand_wrap_basic input[name='wr_address_sale99']").val(wr_address_sale_val[i])
+        $(".rand_wrap_basic input[name='wr_area_p99']").val(wr_area_p_val[i])
+        $(".rand_wrap_basic input[name='wr_area_m99']").val(wr_area_m_val[i])
        }
        else{
         clone.insertAfter($('.rand_wrap.clone'+(cloneNumber-1)));
@@ -271,11 +269,24 @@ function Profit_Rate() {
 
       clone.removeClass("clone100");
       clone.addClass("clone"+cloneNumber);
+      // 매매주소 오브젝트
       $(".clone"+cloneNumber+" input[name='wr_address_sale100']").attr("name","wr_address_sale");
       $(".clone"+cloneNumber+" input[name='wr_address_sale']").attr("name","wr_address_sale"+cloneNumber);
+      // 매매평수 오브젝트
+      $(".clone"+cloneNumber+" input[name='wr_area_p100']").attr("name","wr_area_p");
+      $(".clone"+cloneNumber+" input[name='wr_area_p']").attr("name","wr_area_p"+cloneNumber);
+      //  매매m2 오브젝트
+      $(".clone"+cloneNumber+" input[name='wr_area_m100']").attr("name","wr_area_m");
+      $(".clone"+cloneNumber+" input[name='wr_area_m']").attr("name","wr_area_m"+cloneNumber);
+      
       var clone_child = $(".clone"+cloneNumber+ " #wr_address_sale3")
+      var clone_child2 = $(".clone"+cloneNumber+ " #wr_area_p3")
+      var clone_child3 = $(".clone"+cloneNumber+ " #wr_area_m3")
+
 
       clone_child.val(wr_address_sale_val[i+1])
+      clone_child2.val(wr_area_p_val[i+1])
+      clone_child3.val(wr_area_m_val[i+1])
 
       $('.rand_wrap').css("border-top","2px solid #555");
       $('.clone'+(cloneNumber-1)).show(); 

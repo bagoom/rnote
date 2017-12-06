@@ -12,7 +12,7 @@
     "privateKeyPath": null,
     "passphrase": null,
     "ignore": [
-        "\\.vscode",
+        "\\.vscode", 
         "\\.git",
         "\\.DS_Store"
     ],

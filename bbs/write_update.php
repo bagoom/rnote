@@ -826,7 +826,6 @@ delete_cache_latest($bo_table);
 // }
 
 
-print_r ($_POST);
 if ($file_upload_msg)
     alert($file_upload_msg, G5_HTTP_BBS_URL.'/board.php?bo_table='.$bo_table.'&amp;wr_id='.$wr_id.$qstr);
 else{

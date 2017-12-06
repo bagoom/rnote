@@ -373,11 +373,13 @@ include_once("$board_skin_path/lib/skin.lib.php");
 
                   <?}}else if($wr_important == 1 ){?>
                     <?if ($gr_admin ){ ?>
-                    <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$member[mb_id]?>&board_list=<?$member[mb_3]?>&wr_sale_type=1&wr_writer_id=<?=$member[mb_id]?>" class="btn btn-theme03 left rent" style="padding-left:12px;">
+                    <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$member[mb_id]?>&board_list=<?=$member[mb_3]?>&wr_important=1&wr_sale_type=1&wr_office_permission=<?$wr_office_permission?>" class="btn btn-theme03 left rent" style="padding-left:12px;">
+
+                   
                 임대
                 </a> 
 
-                <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$member[mb_id]?>&board_list=<?$member[mb_3]?>&wr_sale_type=2&wr_writer_id=<?=$member[mb_id]?>" class="btn btn-theme03 left sale" style="padding-left:12px;">
+                <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$member[mb_id]?>&board_list=<?=$member[mb_3]?>&wr_important=1&wr_sale_type=2&wr_office_permission=<?$wr_office_permission?>" class="btn btn-theme03 left sale" style="padding-left:12px;">
                 매매
                 </a>
                 <?}else if(!$gr_admin){ ?>
@@ -435,7 +437,7 @@ include_once("$board_skin_path/lib/skin.lib.php");
           <?}?>
 
           <? if ( !$_GET[wr_important] == 1 && !$wr_sold_out == 1){?>
-            <a href="<?echo G5_BBS_URL?>/write.php?bo_table=<?=$bo_table?>&board_list=<?=$member[mb_3]?>" class="btn btn-theme03 right sg_cate_list active">
+            <a href="<?echo G5_BBS_URL?>/write.php?bo_table=<?=$bo_table?>&board_list=<?=$member[mb_3]?>" class="btn btn-theme03 right sg_cate_list active" style="background:#3b4db7; color:#fff;">
           <i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:18px; "></i>
            매물등록하기
           </a> 
@@ -477,6 +479,7 @@ include_once("$board_skin_path/lib/skin.lib.php");
                           <input type="hidden" name="page" value="<?php echo $page ?>">
                           <input type="hidden" name="wr_sale_type" value="<?=$wr_sale_type ?>">
                           <input type="hidden" name="wr_sold_out" value="<?=$wr_sold_out ?>">
+                          <input type="hidden" name="wr_important" value="<?=$wr_important ?>">
                           <input type="hidden" name="sw" value="">
                   <div class="board_list_box col-xs-12 col-md-12" id="list_style_list" style="padding:0;">
                     <div class="table">
@@ -540,10 +543,17 @@ include_once("$board_skin_path/lib/skin.lib.php");
                               <p class="permission_disable"style="font-size:7px; ">미승인
                               </p>
                             </div>
-                          <? }else{ ?>
-                            <div class="td">
+                          <? }else if($list[$i]['wr_important']=='1' && $wr_writer_id == $member[mb_id]){ ?>
+                            <div class="td" style=" position:relative;">
+                            <?= $list[$i]['num']?>
+                            <p class="permission_disable"style="font-size:7px; ">오피스
+                            </p>
+                          </div>
+                            <?}else{?>
+                              <div class="td">
                               <?= $list[$i]['num']?>
                             </div>
+
                             <?}?>
 
                         <div class="td" style="font-weight:600; background:#edf1f4; ">
