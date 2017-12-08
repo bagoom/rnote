@@ -1,8 +1,8 @@
 {
     "remotePath": "/html",
     "host": "real-note.co.kr",
-    "username": "woodonggoon",
-    "password": "dnwls1127",
+    "username": "realnote",
+    "password": "!dnwls1127",
     "port": 21,
     "secure": false,
     "protocol": "ftp",

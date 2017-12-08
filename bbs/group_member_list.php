@@ -34,10 +34,11 @@ $sql_order = " order by {$sst} {$sod} ";
 
 
                   <div class="col-lg-12 main-list-wrap">
-                    <form name="fboardgroupmember_form" id="fboardgroupmember_form" action="./boardgroupmember_update.php" onsubmit="return boardgroupmember_form_check(this)" method="post">
+                    <form name="fboardgroupmember_form" id="fboardgroupmember_form" action="./boardgroupmember_update.php" method="post">
                     <input type="hidden" name="token" value="" id="token">
                     <input type="hidden" name="bo_table" value="">
                     <input type="hidden" name="w" value="" id="w">
+                    
                     <div class="board_list_box col-xs-12 col-md-12">
                     <div class="table">
                       <div class="thead">
@@ -65,7 +66,7 @@ $sql_order = " order by {$sst} {$sod} ";
                          <label for="chk_wr_id_<?php echo $i ?>"> <p><i class="fa fa-check"></i></p></label>
                        </div> -->
                       <div class="tr" id="list_link" style="position:relative">
-
+                          
                         <div class="td">
                           <a class="" href="<?php echo G5_BBS_URL?>/board.php?bo_table=<?=$bo_table?>&wr_writer=<?=$row['mb_id']?>&wr_important=1&wr_sale_type=1" >
                           <?=$row['mb_nick'] ?>
@@ -87,11 +88,13 @@ $sql_order = " order by {$sst} {$sod} ";
                         <div class="td">
                           <?
                               $delete_href = "javascript:del('./gr_member_delete.php?bo_table=$bo_table&mb_id=$row[mb_id]&page=$page".urldecode($qstr)."');";
-                            ?>
-
+                              $block_href = "./gr_member_block.php?bo_table=$bo_table&mb_id=$row[mb_id]";                            ?>
                             <? if ($row['gm_exit_date'] == '0000-00-00 00:00:00'){?>
                             <?php if ($delete_href) { ?><a class='btn btn-danger btn-md' href="<?php echo $delete_href ?>" class="btn_b01">직원탈퇴</a><?php } ?>
                           <? } else{ echo "퇴사한직원" ;} ?>
+                          <input type="hidden" name="mb_id" value="<?=$row[mb_id]?>">
+                          
+                          <a class='btn btn-danger btn-md block' href="<?php echo $block_href ?>"style="background:#3b4db7">차단하기</a>
                         </div>
                       </div>
                   <?php } ?>
@@ -106,7 +109,13 @@ $sql_order = " order by {$sst} {$sod} ";
 //  리스트 형태가 테이블형일때 2번째 tr의 배경 색상변경
 
     $(".tr:even").css("background", "white");
+    // $(".block").click(function(){
+    //   $("#fboardgroupmember_form").attr("action", "./gr_member_block.php");
+    //   $("#fboardgroupmember_form").submit();
 
+    // });
+
+    
 // function boardgroupmember_form_check(f)
 // {
 //     if (f.gr_id.value == '') {

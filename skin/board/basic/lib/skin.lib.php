@@ -568,6 +568,10 @@ if($_GET[wr_premium_o_min] || $_GET[wr_premium_o_max]){
 	$sql_order = " order by wr_id desc ";
 }
 
+if($_GET[wr_sold_out]){
+	$sql_order = " order by wr_sold_out_date desc ";
+}
+
 // 기본 리스트 쿼리 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 if ($sca || $stx || count($arr_search) > 0) {
     if($wr_sold_out == '1'){

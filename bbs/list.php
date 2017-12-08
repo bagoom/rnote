@@ -3,6 +3,10 @@
 // // 분류 사용 여부
 // $is_category = false;
 // $category_option = '';
+if($gr_cp&&$bo_table != $member['mb_id']){
+if($member[mb_8] == '2')
+alert("사무실 매물 읽기 기능이 제한 되었습니다.");
+}
 
 if($gr_cp&&$bo_table != $member['mb_id']){
 if($write_count >= $join_gr_info['gr_write_permission']){
@@ -262,5 +266,9 @@ if($write_count >= $join_gr_info['gr_write_permission']){
 // }
 
 // $stx = get_text(stripslashes($stx));
+
+if ($wr_sold_out)
+include_once($board_skin_path.'/list_sold_out_skin.php');
+else
 include_once($board_skin_path.'/list.skin.php');
 ?>

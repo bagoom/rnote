@@ -50,12 +50,6 @@ include_once("$board_skin_path/lib/skin.lib.php");
   border-bottom:1px solid rgba(255,255,255,0.8);
   /*border-right:1px solid #e0e0e0;*/
 }
-#my_popup{
-  /*position: absolute;*/
-  text-align: left;
-  padding : 0px 25px;
-  overflow: hidden;
-}
 .input_box p{
   width: 20%;
   height: 50px;
@@ -120,6 +114,26 @@ include_once("$board_skin_path/lib/skin.lib.php");
   margin:10px  0!important;
   line-height: 45px !important;
   padding:0;
+}
+.sold_wrap{
+    width: 1200px;
+    margin:0 auto; 
+    overflow:hidden;
+}
+.sold_out_list{
+    padding: 20px;
+}
+.sold_out_con{
+    background: rgba(255,255,255,0.85);
+    border :1px solid #3b4db7;
+    height : 85px;
+    padding: 5px 15px;
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.15);
+    color:#222;
+    border-radius:5px;
+}
+.sold_out_con h4{
+    color:#222;
 }
 </style>
 
@@ -409,7 +423,7 @@ include_once("$board_skin_path/lib/skin.lib.php");
             </a>
          
             <?}}?>
-
+  
             <!-- <span class="btn btn-theme03 left list_style_memo "style="padding-left:12px;"> 메모지형 </span> -->
 
 
@@ -422,7 +436,7 @@ include_once("$board_skin_path/lib/skin.lib.php");
             <! -- MODALS -->
           <!-- Button trigger modal -->
 
-<?=$GET_['office_write']?>
+            <?=$GET_['office_write']?>
               
           <? if($gr_admin){ ?>
             <button class="btn btn-theme03 right  config active" type="button"  style="margin-right:10px;">
@@ -442,31 +456,7 @@ include_once("$board_skin_path/lib/skin.lib.php");
            매물등록하기
           </a> 
           <?}else{} ?>
-          
-          
           </div>
-
-
-
-
-
-
-<!--
-                      <? if ($sfl == "wr_important"&&$stx=="1"){
-                      echo "중요 매물리스트";
-                    }elseif($wr_sale_type=="1"){
-                      echo "임대 매물리스트";
-                    }elseif($wr_sale_type=="2"){
-                        echo "매매 매물리스트";
-                      }else{
-                        echo "매물리스트";
-                      }
-                      ?>
-                      <?
-                      $sql = "select count(*) as cnt from {$write_table}";
-                      $result3 = sql_fetch($sql);
-                      ?>
-                        <span class="tb_header_cnt right">  <span>Total <?php echo number_format($result3['cnt']) ?>건</span></span> -->
 
                           <input type="hidden" name="bo_table" value="<?php echo $bo_table ?>">
                           <input type="hidden" name="board_list" value="<?php echo $board_list ?>">
@@ -481,230 +471,37 @@ include_once("$board_skin_path/lib/skin.lib.php");
                           <input type="hidden" name="wr_sold_out" value="<?=$wr_sold_out ?>">
                           <input type="hidden" name="wr_important" value="<?=$wr_important ?>">
                           <input type="hidden" name="sw" value="">
-                  <div class="board_list_box col-xs-12 col-md-12" id="list_style_list" style="padding:0;">
-                    <div class="table">
-                      <div class="thead">
-                        <? $sale = $_GET['wr_sale_type'] ;?>
-                        <div class="td">번호</div>
-                        <div class="td">매물명</div>
-                        <div class="td"><? if($sale == '1' || $sale == '3') echo '상권명'; else echo '지목'?></div>
-                        <div class="td"><? if($sale == '1' || $sale == '3') echo '층수'; else echo '지역지구'?></div>
-                        <div class="td"><? if($sale == '1' || $sale == '3') echo '평수'; else echo '총면적'?></div>
-                        <div class="td"><? if($sale == '1' || $sale == '3') echo '보증금'; else echo '총매도가'?></div>
-                        <div class="td"><? if($sale == '1' || $sale == '3') echo '월세'; else echo '평당가격'?></div>
-                        <div class="td"><? if($sale == '1' || $sale == '3') echo '권리금'; else echo '대출'?></div>
-                        <? if ($sale == '2'){ ?>
 
-                        <? if($_GET[wr_important] == 1){ ?>
-                          <div class="td">담당자</div>
-                        <?} ?>
+                <div class="sold_wrap">
 
-                      <div class="td">실인수가</div> 
-                      <div class="td">수익률</div> 
-                      <div class="td">주소</div> 
-                      <?}?>
-
-                        <div class="td"><? if($sale == '1') echo '합계';  else echo '등록일'?></div>
-
-                        <? if($sale == '1'  || $sale == '3'){?><div class="td">주소</div><?}?>
-
-                        <? if ($sale == '1' || $sale == '3'){ ?>
-                        <? if( $_GET[wr_important] == 1 ){ ?>
-                          <div class="td">담당자</div>
-                        <?} }?>
-
-                        
-                        <? if($sale == '1' && !$wr_sold_out=='1'){?>
-                        <div class="td">등록일</div>
-                        <?}elseif($wr_sold_out=='1'){?>
-                          <div class="td">거래종료일</div>
-                        <?}?>
-                      </div>
-                      <div class="tbody">
-                              <?php
+                            <?php
                               for ($i=0; $i<count($list); $i++) {
                                ?>
+                               <div class="sold_out_list col-md-3">
+                               <div class="sold_out_con" onClick=location.href="<?php echo $list[$i]['href'] ?>">
+                               <ul>
+                                <li>
+                                <h4><?=$list[$i]['wr_subject']?>
+                                <span style="float:right; font-size:12px;"><?php echo date("Y-m-d", strtotime($list[$i]['wr_sold_out_date'])); ?></span>
+                                </h4>
+                                </li>
+                                <li><?=$list[$i]['wr_address']?>
+                                <span style="font-size: 10px; float: right;background:#333; padding:5px; color:#fff; " > 
+                                <?=$list[$i]['wr_writer']?>
+                                </span>
+                                </li>
+                      
+                               </ul>
+                               
+                               </div>
+                               </div>
 
-                       <div class="td_chk " style="display:none; ">
-                         <input type="checkbox" name="chk_wr_id[]" class="import_chk" style="display:none;" value="<?php echo $list[$i]['wr_id'] ?>" id="chk_wr_id_<?php echo $i ?>" >
-                         <label for="chk_wr_id_<?php echo $i ?>"> 
-                         <p>
-                         <i class="fa fa-check"></i>
-                         <i class="fa fa-times" aria-hidden="true" style="display:none; "> <span style="font-size:16px;"> 해당매물은 승인된 매물이므로 거래종료 등록만 가능합니다.</span></i>
-                         </p>
-                         </label>
-                       </div>
+                            <?}?> <!-- 반복문 끝 !-->
+                </div>
 
-
-                        <div class="tr" id="list_link"onClick=location.href="<?php echo $list[$i]['href'] ?>" style="position:relative">
-                          <? if ($list[$i]['wr_office_permission'] == '1'){ ?>
-                            <div class="td" style=" position:relative;">
-                              <?= $list[$i]['num']?>
-                              <p class="permission_disable"style="font-size:7px; ">미승인
-                              </p>
-                            </div>
-                          <? }else if($list[$i]['wr_important']=='1' && $wr_writer_id == $member[mb_id]){ ?>
-                            <div class="td" style=" position:relative;">
-                            <?= $list[$i]['num']?>
-                            <p class="permission_disable"style="font-size:7px; ">오피스
-                            </p>
-                          </div>
-                            <?}else{?>
-                              <div class="td">
-                              <?= $list[$i]['num']?>
-                            </div>
-
-                            <?}?>
-
-                        <div class="td" style="font-weight:600; background:#edf1f4; ">
-                          <?php echo $list[$i]['subject']; ?>
-                        </div>
-
-                        <div class="td">
-                          <?php  if($sale == '1' || $sale == '3') echo $list[$i]['wr_sale_area']; else echo $list[$i]['wr_rand_type']; ?>
-                        </div>
-                          <?php  if($sale == '1' || $sale == '3') {?>
-                        <div class="td">
-                          <?  if ($list[$i]['wr_floor'] < 0) {$under_floor = str_replace('-', "", $list[$i]['wr_floor']); echo "지하".$under_floor.'층'; }else echo $list[$i]['wr_floor'].'층'?>
-                        </div>
-                        <?} else{?>
-                          <div class="td">
-                            <?php echo $list[$i]['wr_zoning_district'] ?>
-                          </div>
-                          <?}?>
-                        <div class="td">
-                          <?php  if($sale == '1' || $sale == '3') echo $list[$i]['wr_area_p'].'평'; else echo $list[$i]['wr_area_p_all']; ?>
-                        </div>
-                        <div class="td">
-                          <span class="commaN">
-                          <?php  if($sale == '1' || $sale == '3') echo $list[$i]['wr_rent_deposit']; else echo $list[$i]['wr_sale_price']; ?>
-                          </span>
-                        </div>
-                        <div class="td">
-                          <span class="commaN">
-                          <?php  if($sale == '1' || $sale == '3') echo $list[$i]['wr_m_rate']; else echo $list[$i]['wr_p_sale_price']; ?>
-                        </div>
-                          </span>
-                        <div class="td">
-                          <?php  if($sale == '1' || $sale == '3') {?>
-                          <span class="commaN">
-                           <?=$list[$i]['wr_premium_o']?>
-                          </span>
-                        <? }else{ ?> 
-                        <span class="commaN">
-                           <?=$list[$i]['wr_loan']?>
-                          </span>
-                        <?}?>
-                        </div>
-
-
-                        <? if ($sale == '2'){ ?>
-                        <? if( $_GET[wr_important] == 1 ){ ?>
-                          <div class="td">
-                            <?php echo $list[$i]['wr_writer'] ?>
-                          </div>
-                        <?}?>
-
-                          <div class="td">
-                          <span class="commaN">
-                            <?php echo $list[$i]['wr_silinsu'] ?>
-                          </span>
-                          </div>
-
-                          <div class="td">
-                          <span class="commaN">
-                            <?php echo $list[$i]['wr_profit_rate'] ?>
-                          </span>
-                          </div>
-
-                          <div class="td">
-                            <?php echo $list[$i]['wr_address'] ?>
-                          </div>
-                          <?}?><!-- 매매일경우 -->
-                          
-                        <div class="td sum" style="background:#edf1f4">
-                          <?php  if($sale == '1' || $sale == '3') {?>
-                          <span class="commaN" style="font-weight:600; ">
-                           <? echo $list[$i]['wr_premium_o'] + $list[$i]['wr_rent_deposit']; ?>
-                           </span>
-                          <?}else{?>
-                          <?=$list[$i]['datetime']?>
-                             <?}?>
-                        </div>
-
-
-                        <? if($sale == '1' || $sale == '3'){?>
-                        <div class="td">
-                          <?php echo $list[$i]['wr_address'] ?>
-                        </div> <?} ?>
-
-                        <? if ($sale == '1' || $sale == '3'){ ?>
-                        <? if( $_GET[wr_important] == 1 ){ ?>
-                          <div class="td">
-                            <?php echo $list[$i]['wr_writer'] ?>
-                          </div>
-                        <?} }?>
-                        <? if($sale == '1' && !$wr_sold_out=='1') {?>
-                        <div class="td">
-                          <?php echo $list[$i]['datetime'] ?>
-                        </div>
-                        <?}elseif($wr_sold_out=='1'){?>
-                        <div class="td">
-                        <?php echo date("Y-m-d", strtotime($list[$i]['wr_sold_out_date'])); ?>
-
-                         </div>
-                        <?}?>
-                      </div>
-
-                  <?php } ?><!-- 리스트 출력 끝 -->
-                      </div>
-                    </div>
-                  </div>
                   <?php if (count($list) == 0) { echo '<tr><td colspan="10" class="empty_table">등록된 매물이 없습니다.</td></tr>'; } ?>
 
-                  <div class="board_list_box col-xs-12 col-md-12" id="list_style_memo" style="display:none;">
-                      <?php
-                      for ($i=0; $i<count($list); $i++) {
-                       ?>
-                       <div class="memo_list col-md-3" id="ddd"  style="position:relative; overflow:hidden;">
-                      <div class="right td_chk2" style="display:none; ">
-                        <input type="checkbox" name="chk_wr_id[]" class="import_chk" style="display:none;" value="<?php echo $list[$i]['wr_id'] ?>" id="chk_wr_id2_<?php echo $i ?>" >
-                        <label for="chk_wr_id2_<?php echo $i ?>"><p>선택하기</p> <p><i class="fa fa-check"></i></p></label>
-                      </div>
-                      <a href="<?php echo $list[$i]['href'] ?>">
-                      <div class="list_item " style="width:100%;">
-                        <div class="list_num"><?= $list[$i]['num']?></div>
-
-                      <ul>
-                      <li class="list_subject">
-                        <?php echo $list[$i]['subject'] ?>
-                      </li>
-                      <li class="list_address">
-                        <span><?php echo $list[$i]['wr_address'] ?></span>
-                      </li>
-                      <li class="list_address" style="border-bottom: 3px solid #323e51; padding-bottom:20px;">
-                        <span><?php echo $list[$i]['wr_sale_area'] ?></span>
-                      </li>
-
-                      <li class="list_sub_info" style="border-left: 1px solid #ddd;"><p>보증금</p> <?=$list[$i]['wr_rent_deposit'] ?></li>
-                      <li class="list_sub_info"><p>월세</p> <?=$list[$i]['wr_m_rate'] ?></li>
-                      <li class="list_sub_info"><p>권리금</p><?php echo $list[$i]['wr_premium_o'] ?></li>
-                      <li class="list_sub_info" style="border-left: 1px solid #ddd;"><p>층/평</p>
-                        <?  if ($list[$i]['wr_floor'] < 0) {
-                       $under_floor = str_replace('-', "", $list[$i]['wr_floor']); echo "지하".$under_floor; }
-                        else echo $list[$i]['wr_floor']?>
-                      <?php echo $list[$i]['wr_area_p'] ?> </li>
-
-                      <li class="list_sub_info"><p>합예산</p> <?php echo $list[$i]['wr_rent_deposit']+$list[$i]['wr_premium_o'] ?></li>
-
-                      <li class="list_sub_info"><p>등록일</p> <?php echo $list[$i]['datetime2'] ?></li>
-
-                    </ul>
-                    </div>
-                  </a>
-                  </div>
-                <?php } ?>
-              </div>
+                 
 
               <div class="modal fade" id="layerpop" >
                 <div class="modal-dialog">
