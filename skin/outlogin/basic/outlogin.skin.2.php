@@ -48,6 +48,14 @@ input[type=button]{
   color: #fff;
 
 }
+.visual_contents{
+  position: absolute;
+  top: 220px !important;
+  left: 50%;
+  margin-left: -165px;
+  width: 330px;
+}
+
 </style>
 <!-- 로그인 후 아웃로그인 시작 { -->
 <section id="ol_after" class="ol">
@@ -59,7 +67,7 @@ $gr_cp = $gr_mb['gr_id'];
         <?php if ($is_admin == 'super' || $is_auth) {  ?><a href="<?php echo G5_ADMIN_URL ?>" class="btn_admin">관리자 모드</a><?php }  ?>
     </header>
     <ul id="ol_after_private">
-      <h3 style="margin-top:10px;"><strong><?php echo $nick ?>님</strong> 환영합니다!</h3>
+      <h3 style="margin-top:10px; font-size:20px;"><strong><?php echo $nick ?>님</strong> 환영합니다!</h3>
     </ul>
     <footer id="ol_after_ft">
       <? if(!$gr_cp && $gr_mb){ ?>

@@ -631,10 +631,15 @@ $write_pages = get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['c
 '&wr_rec_sectors='.$wr_rec_sectors.'&amp;page=');
 } 
 
-else if(!$gr_admin && $wr_important == '2'){
+
+
+else if(!$gr_admin && $wr_sold_out == '1'){
 $write_pages = get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, './board.php?bo_table='.$bo_table.$qstr.'&board_list='.$board_list.'&wr_important='.$wr_important.'&wr_sale_type='.$wr_sale_type.'&wr_sold_out='.$wr_sold_out.'&wr_subject='.$wr_subject.'&wr_sale_area='.$wr_sale_area.'&wr_floor='.$wr_floor.'&wr_floor_min='.$wr_floor_min.'&wr_address='.$wr_address.'&wr_writer_id='.$wr_writer_id.'&wr_floor_max='.$wr_floor_max.'&wr_area_p_min='.$wr_area_p_min.'&wr_area_p_max='.$wr_area_p_max.'&wr_rent_deposit_min='.$wr_rent_deposit_min.'&wr_rent_deposit_max='.$wr_rent_deposit_max.'&wr_m_rate_min='.$wr_m_rate_min.'&wr_m_rate_max='.$wr_m_rate_max.'&wr_premium_o_min='.$wr_premium_o_min.'&wr_premium_o_max='.$wr_premium_o_max.'&wr_sum_pay_min='.$wr_sum_pay_min.'&wr_sum_pay_max='.$wr_sum_pay_max.
 '&wr_rec_sectors='.$wr_rec_sectors.'&amp;page=');
  
+
+
+
 }else if(!$gr_admin && $wr_important == '1' && $wr_office_permission == '1'){
     $write_pages = get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, './board.php?bo_table='.$bo_table.$qstr.'&board_list='.$board_list.'&wr_important='.$wr_important.'&wr_sale_type='.$wr_sale_type.'&wr_subject='.$wr_subject.'&wr_sale_area='.$wr_sale_area.'&wr_floor='.$wr_floor.'&wr_floor_min='.$wr_floor_min.'&wr_office_permission=1&wr_address='.$wr_address.'&wr_writer_id='.$wr_writer_id.'&wr_floor_max='.$wr_floor_max.'&wr_area_p_min='.$wr_area_p_min.'&wr_area_p_max='.$wr_area_p_max.'&wr_rent_deposit_min='.$wr_rent_deposit_min.'&wr_rent_deposit_max='.$wr_rent_deposit_max.'&wr_m_rate_min='.$wr_m_rate_min.'&wr_m_rate_max='.$wr_m_rate_max.'&wr_premium_o_min='.$wr_premium_o_min.'&wr_premium_o_max='.$wr_premium_o_max.'&wr_sum_pay_min='.$wr_sum_pay_min.'&wr_sum_pay_max='.$wr_sum_pay_max.
     '&wr_rec_sectors='.$wr_rec_sectors.'&amp;page=');

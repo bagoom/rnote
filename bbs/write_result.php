@@ -125,22 +125,22 @@ include_once(G5_PATH.'/head.sub.php');
 <? if($gr_admin){ 
 if ($wr_sale_type=='1') {?>
 
-  <a href="<?php echo G5_BBS_URL ?>/board.php?bo_table=<?=$member[mb_id] ?>&board_list=<?=$member[mb_3]?>&wr_sale_type=1&wr_writer=<?=$member[mb_name] ?>">
+  <a href="<?php echo G5_BBS_URL ?>/board.php?bo_table=<?=$member[mb_id] ?>&board_list=<?=$member[mb_3]?>&wr_sale_type=1&wr_writer_id=<?=$member[mb_id] ?>">
   <span class="">매물리스트로가기</span>
   </a>
   <?}else if($wr_sale_type=='2'){?>
-    <a href="<?php echo G5_BBS_URL ?>/board.php?bo_table=<?=$member[mb_id] ?>&board_list=<?=$member[mb_3]?>&wr_sale_type=2&wr_writer=<?=$member[mb_name] ?>">
+    <a href="<?php echo G5_BBS_URL ?>/board.php?bo_table=<?=$member[mb_id] ?>&board_list=<?=$member[mb_3]?>&wr_sale_type=2&wr_writer_id=<?=$member[mb_id] ?>">
   <span class="">매물리스트로가기</span>
   </a>
 
 <?}}else{?>
 
 <? if ($wr_sale_type=='1') {?>
-<a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_id']?>&board_list=<?=$member[mb_3]?>&wr_sale_type=1&wr_writer=<?=$member[mb_name] ?>">
+<a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_id']?>&board_list=<?=$member[mb_3]?>&wr_sale_type=1&wr_writer_id=<?=$member[mb_id] ?>">
 <span class="">매물리스트로가기</span>
 </a>
 <? }else if ($wr_sale_type=='2') {?>
-  <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_id']?>&board_list=<?=$member[mb_3]?>&wr_sale_type=2&wr_writer=<?=$member[mb_name] ?>">
+  <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_id']?>&board_list=<?=$member[mb_3]?>&wr_sale_type=2&wr_writer_id=<?=$member[mb_id] ?>">
 <span class="">매물리스트로가기</span>
 </a>
 <?}}?>

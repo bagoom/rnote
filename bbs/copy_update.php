@@ -1,5 +1,6 @@
 <?php
 include_once('./_common.php');
+include_once('../head.php');
 $wr_id_list = '';
 if ($wr_id)
     $wr_id_list = $wr_id;
@@ -131,9 +132,25 @@ if(!$gr_admin){
 sql_query("update $write_table set wr_important =  1 where wr_id = $wr_id_list[$i] ");
 }
 } //for exit
-alert("사무실로 매물이 등록 되었습니다 승인을 기다려 주세요.");
-if($resc[0])
-location.reload(true);
-else
-goto_url(G5_HTTP_BBS_URL.'/board.php?bo_table='.$member['mb_id'].'&sfl=wr_important&stx=1&wr_sale_type=1&wr_office_permission=2');
+// alert("사무실로 매물이 등록 되었습니다 승인을 기다려 주세요.");
+// if($resc[0])
+// // location.reload(true);
+// else
+// goto_url(G5_HTTP_BBS_URL.'/board.php?bo_table='.$member['mb_id'].'&sfl=wr_important&stx=1&wr_sale_type=1&wr_office_permission=2');
 ?>
+
+
+<script>
+    $.alert({
+      theme: 'modern',
+      icon : 'fa fa-check-circle',
+      title: '사무실매물등록',
+      content: '사무실로 매물이 등록 되었습니다 승인을 기다려 주세요.',
+      buttons: {
+          확인: function (helloButton) {
+            history.back()
+          }
+      }
+  });
+
+</script>

@@ -62,9 +62,6 @@ include_once(G5_THEME_PATH.'/head.php');
                 <?}?>
               </div>
               </div>
-            </section>
-
-
               <section id="main_contents">
                   <div class="main_con_wrap table" style="box-shadow:none;">
                     <ul>
@@ -95,7 +92,11 @@ include_once(G5_THEME_PATH.'/head.php');
                 
                     </ul>
                   </div>
-              </section>
+                      </section>
+            </section>
+
+
+             
 </div>
 
 

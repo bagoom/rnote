@@ -88,13 +88,19 @@ $sql_order = " order by {$sst} {$sod} ";
                         <div class="td">
                           <?
                               $delete_href = "javascript:del('./gr_member_delete.php?bo_table=$bo_table&mb_id=$row[mb_id]&page=$page".urldecode($qstr)."');";
-                              $block_href = "./gr_member_block.php?bo_table=$bo_table&mb_id=$row[mb_id]";                            ?>
+                              $block_href = "./gr_member_block.php?bo_table=$bo_table&mb_id=$row[mb_id]";                            
+                              $reblock_href = "./gr_member_block.php?bo_table=$bo_table&mb_id=$row[mb_id]&mb_8=2";                            
+                              ?>
                             <? if ($row['gm_exit_date'] == '0000-00-00 00:00:00'){?>
                             <?php if ($delete_href) { ?><a class='btn btn-danger btn-md' href="<?php echo $delete_href ?>" class="btn_b01">직원탈퇴</a><?php } ?>
                           <? } else{ echo "퇴사한직원" ;} ?>
                           <input type="hidden" name="mb_id" value="<?=$row[mb_id]?>">
                           
+                            <? if ($row['mb_8'] =='2'){ ?>
+                            <a class='btn btn-danger btn-md block' href="<?php echo $reblock_href ?>"style="background:#3b4db7">해제하기</a>
+                            <?}else{?>
                           <a class='btn btn-danger btn-md block' href="<?php echo $block_href ?>"style="background:#3b4db7">차단하기</a>
+                          <?}?>
                         </div>
                       </div>
                   <?php } ?>

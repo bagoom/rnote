@@ -69,11 +69,10 @@ if($config['cf_add_meta'])
 ?>
 <title><?php echo $g5_head_title; ?></title>
 <!-- <link rel="stylesheet" href="<?php echo G5_THEME_CSS_URL; ?>/<?php echo G5_IS_MOBILE ? 'mobile' : 'default'; ?>.css?ver=<?php echo G5_CSS_VER; ?>"> -->
-<!-- Bootstrap core CSS -->
 <!-- <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css"> -->
 <link href="<?php echo G5_URL ?>/assets/css/bootstrap.css" rel="stylesheet">
-<!--external css-->
-<link href="<?php echo G5_URL ?>/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
 <link rel="stylesheet" type="text/css" href="<?php echo G5_URL ?>/assets/css/zabuto_calendar.css">
 <link rel="stylesheet" type="text/css" href="<?php echo G5_URL ?>/assets/js/gritter/css/jquery.gritter.css" />
 <link rel="stylesheet" href="<?php G5_PATH?>/assets/css/style2.css">
@@ -98,6 +97,8 @@ var g5_sca       = "<?php echo isset($sca)?$sca:''; ?>";
 var g5_editor    = "<?php echo ($config['cf_editor'] && $board['bo_use_dhtml_editor'])?$config['cf_editor']:''; ?>";
 var g5_cookie_domain = "<?php echo G5_COOKIE_DOMAIN ?>";
 var wr_office_permission = "<?php echo $wr_office_permission ?>";
+var wr_sold_out = "<?php echo $wr_sold_out ?>";
+var wr_sale_type = "<?php echo $wr_sale_type ?>";
 var gr_admin = "<?php echo $gr_admin ?>";
 
 
@@ -117,6 +118,7 @@ var g5_admin_url = "<?php echo G5_ADMIN_URL; ?>";
 <script src="<?php echo G5_JS_URL ?>/common.js?ver=<?php echo G5_JS_VER; ?>"></script>
 <script src="<?php echo G5_JS_URL ?>/wrest.js?ver=<?php echo G5_JS_VER; ?>"></script>
 <script src="<?php echo G5_URL ?>/assets/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
 
 <?php
 
@@ -128,7 +130,8 @@ if(!defined('G5_IS_ADMIN'))
 ?>
 </head>
 <body>
-
+  <section class="contact_wrap" >
+  </section>
   <section id="container" >
 
       <!--header start-->
@@ -145,17 +148,17 @@ if(!defined('G5_IS_ADMIN'))
           <li>
           <?if (!$wr_important && $wr_writer_id == $member[mb_id] && $is_member){ ?>
               <? if ($gr_admin){ ?>
-                <a href="<?php echo G5_BBS_URL ?>/board.php?bo_table=<?=$member[mb_id] ?>&board_list=<?=$member[mb_3]?>&wr_sale_type=1&wr_writer_id=<?=$member[mb_id] ?>" style="letter-spacing:.5px; background:#222!important;">My Note</a>
+                <a href="<?php echo G5_BBS_URL ?>/board.php?bo_table=<?=$member[mb_id] ?>&board_list=<?=$member[mb_3]?>&wr_sale_type=1&wr_writer_id=<?=$member[mb_id] ?>" style="letter-spacing:.5px;color:#e8b82e!important;">마이노트</a>
               <?}else{ ?>
-                <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_id']?>&board_list=<?=$member[mb_3]?>&wr_sale_type=1&wr_writer_id=<?=$member[mb_id] ?>" style="letter-spacing:.5px; background:#222!important;">My Note</a>
+                <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_id']?>&board_list=<?=$member[mb_3]?>&wr_sale_type=1&wr_writer_id=<?=$member[mb_id] ?>" style="letter-spacing:.5px;color:#e8b82e!important;">마이노트</a>
               <?}?>
 
           <?}else{?>
 
             <? if ($gr_admin){ ?>
-                <a href="<?php echo G5_BBS_URL ?>/board.php?bo_table=<?=$member[mb_id] ?>&board_list=<?=$member[mb_3]?>&wr_sale_type=1&wr_writer_id=<?=$member[mb_id] ?>" style="letter-spacing:.5px; ">My Note</a>
+                <a href="<?php echo G5_BBS_URL ?>/board.php?bo_table=<?=$member[mb_id] ?>&board_list=<?=$member[mb_3]?>&wr_sale_type=1&wr_writer_id=<?=$member[mb_id] ?>" style="letter-spacing:.5px; ">마이노트</a>
               <?}else{ ?>
-                <a href="<?php echo G5_BBS_URL ?>/board.php?bo_table=<?=$member[mb_id] ?>&board_list=<?=$member[mb_3]?>&wr_sale_type=1&wr_writer_id=<?=$member[mb_id] ?>" style="letter-spacing:.5px; ">My Note</a>
+                <a href="<?php echo G5_BBS_URL ?>/board.php?bo_table=<?=$member[mb_id] ?>&board_list=<?=$member[mb_3]?>&wr_sale_type=1&wr_writer_id=<?=$member[mb_id] ?>" style="letter-spacing:.5px; ">마이노트</a>
               <?}?>
 
 
@@ -170,30 +173,30 @@ if(!defined('G5_IS_ADMIN'))
             <?if ($wr_important == '1' ){ ?>
 
                 <? if ($gr_admin){ ?>
-                  <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_1']?>&board_list=<?=$member[mb_3]?>&wr_important=1&wr_sale_type=1&wr_office_permission=" style="letter-spacing:.5px; background:#222!important;">Office Note</a>
+                  <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_1']?>&board_list=<?=$member[mb_3]?>&wr_important=1&wr_sale_type=1&wr_office_permission=" style="letter-spacing:.5px; color:#e8b82e!important;">오피스노트</a>
                 <?}else{ ?>
-                  <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_1']?>&board_list=<?=$member[mb_3]?>&wr_important=1&wr_sale_type=1&wr_office_permission=2" style="letter-spacing:.5px; background:#222!important;">Office Note</a>
+                  <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_1']?>&board_list=<?=$member[mb_3]?>&wr_important=1&wr_sale_type=1&wr_office_permission=2" style="letter-spacing:.5px; color:#e8b82e!important;">오피스노트</a>
                 <?}?>
 
             <?}else{?>
                 <? if ($gr_admin){ ?>
-                  <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_1']?>&board_list=<?=$member[mb_3]?>&wr_important=1&wr_sale_type=1&wr_office_permission=" style="letter-spacing:.5px;">Office Note</a>
+                  <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_1']?>&board_list=<?=$member[mb_3]?>&wr_important=1&wr_sale_type=1&wr_office_permission=" style="letter-spacing:.5px;">오피스노트</a>
                 <?}else{ ?>
-                  <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_1']?>&board_list=<?=$member[mb_3]?>&wr_important=1&wr_sale_type=1&wr_office_permission=2" style="letter-spacing:.5px;">Office Note</a>
+                  <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_1']?>&board_list=<?=$member[mb_3]?>&wr_important=1&wr_sale_type=1&wr_office_permission=2" style="letter-spacing:.5px;">오피스노트</a>
                 <?}}?>
           </li>
 
           <li>
             <?if ($wr_sold_out == '3'){ ?>
-                  <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<?=$member['mb_id']?>&board_list=<?=$member[mb_3]?>&wr_important=&wr_sold_out=1&wr_sale_type=1" style="letter-spacing:.5px; background:#222!important;">거래종료</a>
+                  <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<?=$member['mb_id']?>&board_list=<?=$member[mb_3]?>&wr_important=&wr_sold_out=1&wr_sale_type=1" style="letter-spacing:.5px; color:#e8b82e!important;">거래종료</a>
             <?}else{?>
-                  <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<?=$member['mb_id']?>&board_list=<?=$member[mb_3]?>&wr_important=&wr_sold_out=1&wr_sale_type=1" style="letter-spacing:.5px;">거래종료</a>
+                  <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<?=$member['mb_id']?>&board_list=<?=$member[mb_3]?>&wr_important=&wr_sold_out=1&wr_sale_type=1" style="letter-spacing:.5px;">일정관리</a>
             <?}?>
           </li>
 
           <li>
             <?if ($wr_important == '2' && $wr_important == '1'){ ?>
-                  <a href="<?php echo G5_BBS_URL?>/bookmark.php?bo_table=<? echo $member['mb_id']?>&board_list=<?=$member[mb_3]?>&wr_bookmark=1" style="letter-spacing:.5px; background:#222!important;">즐겨찾기</a>
+                  <a href="<?php echo G5_BBS_URL?>/bookmark.php?bo_table=<? echo $member['mb_id']?>&board_list=<?=$member[mb_3]?>&wr_bookmark=1" style="letter-spacing:.5px; color:#e8b82e!important;">즐겨찾기</a>
             <?}else{?>
                   <a href="<?php echo G5_BBS_URL?>/bookmark.php?bo_table=<? echo $member['mb_id']?>&board_list=<?=$member[mb_3]?>&wr_bookmark=1" style="letter-spacing:.5px;">즐겨찾기</a>
             <?}?> 
@@ -225,6 +228,15 @@ if(!defined('G5_IS_ADMIN'))
             </div>
           </div>
         </div> -->
+<? if ($gr_admin){ ?>
+<div class="user_contact" style="right:217px;">
+<i class="fa fa-address-book" aria-hidden="true"></i>
+</div>
+<?}else{?>
+  <div class="user_contact">
+<i class="fa fa-address-book" aria-hidden="true"></i>
+</div>
+<?}?>
 
 <div class="user_info">
   <i class="fa fa-user" aria-hidden="true"></i>
@@ -272,7 +284,7 @@ if(!defined('G5_IS_ADMIN'))
 </div>
       <!--header end-->
       <script type="text/javascript">
-
+        
         $(window).on("scroll", function() {
       if($(window).scrollTop() > 100) {
           $("header").addClass("active");
@@ -285,7 +297,7 @@ if(!defined('G5_IS_ADMIN'))
         if(g5_bo_table) {
           // $("#menubar-menus > li > a").css({'color':'#eee',});
           $(".header").css({'min-height':'75px'});
-          $(".black-bg").css({'background':'transparent'});
+          $(".black-bg").css({'background':'rgba(17, 17, 17, 0.6)'});
         }
         $(".user_info").click(function(){
            $(".user_info ul").fadeToggle(300);
@@ -298,6 +310,23 @@ if(!defined('G5_IS_ADMIN'))
            $("#dd_arm").fadeOut(300);
         });
 
+        // 고객관리 ajax요청
+        var contact_url = "<?echo G5_BBS_URL?>/contact.php";
+        $(".user_contact").click(function(){
+          $('.contact_wrap').fadeToggle(100);
+        $.ajax({
+        type : "POST",
+        url : contact_url,
+        dataType : "text",
+        error : function() {
+            alert('통신실패!!');
+        },
+        success : function(data) {
+            $('.contact_wrap').html(data);
+        }
+        });
+        })
+        
 
 
       </script>

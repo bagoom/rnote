@@ -311,7 +311,7 @@ input[type="text"],input[type="number"],input[type="tel"]{
 
 <!----------------- 매매 내용 ---------------->
                           <div class="tab-pane" id="sale">
-                            <form name="fwrite" id="fwrite" action="<?php echo $action_url ?>"  method="post" enctype="multipart/form-data" autocomplete="off" style="width:100%">
+                            <form name="fwrite" id="fwrite2" action="<?php echo $action_url ?>"  method="post" enctype="multipart/form-data" autocomplete="off" style="width:100%">
                               <input type="hidden" name="uid" value="<?php echo get_uniqid(); ?>">
                               <input type="hidden" name="w" value="<?php echo $w ?>">
                               <input type="hidden" name="bo_table" value="<?php echo $bo_table ?>">
@@ -595,7 +595,14 @@ input[type="text"],input[type="number"],input[type="tel"]{
 
 <script src="<?php G5_PATH?>/assets/js/pc_script2.js"></script>
 <script>
+$("#fwrite2").submit(function(){
+  if($("#wr_int_rate2").val() =='' || $("#wr_int_rate2").val()== '0'){
+    $("#wr_int_rate2").val('4');
+  }
 
+})
+
+console.log($("#wr_int_rate2"))
   if( "<?=$wr_sale_type?>" == "1"){
   $(".rent").addClass("active");
   $(".sale").removeClass("active");

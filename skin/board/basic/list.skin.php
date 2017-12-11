@@ -47,7 +47,7 @@ include_once("$board_skin_path/lib/skin.lib.php");
   background: transparent;
   color: #fff;
   border:0;
-  border-bottom:1px solid rgba(255,255,255,0.8);
+  border-bottom:1px solid rgba(255,255,255,0.5);
   /*border-right:1px solid #e0e0e0;*/
 }
 #my_popup{
@@ -64,7 +64,7 @@ include_once("$board_skin_path/lib/skin.lib.php");
   text-align: center;
   float: left;
   color: #fff;
-  border-bottom:1px solid rgba(255,255,255,0.8);
+  border-bottom:1px solid rgba(255,255,255,0.5);
 }
 .range_p{
   border-radius:0 !important;
@@ -81,23 +81,29 @@ include_once("$board_skin_path/lib/skin.lib.php");
   border-radius: 0!important;
 }
 .search_list i{
-  font-size: 12px;
+  font-size: 16px;
   padding-left: 5px;
-  padding-right: 25px;
-  border-right: 1px solid #d1d1d1;
+  padding-right: 15px;
+  color: rgba(255,255,255,0.7);
 }
 .search_btn_wrap{
-  width: 600px;
+  width: 400px;
   margin: 0 auto;
 }
 .input_box2{
-  width: 50%;
+  width: 47%;
   height:45px;
   line-height: 45px;
   margin-top: 30px;
   float: left;
-  color: #fff;
-  border: 0.5px solid rgba(255,255,255,0.8);
+  color: #000;
+  font-size: 16px;
+  margin-left: 5px;
+  margin-right:5px;
+  border-radius : 3px;
+  background: #e8b82e;
+  
+  /* border: 0.5px solid rgba(255,255,255,0.8); */
   cursor: pointer;
 }
 .search_list{
@@ -106,16 +112,20 @@ include_once("$board_skin_path/lib/skin.lib.php");
   display: block;
 }
 .input_box2 input[type=submit]{
-  width: 100%;
+  /* width: 100%; */
   height: 45px;
   background: transparent;
   border:0;
-  color: #fff;
+  color: #000;
+}
+.input_box2 i{
+  padding-right:5px;
+  color : #000;
 }
 .job{
   background: transparent;
   color: #fff;
-  border:  0.5px solid rgba(255,255,255,0.8);
+  border:  0.5px solid rgba(255,255,255,0.5);
   height:45px;
   margin:10px  0!important;
   line-height: 45px !important;
@@ -317,10 +327,10 @@ include_once("$board_skin_path/lib/skin.lib.php");
 <?=$wr_sold_out?>
     <div class="search_btn_wrap">
       <div class="input_box2" style="border-right:0;">
-       <span class="search_list"  >검색초기화</span>
+       <span class="search_list"  ><i class="fa fa-refresh" aria-hidden="true" style="padding-right:10px;"></i>검색초기화</span>
       </div>
       <div class="input_box2" >
-        <input type="submit" value="검색"  class="btn-default" >
+      <i class="fa fa-search" aria-hidden="true"></i><input type="submit" value="검색"  class="btn-default" >
       </div>
     </div>
 
@@ -345,11 +355,8 @@ include_once("$board_skin_path/lib/skin.lib.php");
     <span><strong>My Note</strong></span>
     <?}else if ($wr_important == '1') {?>
     <span><strong>Office Note</strong></span>
-    <?}else if($wr_sold_out == '1') { ?>
-    <span><strong>거래종료</strong></span>
-    <?}else if($wr_office_permission == '1') { ?>
-    <span><strong>거래종료</strong></span>
-    <?}?>
+    <?} ?>
+
   </div>
           <div class="content_header">
             <?if ($wr_writer_id == $member[mb_id] && !$wr_important == 1) { ?>
@@ -361,6 +368,11 @@ include_once("$board_skin_path/lib/skin.lib.php");
                 <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$member[mb_id]?>&board_list=<?$member[mb_3]?>&wr_sale_type=2&wr_writer_id=<?=$member[mb_id]?>" class="btn btn-theme03 left sale" style="padding-left:12px;">
                 매매
                 </a>
+                <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$member[mb_id]?>&board_list=<?=$member[mb_3]?>&wr_important=<?=$wr_important?>&wr_sold_out=1&wr_writer_id=<?=$member[mb_id]?>" class="btn btn-theme03 left permission_no" style="padding-left:12px;">
+                거래종료
+               </a>
+                
+
                 <?}else if(!$gr_admin){ ?>
                 <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$member[mb_id]?>&board_list=<?$member[mb_3]?>&wr_sale_type=1&wr_writer_id=<?=$member[mb_id]?>" class="btn btn-theme03 left rent" style="padding-left:12px;">
                 임대
@@ -369,13 +381,14 @@ include_once("$board_skin_path/lib/skin.lib.php");
                 <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$member[mb_id]?>&board_list=<?$member[mb_3]?>&wr_sale_type=2&wr_writer_id=<?=$member[mb_id]?>" class="btn btn-theme03 left sale" style="padding-left:12px;">
                 매매
                 </a>
+                <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$member[mb_id]?>&board_list=<?=$member[mb_3]?>&wr_writer_id=<?=$member[mb_id]?>&wr_sold_out=1" class="btn btn-theme03 left permission_no" style="padding-left:12px;">
+                거래종료
+               </a>
 
-
-                  <?}}else if($wr_important == 1 ){?>
-                    <?if ($gr_admin ){ ?>
-                    <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$member[mb_id]?>&board_list=<?=$member[mb_3]?>&wr_important=1&wr_sale_type=1&wr_office_permission=<?$wr_office_permission?>" class="btn btn-theme03 left rent" style="padding-left:12px;">
-
-                   
+                  <!-- 오피스노트 일 경우 -->
+                <?}}else if($wr_important == 1 ){?>
+                <?if ($gr_admin ){ ?>
+                <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$member[mb_id]?>&board_list=<?=$member[mb_3]?>&wr_important=1&wr_sale_type=1&wr_office_permission=<?$wr_office_permission?>" class="btn btn-theme03 left rent" style="padding-left:12px;">
                 임대
                 </a> 
 
@@ -391,23 +404,26 @@ include_once("$board_skin_path/lib/skin.lib.php");
                 매매
                 </a>
                 <?} }?>
+
+                <!-- 오피스노트 일 때 -->
             <?if ($wr_important == 1){ ?>
             <?if ($gr_admin){ ?>
-              <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$member[mb_id]?>&board_list=<?$member[mb_3]?>&wr_important=1&wr_sale_type=1&wr_office_permission=2" class="btn btn-theme03 left permission_yes" style="padding-left:12px;">
-             승인매물
-            </a>
+    
             <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$member[mb_id]?>&board_list=<?$member[mb_3]?>&wr_important=1&wr_sale_type=1&wr_office_permission=1" class="btn btn-theme03 left permission_no" style="padding-left:12px;">
              미승인매물
             </a>
+            <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$member[mb_id]?>&board_list=<?=$member[mb_3]?>&wr_important=<?=$wr_important?>&wr_sold_out=1" class="btn btn-theme03 left permission_no" style="padding-left:12px;">
+             거래종료
+            </a>
+            
             
             <?}else{ ?>
-              <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$gr_cp?>&board_list=<?$member[mb_3]?>&wr_important=1&wr_sale_type=1&wr_office_permission=2&wr_writer_id=<?=$member[mb_id]?>" class="btn btn-theme03 left permission_yes" style="padding-left:12px;">
-             승인매물
-            </a>
+      
               <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$gr_cp?>&board_list=<?$member[mb_3]?>&wr_important=1&wr_sale_type=1&wr_office_permission=1&wr_writer_id=<?=$member[mb_id]?>" class="btn btn-theme03 left permission_no" style="padding-left:12px;">
              미승인매물
+              <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$gr_cp?>&board_list=<?=$member[mb_3]?>&wr_important=<?=$wr_important?>&wr_sold_out=1" class="btn btn-theme03 left permission_no" style="padding-left:12px;">
+             거래종료
             </a>
-         
             <?}}?>
 
             <!-- <span class="btn btn-theme03 left list_style_memo "style="padding-left:12px;"> 메모지형 </span> -->
@@ -556,7 +572,7 @@ include_once("$board_skin_path/lib/skin.lib.php");
 
                             <?}?>
 
-                        <div class="td" style="font-weight:600; background:#edf1f4; ">
+                        <div class="td subject" style="font-weight:600; background:#edf1f4; ">
                           <?php echo $list[$i]['subject']; ?>
                         </div>
 
@@ -895,22 +911,8 @@ for (var i = 0; i < target.length; i++) {
     });
 // 리스트 체크했을때 , 중요매물 / 즐겨찾기 등록버튼
   $(".s1").click(function(){
-  if("<?=$gr_admin?>"){
     $("#fboardlist").submit();
-    // if(<?=$write_count?> >= "<?=$gr_write_permission?>"){
-    // $("#fboardlist").submit();
-    // }else{
-    //   alert("사무실 매물 등록 권한이 없습니다.");
-    // }
-  }
-  else if ("<?=$gr_cp?>"){
-    // if(<?=$write_count?> >= "<?=$join_gr_info['gr_write_permission']?>"){
-    $("#fboardlist").submit();
-    // }else{
-      // alert("사무실 매물 등록 권한이 없습니다.");
-    // }
-  }
-  });
+});
   $(".s2").click(function(){
       $("#fboardlist").attr("action", "./office_delete.php");
       $("#fboardlist").submit();
@@ -932,13 +934,21 @@ for (var i = 0; i < target.length; i++) {
     $("#fboardlist").submit();
   });
   $(".s7").click(function(){
-    var result = confirm('정말로 삭제하시겠습니까? 한번 삭제된 자료는 복구되지 않습니다.'); 
-    if(result) { 
-      $("#fboardlist").attr("action", "./delete_all.php");
-      $("#fboardlist").submit();
-    } 
-    else { 
-    }
+    $.confirm({
+      theme: 'supervan',
+      icon : 'fa fa-exclamation-triangle',
+      title: '삭제확인여부!',
+      content: '정말로 삭제 하시겠습니까?<br>삭제된 자료는 복구가 불가능 합니다.',
+      buttons: {
+          삭제: function (helloButton) {
+            $("#fboardlist").attr("action", "./delete_all.php");
+            $("#fboardlist").submit();
+          },
+          취소: function () {
+            
+          }
+      }
+  });
   });
 //  리스트 형태 메모지형 , 리스트형으로 변경
    $(".list_style_memo").click(function(){

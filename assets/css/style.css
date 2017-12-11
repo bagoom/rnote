@@ -250,18 +250,23 @@ li{
 
 #visual_wrap{
   width: 100%;
-  height: 780px;
-  background: url(../../img/main_img/visual_img.jpg) ;
+  height: 820px;
+  background: #4974d1; /* Old browsers */
+  background: -moz-radial-gradient(center, ellipse cover, #4974d1 0%, #3b4db7 97%); /* FF3.6-15 */
+  background: -webkit-radial-gradient(center, ellipse cover, #4974d1 0%,#3b4db7 97%); /* Chrome10-25,Safari5.1-6 */
+  background: radial-gradient(ellipse at center, #4974d1 0%,#3b4db7 97%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4974d1', endColorstr='#3b4db7',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */ 
+  /* background: url(../../img/main_img/visual_img.jpg) ; */
   background-size: cover;
   overflow: hidden;
   position: relative;
 }
 .visual_contents{
   position: absolute;
-  top: 220px !important;
+  top: 160px !important;
   left: 50%;
-  margin-left: -200px;
-  width: 400px;
+  margin-left: -165px;
+  width: 330px;
 }
 .visual_contents h2{
   font-size: 80px;
@@ -274,7 +279,11 @@ li{
   color: #fff;
 }
 #main_contents{
-  background: #3b4db7;
+  position:absolute;
+  bottom:0;
+  left:50%;
+  margin-left:-400px;
+  /* background: #3b4db7; */
   height:180px;
 }
 .main_con_wrap{
@@ -284,19 +293,18 @@ li{
 .main_con_wrap li{
   width:200px;
   height:180px;
-  padding-top:55px;
+  padding-top:35px;
   float:left;
   color: #fff;
   text-align: center;
-  border:1px solid #5063cd;
-  border-width: 0 1px 0px 0;
+  /* border:1px solid #5063cd; */
+  /* border-width: 0 1px 0px 0; */
   transition: .5s all;
 }
 .main_con_wrap a:first-child li{
-  border-left:1px solid #5063cd;
+  /* border-left:1px solid #5063cd; */
 }
 .main_con_wrap li:hover{
-  background:  #5063cd;
 }
 .main_con_wrap h4{
   color:#fff;
@@ -606,13 +614,13 @@ li{
   background: url(../../img/resister_img/register_bg.jpg) center -100px;
   /*background: rgba(245, 249, 252,0.95);*/
   /*box-shadow: 0 4px 8px rgba(0,0,0,0.3);*/
-  border-bottom: 3px solid #3b4db7;
+  /* border-bottom: 3px solid #e8b82e; */
   z-index: 10;
 }
 .list_search_wrap{
   width: 980px;
   margin: 0 auto;
-  padding: 20px 20px 40px 20px;
+  padding: 10px 20px 50px 20px;
   overflow: hidden;
 }
 .submit_box{
@@ -1010,6 +1018,127 @@ color: #fff;
   border-right: 7px solid transparent;
   border-left: 7px solid  transparent;
 }
+
+/* 고객연락처기능 */ 
+.contact_wrap{
+  position: absolute;
+  top:0;
+  right:0;
+  width:400px;
+  background: #fafafa;
+  display:none;
+  box-shadow: -2px 0 10px rgba(0,0,0,0.15);
+  z-index:10000;
+}
+.contact_head{
+  font-size:22px;
+  color:#fff;
+  background: #3b4db7;
+  /* border-bottom:2px solid #e5e9eb; */
+  overflow:hidden;
+}
+.contact_hide{
+  position: absolute;
+  left:-65px;
+  width:65px;
+  height:64.67px;
+  text-align: center;
+  line-height: 64.67px;
+  color:#fff;
+  background: #000;
+  cursor: pointer;
+}
+.contact_add ,.contact_title{
+  float:left;
+}
+.contact_title{
+  width:300px;
+  padding:20px;
+}
+.contact_add{
+  width:90px;
+  padding:10px;
+  padding-top:15px;
+}
+.contact_form{
+  padding:20px;
+}
+.contact_search_input{
+  width:100%;
+  height:45px;
+  padding: 5px 10px;
+  border:1px solid #d4dbdf;
+  background:#fff;  
+}
+.contact_add_btn{
+  width: 35px;
+  height:35px;
+  float:right;
+  text-align:center;
+  font-size:25px;
+  color:#3b4db7;
+  background:#fff;
+  border:0;
+  border-radius:50%;
+  transition: 0.3s all;
+}
+.contact_add_btn:hover{
+  margin-right:5px;
+  color:#fff;
+  background: #222;
+
+}
+.contact_book_mark{
+  width:60px;
+  height: 70px;
+  float: left;
+  padding-top: 5px;
+  line-height: 70px;
+  text-align: center;
+  cursor:pointer;
+}
+.contact_content li{
+  height:70px;
+  padding: 15px;
+  font-size:20px;
+  background: #fff;
+  border-bottom:1px solid #e5e9eb;
+}
+.contact_content .contact_book_mark:first-child+li{
+  border-top:1px solid #e5e9eb;
+}
+.contact_content p{
+  margin-top:3px;
+  font-size:13px;
+}
+.contact_content li span{
+  font-size:17px;
+  float:right;
+}
+.contact_content span i{
+  font-size:20px;
+  color:#3b4db7;
+  transition: 0.3s all; 
+}
+.contact_content span i:hover{
+ font-size:25px;
+}
+#suggesstion-box{
+  margin-bottom:25px;
+  display:none;
+}
+
+
+.user_contact{
+  position: fixed;
+  top:27px;
+  right:172px;
+  z-index: 9999;
+  font-size: 25px;
+  color: #fff;
+  transition: all 0.4s;
+  cursor:pointer;
+}
 .user_info{
   position: fixed;
   top:27px;
@@ -1117,7 +1246,8 @@ color: #fff;
    vertical-align: middle;
    width: 150px;
    height: 75px;
-   font-size: 18px;
+   font-size: 17px;
+   font-weight:lighter;
    letter-spacing: 1.5px;
    text-decoration: none;
    color: #fff;
@@ -1152,7 +1282,7 @@ color: #fff;
 }
 .black-bg {
   /*padding: 10px 0;*/
-    background: #222;
+    background: rgba(17, 17, 17, 0.6);
     /*border-bottom:3px solid #3b4db7;*/
 }
 
@@ -3189,4 +3319,37 @@ label {
   color:#fff;
   border-radius: 3px;
   background: #3b4db7;
+}
+
+/* 얼럿트창 커스텀 */
+.jconfirm-content{
+    line-height: 20px;
+}
+.jconfirm.jconfirm-supervan .jconfirm-box .jconfirm-buttons button{
+  color:#000;
+  border-radius: 0;
+  background: #bdc3c7;
+}
+.jconfirm.jconfirm-supervan .jconfirm-box .jconfirm-buttons button:first-child{
+  color:#fff;
+  background: #e0082c;
+}
+.jconfirm .jconfirm-box .jconfirm-buttons button.btn-default:hover{
+  color:#fff;
+  background: #3b4db7;
+}
+.jconfirm .jconfirm-box .jconfirm-buttons > button {
+  margin-left:6px;
+  margin-right:6px;
+}  
+.jconfirm .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c i{
+  color:#3b4db7;
+}
+
+.jconfirm.jconfirm-supervan .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c i{
+  color:#bdc3c7 !important;
+}
+.jconfirm.jconfirm-modern .jconfirm-bg{
+  background: #3b4db7;
+  opacity: 1;
 }
