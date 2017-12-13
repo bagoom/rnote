@@ -47,7 +47,7 @@ $id_list = sql_query($sql3);
 
 // 승인거절 시 office 테이블에 해당 매물의 wr_o_id와 
 // 작성자아이디 테이블의 wr_id가 같으면 wr_important = 2로 업데이트  
-sql_query("update `g5_write_$row[wr_writer_id]` set wr_important =  2 where wr_id = '$row[wr_o_id]' ");
+sql_query("update `g5_write_$row[wr_writer_id]` set wr_important =  2 , wr_office_permission = '' where wr_id = '$row[wr_o_id]' ");
 
 
 if($confirm_unaccept2){

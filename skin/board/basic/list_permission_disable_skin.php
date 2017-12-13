@@ -467,19 +467,7 @@ include_once("$board_skin_path/lib/skin.lib.php");
               <i class="fa fa-cog" aria-hidden="true" value="중요매물등록"  style="font-size:18px; "></i>
               매물관리설정
             </button>
-          <?}else if($gr_cp && $wr_writer_id == $member[mb_id] || !$wr_sold_out){ ?>
-            <button class="btn btn-theme03 right  config active" type="button"  style="margin-right:10px;">
-              <i class="fa fa-cog" aria-hidden="true" value="중요매물등록"  style="font-size:18px; "></i>
-              매물관리설정
-            </button>
           <?}?>
-
-          <? if ( !$_GET[wr_important] == 1 && !$wr_sold_out == 1){?>
-            <a href="<?echo G5_BBS_URL?>/write.php?bo_table=<?=$bo_table?>&board_list=<?=$member[mb_3]?>" class="btn btn-theme03 right sg_cate_list active" style="background:#3b4db7; color:#fff;">
-          <i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:18px; "></i>
-           매물등록하기
-          </a> 
-          <?}else{} ?>
           </div>
 
                           <input type="hidden" name="bo_table" value="<?php echo $bo_table ?>">
@@ -498,15 +486,9 @@ include_once("$board_skin_path/lib/skin.lib.php");
 
                 <div class="sold_wrap">
 
-            <?php
-            // 솔드아웃 리스트 반복문 실행
-              for ($i=0; $i<count($list); $i++) {
-            ?>
-
-
-                    
-
-
+                            <?php
+                              for ($i=0; $i<count($list); $i++) {
+                               ?>
                                <div class="sold_out_list col-md-3">
 
                                <div class="td_chk " style="display:none; ">
@@ -524,7 +506,7 @@ include_once("$board_skin_path/lib/skin.lib.php");
                                <ul>
                                 <li>
                                 <h4><?=$list[$i]['wr_subject']?>
-                                <span style="float:right; font-size:12px;"><?php echo date("Y-m-d", strtotime($list[$i]['wr_sold_out_date'])); ?></span>
+                                <span style="float:right; font-size:12px;"><?php echo date("Y-m-d", strtotime($list[$i]['wr_move_date'])); ?></span>
                                 </h4>
                                 </li>
                                 <li><?=$list[$i]['wr_address']?>
@@ -577,19 +559,12 @@ include_once("$board_skin_path/lib/skin.lib.php");
                       </form>
 
             <div class="chk_confirm_wrap">
-              <? if ($wr_sold_out == '1'){ 
-                      if($gr_admin){   
-              ?>
-              <!-- 소장일경우  -->
-                <span class="s1">오피스매물등록하기</span>
-            <?}else{?>
-              <!-- 직원일경우 -->
-                <span class="s6">마이노트로등록하기</span>
-                <?}?>
+              <? if ($wr_office_permission == '1'){ ?>
+                <span class="s1">사무실매물등록하기</span>
+                <span data-target="#layerpop" data-toggle="modal" class="s5">거절하기</span>
                 <span class="s8">즐겨찾기등록하기</span>
                 <span class="s7">삭제</span>
-            <?} ?>
-
+              <?} ?>
             </div>
 </div>
 <?echo $write_pages;?>
@@ -655,7 +630,7 @@ for (var i = 0; i < target.length; i++) {
 }
 });
 
-console.log($(".sold_out_list").width())
+
 $('.wrapper').css("height", $(document).height() );
 $('.td_chk').css("width", $(".sold_out_list").width() );
 $('.td_chk label').css("height", $(".sold_out_list ").height() );
@@ -763,9 +738,11 @@ for (var i = 0; i < target.length; i++) {
 
     var config = $(".config");
     $(config).click(function(){
-    $(".chk_confirm_wrap").fadeToggle(300,"swing");
     $(".td_chk,.td_chk2").fadeToggle(300,"swing");
-
+    $(".chk_confirm_wrap").fadeToggle(300,"swing");
+    // if( $(".chk_confirm_wrap").css("display") == "block"){
+    //   $(".chk_confirm_wrap").css('display', 'none');
+    // }
     if($(".import_chk").is(":checked")){
       $(".chk_confirm_wrap").css('display', 'block');
       console.log($("dddd"))

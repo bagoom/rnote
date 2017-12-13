@@ -37,7 +37,17 @@ if($gr_admin){
 
 // print_r (array_values($col));
 // echo $col[1];
+
+$sql2 = "select * from g5_write_ekdna8284 where wr_id = '$wr_id_list[$i]' ";
+$result2 = mysqli_fetch_assoc(sql_query($sql2));
+$wr_o_id = $result2['wr_o_id'];
+$wr_writer_id = $result2['wr_writer_id'];
+
+
+// 소장테이블의 해당글을 승인처리
 sql_query("update $group_table set wr_office_permission =  '2'  where  wr_id = '$wr_id_list[$i]' ");
+//  미승인 매물중에 원글 작성자를 찾아 해당 테이블에 해당글을 승인처리
+sql_query("update `g5_write_$wr_writer_id` set wr_office_permission =  2 where wr_id = '$wr_o_id' ");
 
 
 
@@ -46,7 +56,7 @@ sql_query("update $group_table set wr_office_permission =  '2'  where  wr_id = '
 // echo $wr_id;
 // sql_query("update $group_table set wr_important = '1', wr_id = $max_id+1,wr_num = $next_wr_num, wr_parent = wr_id  where wr_id = '$wr_id_list[$i]' ");
 }
-alert("Office 매물로 수락 되었습니다.");
+alert(" Office 매물로 수락 되었습니다.");
 
 
 

@@ -403,9 +403,16 @@ function get_list($write_row, $board, $skin_url, $subject_len=40)
 
     // 분류명 링크
     $list['ca_name_href'] = G5_BBS_URL.'/board.php?bo_table='.$board['bo_table'].'&amp;sca='.urlencode($list['ca_name']);
-
+    global $wr_important;
+    echo $wr_important."꾸엥";
+    if ($wr_important){
     $list['href'] = G5_BBS_URL.'/board.php?bo_table='.$board['bo_table'].'&amp;wr_important='.$list['wr_important'].'&amp;wr_sale_type='.$list['wr_sale_type'].'&amp;wr_id='.$list['wr_id'].$qstr;
     $list['comment_href'] = $list['href'];
+}else{
+    $list['href'] = G5_BBS_URL.'/board.php?bo_table='.$board['bo_table'].'&amp;wr_writer_id='.$list['wr_writer_id'].'&amp;wr_sale_type='.$list['wr_sale_type'].'&amp;wr_id='.$list['wr_id'].$qstr;
+    $list['comment_href'] = $list['href'];
+}  
+
 
     $list['icon_new'] = '';
     if ($board['bo_new'] && $list['wr_datetime'] >= date("Y-m-d H:i:s", G5_SERVER_TIME - ($board['bo_new'] * 3600)))

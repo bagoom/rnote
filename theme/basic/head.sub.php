@@ -96,6 +96,7 @@ var g5_bo_table  = "<?php echo isset($bo_table)?$bo_table:''; ?>";
 var g5_sca       = "<?php echo isset($sca)?$sca:''; ?>";
 var g5_editor    = "<?php echo ($config['cf_editor'] && $board['bo_use_dhtml_editor'])?$config['cf_editor']:''; ?>";
 var g5_cookie_domain = "<?php echo G5_COOKIE_DOMAIN ?>";
+var wr_important = "<?php echo $wr_important ?>";
 var wr_office_permission = "<?php echo $wr_office_permission ?>";
 var wr_sold_out = "<?php echo $wr_sold_out ?>";
 var wr_sale_type = "<?php echo $wr_sale_type ?>";

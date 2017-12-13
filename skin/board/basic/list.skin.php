@@ -361,11 +361,11 @@ include_once("$board_skin_path/lib/skin.lib.php");
           <div class="content_header">
             <?if ($wr_writer_id == $member[mb_id] && !$wr_important == 1) { ?>
                 <?if ($gr_admin ){ ?>
-                <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$member[mb_id]?>&board_list=<?$member[mb_3]?>&wr_sale_type=1&wr_writer_id=<?=$member[mb_id]?>" class="btn btn-theme03 left rent" style="padding-left:12px;">
+                <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$member[mb_id]?>&board_list=<?=$member[mb_3]?>&wr_sale_type=1&wr_writer_id=<?=$member[mb_id]?>" class="btn btn-theme03 left rent" style="padding-left:12px;">
                 임대
                 </a> 
 
-                <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$member[mb_id]?>&board_list=<?$member[mb_3]?>&wr_sale_type=2&wr_writer_id=<?=$member[mb_id]?>" class="btn btn-theme03 left sale" style="padding-left:12px;">
+                <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$member[mb_id]?>&board_list=<?=$member[mb_3]?>&wr_sale_type=2&wr_writer_id=<?=$member[mb_id]?>" class="btn btn-theme03 left sale" style="padding-left:12px;">
                 매매
                 </a>
                 <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$member[mb_id]?>&board_list=<?=$member[mb_3]?>&wr_important=<?=$wr_important?>&wr_sold_out=1&wr_writer_id=<?=$member[mb_id]?>" class="btn btn-theme03 left permission_no" style="padding-left:12px;">
@@ -374,11 +374,11 @@ include_once("$board_skin_path/lib/skin.lib.php");
                 
 
                 <?}else if(!$gr_admin){ ?>
-                <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$member[mb_id]?>&board_list=<?$member[mb_3]?>&wr_sale_type=1&wr_writer_id=<?=$member[mb_id]?>" class="btn btn-theme03 left rent" style="padding-left:12px;">
+                <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$member[mb_id]?>&board_list=<?=$member[mb_3]?>&wr_sale_type=1&wr_writer_id=<?=$member[mb_id]?>" class="btn btn-theme03 left rent" style="padding-left:12px;">
                 임대
                 </a>
 
-                <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$member[mb_id]?>&board_list=<?$member[mb_3]?>&wr_sale_type=2&wr_writer_id=<?=$member[mb_id]?>" class="btn btn-theme03 left sale" style="padding-left:12px;">
+                <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$member[mb_id]?>&board_list=<?=$member[mb_3]?>&wr_sale_type=2&wr_writer_id=<?=$member[mb_id]?>" class="btn btn-theme03 left sale" style="padding-left:12px;">
                 매매
                 </a>
                 <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$member[mb_id]?>&board_list=<?=$member[mb_3]?>&wr_writer_id=<?=$member[mb_id]?>&wr_sold_out=1" class="btn btn-theme03 left permission_no" style="padding-left:12px;">
@@ -396,11 +396,11 @@ include_once("$board_skin_path/lib/skin.lib.php");
                 매매
                 </a>
                 <?}else if(!$gr_admin){ ?>
-                <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$gr_cp?>&board_list=<?$member[mb_3]?>&wr_sale_type=1&wr_important=1&wr_office_permission=2" class="btn btn-theme03 left rent" style="padding-left:12px;">
+                <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$gr_cp?>&board_list=<?=$member[mb_3]?>&wr_sale_type=1&wr_important=1&wr_office_permission=2" class="btn btn-theme03 left rent" style="padding-left:12px;">
                 임대
                 </a>
          
-                <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$gr_cp?>&board_list=<?$member[mb_3]?>&wr_sale_type=2&wr_important=1&wr_office_permission=2" class="btn btn-theme03 left sale" style="padding-left:12px;">
+                <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$gr_cp?>&board_list=<?=$member[mb_3]?>&wr_sale_type=2&wr_important=1&wr_office_permission=2" class="btn btn-theme03 left sale" style="padding-left:12px;">
                 매매
                 </a>
                 <?} }?>
@@ -409,7 +409,7 @@ include_once("$board_skin_path/lib/skin.lib.php");
             <?if ($wr_important == 1){ ?>
             <?if ($gr_admin){ ?>
     
-            <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$member[mb_id]?>&board_list=<?$member[mb_3]?>&wr_important=1&wr_sale_type=1&wr_office_permission=1" class="btn btn-theme03 left permission_no" style="padding-left:12px;">
+            <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$member[mb_id]?>&board_list=<?$member[mb_3]?>&wr_important=1&wr_office_permission=1" class="btn btn-theme03 left permission_no" style="padding-left:12px;">
              미승인매물
             </a>
             <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$member[mb_id]?>&board_list=<?=$member[mb_3]?>&wr_important=<?=$wr_important?>&wr_sold_out=1" class="btn btn-theme03 left permission_no" style="padding-left:12px;">
@@ -419,7 +419,7 @@ include_once("$board_skin_path/lib/skin.lib.php");
             
             <?}else{ ?>
       
-              <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$gr_cp?>&board_list=<?$member[mb_3]?>&wr_important=1&wr_sale_type=1&wr_office_permission=1&wr_writer_id=<?=$member[mb_id]?>" class="btn btn-theme03 left permission_no" style="padding-left:12px;">
+              <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$gr_cp?>&board_list=<?$member[mb_3]?>&wr_important=1&wr_office_permission=1&wr_writer_id=<?=$member[mb_id]?>" class="btn btn-theme03 left permission_no" style="padding-left:12px;">
              미승인매물
               <a href="<?echo G5_BBS_URL?>/board.php?bo_table=<?=$gr_cp?>&board_list=<?=$member[mb_3]?>&wr_important=<?=$wr_important?>&wr_sold_out=1" class="btn btn-theme03 left permission_no" style="padding-left:12px;">
              거래종료
@@ -556,13 +556,15 @@ include_once("$board_skin_path/lib/skin.lib.php");
                           <? if ($list[$i]['wr_office_permission'] == '1'){ ?>
                             <div class="td" style=" position:relative;">
                               <?= $list[$i]['num']?>
-                              <p class="permission_disable"style="font-size:7px; ">미승인
+                              <p class="permission_disable"style="font-size:13px; ">
+                              <i class="fa fa-hourglass-half" aria-hidden="true"></i>
                               </p>
                             </div>
-                          <? }else if($list[$i]['wr_important']=='1' && $wr_writer_id == $member[mb_id]){ ?>
+                          <? }else if($list[$i]['wr_office_permission']=='2' && !$wr_important ){ ?> 
                             <div class="td" style=" position:relative;">
                             <?= $list[$i]['num']?>
-                            <p class="permission_disable"style="font-size:7px; ">오피스
+                            <p class="permission_disable"style="font-size:13p; ">
+                            <i class="fa fa-check-circle" aria-hidden="true"></i>
                             </p>
                           </div>
                             <?}else{?>

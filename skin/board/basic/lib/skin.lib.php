@@ -44,11 +44,13 @@ function get_sql_search3($search_ca_name, $search_field, $search_text, $search_o
 
 
         else if(strlen($search_arr[val][$j]) > 0 && $search_arr[val][$j] ){
+            // 소장계정 오피스 매물 출력
          if($gr_admin && $wr_important && !$wr_sold_out){
-            $str = append_sql2($str, " and ", "wr_sold_out !=1 and {$search_arr[name][$j]}  like '%{$search_arr[val][$j]}%' ");
+            $str = append_sql2($str, " and ", "wr_sold_out !=1 and wr_important= '1' and {$search_arr[name][$j]}  like '%{$search_arr[val][$j]}%' ");
+            //  소장계정 마이노트 매물 출력
             }else if($gr_admin && !$wr_important && !$wr_sold_out){
-            $str = append_sql2($str, " and ", "wr_sold_out !=1 and wr_office_permission = '' and {$search_arr[name][$j]}  like '%{$search_arr[val][$j]}%' ");
-            // 거래종료 필터 쿼리
+            $str = append_sql2($str, " and ", "wr_sold_out !=1 and (wr_office_permission = '' or wr_office_permission = '2') and {$search_arr[name][$j]}  like '%{$search_arr[val][$j]}%' ");
+            // 거래종료 출력 
             }else if($wr_sold_out == "1"){
                 $str = append_sql2($str, " and ", "wr_sold_out = '1' and {$search_arr[name][$j]}  like '%{$search_arr[val][$j]}%' ");
             
@@ -309,6 +311,10 @@ $arr_search = array();
     $arr_search[name][] = "wr_bookmark";
     $arr_search[val][] = $_GET["wr_bookmark"];
   }
+  if(($_GET["schedule"])) {
+    $arr_search[name][] = "schedule";
+    $arr_search[val][] = $_GET["schedule"];
+  }
 
 
 
@@ -546,9 +552,14 @@ if (!$sst) {
     $sst = preg_match("/^(wr_datetime|wr_hit|wr_good|wr_nogood|coco|wr_9)$/i", $sst) ? $sst : "";
 }
 
+
+
+
 if ($sst) {
     $sql_order = " order by {$sst} {$sod} ";
 }
+
+
 if($wr_rent_deposit_min || $wr_rent_deposit_max){
 	$sql_order = " order by wr_id desc ";
 }
@@ -570,6 +581,9 @@ if($_GET[wr_premium_o_min] || $_GET[wr_premium_o_max]){
 
 if($_GET[wr_sold_out]){
 	$sql_order = " order by wr_sold_out_date desc ";
+}
+if ($wr_important == '1'){
+    $sql_order = " order by wr_move_date desc , wr_num asc  ";
 }
 
 // 기본 리스트 쿼리 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

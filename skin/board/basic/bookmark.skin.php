@@ -7,7 +7,9 @@
 .customoverlay {position:relative;bottom:45px;border-radius:6px;border: 1px solid #ccc;border-bottom:2px solid #ddd;float:left;}
 .customoverlay:nth-of-type(n) {border:0; box-shadow:0px 1px 2px #888;}
 .customoverlay a {display:block;text-decoration:none;color:#555;text-align:center;border-radius:6px;font-size:14px;font-weight:bold;overflow:hidden;background: #3b4db7;background: #3b4db7 url(http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;}
-.customoverlay .title {display:block;text-align:center;background:#fff;margin-right:35px;padding:10px 15px;font-size:14px;font-weight:bold;}
+.customoverlay .title {display:block;text-align:center;background:#fff;
+  /* margin-right:35px; */
+  padding:10px 15px;font-size:14px;font-weight:bold;}
 .customoverlay:after {content:'';position:absolute;margin-left:-12px;left:50%;bottom:-12px;width:22px;height:12px;background:url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
 
 .black-bg{
@@ -101,7 +103,7 @@
 }
 .ddong_border{
   /*z-index: 9999999;*/
-  border:3px solid #fba106;
+  border:3px solid #3b4db7;
   transition: 0.3s all;
 }
 </style>
@@ -148,12 +150,13 @@
 $(".map_board_list").each(function(index) {
 $(this).find(".dropdown_btn").on("click", function(){
     $(this).parents(".map_board_list").next(".map_board_info").slideToggle(200);
-
 });
 $(this).on('click', function(){
     panTo($(this))
 })
 });
+
+
 
 
 var positions = [];
@@ -247,7 +250,8 @@ marker.setMap(map);
 
 // 커스텀 오버레이에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 var content = '<div class="customoverlay">' +
-  '  <a href="'+newPositions[i].url+'" target="_blank">' +
+  '  <a href="#" >' +
+  // '  <a href="'+newPositions[i].url+'" target="_blank">' +
   '    <span class="title">'+'<span class="subj">'+newPositions[i].title+' </span>'+newPositions[i].wr_floor+'/'+newPositions[i].wr_area_p+'<br>'+newPositions[i].wr_rent_deposit+'/'+newPositions[i].wr_m_rate+'/'+newPositions[i].wr_premium_o+'</span>' +
   '  </a>' +
   '</div>';
@@ -270,6 +274,24 @@ $(".map_board_list").hover(function(){
 $(".map_board_list").mouseleave(function(){
   leaveList($(this))
 });
+
+
+// 맵 오버레이 마우스오버시 보더 / z-index 증가
+$(".customoverlay").hover(function() {
+  $(this).children('a').addClass("ddong_border");
+  $(this).parent().css("z-index","10");
+});
+
+$(".customoverlay").mouseleave(function() {
+  $(this).children('a').removeClass("ddong_border");
+  $(this).parent().css("z-index","0");
+});
+// 맵 오버레이 마우스클릭시 보더 / z-index 증가
+$(".customoverlay").click(function() {
+  $(this).children('a').addClass("ddong_border");
+  $(this).parent().css("z-index","10");
+});
+
 
 
 function hoverList(d){

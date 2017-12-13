@@ -8,12 +8,12 @@ if($member[mb_8] == '2')
 alert("사무실 매물 읽기 기능이 제한 되었습니다.");
 }
 
-if($gr_cp&&$bo_table != $member['mb_id']){
-if($write_count >= $join_gr_info['gr_write_permission']){
-}else{
-  alert('사무실 매물 읽기 권한이 없습니다.', G5_URL);
-}
-}
+// if($gr_cp&&$bo_table != $member['mb_id']){
+// if($write_count >= $join_gr_info['gr_write_permission']){
+// }else{
+//   alert('사무실 매물 읽기 권한이 없습니다.', G5_URL);
+// }
+// }
 
 
 
@@ -269,6 +269,11 @@ if($write_count >= $join_gr_info['gr_write_permission']){
 
 if ($wr_sold_out)
 include_once($board_skin_path.'/list_sold_out_skin.php');
+else if ($schedule)
+include_once($board_skin_path.'/list_schedule_skin.php');
+else if ($wr_important && $wr_office_permission == "1"){
+include_once($board_skin_path.'/list_permission_disable_skin.php') ;
+}
 else
 include_once($board_skin_path.'/list.skin.php');
 ?>

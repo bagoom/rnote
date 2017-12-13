@@ -164,18 +164,18 @@ delete_cache_latest($bo_table);
 
 if($gr_admin && $wr_important){
     if($wr_sold_out == '1'){
-        goto_url(G5_HTTP_BBS_URL.'/board.php?bo_table='.$bo_table.'&board_list='.$board_list.'&wr_sale_type='.$wr_sale_type.'&wr_sold_out=1');
+        goto_url(G5_HTTP_BBS_URL.'/board.php?bo_table='.$bo_table.'&board_list='.$board_list.'&wr_sale_type='.$wr_sale_type.'&wr_sold_out=1&page='.$page);
         }else if($wr_important){
-        goto_url(G5_HTTP_BBS_URL.'/board.php?bo_table='.$bo_table.'&board_list='.$board_list.'&wr_sale_type='.$wr_sale_type.'&wr_important=1&wr_office_permission='.$wr_office_permission);
+        goto_url(G5_HTTP_BBS_URL.'/board.php?bo_table='.$bo_table.'&board_list='.$board_list.'&wr_sale_type='.$wr_sale_type.'&wr_important=1&wr_office_permission='.$wr_office_permission.'&page='.$page);
         }else{
-        goto_url(G5_HTTP_BBS_URL.'/board.php?bo_table='.$bo_table.'&board_list='.$board_list.'&wr_sale_type='.$wr_sale_type.'&wr_writer_id='.$member[mb_id]);
+        goto_url(G5_HTTP_BBS_URL.'/board.php?bo_table='.$bo_table.'&board_list='.$board_list.'&wr_sale_type='.$wr_sale_type.'&wr_writer_id='.$member[mb_id].'&page='.$page);
     }
     
 }else{
     if($wr_sold_out == '1'){
-        goto_url(G5_HTTP_BBS_URL.'/board.php?bo_table='.$bo_table.'&board_list='.$board_list.'&wr_sale_type='.$wr_sale_type.'&wr_sold_out=1');
+        goto_url(G5_HTTP_BBS_URL.'/board.php?bo_table='.$bo_table.'&board_list='.$board_list.'&wr_sale_type='.$wr_sale_type.'&wr_sold_out=1&page='.$page);
         }else{
-        goto_url(G5_HTTP_BBS_URL.'/board.php?bo_table='.$bo_table.'&board_list='.$board_list.'&wr_sale_type='.$wr_sale_type.'&wr_writer_id='.$member[mb_id]);
+        goto_url(G5_HTTP_BBS_URL.'/board.php?bo_table='.$bo_table.'&board_list='.$board_list.'&wr_sale_type='.$wr_sale_type.'&wr_writer_id='.$member[mb_id].'&page='.$page);
         }
 }
 

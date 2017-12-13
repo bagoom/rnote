@@ -361,9 +361,10 @@ input[type="text"],input[type="number"],input[type="tel"]{
                               </table>
 
                               <div class="form-title">
-                                지번 및 면적
+                                <!-- 지번 및  -->
+                                면적
                               </div>
-
+<!-- 
                               <table class="write_table">
                                 <tbody class="sale_rand_wrap rand_wrap_basic" style="display:table-header-group;" >
                                   <tr>
@@ -397,11 +398,12 @@ input[type="text"],input[type="number"],input[type="tel"]{
                                   </tr>
                                 </tbody>
 
-                              </table>
+                              </table> -->
 
-                              <div style="position:relative; padding-bottom:45px;">
-
-                                  <table class="write_table">
+                                  <!-- 기존 지번밎면적 총면적부분 -->
+                              <!-- <div style="position:relative; padding-bottom:45px;"> -->
+                              <div style="position:relative; ">
+                                  <!-- <table class="write_table">
                                     <tbody >
                                       <tr>
                                         <th style="background:#ddd;">총면적(평)</th>
@@ -409,6 +411,25 @@ input[type="text"],input[type="number"],input[type="tel"]{
                                         <th style="background:#ddd;">총면적(㎡)</th>
                                         <td><input type="text"  name="wr_area_m_all" value="<?php echo $write[wr_area_m_all]  ?>" id="wr_area_m_all"  tabindex="999" placeholder="㎡" readonly></td>
                                       </tr>
+                                    </tbody>
+                                  </table> -->
+                                  <table class="write_table">
+                                    <tbody >
+                                      <tr>
+                                        <th >면적(평)</th>
+                                        <td><input type="text"  name="wr_area_p_all" value="<?php echo $write[wr_area_p_all]  ?>" id="wr_area_p_all"  tabindex="999" placeholder="평"  ></td>
+                                        <th>면적(㎡)</th>
+                                        <td><input type="text"  name="wr_area_m_all" value="<?php echo $write[wr_area_m_all]  ?>" id="wr_area_m_all"  tabindex="999" placeholder="㎡" ></td>
+                                      </tr>
+
+                        <script>
+                          $("#wr_area_p_all").keyup(function(){
+                            $("#wr_area_m_all").val( ($(this).val() * 3.3).toFixed(2))
+                          });
+                          $("#wr_area_m_all").keyup(function(){
+                            $("#wr_area_p_all").val( ($(this).val() / 3.3).toFixed(2))
+                          });
+                        </script>
                                     </tbody>
                                   </table>
                                   <!-- <div class="sale_rand_add">
