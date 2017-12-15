@@ -556,15 +556,22 @@ include_once("$board_skin_path/lib/skin.lib.php");
                           <? if ($list[$i]['wr_office_permission'] == '1'){ ?>
                             <div class="td" style=" position:relative;">
                               <?= $list[$i]['num']?>
-                              <p class="permission_disable"style="font-size:13px; ">
-                              <i class="fa fa-hourglass-half" aria-hidden="true"></i>
+                              <p class="permission_disable"style="font-size:14px; background:#ffc107">
+                              <i class="fa fa-clock-o" aria-hidden="true"></i>
                               </p>
                             </div>
                           <? }else if($list[$i]['wr_office_permission']=='2' && !$wr_important ){ ?> 
                             <div class="td" style=" position:relative;">
                             <?= $list[$i]['num']?>
-                            <p class="permission_disable"style="font-size:13p; ">
+                            <p class="permission_disable"style="font-size:13px; ">
                             <i class="fa fa-check-circle" aria-hidden="true"></i>
+                            </p>
+                          </div>
+                          <? }else if($list[$i]['wr_office_permission']=='3' && !$wr_important ){ ?> 
+                            <div class="td" style=" position:relative;">
+                            <?= $list[$i]['num']?>
+                            <p class="permission_disable"style="font-size:13px; background:#FC284F; ">
+                            <i class="fa fa-times" aria-hidden="true"></i>
                             </p>
                           </div>
                             <?}else{?>
@@ -808,6 +815,7 @@ include_once("$board_skin_path/lib/skin.lib.php");
 <script src="<?php G5_PATH?>/assets/js/demo3.js"></script>
 <script type="application/javascript">
 $(".tr:even").css("background", "white");
+$(function() { $("input:text").keydown(function(evt) { if (evt.keyCode == 13) return false; }); });
 
 
 $(".select").change(function(){

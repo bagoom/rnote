@@ -33,14 +33,17 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
 }
 #bo_v_img{
   width: 100%;
-  height: 150px;
+  /* height: 150px; */
 }
 #bo_v_img img{
   width: 100%;
   height: 150px;
 }
 .wr_memo{
-  text-align: right;
+  color:#444 !important;
+  text-align: left;
+  font-size:15px !important;
+  font-weight:lighter!important;
   line-height: 27px;
 }
 
@@ -132,9 +135,9 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                     <input type="hidden" name="wr_id" value="<?=$wr_id?>">
                         <div class="col-lg-1"></div>
                         
-                       <div class="col-lg-4" style="padding-top:70px;" >
+                       <div class="col-lg-4" style="padding:90px 0;" >
                           <!--수정/삭제버튼 11-17일 변경-->
-                          <div style="position:absolute; top :30px; right: -50px;">
+                          <div style="position:absolute; top :28px; right: -10px;">
                           <?=$GET_['office_write']?>
                           <? if($gr_admin){ ?>
                             <button class="btn btn-theme03 right  config" type="button"  style="margin-right:10px;">
@@ -150,7 +153,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                           </div>
                         <div class="info_body">
                           <div class="info_head">
-                            <h2 style="margin-top:5px;"><?=$view['wr_subject'];?></h2>
+                            <h3 style="margin-top:5px;"><?=$view['wr_subject'];?></h3>
                             <h4><?=$view['wr_address'];?> / <?=$view['wr_sale_area'];?></h4>
                           </div>
 
@@ -169,47 +172,70 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                                 <li>합예산<span style="color:#FC284F;"><?=$sum_pay?><span class="info_sm_span"> 만원</span></span></li>
                               </ul>
                             </div>
+                            
 
-                            <div class="info_mid">
+                            <p class="sale_view_drop">추천업종 및 기타정보
+                            <i class="fa fa-chevron-circle-down" aria-hidden="true" style=""></i>
+                            </p>
+
+                            <!-- 접기시작 -->
+                            <div class="sale_drop_form" >
+                            <div class="info_top">
                               <?  $str = $view['wr_rec_sectors'];
                                     $str2 = explode(' ', $str);
                                     $str3 = sizeof($str2)-1 ; ?>
 
 
-                              <li>추천업종  <ul class="rec_list_wrap"><?for ($i = 0 ; $i < $str3 ; $i++){
+                              <li><p>추천업종</p>  
+                              <ul class="rec_list_wrap" style-"overflow:hidden;">
+                                
+                                <?for ($i = 0 ; $i < $str3 ; $i++){
                                 echo '<li class="rec_list">'.$str2[$i].'</li>';
-                              }?></div></li>
+                              }?>
+                           </li>
                             </div>
 
-                            <div class="info_bot">
-                              <li>관리번호<span><?=$view['wr_code'];?></li>
-                          <? if($view['wr_writer'] !== $member['mb_name']){ ?>
+                            <div class="info_top">
+                              <li>관리번호<span class="info_sm_span"><?=$view['wr_code'];?></span></li>
+                              <? if($view['wr_writer'] !== $member['mb_name']){ ?>
 
                           <!-- 임차인연락처가 있을경우 -->
                           <?if ($gr_admin&& $view['wr_renter_contact']){?>
-                                <li>임차인연락처<span><?=$view['wr_renter_contact'];?></li>
+                               
+                                <li>임차인연락처
+                                  <span>
+                                  <?=$view['wr_renter_contact'];?>
+                                  </span>
+                                </li>
+
                                 <li class="wr_writer">담당자
-                                <span><?=$view['wr_writer']?>
+                                <span class="info_sm_span">
+                                <?=$view['wr_writer']?>
                                 <i class="fa fa-caret-square-o-down" aria-hidden="true"></i>
-                                </span></li>
-                                <li class="wr_writer_contact">담당자연락처 <span>  <?=$view['wr_hp']?></span> </li>
+                                </span>
+                              </li>
+                              
+                                <li class="wr_writer_contact">담당자연락처<span class="info_sm_span"><?=$view['wr_hp']?></span> </li>
 
                             <!-- 임대인연락처가 있을경우 -->
                             <?}else if($gr_admin&& $view['wr_lessor_contact']){?>
-                                <li>임대인연락처<span><?=$view['wr_lessor_contact'];?></li>
+                                <li>임대인연락처
+                                  <?=$view['wr_lessor_contact'];?></li>
                                   <li class="wr_writer">담당자
-                                  <span><?=$view['wr_writer']?>
+                                  <span class="info_sm_span">
+                                    <?=$view['wr_writer']?>
                                   <i class="fa fa-caret-square-o-down" aria-hidden="true"></i>
                                   </span></li>
-                                <li class="wr_writer_contact">담당자연락처 <span>  <?=$view['wr_hp']?></span> </li>
+                                <li class="wr_writer_contact">담당자연락처<span class="info_sm_span"><?=$view['wr_hp']?></span> </li>
 
                             <!-- 직원일경우 -->
                             <?}else if(!$gr_admin){?>
                               <li class="wr_writer">담당자
-                              <span><?=$view['wr_writer']?>
+                              <span class="info_sm_span">
+                                <?=$view['wr_writer']?>
                               <i class="fa fa-caret-square-o-down" aria-hidden="true"></i>
                               </span></li>
-                                <li class="wr_writer_contact">담당자연락처 <span>  <?=$view['wr_hp']?></span> </li>
+                                <li class="wr_writer_contact">담당자연락처<span class="info_sm_span"><?=$view['wr_hp']?></span> </li>
                               <?}?>
 
                               <?}else{ ?>
@@ -250,8 +276,15 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                                   ?>
                               <? }?></span></li>
                               <li>기타지출<span><?=$view['wr_extra_exp'];?></span></li>
-                              <li style="margin-top:15px; padding-top:15px; border-top:2px solid #444">메모<span class="wr_memo"><?=nl2br($view['wr_memo']);?></span></li>
-                              <li>
+                            </div>
+                            </div><!-- 접기끝 -->
+                             
+                            <div class="info_top ">
+                            <li style=""><p>메모</p>
+                              <p style="margin-bottom:0;">
+                                <span class="wr_memo"><?=nl2br($view['wr_memo']);?></span></p>
+                            </li>
+                          </div>
                                 <?php
                                 // 파일 출력
                                 $v_img_count = count($view['file']);
@@ -268,16 +301,14 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                                     echo "</div>\n";
                                 }
                                  ?>
-                            </li>
-                            </div>
                        </div>
                      </form>
                       </div>
                    
                             <div class="col-lg-7" style="padding:0;" >
                               <div class="col-lg-1"></div>
-                              <div class="col-lg-11" style="padding:0;">
-                              <div class="" id="map_area" style="width:100%; postion:relative;">
+                              <div class="col-lg-11" style="padding:50px; padding-left:0; padding-top:92px; border-radius:10px;">
+                              <div class="" id="map_area" style="width:100%; height:500px; postion:relative; border:1px solid #afafaf;">
                               <a href="http://map.daum.net/?q=<?=$view['wr_address']?>"
                                style="position:absolute; z-index:10; top: 50%; left: 50%; background:#3b4db7; padding: 15px; width:200px; height:45px; margin-top:-100px; margin-left:-100px; border-radius:5px; box-shadow:0 3px 5px rgba(0,0,0,0.25);text-align: center; color: #fff; " onClick="window.open(this.href, '', 'width=1200, height=800'); return false;"
                                >다음지도로보기</a>
@@ -291,15 +322,15 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
 
 
 
-                            <div class="map_wrap">
-    <div id="mapWrapper" style="width:50%;height:300px;float:left">
-        <div id="map" style="width:100%;height:100%"></div> <!-- 지도를 표시할 div 입니다 -->
-    </div>
-    <div id="rvWrapper" style="width:50%;height:300px;float:left">
-        <!-- <div id="roadview" style="width:100%;height:100%"></div>  -->
-    </div>
-</div>
-
+                            <!-- <div class="map_wrap">
+                            <div id="mapWrapper" style="width:50%;height:300px;float:left">
+                                <div id="map" style="width:100%;height:100%"></div> 
+                            </div> -->
+                            <!-- <div id="roadview" style="width:100%;height:100%"></div>  -->
+                            <!-- <div id="rvWrapper" style="width:50%;height:300px;float:left">
+                              </div>
+                            </div>
+                             -->
 
                             
 
@@ -357,8 +388,13 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                       </div>
                      
 <script>
+$(".sale_view_drop").click(function(){
+  $(".sale_drop_form").slideToggle(400);
+})
 
-$('#map_area').css('height', $("#bo_v_atc").height() );
+
+
+// $('#map_area').css('height', $("#bo_v_atc").height() );
 
   $(".config").click(function(){
   $(".chk_confirm_wrap").fadeToggle(300,"swing");

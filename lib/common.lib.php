@@ -404,7 +404,6 @@ function get_list($write_row, $board, $skin_url, $subject_len=40)
     // 분류명 링크
     $list['ca_name_href'] = G5_BBS_URL.'/board.php?bo_table='.$board['bo_table'].'&amp;sca='.urlencode($list['ca_name']);
     global $wr_important;
-    echo $wr_important."꾸엥";
     if ($wr_important){
     $list['href'] = G5_BBS_URL.'/board.php?bo_table='.$board['bo_table'].'&amp;wr_important='.$list['wr_important'].'&amp;wr_sale_type='.$list['wr_sale_type'].'&amp;wr_id='.$list['wr_id'].$qstr;
     $list['comment_href'] = $list['href'];

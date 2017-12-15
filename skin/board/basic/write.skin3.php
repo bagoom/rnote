@@ -42,6 +42,12 @@ input[type="submit"]:hover{
   padding:10px 3px;
   margin-bottom: 18px;
 } 
+.drop{
+  margin-bottom:20px !important;
+  background:#3b4db7!important;
+  border:0 !important;
+  color:#fff;
+}
 input[type="text"],input[type="number"],input[type="tel"]{
 
 }
@@ -417,9 +423,9 @@ input[type="text"],input[type="number"],input[type="tel"]{
                                     <tbody >
                                       <tr>
                                         <th >면적(평)</th>
-                                        <td><input type="text"  name="wr_area_p_all" value="<?php echo $write[wr_area_p_all]  ?>" id="wr_area_p_all"  tabindex="999" placeholder="평"  ></td>
+                                        <td><input type="text"  name="wr_area_p_all" value="<?php echo $write[wr_area_p_all]  ?>" id="wr_area_p_all"  tabindex="4" placeholder="평"  ></td>
                                         <th>면적(㎡)</th>
-                                        <td><input type="text"  name="wr_area_m_all" value="<?php echo $write[wr_area_m_all]  ?>" id="wr_area_m_all"  tabindex="999" placeholder="㎡" ></td>
+                                        <td><input type="text"  name="wr_area_m_all" value="<?php echo $write[wr_area_m_all]  ?>" id="wr_area_m_all"  tabindex="5" placeholder="㎡" ></td>
                                       </tr>
 
                         <script>
@@ -445,13 +451,19 @@ input[type="text"],input[type="number"],input[type="tel"]{
                                     <tbody>
                                       <tr>
                                         <th>총매도가</th>
-                                        <td><input type="text" name="wr_sale_price"  tabindex="7" value="<?php echo $write[wr_sale_price]  ?>" id="wr_sale_price2"  placeholder="" ></td>
+                                        <td><input type="text" name="wr_sale_price"  tabindex="6" value="<?php echo $write[wr_sale_price]  ?>" id="wr_sale_price2"  placeholder="" ></td>
                                         <th>평당가격</th>
-                                        <td ><input type="text" name="wr_p_sale_price" value="<?php echo $write[wr_p_sale_price] ?>" id="wr_p_sale_price"  tabindex="8" placeholder=""></td>
+                                        <td ><input type="text" name="wr_p_sale_price" value="<?php echo $write[wr_p_sale_price] ?>" id="wr_p_sale_price"  tabindex="7" placeholder=""></td>
                                       </tr>
                                     </tbody>
                                   </table>
 
+
+                                  <!--  접기 시작  -->
+                                  <h4 style="background:#fff; padding: 20px;margin: 40px 0; border: 1px solid #bbb; cursor:pointer" class="drop_sale_btn">임대현황 / 대출관계 / 추정수익
+                                  <i class="fa fa-chevron-circle-down" aria-hidden="true" style="float:right; "></i>
+                                  </h4>
+                                  <div class="drop_sale_form" style="display:none;"> 
                                   <div class="form-title">
                                     임대현황
                                   </div>
@@ -460,15 +472,15 @@ input[type="text"],input[type="number"],input[type="tel"]{
                                     <tbody>
                                       <tr>
                                         <th>총보증금</th>
-                                        <td ><input type="text" name="wr_sale_deposit" value="<?php echo $write[wr_sale_deposit] ?>" id="wr_sale_deposit" tabindex="9" placeholder=""></td>
+                                        <td ><input type="text" name="wr_sale_deposit" value="<?php echo $write[wr_sale_deposit] ?>" id="wr_sale_deposit" tabindex="8" placeholder=""></td>
                                         <th>총임대료</th>
-                                        <td><input type="text" name="wr_total_rfee" value="<?php echo $write[wr_total_rfee] ?>" id="wr_total_rfee2" tabindex="10" placeholder=""></td>
+                                        <td><input type="text" name="wr_total_rfee" value="<?php echo $write[wr_total_rfee] ?>" id="wr_total_rfee2" tabindex="9" placeholder=""></td>
                                       </tr>
                                       <tr>
                                         <th>연임대수익</th>
-                                        <td><input type="text" name="wr_year_rate" value="<?php echo $write[wr_year_rate] ?>" id="wr_year_rate"  tabindex="11" placeholder=""></td>
+                                        <td><input type="text" name="wr_year_rate" value="<?php echo $write[wr_year_rate] ?>" id="wr_year_rate"  tabindex="10" placeholder=""></td>
                                         <th>임대료추정<br>가치시세</th>
-                                        <td ><input type="text"  name="wr_m_rate_guess" tabindex="12" value="<?=$write[wr_m_rate_guess] ?>" id="wr_m_rate_guess" readonly  placeholder="만원" ></td>
+                                        <td ><input type="text"  name="wr_m_rate_guess" tabindex="11" value="<?=$write[wr_m_rate_guess] ?>" id="wr_m_rate_guess" readonly  placeholder="만원" ></td>
                                       </tr>
                                     </tbody>
                                   </table>
@@ -481,15 +493,15 @@ input[type="text"],input[type="number"],input[type="tel"]{
                                     <tbody>
                                       <tr>
                                         <th>대출금</th>
-                                        <td ><input type="text" name="wr_loan" value="<?php echo $write[wr_loan] ?>" id="wr_loan2" tabindex="13" placeholder=""></td>
+                                        <td ><input type="text" name="wr_loan" value="<?php echo $write[wr_loan] ?>" id="wr_loan2" tabindex="12" placeholder=""></td>
                                         <th>금리</th>
-                                        <td><input type="text" name="wr_int_rate" value="<?php echo $write[wr_int_rate] ?>" id="wr_int_rate2"  tabindex="14" placeholder="미입력시 기본 4%"></td>
+                                        <td><input type="text" name="wr_int_rate" value="<?php echo $write[wr_int_rate] ?>" id="wr_int_rate2"  tabindex="13" placeholder="미입력시 기본 4%"></td>
                                       </tr>
                                       <tr>
                                         <th>월이자</th>
-                                        <td ><input type="text" readonly  name="wr_mon_int" value="<?php echo $write[wr_mon_int] ?>" id="wr_mon_int"  tabindex="15" placeholder=""></td>
+                                        <td ><input type="text" readonly  name="wr_mon_int" value="<?php echo $write[wr_mon_int] ?>" id="wr_mon_int"  tabindex="14" placeholder=""></td>
                                         <th>연이자</th>
-                                        <td  ><input type="text"  readonly name="wr_year_int" value="<?php echo $write[wr_year_int] ?>" id="wr_year_int"  tabindex="16" placeholder=""></td>
+                                        <td  ><input type="text"  readonly name="wr_year_int" value="<?php echo $write[wr_year_int] ?>" id="wr_year_int"  tabindex="15" placeholder=""></td>
                                       </tr>
                                     </tbody>
                                   </table>
@@ -502,13 +514,14 @@ input[type="text"],input[type="number"],input[type="tel"]{
                                     <tbody>
                                       <tr>
                                         <th>연간순수익</th>
-                                        <td ><input type="text" name="wr_year_income" value="<?php echo $write[wr_year_income] ?>" id="wr_year_income"  tabindex="17" readonly  placeholder=""></td>
+                                        <td ><input type="text" name="wr_year_income" value="<?php echo $write[wr_year_income] ?>" id="wr_year_income"  tabindex="16" readonly  placeholder=""></td>
                                         <th>월순수익</th>
-                                        <td><input type="text"  name="wr_mon_income" tabindex="18" value="<?=$write[wr_mon_income] ?>" id="wr_mon_income" placeholder="만원" readonly  ></td>
+                                        <td><input type="text"  name="wr_mon_income" tabindex="17" value="<?=$write[wr_mon_income] ?>" id="wr_mon_income" placeholder="만원" readonly  ></td>
                                       </tr>
 
                                     </tbody>
                                   </table>
+                                  </div> <!-- 접기 끝 -->
 
                                   <div class="form-title">
                                     종합
@@ -518,9 +531,9 @@ input[type="text"],input[type="number"],input[type="tel"]{
                                     <tbody>
                                       <tr>
                                         <th>실인수가</th>
-                                        <td ><input type="text" name="wr_silinsu"  id="wr_silinsu" value="<?php echo $write[wr_silinsu] ?>"  tabindex="19" readonly /></td>
+                                        <td ><input type="text" name="wr_silinsu"  id="wr_silinsu" value="<?php echo $write[wr_silinsu] ?>"  tabindex="18" readonly /></td>
                                         <th>수익률</th>
-                                        <td><input type="text" name="wr_profit_rate" value="<?php echo $write[wr_profit_rate] ?>" id="wr_profit_rate"  tabindex="20" placeholder="%" readonly></td>
+                                        <td><input type="text" name="wr_profit_rate" value="<?php echo $write[wr_profit_rate] ?>" id="wr_profit_rate"  tabindex="19" placeholder="%" readonly></td>
                                       </tr>
 
                                     </tbody>
@@ -534,24 +547,29 @@ input[type="text"],input[type="number"],input[type="tel"]{
                                     <tbody>
                                       <tr>
                                         <th>지목</th>
-                                        <td > <input type="text" name="wr_rand_type" value="<?php echo $write[wr_rand_type] ?>" id="wr_rand_type"  tabindex="21" placeholder=""></td>
+                                        <td > <input type="text" name="wr_rand_type" value="<?php echo $write[wr_rand_type] ?>" id="wr_rand_type"  tabindex="20" placeholder=""></td>
                                         <th>지역지구</th>
-                                        <td>  <input type="text" name="wr_zoning_district" value="<?php echo $write[wr_zoning_district] ?>" id="wr_zoning_district"  tabindex="22" placeholder=""></td>
+                                        <td>  <input type="text" name="wr_zoning_district" value="<?php echo $write[wr_zoning_district] ?>" id="wr_zoning_district"  tabindex="21" placeholder=""></td>
                                       </tr>
                                       <tr>
                                         <th>건물층수</th>
-                                        <td > <input type="text" name="wr_floor" value="<?php echo $write[wr_floor] ?>" id="wr_floor"  tabindex="23" placeholder=""></td>
+                                        <td > <input type="text" name="wr_floor" value="<?php echo $write[wr_floor] ?>" id="wr_floor"  tabindex="22" placeholder=""></td>
                                         <th>연면적</th>
-                                        <td><input type="text" name="wr_gross_area" value="<?php echo $write[wr_gross_area] ?>" id="wr_gross_area"  tabindex="24" placeholder=""></td>
+                                        <td><input type="text" name="wr_gross_area" value="<?php echo $write[wr_gross_area] ?>" id="wr_gross_area"  tabindex="23" placeholder=""></td>
                                       </tr>
                                       <tr>
                                         <th >메모</th>
-                                      <td colspan="3"><textarea name="wr_memo"  id="wr_memo"  placeholder="기타 사항 메모" onKeyup="var a=100; var b=this.scrollHeight;if(b>=a)this.style.pixelHeight=b+6"rows="1" cols="80" tabindex="25"><?=$write[wr_memo] ?></textarea></td>
+                                      <td colspan="3"><textarea name="wr_memo"  id="wr_memo"  placeholder="기타 사항 메모" onKeyup="var a=100; var b=this.scrollHeight;if(b>=a)this.style.pixelHeight=b+6"rows="1" cols="80" tabindex="24"><?=$write[wr_memo] ?></textarea></td>
                                       </tr>
 
                                     </tbody>
                                   </table>
 
+                                  <!-- 접기시작  -->
+                                  <h4 style="background:#ㄹㄹㄹ; padding: 20px;margin: 40px 0; border: 1px solid #bbb; cursor:pointer" class="drop_sale_btn2">광고정보
+                                  <i class="fa fa-chevron-circle-down" aria-hidden="true" style="float:right; "></i>
+                                  </h4>
+                                  <div class="drop_sale_form2" style="display:none;"> 
                                   <div class="form-title">
                                     광고정보
                                   </div>
@@ -560,7 +578,7 @@ input[type="text"],input[type="number"],input[type="tel"]{
                                     <tbody>
                                       <tr>
                                         <th>광고제목</th>
-                                        <td><input type="text"  name="wr_adver_subject" tabindex="26" value="<?=$write[wr_adver_subject] ?>" id="wr_adver_subject" placeholder="광고시 제목"></td>
+                                        <td><input type="text"  name="wr_adver_subject" tabindex="25" value="<?=$write[wr_adver_subject] ?>" id="wr_adver_subject" placeholder="광고시 제목"></td>
                                       </tr>
                                       <tr>
                                         <th>광고내용</th>
@@ -589,6 +607,7 @@ input[type="text"],input[type="number"],input[type="tel"]{
                                       </tr>
                                     </tbody>
                                   </table>
+                                  </div> <!-- 접기끝 -->
 
 
 
@@ -616,6 +635,17 @@ input[type="text"],input[type="number"],input[type="tel"]{
 
 <script src="<?php G5_PATH?>/assets/js/pc_script2.js"></script>
 <script>
+
+$(".drop_sale_btn").click(function(){
+    $(this).toggleClass("drop");
+    $(".drop_sale_form").slideToggle(300);
+})
+
+$(".drop_sale_btn2").click(function(){
+    $(this).toggleClass("drop");
+    $(".drop_sale_form2").slideToggle(300);
+})
+
 $("#fwrite2").submit(function(){
   if($("#wr_int_rate2").val() =='' || $("#wr_int_rate2").val()== '0'){
     $("#wr_int_rate2").val('4');
@@ -651,7 +681,7 @@ for(var i=0; i<=arr.length-1; i++) {
     }
 }
 
-var contact = '#wr_renter_contact,#wr_lessor_contact';
+var contact = '#wr_renter_contact,#wr_lessor_contact,#wr_seller_contact';
 $(contact).on('blur' ,function(){
 var contact_val = $(this).val();
 if(contact_val.length ==11){

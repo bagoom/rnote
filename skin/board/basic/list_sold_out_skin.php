@@ -620,6 +620,7 @@ include_once("$board_skin_path/lib/skin.lib.php");
 <script type="application/javascript">
 $(".tr:even").css("background", "white");
 
+$(function() { $("input:text").keydown(function(evt) { if (evt.keyCode == 13) return false; }); });
 
 $(".select").change(function(){
   var select_option = $(".select option:selected").text();

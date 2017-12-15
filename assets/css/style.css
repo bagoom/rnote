@@ -325,14 +325,39 @@ li{
 .info_body li>span{
   float: right;
 }
+.info_top li>span{
+  float: right;
+}
+.info_top li{
+  font-size: 20px;
+  padding: 5px 0;
+}
+.info_head{
+  padding:20px;
+  margin-bottom: 15px  ;
+  background: #fff;
+  border-radius: 3px;
+  border:0.5px solid #cecece;
+  /* box-shadow: 0 0 10px rgba(0,0,0,0.06); */
+  
+}
+.info_head h4{
+  font-size:16px;
+  margin: 7px 0;
+}
 .info_top{
-  padding:20px 0;
-  border-bottom:2px solid #444;
+  padding:20px;
+  margin: 15px 0 !important ;
+  background: #fff;
+  border-radius: 3px;
+  border:0.5px solid #cecece;
+  overflow: hidden;
 }
 .info_top li>span{
-  font-size: 23px;
+  font-size: 19px;
   font-weight: 600;
-  color:#1BB0CE;
+  color:#3b4db7;
+  /* color:#1BB0CE; */
 }
 .profit_rate li>span{
   font-size:23px;
@@ -341,7 +366,29 @@ li{
 }
 .info_top .info_sm_span{
   font-size:17px;
+  font-weight: lighter;
   color:#444;
+}
+.sale_view_drop{
+  text-align: center;
+  padding:20px;
+  margin: 15px 0 ;
+  margin-bottom:0;
+  font-size:18px;
+  background: #fff;
+  border-radius: 3px;
+  border:0.5px solid #cecece;
+  transition:0.5s all;
+  cursor:pointer;
+}
+.sale_view_drop:hover{
+  color:#fff;
+  background:#3b4db7;
+  border:0.5px solid #3b4db7;
+}
+.sale_drop_form{
+  display:none;
+  overflow: hidden;
 }
 .info_mid{
   min-height: 200px;
@@ -351,16 +398,19 @@ li{
 }
 
 .rec_list_wrap{
-  width: 70%;
-  float: right;
+  width: 100%;
+  float: left;
+  margin-top:10px;
 }
 .rec_list{
-  padding : 8px 10px !important;
+  padding : 8px 10px 7px 10px!important;
   background: transparent;
+  font-size: 12px !important;
   color: #444;
-  margin: 0 5px 5px 0;
-  float: right;
-  border: 1px solid #666;
+  margin: 0 8px 8px 0;
+  float: left;
+  border-radius:2px;
+  border: 0.5px solid #444;
 }
 .info_bot{
   padding:20px 0;

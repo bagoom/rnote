@@ -16,7 +16,6 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
 }
 #bo_v_atc{
   overflow: hidden;
-  padding : 30px;
 }
 .wrapper{
   margin-top:75px !important;
@@ -39,7 +38,10 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
   height: 150px;
 }
 .wr_memo{
-  text-align: right;
+  color:#444 !important;
+  text-align: left;
+  font-size:15px !important;
+  font-weight:lighter!important;
   line-height: 27px;
 }
 </style>
@@ -116,35 +118,37 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                       <!-- } 게시물 상단 버튼 끝 -->
 
                       <section id="bo_v_atc">
-                          <div class="col-lg-12" style="margin-bottom:25px; overflow:hidden;">
-                          <!--수정/삭제버튼 11-17일 변경-->
-                          <?=$GET_['office_write']?>
-                          <? if($gr_admin){ ?>
-                            <button class="btn btn-theme03 right  config" type="button"  style="margin-right:10px;">
-                              <i class="fa fa-cog" aria-hidden="true" value="중요매물등록"  style="font-size:18px; "></i>
-                              매물관리설정
-                            </button>
-                          <?}else if($gr_cp && $bo_table == "$member[mb_id]"){ ?>
-                            <button class="btn btn-theme03 right  config" type="button"  style="margin-right:10px;">
-                              <i class="fa fa-cog" aria-hidden="true" value="중요매물등록"  style="font-size:18px; "></i>
-                              매물관리설정
-                            </button>
-                          <?}?>
-                          </div>
-      <form name="fboardlist" id="fboardlist" action="./copy_update.php"  method="post">
-        <input type="hidden" name="bo_table" value="<?php echo $bo_table ?>">
-        <input type="hidden" name="board_list" value="<?php echo $board_list ?>">
-        <input type="hidden" name="sfl" value="<?php echo $sfl ?>">
-        <input type="hidden" name="stx" value="<?php echo $stx ?>">
-        <input type="hidden" name="spt" value="<?php echo $spt ?>">
-        <input type="hidden" name="sca" value="<?php echo $sca ?>">
-        <input type="hidden" name="sst" value="<?php echo $sst ?>">
-        <input type="hidden" name="sod" value="<?php echo $sod ?>">
-        <input type="hidden" name="sw" value="">
-        <input type="hidden" name="wr_id" value="<?=$wr_id?>">
-                        
-                        <div class="col-lg-1"></div>
-                       <div class="col-lg-4" >
+                      <section id="bo_v_atc">
+                      
+                    <form name="fboardlist" id="fboardlist" action="./copy_update.php"  method="post">
+                  <input type="hidden" name="bo_table" value="<?php echo $bo_table ?>">
+                  <input type="hidden" name="board_list" value="<?php echo $board_list ?>">
+                  <input type="hidden" name="sfl" value="<?php echo $sfl ?>">
+                  <input type="hidden" name="stx" value="<?php echo $stx ?>">
+                  <input type="hidden" name="spt" value="<?php echo $spt ?>">
+                  <input type="hidden" name="sca" value="<?php echo $sca ?>">
+                  <input type="hidden" name="sst" value="<?php echo $sst ?>">
+                  <input type="hidden" name="sod" value="<?php echo $sod ?>">
+                  <input type="hidden" name="sw" value="">
+                  <input type="hidden" name="wr_id" value="<?=$wr_id?>">
+                      <div class="col-lg-1"></div>
+                      
+                     <div class="col-lg-4" style="padding:90px 0;" >
+                        <!--수정/삭제버튼 11-17일 변경-->
+                        <div style="position:absolute; top :28px; right: -10px;">
+                        <?=$GET_['office_write']?>
+                        <? if($gr_admin){ ?>
+                          <button class="btn btn-theme03 right  config" type="button"  style="margin-right:10px;">
+                            <i class="fa fa-cog" aria-hidden="true" value="중요매물등록"  style="font-size:18px; "></i>
+                            매물관리설정
+                          </button>
+                        <?}else if($gr_cp && $bo_table == "$member[mb_id]"){ ?>
+                          <button class="btn btn-theme03 right  config" type="button"  style="margin-right:10px;">
+                            <i class="fa fa-cog" aria-hidden="true" value="중요매물등록"  style="font-size:18px; "></i>
+                            매물관리설정
+                          </button>
+                        <?}?>
+                        </div>
                         <div class="info_body">
                           <div class="info_head">
                           <?$wr_area_p_sale=explode(",",$view['wr_area_p']);
@@ -153,7 +157,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                               // $wr_area_p_sale = count($wr_area_p_sale);
                           ?>
                  
-                            <h2 style="margin-top:5px;"><?=$view['wr_subject'];?></h2>
+                            <h3 style="margin-top:5px;"><?=$view['wr_subject'];?></h3>
                             <h4><?=$view['wr_address'];?>
                             <?if (count($wr_address_sale) > 1) {?>                           
                              외 (<?=count($wr_address_sale);?>)필지 </h4>
@@ -168,26 +172,44 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                                 <? $m2 = $view['wr_area_p'] *3.3;?>
                                 <li class="wr_writer">대지면적
                                 <span>
-                                <?=$view[wr_area_p_all]?>평(<?=$view[wr_area_m_all] ?>㎡)
-                                <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                <?=$view[wr_area_p_all]?>평 
+                                <span class="info_sm_span">
+                                [<?=$view[wr_area_m_all] ?>㎡]
+                                </span>
+                                <i class="fa fa-angle-down" aria-hidden="true" style="padding:0 3px 0 2px; border-radius:2px; background:#3b4db7; color:#fff;"></i>
                                 </span>
                                 </li> 
                                 <div class="wr_sale_area" style="display:none;">
                                 <? for ($i=0; $i<count($wr_address_sale); $i++) { ?>
-
-                                <li style="font-size:14px; background:#fff; margin:5px 0; border:1px solid #eee; padding:10px;"> <?=$wr_address_sale[$i]?>  <?=$wr_area_p_sale[$i]?>평 <?=$wr_area_m_sale[$i]?>㎡ </li>
+                                <li style="font-size:14px; background:#fff; margin:5px 0; border:1px solid #eee; padding:10px;"> 
+                                  <?=$wr_address_sale[$i]?>  <?=$wr_area_p_sale[$i]?>평 <?=$wr_area_m_sale[$i]?>㎡ </li>
                                 <?}?>
                                 </div>
+                                  
+                                <li>총매도가
+                                  <span class="info_sm_span">만]</span>
+                                  <span><?=$view[wr_p_sale_price]?></span>
+                                  <span class="info_sm_span"> [평당</span>
+                                  <span class="sale_price" style="margin-right:5px;"></span>
+                              </li>
+
+                                <li>실인수가
+                                  <span class="wr_silinsu"> </span>
+                                </li>
                               </ul>
                             </div>
 
                             <!-- 가격정보 -->
+                            <p class="sale_view_drop">대출 및 임차관계
+                            <i class="fa fa-chevron-circle-down" aria-hidden="true" style=""></i>
+                            </p>
+
+                            <!-- 접기시작 -->
+                            <div class="sale_drop_form" >
                             <div class="info_top">
                               <ul>
-                                <li>총매도가<span><?=$view[wr_sale_price]?><span class="info_sm_span">만원</span> <span class="info_sm_span">(평당</span><?=$view[wr_p_sale_price]?><span class="info_sm_span">만원)</span></li>
-                              </ul> 
-                              <ul>
-                                <li>대출금<span><?=$view['wr_loan'];?><span class="info_sm_span"> 만원 (금리</span><? $int_rate = ($view[wr_int_rate] == '0') ?  "4" : $view[wr_int_rate] ?><?=$int_rate?><span class="info_sm_span">%)</span></span></li>
+                                <li>
+                                대출금<span><?=$view['wr_loan'];?><span class="info_sm_span"> 만원 (금리</span><? $int_rate = ($view[wr_int_rate] == '0') ?  "4" : $view[wr_int_rate] ?><?=$int_rate?><span class="info_sm_span">%)</span></span></li>
                                 <li>이자<span><span class="info_sm_span">월</span><?=$view['wr_mon_int'];?><span class="info_sm_span">만원 (연</span><?=$view['wr_year_int'];?><span class="info_sm_span">만원)</span></span></li>
                               </ul>
                             </div>
@@ -201,18 +223,22 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                             <!-- 수익성 -->
                             <div class="info_top profit_rate">
                               <ul>
-                                <li>실인수가<span><?=$view['wr_silinsu'];?><span class="info_sm_span">만원</span></span></li>
+                                
                                 <li>연간순수익<span><?=$view['wr_year_income'];?><span class="info_sm_span">만원(월순수익</span><?=$view[wr_mon_income]?><span class="info_sm_span">만원)</span>
                                 
                                 </li>
                                 <li>수익률<span><?=$view['wr_profit_rate'];?><span class="info_sm_span">%</span></span></li>
                               </ul>
                             </div> 
+                            </div> <!-- 접기끝 -->
 
                
-
-                              <li style="margin-top:15px; padding-top:15px;">메모<span class="wr_memo"><?=nl2br($view['wr_memo']);?></span></li>
-                              <li>
+                            <div class="info_top ">
+                              <li style=""><p>메모</p>
+                                <p style="margin-bottom:0;">
+                                  <span class="wr_memo"><?=nl2br($view['wr_memo']);?></span></p>
+                              </li>
+                            </div>
                                 <?php
                                 // 파일 출력
                                 $v_img_count = count($view['file']);
@@ -229,18 +255,23 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                                     echo "</div>\n";
                                 }
                                  ?>
-                            </li>
                             </div>
                        </div>
                      </form>
                       </div>
-                            <div class="col-lg-6" >
+
+
+
+                           <div class="col-lg-7" style="padding:0;" >
                               <div class="col-lg-1"></div>
-                              <div class="col-lg-11">
-                              <div class="" id="map_area" style="width:100%; height:360px;">
+                              <div class="col-lg-11" style="padding:50px; padding-left:0; padding-top:92px; border-radius:10px;">
+                              <div class="" id="map_area" style="width:100%; height:500px; postion:relative; border:1px solid #afafaf;">
+                              <a href="http://map.daum.net/?q=<?=$view['wr_address']?>"
+                               style="position:absolute; z-index:10; top: 50%; left: 50%; background:#3b4db7; padding: 15px; width:200px; height:45px; margin-top:-100px; margin-left:-100px; border-radius:5px; box-shadow:0 3px 5px rgba(0,0,0,0.25);text-align: center; color: #fff; " onClick="window.open(this.href, '', 'width=1200, height=800'); return false;"
+                               >다음지도로보기</a>
                               </div>
-                              <div class="" id="roadview" style="width:100%; height:360px;">
-                              </div>
+                              <!-- <div class="" id="roadview" style="width:100%; height:360px;">
+                              </div> -->
                             </div>
                             </div>
 
@@ -263,6 +294,90 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                       </div>
 
 <script>
+
+$(".sale_view_drop").click(function(){
+  $(".sale_drop_form").slideToggle(400);
+})
+
+function number2Kor(num, type, delimChar) {
+  (function() {
+    var fnEach = String.prototype.each ;
+    String.prototype.each = fnEach || function(callback) {
+      var str = this;
+      for( var i = 0 ; i < str.length ; i++) {
+        callback(i, str.charAt(i));
+      }
+    };
+  })();
+  var baseNames =  ["천", "백", "", ""];
+  var levelNames = ["만", "억"];
+  type = type || "HALF";
+  delimChar = delimChar || " ";
+
+  var decimal = ["", "일", "이", "삼", "사", "오", "육", "칠", "팔", "구"];
+
+  var level = parseInt(num.length / baseNames.length);
+  var start = 0;
+  var end = num.length % baseNames.length; // 0, 1, 2, 3
+  /* start validation */
+  if ( isNaN(num) ) {
+    throw "not a number form : " + num ;
+  }
+  if ( ! isFinite(num) ) {
+    throw "not finite : " + num ;
+  }
+  /* end validation */
+
+  if ( end == 0) { // in case the length of num is => 0, 4, 8, 12, ...
+    end = Math.min(num.length, baseNames.length) ;
+    level --;
+  } else {
+    for( var k = 0 ; k < baseNames.length-end; k++) {
+      num = "0" + num;
+    }
+    end = baseNames.length;
+  }
+
+  var toKorString = "";
+  var fns = {
+      "LOW" : function (i, ch) {
+        if ( ch !== "0"){
+          unitStr += ch;
+        } else if ( ch === "0" && unitStr.length > 0 ) {
+          unitStr += ch;
+        }
+      },
+      "HALF" : function(i, ch) {
+        if ( ch != "0" ) {
+          unitStr += ch + baseNames[i];
+        }
+      },
+      "HIGH" : function (i, ch) {
+        if ( ch != "0") {
+          unitStr += decimal [ parseInt(ch)] + baseNames[i];
+        }
+      }
+    };
+
+  while ( start < num.length ) {
+    var partial = num.substring(start, end);
+    var unitStr = "";
+
+    partial.each ( fns[type] );
+
+    if ( unitStr.length > 0 ) {
+      toKorString += unitStr + levelNames[level] + delimChar ;
+    }
+    level --;
+    start = end;
+    end += baseNames.length;
+  }
+  return toKorString;
+}
+
+
+$(".sale_price").text(number2Kor('<?=$view[wr_sale_price]?>', "HALF"))
+$(".wr_silinsu").text(number2Kor('<?=$view[wr_silinsu]?>', "HALF"))
 
 
   $(".config").click(function(){

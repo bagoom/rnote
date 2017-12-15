@@ -151,7 +151,11 @@ sql_query("update $write_table set wr_important =  1 , wr_office_permission = 2,
       content: '사무실로 매물이 등록 되었습니다 승인을 기다려 주세요.',
       buttons: {
           확인: function (helloButton) {
-            history.back()
+              if(gr_admin){
+                location.href= g5_bbs_url +'/board.php?bo_table='+'<?=$member['mb_id']?>'+'&wr_important=1&wr_sale_type=1&wr_office_permission=2';
+                }else{
+                location.href= g5_bbs_url +'/board.php?bo_table='+'<?=$member['mb_id']?>'+'&board_list='+'<?=$member['mb_3']?>'+'&wr_sale_type='+'<?=$wr_sale_type?>'+'&wr_writer_id='+'<?=$member['mb_id']?>';
+                }  
           }
       }
   });

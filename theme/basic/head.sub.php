@@ -6,7 +6,7 @@ if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
 
 if($member[mb_id])
 {
-    $checktime = mktime(date("H"),date("i")-10,date("s"),date("m"),date("d"),date("Y")); // 시간지정
+    $checktime = mktime(date("H"),date("i")-25,date("s"),date("m"),date("d"),date("Y")); // 시간지정
     if($_SESSION['ss_login_time'] && ($_SESSION['ss_login_time'] < $checktime)) {
         // 페이지를 연 시점이 되어있고, 저장된 시간이 특정시간 이전일때
         goto_url(G5_BBS_URL."/logout.php",$urlencode); // 강제 로그아웃
