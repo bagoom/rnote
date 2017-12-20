@@ -161,7 +161,7 @@ delete_cache_latest($bo_table);
 
 
 
-
+//소장일경우
 if($gr_admin && $wr_important){
     if($wr_sold_out == '1'){
         goto_url(G5_HTTP_BBS_URL.'/board.php?bo_table='.$bo_table.'&board_list='.$board_list.'&wr_sale_type='.$wr_sale_type.'&wr_sold_out=1&page='.$page);
@@ -170,7 +170,8 @@ if($gr_admin && $wr_important){
         }else{
         goto_url(G5_HTTP_BBS_URL.'/board.php?bo_table='.$bo_table.'&board_list='.$board_list.'&wr_sale_type='.$wr_sale_type.'&wr_writer_id='.$member[mb_id].'&page='.$page);
     }
-    
+
+// 직원일경우
 }else{
     if($wr_sold_out == '1'){
         goto_url(G5_HTTP_BBS_URL.'/board.php?bo_table='.$bo_table.'&board_list='.$board_list.'&wr_sale_type='.$wr_sale_type.'&wr_sold_out=1&page='.$page);

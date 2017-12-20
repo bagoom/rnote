@@ -345,13 +345,12 @@ include_once("$board_skin_path/lib/skin.lib.php");
         </li>
       </ul>
 
-<?=$wr_sold_out?>
-    <div class="search_btn_wrap">
+      <div class="search_btn_wrap">
       <div class="input_box2" style="border-right:0;">
-       <span class="search_list"  >검색초기화</span>
+       <span class="search_list"  ><i class="fa fa-refresh" aria-hidden="true" style="padding-right:10px;"></i>검색초기화</span>
       </div>
       <div class="input_box2" >
-        <input type="submit" value="검색"  class="btn-default" >
+      <i class="fa fa-search" aria-hidden="true"></i><input type="submit" value="검색"  class="btn-default" >
       </div>
     </div>
 
@@ -620,7 +619,7 @@ include_once("$board_skin_path/lib/skin.lib.php");
 <script type="application/javascript">
 $(".tr:even").css("background", "white");
 
-$(function() { $("input:text").keydown(function(evt) { if (evt.keyCode == 13) return false; }); });
+// $(function() { $("input:text").keydown(function(evt) { if (evt.keyCode == 13) return false; }); });
 
 $(".select").change(function(){
   var select_option = $(".select option:selected").text();

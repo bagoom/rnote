@@ -506,7 +506,6 @@ if ($w == '' || $w == 'r') {
                          wr_rec_sectors = '$wr_rec_sectors',
                          wr_code = '$wr_code',
                          wr_extra_exp = '$wr_extra_exp',
-                         wr_move_date = '$wr_move_date',
                          board_list = '$board_list',
                          wr_posy = '$wr_posy',
                          wr_posx = '$wr_posx'

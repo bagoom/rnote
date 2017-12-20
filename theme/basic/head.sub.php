@@ -15,7 +15,7 @@ if($member[mb_id])
         $login_time = mktime(date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")); // 현재시간 저장
         set_session("ss_login_time", $login_time);
     }
-}
+}  
 
 
 // // 테마 head.sub.php 파일

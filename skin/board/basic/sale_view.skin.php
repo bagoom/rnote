@@ -131,10 +131,12 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                   <input type="hidden" name="sod" value="<?php echo $sod ?>">
                   <input type="hidden" name="sw" value="">
                   <input type="hidden" name="wr_id" value="<?=$wr_id?>">
+                  <input type="hidden" name="wr_sale_type" value="<?=$wr_sale_type?>">
                       <div class="col-lg-1"></div>
                       
                      <div class="col-lg-4" style="padding:90px 0;" >
                         <!--수정/삭제버튼 11-17일 변경-->
+                        
                         <div style="position:absolute; top :28px; right: -10px;">
                         <?=$GET_['office_write']?>
                         <? if($gr_admin){ ?>

@@ -594,7 +594,7 @@ include_once("$board_skin_path/lib/skin.lib.php");
 <script src="<?php G5_PATH?>/assets/js/demo3.js"></script>
 <script type="application/javascript">
 $(".tr:even").css("background", "white");
-$(function() { $("input:text").keydown(function(evt) { if (evt.keyCode == 13) return false; }); });
+// $(function() { $("input:text").keydown(function(evt) { if (evt.keyCode == 13) return false; }); });
 
 
 $(".select").change(function(){

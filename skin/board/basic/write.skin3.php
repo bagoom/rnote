@@ -249,7 +249,7 @@ input[type="text"],input[type="number"],input[type="tel"]{
                                   </tr>
                                   <tr>
                                     <th>분양평수</th>
-                                    <td><input type="text"  name="wr_rent_p" tabindex="13" value="<?=$write[wr_rent_p] ?>" id="wr_rent_p" placeholder="평" ></td>
+                                    <td><input type="text"  name="wr_rent_p" tabindex="13" value="<?=$write[wr_rent_p] ?>" id="wr_rent_p" placeholder="평" onkeyup="valchange()"></td>
                                     <th>평당<br>관리비</th>
                                     <td><input type="text"  name="wr_mt_cost_p" tabindex="14" value="<?=$write[wr_mt_cost_p] ?>" id="wr_mt_cost_p"  placeholder="원" onkeyup="valchange()"></td>
                                   </tr>
@@ -558,11 +558,11 @@ input[type="text"],input[type="number"],input[type="tel"]{
                                         <td><input type="text" name="wr_gross_area" value="<?php echo $write[wr_gross_area] ?>" id="wr_gross_area"  tabindex="23" placeholder=""></td>
                                       </tr>
                                       <tr>
-                                        <th >메모</th>
+                                        <th >메모</th> 
                                       <td colspan="3"><textarea name="wr_memo"  id="wr_memo"  placeholder="기타 사항 메모" onKeyup="var a=100; var b=this.scrollHeight;if(b>=a)this.style.pixelHeight=b+6"rows="1" cols="80" tabindex="24"><?=$write[wr_memo] ?></textarea></td>
                                       </tr>
 
-                                    </tbody>
+                                    </tbody> 
                                   </table>
 
                                   <!-- 접기시작  -->

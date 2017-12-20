@@ -47,6 +47,24 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
   line-height: 27px;
 }
 
+.view_state_form{
+  position: absolute;
+  top:107px;
+  left: 120px;
+  z-index:10;
+}
+.view_state_form input[type="radio"]{
+  display:none;
+}
+.view_permission_btn{
+  padding:10px;
+  font-size:14px;
+  color:#fff;
+  background: #aaa;
+  cursor:pointer;
+}
+
+
 </style>
 <script src="<?php echo G5_JS_URL; ?>/viewimageresize.js"></script>
 
@@ -92,36 +110,42 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                   <!-- } 첨부파일 끝 -->
                   <?php } ?>
 
-                      <!-- 게시물 상단 버튼 시작 { -->
-                      <!-- <div id="bo_v_top">
-                          <?php
-                          ob_start();
-                           ?>
-                          <?php if ($prev_href || $next_href) { ?>
-                          <ul class="bo_v_nb">
-                              <?php if ($prev_href) { ?><li><a href="<?php echo $prev_href ?>" class="btn_b01">이전글</a></li><?php } ?>
-                              <?php if ($next_href) { ?><li><a href="<?php echo $next_href ?>" class="btn_b01">다음글</a></li><?php } ?>
-                          </ul>
-                          <?php } ?> -->
-
-                          <!-- <ul class="bo_v_com"> -->
-                              <!-- <?php if ($update_href) { ?><li><a href="<?php echo $update_href ?>" class="btn_b01">수정</a></li><?php } ?>
-                              <?php if ($delete_href) { ?><li><a href="<?php echo $delete_href ?>" class="btn_b01" onclick="del(this.href); return false;">삭제</a></li><?php } ?>
-                              <?php if ($copy_href) { ?><li><a href="<?php echo $copy_href ?>" class="btn_admin" onclick="board_move(this.href); return false;">복사</a></li><?php } ?>
-                              <?php if ($move_href) { ?><li><a href="<?php echo $move_href ?>" class="btn_admin" onclick="board_move(this.href); return false;">이동</a></li><?php } ?> -->
-<!-- <?php if ($update_href) { ?><li><a href="<?php echo $update_href ?>" class="btn_b01">수정</a></li><?php } ?> -->
-                              <!-- <li><a href="<?php echo $list_href ?>" class="btn_b01">목록</a></li> -->
-
-                          <!-- </ul>
-                          <?php
-                          $link_buttons = ob_get_contents();
-                          ob_end_flush();
-                           ?>
-                      </div> -->
                       <!-- } 게시물 상단 버튼 끝 -->
 
                       <section id="bo_v_atc">
-                        
+                      
+                      <!-- 퍼미션 버튼 ajax   12-19일 수정 ----------------------------->
+<!--
+                         <div class="view_state_form">
+                          <form action="./view_permission_update.php" method="post"  id="view_state" > 
+
+                          <input type="hidden" name="wr_id" value="<?=$wr_id?>">
+                          <input type="radio" value="1" id="office_permission1" name="wr_office_permission"/>
+                          <input type="radio" value="2" id="office_permission2" name="wr_office_permission"/>
+                          <input type="radio" value="3" id="office_permission3" name="wr_office_permission"/>
+                          <input type="radio" value="" id="office_permission4" name="wr_office_permission"/>
+                          
+                          <label for="office_permission2" class="view_permission_btn" style="<?if ($view['wr_office_permission'] === '2') {echo "background:#3b4db7";}?>">
+                          <i class="fa fa-check-circle" aria-hidden="true"></i>
+                          </label>
+                          <label for="office_permission1" class="view_permission_btn" style="<?if ($view['wr_office_permission'] === '1') {echo "background:#ffc107";}?>">
+                          <i class="fa fa-clock-o" aria-hidden="true"></i>
+                          </label>
+                          <label for="office_permission3" class="view_permission_btn" style="<?if ($view['wr_office_permission'] === '3') {echo "background:#FC284F";}?>">
+                          <i class="fa fa-times" aria-hidden="true"></i>
+                          </label>
+                          <label for="office_permission4" class="view_permission_btn" >
+                          없음
+                          </label>
+                          
+                          
+                          </form> 
+                          </div>     
+-->    
+ 
+ 
+
+
                       <form name="fboardlist" id="fboardlist" action="./copy_update.php"  method="post">
                     <input type="hidden" name="bo_table" value="<?php echo $bo_table ?>">
                     <input type="hidden" name="board_list" value="<?php echo $board_list ?>">
@@ -133,9 +157,14 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                     <input type="hidden" name="sod" value="<?php echo $sod ?>">
                     <input type="hidden" name="sw" value="">
                     <input type="hidden" name="wr_id" value="<?=$wr_id?>">
+                    <input type="hidden" name="wr_sale_type" value="<?=$wr_sale_type?>">
                         <div class="col-lg-1"></div>
                         
                        <div class="col-lg-4" style="padding:90px 0;" >
+
+
+                          
+
                           <!--수정/삭제버튼 11-17일 변경-->
                           <div style="position:absolute; top :28px; right: -10px;">
                           <?=$GET_['office_write']?>
@@ -321,17 +350,6 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
 
 
 
-
-                            <!-- <div class="map_wrap">
-                            <div id="mapWrapper" style="width:50%;height:300px;float:left">
-                                <div id="map" style="width:100%;height:100%"></div> 
-                            </div> -->
-                            <!-- <div id="roadview" style="width:100%;height:100%"></div>  -->
-                            <!-- <div id="rvWrapper" style="width:50%;height:300px;float:left">
-                              </div>
-                            </div>
-                             -->
-
                             
 
                           <!-- 본문 내용 시작 { -->
@@ -394,7 +412,28 @@ $(".sale_view_drop").click(function(){
 
 
 
-// $('#map_area').css('height', $("#bo_v_atc").height() );
+
+// 퍼미션 상태 업데이트 ajax
+$("input[name=wr_office_permission]").on('click',function () {
+var formData = $('#view_state').serializeArray();
+$.ajax({
+url: "<?echo G5_BBS_URL?>/view_permission_update.php",
+type: "POST",
+data: formData,
+dataType: 'text',
+success: function (response) {
+  location.reload();
+},
+error: function (jqXHR, textStatus, errorThrown) {
+alert(errorThrown);
+}
+})
+});
+
+
+
+
+
 
   $(".config").click(function(){
   $(".chk_confirm_wrap").fadeToggle(300,"swing");

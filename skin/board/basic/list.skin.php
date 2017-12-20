@@ -324,7 +324,6 @@ include_once("$board_skin_path/lib/skin.lib.php");
         </li>
       </ul>
 
-<?=$wr_sold_out?>
     <div class="search_btn_wrap">
       <div class="input_box2" style="border-right:0;">
        <span class="search_list"  ><i class="fa fa-refresh" aria-hidden="true" style="padding-right:10px;"></i>검색초기화</span>
@@ -749,7 +748,8 @@ include_once("$board_skin_path/lib/skin.lib.php");
                             <option value="이미 수락한 매물">이미 수락한 매물</option>
                             <option value="기타사유입력" >기타사유입력</option>
                           </select>
-                          <input type="text" name="confirm_unaccept2" class="etc" style="display:none; width:100%; height:50px; margin-top:5px; text-align:center; border:1px solid #202b6e;  background:#3b4db7; color:#fff;"/>
+
+                          <textarea name="confirm_unaccept2" class="etc"   tabindex="15"  style="display:none; width:100%; height:50px; margin-top:5px; text-align:left; border:1px solid #202b6e;  background:#3b4db7; color:#fff; padding:15px;" onKeyup="var a=100; var b=this.scrollHeight;if(b>=a)this.style.pixelHeight=b+6"rows="1" cols="130"></textarea>
                     </div>
                     <!-- Footer -->
                     <div class="modal-footer" style="padding:15px;">
@@ -815,7 +815,7 @@ include_once("$board_skin_path/lib/skin.lib.php");
 <script src="<?php G5_PATH?>/assets/js/demo3.js"></script>
 <script type="application/javascript">
 $(".tr:even").css("background", "white");
-$(function() { $("input:text").keydown(function(evt) { if (evt.keyCode == 13) return false; }); });
+// $(function() { $("input:text").keydown(function(evt) { if (evt.keyCode == 13) return false; }); });
 
 
 $(".select").change(function(){
