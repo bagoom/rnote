@@ -17,23 +17,7 @@ if($member[mb_id])
     }
 }  
 
-
-// // 테마 head.sub.php 파일
-// if(!defined('G5_IS_ADMIN') && defined('G5_THEME_PATH') && is_file(G5_THEME_PATH.'/head.sub.php')) {
-//     require_once(G5_THEME_PATH.'/head.sub.php');
-//     return;
-// }
-
 $begin_time = get_microtime();
-
-// if (!isset($g5['title'])) {
-//     $g5['title'] = $config['cf_title'];
-//     $g5_head_title = $g5['title'];
-// }
-// else {
-//     $g5_head_title = $g5['title']; // 상태바에 표시될 제목
-//     $g5_head_title .= " | ".$config['cf_title'];
-// }
 
 // 현재 접속자
 // 게시판 제목에 ' 포함되면 오류 발생
@@ -131,8 +115,6 @@ if(!defined('G5_IS_ADMIN'))
 ?>
 </head>
 <body>
-  <section class="contact_wrap" >
-  </section>
   <section id="container" >
 
       <!--header start-->
@@ -191,7 +173,7 @@ if(!defined('G5_IS_ADMIN'))
             <?if ($wr_sold_out == '3'){ ?>
                   <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<?=$member['mb_id']?>&board_list=<?=$member[mb_3]?>&wr_important=&wr_sold_out=1&wr_sale_type=1" style="letter-spacing:.5px; color:#e8b82e!important;">거래종료</a>
             <?}else{?>
-                  <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<?=$member['mb_id']?>&board_list=<?=$member[mb_3]?>&wr_important=&wr_sold_out=1&wr_sale_type=1" style="letter-spacing:.5px;">일정관리</a>
+                  <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<?=$member['mb_id']?>&board_list=<?=$member[mb_3]?>&contact=1" style="letter-spacing:.5px;" class="contact">고객관리</a>
             <?}?>
           </li>
 
@@ -229,15 +211,6 @@ if(!defined('G5_IS_ADMIN'))
             </div>
           </div>
         </div> -->
-<? if ($gr_admin){ ?>
-<div class="user_contact" style="right:217px;">
-<i class="fa fa-address-book" aria-hidden="true"></i>
-</div>
-<?}else{?>
-  <div class="user_contact">
-<i class="fa fa-address-book" aria-hidden="true"></i>
-</div>
-<?}?>
 
 <div class="user_info">
   <i class="fa fa-user" aria-hidden="true"></i>
@@ -311,22 +284,7 @@ if(!defined('G5_IS_ADMIN'))
            $("#dd_arm").fadeOut(300);
         });
 
-        // 고객관리 ajax요청
-        var contact_url = "<?echo G5_BBS_URL?>/contact.php";
-        $(".user_contact").click(function(){
-          $('.contact_wrap').fadeToggle(100);
-        $.ajax({
-        type : "POST",
-        url : contact_url,
-        dataType : "text",
-        error : function() {
-            alert('통신실패!!');
-        },
-        success : function(data) {
-            $('.contact_wrap').html(data);
-        }
-        });
-        })
+
         
 
 

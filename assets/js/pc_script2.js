@@ -121,6 +121,14 @@ $('.sale_rand_wrap ').find('input[name="wr_area_m"]').on('keyup', function(){
 
 
  // 매도가 입력시 매도가 나누기 총면적으로 평당가격 입력
+ 
+$('#wr_area_p_all,#wr_area_m_all').on('keyup', function(){
+    $('#wr_p_sale_price').val(($('#wr_sale_price2').val()/$("#wr_area_p_all").val()).toFixed(1))
+    Profit_Rate();
+});
+
+
+
 $('#wr_sale_price2').on('keyup', function(){
     $('#wr_p_sale_price').val(($(this).val()/$("#wr_area_p_all").val()).toFixed(1))
     Profit_Rate();

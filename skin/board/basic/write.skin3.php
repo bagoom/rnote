@@ -83,7 +83,7 @@ input[type="text"],input[type="number"],input[type="tel"]{
                         <div class="tab-content">
                           <div class="tab-pane " id="rent" >
                             <!-- 게시물 작성/수정 시작 { -->
-                            <form name="fwrite" id="fwrite" action="<?php echo $action_url ?>" method="post" enctype="multipart/form-data" autocomplete="off" style="width:100%">
+                            <form name="fwrite" id="fwrite" name="rent_write" action="<?php echo $action_url ?>" method="post" enctype="multipart/form-data" autocomplete="off" style="width:100%" data-use-autosave="true">
                             <input type="hidden" name="uid" value="<?php echo get_uniqid(); ?>">
                             <input type="hidden" name="w" value="<?php echo $w ?>">
                             <input type="hidden" name="bo_table" value="<?php echo $bo_table ?>">
@@ -618,7 +618,7 @@ input[type="text"],input[type="number"],input[type="tel"]{
                                   <? if($w == "u"){ ?>
                                     <input type="submit" value="매물수정" id="btn_submit" accesskey="s" class="btn btn-primary" style="width:100%; padding:13px; text-align:center; margin-top:10px; margin-left:0;">
                                   <?}else {?>
-                                  <input type="submit" value="매물등록" id="btn_submit" accesskey="s" class="btn btn-primary" style="width:100%; padding:13px; text-align:center; margin-top:10px; margin-left:0;">
+                                  <input type="submit" value="매물등록 " id="btn_submit" accesskey="s" class="btn btn-primary" style="width:100%; padding:13px; text-align:center; margin-top:10px; margin-left:0;">
                                   <?}?>
         
                                 </div>
@@ -749,6 +749,38 @@ function valchange() {
 
 
 
+// $("form[data-use-autosave=true] input, textarea").on("keyup",function() {
+  
+//   // data-use-autosave=true 로 지정된 폼 안의 input과 textarea요소에서 키보드 입력 이벤트가 발생한다면
+//   var form = $(this).parents("form"); // 해당 입력폼이 포함된 폼
+//   window.localStorage[form.name] = form.serializeArray(); // 폼 이름을 키값으로 폼 전체 데이터 저장 
+//   });
+
+// $(document).ready(function() {
+  
+//   $("form[data-use-autosave=true]").each(function() { ; // 저장기능을 사용중인 폼을 찾습니다.​
+  
+   
+  
+//   if (window.localStorage[$(this).attr("name","rent_write").name]) { // 해당 폼 이름을 가진 임시저장글이 있는지 검사
+//   var ddd =   JSON.stringify(window.localStorage[$(this).attr("name","rent_write").name])
+//   var data = JSON.parse(ddd); // 해당 데이터를 해석
+//   console.log(name);
+//   for (name in data) {
+//     console.log(data)
+//   $(this).find("input[name="+"wr_subject"+"], textarea[name="+name+"]").val(data[name]);
+  
+//   // 입력폼에 데이터를 다시 복원
+  
+   
+  
+//   }
+  
+//   }
+  
+//   })
+  
+//   });
       
 
 
@@ -1331,4 +1363,3 @@ $("#wr_premium_b").keyup(function(){
     <script src="<?php G5_PATH?>/assets/js/demo2.js"></script>
 
 </section>
-<!-- } 게시물 작성/수정 끝 -->

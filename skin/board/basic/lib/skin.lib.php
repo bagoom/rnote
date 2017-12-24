@@ -311,9 +311,9 @@ $arr_search = array();
     $arr_search[name][] = "wr_bookmark";
     $arr_search[val][] = $_GET["wr_bookmark"];
   }
-  if(($_GET["schedule"])) {
-    $arr_search[name][] = "schedule";
-    $arr_search[val][] = $_GET["schedule"];
+  if(($_GET["contact"])) {
+    $arr_search[name][] = "contact";
+    $arr_search[val][] = $_GET["contact"];
   }
 
 

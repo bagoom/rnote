@@ -225,7 +225,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                             </div>
 
                             <div class="info_top">
-                              <li>관리번호<span class="info_sm_span"><?=$view['wr_code'];?></span></li>
+                              <li>매물번호<span class="info_sm_span"><?=$view['wr_code'];?></span></li>
                               <? if($view['wr_writer'] !== $member['mb_name']){ ?>
 
                           <!-- 임차인연락처가 있을경우 -->

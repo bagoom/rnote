@@ -269,8 +269,8 @@ if($write_count >= $join_gr_info['gr_write_permission']){
 
 if ($wr_sold_out)
 include_once($board_skin_path.'/list_sold_out_skin.php');
-else if ($schedule)
-include_once($board_skin_path.'/list_schedule_skin.php');
+else if ($contact)
+include_once($board_skin_path.'/contact/list_contact_skin.php');
 else if ($wr_important && $wr_office_permission == "1"){
 include_once($board_skin_path.'/list_permission_disable_skin.php') ;
 }

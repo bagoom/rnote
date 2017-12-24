@@ -1071,41 +1071,9 @@ color: #fff;
 }
 
 /* 고객연락처기능 */ 
-.contact_wrap{
-  position: absolute;
-  top:0;
-  right:0;
-  width:400px;
-  background: #fafafa;
-  display:none;
-  box-shadow: -2px 0 10px rgba(0,0,0,0.15);
-  z-index:10000;
-}
-.contact_head{
-  font-size:22px;
-  color:#fff;
-  background: #3b4db7;
-  /* border-bottom:2px solid #e5e9eb; */
-  overflow:hidden;
-}
-.contact_hide{
-  position: absolute;
-  left:-65px;
-  width:65px;
-  height:64.67px;
-  text-align: center;
-  line-height: 64.67px;
-  color:#fff;
-  background: #000;
-  cursor: pointer;
-}
-.contact_add ,.contact_title{
-  float:left;
-}
-.contact_title{
-  width:300px;
-  padding:20px;
-}
+
+
+
 .contact_add{
   width:90px;
   padding:10px;
@@ -1122,21 +1090,28 @@ color: #fff;
   background:#fff;  
 }
 .contact_add_btn{
-  width: 35px;
-  height:35px;
-  float:right;
-  text-align:center;
-  font-size:25px;
-  color:#3b4db7;
-  background:#fff;
-  border:0;
-  border-radius:50%;
-  transition: 0.3s all;
+  position: absolute;
+  left:50%;
+  bottom:-22px;
+  width: 130px;
+  margin-left: -65px;
+  padding: 15px;
+  background: #fff;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+  border-radius: 3px;
+  cursor:pointer;
+  
+}
+.contact_add_btn h3{
+  margin: 0;
+  font-size: 16px;
+  transition: 0.5s all;
 }
 .contact_add_btn:hover{
   margin-right:5px;
   color:#fff;
-  background: #222;
+  background: #3b4db7;
+  border:.5px solid #6a7deb;
 
 }
 .contact_book_mark{
@@ -1166,12 +1141,12 @@ color: #fff;
   font-size:17px;
   float:right;
 }
-.contact_content span i{
+.rc_bookmark span i{
   font-size:20px;
-  color:#3b4db7;
+  color:#ff9b00;
   transition: 0.3s all; 
 }
-.contact_content span i:hover{
+.rc_bookmark span i:hover{
  font-size:25px;
 }
 #suggesstion-box{

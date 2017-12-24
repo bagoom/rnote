@@ -566,13 +566,6 @@ include_once("$board_skin_path/lib/skin.lib.php");
                             <i class="fa fa-check-circle" aria-hidden="true"></i>
                             </p>
                           </div>
-                          <? }else if($list[$i]['wr_office_permission']=='3' && !$wr_important ){ ?> 
-                            <div class="td" style=" position:relative;">
-                            <?= $list[$i]['num']?>
-                            <p class="permission_disable"style="font-size:13px; background:#FC284F; ">
-                            <i class="fa fa-times" aria-hidden="true"></i>
-                            </p>
-                          </div>
                             <?}else{?>
                               <div class="td">
                               <?= $list[$i]['num']?>

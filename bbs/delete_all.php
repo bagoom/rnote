@@ -166,7 +166,7 @@ if($gr_admin && $wr_important){
     if($wr_sold_out == '1'){
         goto_url(G5_HTTP_BBS_URL.'/board.php?bo_table='.$bo_table.'&board_list='.$board_list.'&wr_sale_type='.$wr_sale_type.'&wr_sold_out=1&page='.$page);
         }else if($wr_important){
-        goto_url(G5_HTTP_BBS_URL.'/board.php?bo_table='.$bo_table.'&board_list='.$board_list.'&wr_sale_type='.$wr_sale_type.'&wr_important=1&wr_office_permission='.$wr_office_permission.'&page='.$page);
+        goto_url(G5_HTTP_BBS_URL.'/board.php?bo_table='.$bo_table.'&board_list='.$board_list.'&wr_sale_type='.$wr_sale_type.'&wr_subject='.$wr_subject.'&wr_sale_area='.$wr_sale_area.'&wr_floor='.$wr_floor.'&wr_floor_min='.$wr_floor_min.'&wr_floor_max='.$wr_floor_max.'&wr_address='.$wr_address.'&wr_writer='.$wr_writer.'&wr_area_p_min='.$wr_area_p_min.'&wr_area_p_max='.$wr_area_p_max.'&wr_rent_deposit_min='.$wr_rent_deposit_min.'&wr_rent_deposit_max='.$wr_rent_deposit_max.'&wr_m_rate_min='.$wr_m_rate_min.'&wr_m_rate_max='.$wr_m_rate_max.'&wr_premium_o_min='.$wr_premium_o_min.'&wr_premium_o_max='.$wr_premium_o_max.'&wr_sum_pay_min='.$wr_sum_pay_min.'&wr_sum_pay_max='.$wr_sum_pay_max.'&wr_rec_sectors='.$wr_rec_sectors.'&wr_important='.$wr_important.'&wr_office_permission='.$wr_office_permission.'&page='.$page);
         }else{
         goto_url(G5_HTTP_BBS_URL.'/board.php?bo_table='.$bo_table.'&board_list='.$board_list.'&wr_sale_type='.$wr_sale_type.'&wr_writer_id='.$member[mb_id].'&page='.$page);
     }
@@ -176,7 +176,7 @@ if($gr_admin && $wr_important){
     if($wr_sold_out == '1'){
         goto_url(G5_HTTP_BBS_URL.'/board.php?bo_table='.$bo_table.'&board_list='.$board_list.'&wr_sale_type='.$wr_sale_type.'&wr_sold_out=1&page='.$page);
         }else{
-        goto_url(G5_HTTP_BBS_URL.'/board.php?bo_table='.$bo_table.'&board_list='.$board_list.'&wr_sale_type='.$wr_sale_type.'&wr_writer_id='.$member[mb_id].'&page='.$page);
+        goto_url(G5_HTTP_BBS_URL.'/board.php?bo_table='.$bo_table.'&board_list='.$board_list.'&wr_sale_type='.$wr_sale_type.'&wr_subject='.$wr_subject.'&wr_sale_area='.$wr_sale_area.'&wr_floor='.$wr_floor.'&wr_floor_min='.$wr_floor_min.'&wr_floor_max='.$wr_floor_max.'&wr_address='.$wr_address.'&wr_writer_id='.$member['mb_id'].'&wr_area_p_min='.$wr_area_p_min.'&wr_area_p_max='.$wr_area_p_max.'&wr_rent_deposit_min='.$wr_rent_deposit_min.'&wr_rent_deposit_max='.$wr_rent_deposit_max.'&wr_m_rate_min='.$wr_m_rate_min.'&wr_m_rate_max='.$wr_m_rate_max.'&wr_premium_o_min='.$wr_premium_o_min.'&wr_premium_o_max='.$wr_premium_o_max.'&wr_sum_pay_min='.$wr_sum_pay_min.'&wr_sum_pay_max='.$wr_sum_pay_max.'&wr_rec_sectors='.$wr_rec_sectors.'&page='.$page);
         }
 }
 

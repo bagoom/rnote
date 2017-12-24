@@ -52,7 +52,6 @@ $(function() {
 <script >
 
 
-$(".contact_wrap").css('height',$("body").height());
 // $('.wrapper').css("height", $(document).height() );
 
 
