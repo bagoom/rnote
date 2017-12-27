@@ -357,6 +357,7 @@ include_once("$board_skin_path/lib/skin.lib.php");
     <?} ?>
 
   </div>
+
           <div class="content_header">
             <?if ($wr_writer_id == $member[mb_id] && !$wr_important == 1) { ?>
                 <?if ($gr_admin ){ ?>
@@ -444,6 +445,12 @@ include_once("$board_skin_path/lib/skin.lib.php");
               <i class="fa fa-cog" aria-hidden="true" value="중요매물등록"  style="font-size:18px; "></i>
               매물관리설정
             </button>
+            <?}else if(!$gr_admin && $bo_table == $gr_cp) {?>
+              <button class="btn btn-theme03 right  config active" type="button"  style="margin-right:10px;">
+              <i class="fa fa-cog" aria-hidden="true" value="중요매물등록"  style="font-size:18px; "></i>
+              매물관리설정
+            </button>
+
           <?}else if($gr_cp && $wr_writer_id == $member[mb_id] || $wr_sold_out){ ?>
             <button class="btn btn-theme03 right  config active" type="button"  style="margin-right:10px;">
               <i class="fa fa-cog" aria-hidden="true" value="중요매물등록"  style="font-size:18px; "></i>
@@ -493,6 +500,7 @@ include_once("$board_skin_path/lib/skin.lib.php");
                           <input type="hidden" name="sod" value="<?php echo $sod ?>">
                           <input type="hidden" name="page" value="<?php echo $page ?>">
                           <input type="hidden" name="wr_sale_type" value="<?=$wr_sale_type ?>">
+                          <input type="hidden" name="wr_writer_id" value="<?=$wr_writer_id ?>">
                           <input type="hidden" name="wr_sold_out" value="<?=$wr_sold_out ?>">
                           <input type="hidden" name="wr_important" value="<?=$wr_important ?>">
                           <input type="hidden" name="sw" value="">
@@ -761,7 +769,8 @@ include_once("$board_skin_path/lib/skin.lib.php");
                 <span class="s6">마이노트로등록하기</span>
                 <span class="s8">즐겨찾기등록하기</span>
                 <span class="s7">삭제</span>
-
+              <?} else if (!$gr_admin && $bo_table == $gr_cp) { ?>
+                <span class="s8">즐겨찾기등록하기</span>
               <?}else{?>
               <?if (!$gr_cp && !$gr_admin) {}else{?>
                 <?if ($wr_important == '1'){}else{ ?>
@@ -933,7 +942,7 @@ for (var i = 0; i < target.length; i++) {
     $("#fboardlist").submit();
   });
   $(".s8").click(function(){
-    $("#fboardlist").attr("action", "./bookmark.php");
+    $("#fboardlist").attr("action", "./insertBookmark.php");
     $("#fboardlist").submit();
   });
   $(".s7").click(function(){

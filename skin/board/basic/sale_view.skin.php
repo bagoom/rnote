@@ -311,8 +311,8 @@ function number2Kor(num, type, delimChar) {
       }
     };
   })();
-  var baseNames =  ["천", "백", "", ""];
-  var levelNames = ["만", "억"];
+  var baseNames =  ["천", "백" , "0", ""];  
+  var levelNames = ["만", "억"]; 
   type = type || "HALF";
   delimChar = delimChar || " ";
 
@@ -378,8 +378,8 @@ function number2Kor(num, type, delimChar) {
 }
 
 
-$(".sale_price").text(number2Kor('<?=$view[wr_sale_price]?>', "HALF"))
-$(".wr_silinsu").text(number2Kor('<?=$view[wr_silinsu]?>', "HALF"))
+$(".sale_price").text(number2Kor('<?=$view[wr_sale_price]?>', "LOW"))
+$(".wr_silinsu").text(number2Kor('<?=$view[wr_silinsu]?>', "LOW"))
 
 
   $(".config").click(function(){

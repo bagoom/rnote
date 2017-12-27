@@ -3,6 +3,8 @@
 <script type="text/javascript" src="http://code.jquerygeo.com/jquery.geo-1.0.0-b1.5.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=322cba0807c729368c6cc0ec6e84585c"></script>
 <script src="https://d3js.org/d3.v4.min.js"></script>
+<link href="<?=G5_URL?>/assets/css/jquery-nicelabel.css" rel="stylesheet" type="text/css" />
+<link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
 <style>
 .customoverlay {position:relative;bottom:45px;border-radius:6px;border: 1px solid #ccc;border-bottom:2px solid #ddd;float:left;}
 .customoverlay:nth-of-type(n) {border:0; box-shadow:0px 1px 2px #888;}
@@ -61,7 +63,7 @@ display:none;
   font-size:20px;
   color:#fff;
   background:#000;
-  z-index:99999;
+  z-index:90;
   cursor:pointer;
 }
 .bookmark_delete_btn{
@@ -76,7 +78,7 @@ display:none;
   font-size:20px;
   color:#fff;
   background:red;
-  z-index:99999;
+  z-index:90;
   cursor:pointer;
 }
 .add_folder_btn{
@@ -94,8 +96,6 @@ display:none;
 .map_board_list {
   position: relative;
   width: 100%;
-  height: 70px;
-  padding:15px 15px;
   font-size: 14px;
   color:#666;
   cursor: pointer;
@@ -106,13 +106,21 @@ display:none;
 }
 .map_board_list:hover{
   font-weight: 700;
-  padding-top:20px;
+  padding-top:5px;
 }
 
 .registerated{
   display: table;
   min-height: 33px;
-  padding:5px;
+  padding:15px 15px;
+}
+.child_list_wrap{
+  display:none;
+}
+.child_list{
+  padding:15px;
+  background:#f5f5f5;
+  border-top: 1px solid #e7e7e7;
 }
 .map_board_info{
   width: 100%;
@@ -160,12 +168,11 @@ display:none;
 .dropdown_btn{
   position: absolute;
   right: 0;
-  top: 50%;
+  top: 10px;
   width: 50px;
   height: 50px;
   line-height: 50px;
   text-align: center;
-  margin-top: -20px;
   color: #3b4db7;
   font-size: 20px;
 }
@@ -174,6 +181,37 @@ display:none;
   border:3px solid #3b4db7;
   transition: 0.3s all;
 }
+.modal-dialog{
+  margin-top:150px;
+}
+.modal-body{
+  padding:0;
+}
+.modal_sec{
+  padding: 30px;
+  border-bottom: 0.5px solid #ccc; 
+  overflow:hidden;
+}
+.modal_sec:last-child{
+  border:0;
+}
+.modal-body input[type=text]{
+  width:80%;
+  height: 50px;  
+  padding-left: 10px ;
+  font-size: 18px;
+  float:left;
+}
+.modal-body label:first-child{
+  width: 20%;
+  float:left;
+  padding-top:15px;
+  font-size: 18px;
+}
+.circle-nicelabel + label{
+  background-color: #3b4db7;
+}
+
 </style>
 
 <div id="bookmark_wrap">
@@ -196,53 +234,163 @@ display:none;
 <i class="fa fa-bookmark" aria-hidden="true" style="font-size:22px; margin-right: 10px;"></i> 
 <?=$member['mb_name']?>님의 
 즐겨찾기
-<div class="add_folder_btn">
+<div class="add_folder_btn" data-target="#layerpop" data-toggle="modal">
 폴더추가하기
 </div>
 </div>
 
+
 <form action="" id="bookmark_form" method="post">
-  <? for ($i=0; $i<count($list); $i++) {?>
+
+
+<? 
+$con = mysqli_connect("localhost","realnote","!dnwls1127","realnote"); 
+
+$sql = "select * from `g5_write_test10` a, `bookmark_test10` b where a.wr_id = b.bm_match_id and b.bm_from = 1 UNION ALL select * from `g5_write_ekdna8284` a, `bookmark_test10` b where a.wr_id = b.bm_match_id and b.bm_from = 2 ";
+
+$sql = "select * from `bookmark_test10_folder`";
+$result = mysqli_query($con , $sql);
+?>
+
+
+
+
+  <? while ($folder = mysqli_fetch_array($result)) {?>
     <div class="map_board_list" >
-      
       <!-- 체크버튼 -->
-      <label for="chk_wr_id_<?php echo $list[$i]['wr_id'] ?>" class="list_check_label">
+      <label for="chk_wr_id_<?php echo $folder['wr_id'] ?>" class="list_check_label">
       <i class="fa fa-check" aria-hidden="true"></i>
       </label>
-      <input type="checkbox" name="chk_wr_id[]" class="import_chk" style="display:none;" value="<?php echo $list[$i]['wr_id'] ?>" id="chk_wr_id_<?php echo $list[$i]['wr_id']?>" >
+      <input type="checkbox" name="chk_wr_id[]" class="import_chk" style="display:none;" value="<?php echo $folder['wr_id'] ?>" id="chk_wr_id_<?php echo $folder['wr_id']?>" >
 
       <!-- 리스트아이템 -->
       <div class="registerated">
-        <img  style="margin-right:10px; width:35px; float:left;"src="<?echo G5_URL?>/img/marker.png">
-        <div class="find_txt" data-key="<?=$list[$i]['wr_id']?>"><?=$list[$i][wr_subject]?></div>
+       <i class="fa fa-folder" aria-hidden="true" style="float:left; font-size: 23px; color:#3b4db7; padding-top:5px; margin-right:10px;"></i>
+        <div class="find_txt" data-key="<?=$folder['wr_id']?>"><?=$folder['bmf_name']?></div>
         <p class="dropdown_btn" ><i class="fa fa-chevron-circle-down" aria-hidden="true"></i></p>
       </div>
+      </div>
+    
 
+
+    <?php
+    $sql2 = "select * from `g5_write_test10` a, `bookmark_test10` b where a.wr_id = b.bm_match_id and b.bm_from = 1 UNION ALL select * from `g5_write_ekdna8284` a, `bookmark_test10` b where a.wr_id = b.bm_match_id and b.bm_from = 2 ";
+    $result2 = mysqli_query($con , $sql2);
+    ?>
+
+    <div class="child_list_wrap">
+   <? while ($child = mysqli_fetch_array($result2)) {?>
+    <?if( $folder[bmf_id] == $child[bm_bmf_id]){ ?>
+    <div class="child_list">
+          <p><?=$child['wr_subject']?></p>
+    </div>
+    <?}}?> 
     </div>
 
-    <div class="map_board_info">
+    <!-- <div class="map_board_info">
         <ul>
-          <li><span class="map_info_big"><?=$list[$i][wr_rent_deposit]?></span>만/<span class="map_info_big"><?=$list[$i][wr_m_rate]?></span>만</li>
-          <li><?=$list[$i][wr_address]?></li>
-          <li><?=$list[$i][wr_sale_area]?></li>
-          <li style="margin-top:10px;"><a href="<?=$list[$i]['href']?>" class="url_btn">매물바로가기</a></li>
+          <li><span class="map_info_big"><?=$folder[wr_rent_deposit]?></span>만/<span class="map_info_big"><?=$folder[wr_m_rate]?></span>만</li>
+          <li><?=$folder[wr_address]?></li>
+          <li><?=$folder[wr_sale_area]?></li>
+          <li style="margin-top:10px;"><a href="<?=$folder['href']?>" class="url_btn">매물바로가기</a></li>
         </ul>
-    </div>
-
+    </div> -->
 
 <?}?>
-<? if(count($list)==0){ ?>
+<!-- <? if(count($folder)==0){ ?>
   <div style="padding:25px 15px; font-size:20px; text-align:center;">
     즐겨찾기된 매물이 없습니다.
   </div>
-  <?}?>
+  <?}?> -->
   </form>
 
 </div>
 </div>
 
 
+
+
+<div class="modal fade" id="layerpop" >
+                <div class="modal-dialog">
+                  <div class="modal-content" style="min-width:500px !important; width:500px; margin:0 auto;">
+                    <!-- header -->
+                    <div class="modal-header">
+                      <!-- 닫기(x) 버튼 -->
+                      <button type="button" class="close" data-dismiss="modal">×</button>
+                      <!-- header title -->
+                      <h4 class="modal-title">즐겨찾기 폴더 추가</h4>
+                    </div>
+                    <!-- body -->
+                    <div class="modal-body" >
+                      
+                      <form id="folder_add_form" action="<?echo G5_BBS_URL?>/folder_update.php" method="post">
+                      <div class="modal_sec">
+                        <label >폴더명</label>  
+                      <input type="text" placeholder="추가하실 폴더의 이름을 적어 주세요." name="folder_name">
+                        </div>
+                        <div class="modal_sec">
+                        <label >상단고정</label>  
+                        <input class="circle-nicelabel" name="folder_top" data-nicelabel="{&quot;position_class&quot;: &quot;circle-checkbox&quot;}" type="checkbox" id="nicelabel" value="0">
+                        <label class="circle-checkbox" for="nicelabel" style="margin-top:8px;"><div class="circle-btn"></div></label>
+                        </div>
+                      </form>
+                      </div>
+                      <!-- Footer -->
+                      <div class="modal-footer" style="padding:15px;">
+                        <button type="button" class="btn btn-default add" data-dismiss="modal">폴더추가</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+                      </div>
+                  </div>
+                </div>
+              </div>
+
+<script src="<?=G5_URL?>/assets/js/jquery.nicelabel.js"></script>            
+
 <script>
+
+//  폴더 추가 ajax요청
+$(".add").on('click',function () {
+  if( $('#nicelabel').is(":checked")){
+      $('#nicelabel').val("1");
+    }
+  var formData = $('#folder_add_form').serializeArray();
+  $.ajax({
+  url: "<?echo G5_BBS_URL?>/folder_update.php",
+  type: "POST", 
+  data: formData,
+  dataType: 'text',
+  success: function (Data, textStatus, jqXHR) {
+
+  console.log(formData[0]);
+  console.log(formData[1]);
+  console.log(formData[2]);
+  // 폴더 추가후 리스트 새로고침 ajax요청
+  // $.ajax({
+  // type : "POST",
+  // url : '<?echo G5_BBS_URL?>/contact.php',
+  // dataType : "text",
+  // error : function() {
+  //     alert('통신실패!!');
+  // },
+  // success : function(data) {
+  //     $('.main-list-wrap').html(data);
+  // }
+  // });
+  
+  },
+  error: function (jqXHR, textStatus, errorThrown) {
+  alert(errorThrown);
+  }
+  })
+  });
+
+
+
+$(".map_board_list").click(function(){
+  $(this).next(".child_list_wrap").slideToggle(200);
+  $("i", this).toggleClass("fa-folder fa-folder-open");
+})
+
 $(".map_board_list").each(function(index) {
 $(this).find(".dropdown_btn").on("click", function(){
     $(this).parents(".map_board_list").next(".map_board_info").slideToggle(200);
@@ -276,16 +424,19 @@ var center_position = [];
 $('#map_area_all,#map_board,#bookmark_wrap').css("height", $(window).height()-85);
 // $('#map_area_all,#map_board,#bookmark_wrap').css('height',$(window).height());
 // $('#map_area_all,#map_board').css("max-height","780px");
-<? for ($i=0; $i<count($list); $i++) {?>
-  var title = "<?=$list[$i][wr_subject]?>";
-  var posx = <?=$list[$i][wr_posx]?>;
-  var posy = <?=$list[$i][wr_posy]?>;
-  var wr_floor = <?=$list[$i][wr_floor]?>;
-  var wr_area_p = <?=$list[$i][wr_area_p]?>;
-  var wr_rent_deposit = <?=$list[$i][wr_rent_deposit]?>;
-  var wr_m_rate = <?=$list[$i][wr_m_rate]?>;
-  var wr_premium_o = <?=$list[$i][wr_premium_o]?>;
-  var url = "<?=$list[$i]['href']?>";
+<? 
+$sql = "select * from `g5_write_test10` a, `bookmark_test10` b where a.wr_id = b.bm_match_id and b.bm_from = 1 UNION ALL select * from `g5_write_ekdna8284` a, `bookmark_test10` b where a.wr_id = b.bm_match_id and b.bm_from = 2 ";
+$result = mysqli_query($con, $sql);
+while ($folder = mysqli_fetch_array($result)) {?>
+  var title = "<?=$folder[wr_subject]?>";
+  var posx = <?=$folder[wr_posx]?>;
+  var posy = <?=$folder[wr_posy]?>;
+  var wr_floor = <?=$folder[wr_floor]?>;
+  var wr_area_p = <?=$folder[wr_area_p]?>;
+  var wr_rent_deposit = <?=$folder[wr_rent_deposit]?>;
+  var wr_m_rate = <?=$folder[wr_m_rate]?>;
+  var wr_premium_o = <?=$folder[wr_premium_o]?>;
+  var url = "<?=$folder['href']?>";
   positions.push( [title,posy,posx,url,wr_floor,wr_area_p,wr_rent_deposit,wr_m_rate,wr_premium_o] )
   center_position.push( [posy,posx] )
 
@@ -470,3 +621,28 @@ map.panTo(moveLatLon);
 
 
 </script>
+<script>
+	$(function(){
+		$('#rect-checkbox > input').nicelabel();
+		$('#rect-radio > input').nicelabel();
+		$('#circle-checkbox > input').nicelabel();
+		$('#circle-radio > input').nicelabel();
+		$('#text-checkbox > input').nicelabel();
+		$('#text-radio > input').nicelabel();
+		$('#text-checkbox-ico > input:eq(0)').nicelabel({
+			checked_ico: './ico/checked.png',
+			unchecked_ico: './ico/unchecked.png'
+		});
+		$('#text-checkbox-ico > input:eq(1)').nicelabel({
+			checked_ico: './ico/checked.png',
+			unchecked_ico: './ico/unchecked.png'
+		});
+		$('#text-checkbox-ico > input:eq(2)').nicelabel({
+			checked_ico: './ico/checked.png',
+			unchecked_ico: './ico/unchecked.png'
+		});
+		$('#text-checkbox-ico > input:eq(3)').nicelabel({
+			uselabel: false
+		});
+		
+	});
