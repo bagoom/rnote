@@ -1,248 +1,26 @@
-<?php
-?>
 <script type="text/javascript" src="http://code.jquerygeo.com/jquery.geo-1.0.0-b1.5.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=322cba0807c729368c6cc0ec6e84585c"></script>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <link href="<?=G5_URL?>/assets/css/jquery-nicelabel.css" rel="stylesheet" type="text/css" />
 <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
-<style>
-.customoverlay {position:relative;bottom:45px;border-radius:6px;border: 1px solid #ccc;border-bottom:2px solid #ddd;float:left;}
-.customoverlay:nth-of-type(n) {border:0; box-shadow:0px 1px 2px #888;}
-.customoverlay a {display:block;text-decoration:none;color:#555;text-align:center;border-radius:6px;font-size:14px;font-weight:bold;overflow:hidden;background: #3b4db7;background: #3b4db7 url(http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;}
-.customoverlay .title {display:block;text-align:center;background:#fff;
-  /* margin-right:35px; */
-  padding:10px 15px;font-size:14px;font-weight:bold;}
-.customoverlay:after {content:'';position:absolute;margin-left:-12px;left:50%;bottom:-12px;width:22px;height:12px;background:url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
-::-webkit-scrollbar {
-display:none;
-}
+<link href="<?=$bookmark_skin_url?>/bookmark_style.css" rel="stylesheet" type="text/css">
 
-.black-bg{
-  margin-top: 0;
-  background: #222 !important;
-}
-#map_area_all{
-  position: absolute;
-  top:85px;
-  left:0;
-  width: 75%;
-}
-#map_area{
-  width: 100%;
-  height: 100%;
-}
-#map_board{
-  width: 25%;
-  position: absolute;
-  top:85px;
-  right:0;
-  background: #fff;
-  z-index:1;
-  overflow-y: scroll;
-  box-shadow: -3px 0 15px rgba(0,0,0,.15);
-  -ms-overflow-style: none; 
-}
-.info_window{
-  border-radius: 3px;
-}
-.bookmark_head{
-  position:relative;
-  padding: 20px;
-  font-size : 18px;
-  color:#fff;
-  background: #3b4db7; 
-}
-.bookmark_config_btn{
-  position:absolute;
-  top:0;
-  right:0;
-  width:64px;
-  height:64px;
-  line-height:64px;
-  text-align:center;
-  font-size:20px;
-  color:#fff;
-  background:#000;
-  z-index:90;
-  cursor:pointer;
-}
-.bookmark_delete_btn{
-  position:absolute;
-  top:0;
-  right:64px;
-  width:64px;
-  height:64px;
-  line-height:64px;
-  display:none;
-  text-align:center;
-  font-size:20px;
-  color:#fff;
-  background:red;
-  z-index:90;
-  cursor:pointer;
-}
-.add_folder_btn{
-  position:absolute;
-  top:20px;
-  right:15px;
-  padding:8px 8px 5px 8px;
-  text-align:center;
-  font-size:12px;
-  color: rgba(255,255,255,0.9);
-  background:#0b1865;
-  border-radius: 1px;
-  border:.5px solid rgba(255,255,255,0.8);
-  cursor:pointer;
-}
-.map_board_list {
-  position: relative;
-  width: 100%;
-  font-size: 14px;
-  color:#666;
-  cursor: pointer;
-}
-.map_board_list:hover{
-  font-weight: 700;
-}
 
-.registerated{
-  display: table;
-  min-height: 33px;
-  padding:15px 15px;
-}
-.child_list_wrap{
-  display:none;
-}
-.child_list{
-  padding:15px;
-  background:#f5f5f5;
-  border-top: 1px solid #e7e7e7;
-  cursor:pointer;
-  transition: 0.15s all;
-}
-.child_list:hover{
-  color:#fff;
-  background: #3b4db7;
-}
-.child_list p{
-  margin: 0;
-}
-.child_list p span{
-  float: right;
-}
-.map_board_info{
-  width: 100%;
-  background: #f6f6f6;
-  display: none;
-  padding:15px;
-  box-shadow: inset 0px 0px 7px rgba(0,0,0,.09);
-  color:#888;
-}
-.map_board_info li{
-  width:100%;
-  padding: 3px;
-}
-.list_check_label{
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:70px;
-  line-height:70px;
-  display:none;
-  text-align:center;
-  font-size:25px;
-  color:#fff;
-  background: rgba(0,0,0,0.5);
-  cursor:pointer;
-}
-.find_txt{
-  float:left;
-  line-height:35px;
-}
-.map_info_big{
-  font-size: 18px;
-  font-weight: bold;
-  color: #3b4db7;
-}
-.url_btn{
-  width: 90px;
-  padding:5px;
-  text-align: center;
-  background: #3b4db7;
-  color: #fff;
-  border-radius: 5px;
-}
-.dropdown_btn{
-  position: absolute;
-  right: 0;
-  top: 10px;
-  width: 50px;
-  height: 50px;
-  line-height: 50px;
-  text-align: center;
-  color: #3b4db7;
-  font-size: 20px;
-}
-.ddong_border{
-  /*z-index: 9999999;*/
-  border:3px solid #3b4db7;
-  transition: 0.3s all;
-}
-.modal-dialog{
-  margin-top:150px;
-}
-.modal-body{
-  padding:0;
-}
-.modal_sec{
-  padding: 30px;
-  border-bottom: 0.5px solid #ccc; 
-  overflow:hidden;
-}
-.modal_sec:last-child{
-  border:0;
-}
-.modal-body input[type=text]{
-  width:80%;
-  height: 50px;  
-  padding-left: 10px ;
-  font-size: 18px;
-  float:left;
-}
-.modal-body label:first-child{
-  width: 20%;
-  float:left;
-  padding-top:15px;
-  font-size: 18px;
-}
-.circle-nicelabel + label{
-  background-color: #3b4db7;
-}
 
-</style>
-
+<? $con = mysqli_connect("localhost","realnote","!dnwls1127","realnote"); ?>
 <div id="bookmark_wrap">
 <div id="map_area_all">
 
 <div id="map_area"></div>
-<div class="bookmark_config_btn">
-<i class="fa fa-cog" aria-hidden="true"></i>
-</div>
-<div class="bookmark_delete_btn">
-<i class="fa fa-trash-o" aria-hidden="true"></i>
-</div>
-
 </div>
 <div id="map_board">
-
+  </div>
 </div>
-</div>
 
 
 
-
-<div class="modal fade" id="layerpop" >
+            <!-- 폴더추가 -->
+            <div class="modal fade" id="layerpop" >
                 <div class="modal-dialog">
                   <div class="modal-content" style="min-width:500px !important; width:500px; margin:0 auto;">
                     <!-- header -->
@@ -276,12 +54,74 @@ display:none;
                 </div>
               </div>
 
+              <!-- 폴더 수정 -->
+              <div class="modal fade" id="modify_folder" >
+              <div class="modal-dialog">
+              <div class="modal-content" style="min-width:500px !important; width:500px; margin:0 auto;">
+                <!-- header -->
+                <div class="modal-header">
+                  <!-- 닫기(x) 버튼 -->
+                  <button type="button" class="close" data-dismiss="modal">×</button>
+                  <!-- header title -->
+                  <h4 class="modal-title">즐겨찾기 폴더 수정</h4>
+                </div>
+                <!-- body -->
+                <div class="modal-body" >
+                  
+                  <form id="folder_add_form2" action="<?echo G5_BBS_URL?>/folder_update.php" method="post">
+                  <input type="hidden" id="bmf_id" name="bmf_id" value="">
+                  <input type="hidden" name="w" value="u">
+                  <div class="modal_sec">
+                    <label >폴더명</label>  
+                  <input type="text" placeholder="추가하실 폴더의 이름을 적어 주세요." name="folder_name" id="folder_name">
+                    </div>
+                    <div class="modal_sec">
+                    <label >상단고정</label>  
+                    <input class="circle-nicelabel" name="folder_top" id="folder_top" data-nicelabel="{&quot;position_class&quot;: &quot;circle-checkbox&quot;}" type="checkbox" id="nicelabel" value="0" >
+                    <label class="circle-checkbox" for="folder_top" style="margin-top:8px;"><div class="circle-btn"></div></label>
+                    </div>
+                  </form>
+                  </div>
+                  <!-- Footer -->
+                  <div class="modal-footer" style="padding:15px;">
+                    <button type="button" class="btn btn-default modify" data-dismiss="modal">폴더수정</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+                  </div>
+              </div>
+            </div>
+              </div>
 <script src="<?=G5_URL?>/assets/js/jquery.nicelabel.js"></script>            
 
 <script>
+$(function() { $("input:text").keydown(function(evt) { if (evt.keyCode == 13) return false; }); });
+
+
+
+
+
+
+
+// 북마크리스트 ajax요청
+var contact_url = "<?=$bookmark_skin_url?>/bookmark_board_list.php";
+$(document).ready(function(){
+  // $('.contact_wrap').fadeToggle(100);
+$.ajax({
+type : "POST",
+url : contact_url,
+dataType : "text",
+error : function() {
+    alert('통신실패!!');
+},
+success : function(data) {
+    $('#map_board').html(data);
+}
+});
+})
+
 
 //  폴더 추가 ajax요청
 $(".add").on('click',function () {
+  var contact_url = "<?=$bookmark_skin_url?>/bookmark_board_list.php";
   if( $('#nicelabel').is(":checked")){
       $('#nicelabel').val("1");
     }
@@ -292,23 +132,52 @@ $(".add").on('click',function () {
   data: formData,
   dataType: 'text',
   success: function (Data, textStatus, jqXHR) {
-  
-  console.log(formData[0]);
-  console.log(formData[1]);
-  console.log(formData[2]);
-  // 폴더 추가후 리스트 새로고침 ajax요청
-  // $.ajax({
-  // type : "POST",
-  // url : '<?echo G5_BBS_URL?>/contact.php',
-  // dataType : "text",
-  // error : function() {
-  //     alert('통신실패!!');
-  // },
-  // success : function(data) {
-  //     $('.main-list-wrap').html(data);
-  // }
-  // });
-  
+// 폴더 추가후 리스트 리로드 요청 
+$.ajax({
+type : "POST",
+url : contact_url,
+dataType : "text",
+error : function() {
+alert('통신실패!!');
+},
+success : function(data) {
+$('#map_board').html(data);
+}
+});
+
+  },
+  error: function (jqXHR, textStatus, errorThrown) {
+  alert(errorThrown);
+  }
+  })
+  });
+
+  //  폴더 수정 ajax요청
+$(".modify").on('click',function () {
+  var contact_url = "<?=$bookmark_skin_url?>/bookmark_board_list.php";
+  if( $('#folder_top').is(":checked")){
+      $('#folder_top').val("1");
+    }
+  var formData = $('#folder_add_form2').serializeArray();
+  $.ajax({
+  url: "<?echo G5_BBS_URL?>/folder_update.php",
+  type: "POST", 
+  data: formData,
+  dataType: 'text',
+  success: function (Data, textStatus, jqXHR) {
+// 폴더 수정후 리스트 리로드 요청 
+$.ajax({
+type : "POST",
+url : contact_url,
+dataType : "text",
+error : function() {
+alert('통신실패!!');
+},
+success : function(data) {
+$('#map_board').html(data);
+}
+});
+
   },
   error: function (jqXHR, textStatus, errorThrown) {
   alert(errorThrown);
@@ -318,46 +187,18 @@ $(".add").on('click',function () {
 
 
 
-$(".map_board_list").click(function(){
-  $(this).next(".child_list_wrap").slideToggle(200);
-  $("i", this).toggleClass("fa-folder fa-folder-open");
-})
 
-$(".map_board_list").each(function(index) {
-$(this).find(".dropdown_btn").on("click", function(){
-    $(this).parents(".map_board_list").next(".map_board_info").slideToggle(200);
-});
-$(this).on('click', function(){
-    panTo($(this))
-})
-});
 
-$(".bookmark_config_btn").click(function(){
-    $(".list_check_label").fadeToggle(300,'swing');
-})
 
-$(".import_chk").click(function(){
-  
-  if( $(this).is(":checked") ){
-    $(".bookmark_delete_btn").show();
-  }else{
-    $(".bookmark_delete_btn").hide();
-  }
-})
-
-$(".bookmark_delete_btn").click(function(){
-    $("#bookmark_form").attr("action", "./bookmark_update.php");
-    $("#bookmark_form").submit();
-  });
 
 
 var positions = [];
 var center_position = [];
 $('#map_area_all,#map_board,#bookmark_wrap').css("height", $(window).height()-85);
-// $('#map_area_all,#map_board,#bookmark_wrap').css('height',$(window).height());
-// $('#map_area_all,#map_board').css("max-height","780px");
-<? 
-$sql = "select * from `g5_write_test10` a, `bookmark_test10` b where a.wr_id = b.bm_match_id and b.bm_from = 1 UNION ALL select * from `g5_write_ekdna8284` a, `bookmark_test10` b where a.wr_id = b.bm_match_id and b.bm_from = 2 ";
+
+
+
+<? $sql = "select * from `g5_write_test10` a, `bookmark_test10` b where a.wr_id = b.bm_match_id and b.bm_from = 1 UNION ALL select * from `g5_write_ekdna8284` a, `bookmark_test10` b where a.wr_id = b.bm_match_id and b.bm_from = 2 ";
 $result = mysqli_query($con, $sql);
 while ($folder = mysqli_fetch_array($result)) {?>
   var title = "<?=$folder[wr_subject]?>";
@@ -368,10 +209,10 @@ while ($folder = mysqli_fetch_array($result)) {?>
   var wr_rent_deposit = <?=$folder[wr_rent_deposit]?>;
   var wr_m_rate = <?=$folder[wr_m_rate]?>;
   var wr_premium_o = <?=$folder[wr_premium_o]?>;
+  var bm_bmf_id = <?=$folder['bm_bmf_id']?>;
   var url = "<?=$folder['href']?>";
-  positions.push( [title,posy,posx,url,wr_floor,wr_area_p,wr_rent_deposit,wr_m_rate,wr_premium_o] )
+  positions.push( [title,posy,posx,url,wr_floor,wr_area_p,wr_rent_deposit,wr_m_rate,wr_premium_o,bm_bmf_id] )
   center_position.push( [posy,posx] )
-
 <?}?>
 
 var newPositions = positions.map(function(d)
@@ -383,7 +224,8 @@ var newPositions = positions.map(function(d)
   wr_area_p: d[5],
   wr_rent_deposit: d[6],
   wr_m_rate: d[7],
-  wr_premium_o: d[8]
+  wr_premium_o: d[8],
+  bm_bmf_id: d[9]
   }
 });
 
@@ -420,7 +262,8 @@ var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니�
     //
 		// });
     var imageSrc = "<?echo G5_URL?>/img/marker.png";
-
+    var markers = [];
+    var overlays = [];
 for (var i = 0; i < positions.length; i ++) {
 
 
@@ -429,7 +272,6 @@ for (var i = 0; i < positions.length; i ++) {
 
       // 마커 이미지를 생성합니다
       var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize);
-
       // 마커를 생성합니다
       var marker = new daum.maps.Marker({
           map: map, // 마커를 표시할 지도
@@ -437,12 +279,6 @@ for (var i = 0; i < positions.length; i ++) {
           title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
           image : markerImage // 마커 이미지
       });
-
-
-
-// 마커가 지도 위에 표시되도록 설정합니다
-marker.setMap(map);
-
 // 커스텀 오버레이에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 var content = '<div class="customoverlay">' +
   '  <a href="#" >' +
@@ -451,8 +287,6 @@ var content = '<div class="customoverlay">' +
   '  </a>' +
   '</div>';
 
-// 커스텀 오버레이가 표시될 위치입니다
-var position = new daum.maps.LatLng(37.54699, 127.09598);
 
 // 커스텀 오버레이를 생성합니다
 var customOverlay = new daum.maps.CustomOverlay({
@@ -461,12 +295,52 @@ var customOverlay = new daum.maps.CustomOverlay({
   content: content,
   yAnchor: 1
 });
+
+
+markers.push(marker);
+overlays.push(customOverlay);
+
+function setMarkers(map,a) {
+  for (var i = 0; i < markers.length; i++) {
+
+      if(newPositions[i].bm_bmf_id == a){
+
+          markers[i].setMap(map);
+          overlays[i].setMap(map);
+
+      }
+  }            
 }
 
-$(".map_board_list").hover(function(){
+
+} // for exit
+
+
+function _initsetMarkers(map) {
+  for (var i = 0; i < markers.length; i++) {
+      markers[i].setMap(map);
+      overlays[i].setMap(map);
+  }            
+}
+function initMarkers(map) {
+  _initsetMarkers(null);  
+}
+
+
+function hideMarkers(toggle_id) {
+    setMarkers(null,toggle_id);  
+}
+function showMarkers(toggle_id) {
+    setMarkers(map,toggle_id)    
+}
+
+
+
+$(".child_list").hover(function(){
+  console.log("ddd")
   hoverList($(this))
 });
-$(".map_board_list").mouseleave(function(){
+$(".child_list").mouseleave(function(){
   leaveList($(this))
 });
 
@@ -497,8 +371,8 @@ function hoverList(d){
   return a.innerHTML.replace(' ','') == text})
 $(ddd).parents('a').addClass("ddong_border");
 $(ddd).parents('.customoverlay').parent().css("z-index","10");
+console.log(ddong);
   };
-
 function leaveList(d){
   var text = d.find('.find_txt').text();
   var ddong =$('span.title').parent();
@@ -512,22 +386,15 @@ $(ddd).parents('.customoverlay').parent().css("z-index","0");
 
 
 
-
-
-//
 // var filtered = ddong.filter(function(a){return ddong.text() == text});
 // console.log(ddong[1].innerHTML)
 // $(filtered).find(".customoverlay").css("background","red")
 // }
-
-
-
-
 function panTo(d) {
   // console.log('works')
 var text = d.find('.find_txt').text();
-console.log(text)
 var filtered = newPositions.filter(function(a){return a.title == text})
+console.log(text)
 
 var moveLatLon = filtered[0].latlng;
 map.panTo(moveLatLon);
@@ -536,45 +403,4 @@ map.panTo(moveLatLon);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</script>
-<script>
-	$(function(){
-		$('#rect-checkbox > input').nicelabel();
-		$('#rect-radio > input').nicelabel();
-		$('#circle-checkbox > input').nicelabel();
-		$('#circle-radio > input').nicelabel();
-		$('#text-checkbox > input').nicelabel();
-		$('#text-radio > input').nicelabel();
-		$('#text-checkbox-ico > input:eq(0)').nicelabel({
-			checked_ico: './ico/checked.png',
-			unchecked_ico: './ico/unchecked.png'
-		});
-		$('#text-checkbox-ico > input:eq(1)').nicelabel({
-			checked_ico: './ico/checked.png',
-			unchecked_ico: './ico/unchecked.png'
-		});
-		$('#text-checkbox-ico > input:eq(2)').nicelabel({
-			checked_ico: './ico/checked.png',
-			unchecked_ico: './ico/unchecked.png'
-		});
-		$('#text-checkbox-ico > input:eq(3)').nicelabel({
-			uselabel: false
-		});
-		
-	});
+  </script>

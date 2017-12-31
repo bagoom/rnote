@@ -4,6 +4,7 @@
 
 include '../common.php';
 
+
 header("Content-Type: text/html; charset=UTF-8");
 
 if($gr_admin){
@@ -38,28 +39,30 @@ else {
 $wr_id_list=explode(",",$wr_id_list);
 
 
+
+
+
 for ($i=0; $i<count($wr_id_list); $i++) {
-    $sql5 = ("update {$write_table}
-                set wr_bookmark = '1' where wr_id =$wr_id_list[$i]");
-    sql_query($sql5);
-    $memberID = $member['mb_id'];
-    $sql6="Insert into bookmark_$memberID (bm_date, bm_match_id, bm_from) values ('".G5_TIME_YMDHIS."', '$wr_id_list[$i]', '$bm_from' )";
-    sql_query($sql6);
-    // echo $wr_id_list[$i] ;
-    echo $wr_id_list[$i];
-    echo $bm_from;
+$chk_sql = sql_fetch("select count(*) as cnt  from bookmark_test10 where bm_bmf_id = '$bmf_id' and bm_match_id = '$wr_id_list[$i]' and (bm_from = '1' or bm_from = '2') ");
+
+
+if ($chk_sql['cnt']>0){
+    echo "overlap";
+    return;
+}else{
+    echo "success"; 
 }
 
 
 
-// $sql="Insert into bookmark_$memberID (bm_date, bm_match_id, bm_from) values ('".G5_TIME_YMDHIS."', 137, 1 )";
-
-
-
-// $result = sql_query($sql);
-;
-
-
+    $sql5 = ("update {$write_table}
+                set wr_bookmark = '1' where wr_id =$wr_id_list[$i]");
+    sql_query($sql5);
+    // 회원테이블에 넣을떄 memberID변수 사용할것
+    $memberID = $member['mb_id'];
+    $sql6="Insert into bookmark_test10 (bm_date, bm_match_id, bm_from,bm_bmf_id) values ('".G5_TIME_YMDHIS."', '$wr_id_list[$i]', '$bm_from' , '$bmf_id')";
+    sql_query($sql6);
+}
 
 
 ?>

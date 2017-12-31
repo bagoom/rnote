@@ -12,21 +12,24 @@ else {
 }
 $wr_id_list=explode(",",$wr_id_list);
 
-$write_table = 'g5_write_'.$member['mb_id'];
+$bookmark_table = 'bookmark_'.$member['mb_id'];
+$bookmark_folder_table = 'bookmark_'.$member['mb_id'].'_folder';
 
- 
 for ($i=0; $i<count($wr_id_list); $i++) {
-// echo $wr_id_list[$i];
-$sql2 = "select wr_id from `$write_table` where wr_id = '$wr_id_list[$i]' ";
-$resc = mysqli_fetch_assoc(sql_query($sql2));
+$sql2 = "select bmf_id from `$bookmark_folder_table` where bmf_id = '$wr_id_list[$i]' ";
+$result2 = mysqli_fetch_assoc(sql_query($sql2));
+$bmf_id = $result2['bmf_id'];
+// 폴더 삭제 쿼리
+sql_query("delete from `$bookmark_folder_table` where bmf_id = '$bmf_id' ");
+        // 해당 폴더의 아이디를 가지는 매물 삭제
+        $sql3 = sql_query("select bm_id from `$bookmark_table` where bm_bmf_id = '$wr_id_list[$i]' ");
+        while ($child = mysqli_fetch_assoc($sql3)){ 
+        $bm_id = $child['bm_id'];
+         sql_query("delete from `$bookmark_table` where bm_id = '$bm_id' ");
+         }
 
-$wr_id = $resc['wr_id'];
-sql_query("update `$write_table` set wr_bookmark = '0'  where wr_id = '$wr_id' ");
+} //  for exit
 
-}
-
-
-
-alert("해당 매물이 즐겨찾기가 해제 되었습니다.");
+alert("해당 폴더가 삭제 되었습니다.");
 
 ?>

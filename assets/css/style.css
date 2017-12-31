@@ -250,20 +250,15 @@ li{
 
 #visual_wrap{
   width: 100%;
-  height: 820px;
-  background: #4974d1; /* Old browsers */
-  background: -moz-radial-gradient(center, ellipse cover, #4974d1 0%, #3b4db7 97%); /* FF3.6-15 */
-  background: -webkit-radial-gradient(center, ellipse cover, #4974d1 0%,#3b4db7 97%); /* Chrome10-25,Safari5.1-6 */
-  background: radial-gradient(ellipse at center, #4974d1 0%,#3b4db7 97%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4974d1', endColorstr='#3b4db7',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */ 
-  /* background: url(../../img/main_img/visual_img.jpg) ; */
+  height: 900px;
+  background: #3b4db7; /* Old browsers */
   background-size: cover;
   overflow: hidden;
   position: relative;
 }
 .visual_contents{
   position: absolute;
-  top: 160px !important;
+  top: 120px !important;
   left: 50%;
   margin-left: -165px;
   width: 330px;

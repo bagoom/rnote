@@ -8,6 +8,8 @@ include_once("$board_skin_path/lib/skin.lib.php");
 <script src="<?php G5_PATH?>/assets/js/jquery-labelauty.js"></script>
 <link rel="stylesheet" type="text/css" href="<?php G5_PATH?>/assets/css/jquery-labelauty.css">
 <link rel="stylesheet" href="<?php G5_PATH?>/assets/css/bootstrap-range.min.css">
+<link rel="stylesheet" href="<?php G5_PATH?>/assets/css/toastr.min.css">
+<link href="<?=G5_URL?>/assets/css/jquery-nicelabel.css" rel="stylesheet" type="text/css" />
 
 <style>
 .wrapper{
@@ -130,6 +132,137 @@ include_once("$board_skin_path/lib/skin.lib.php");
   margin:10px  0!important;
   line-height: 45px !important;
   padding:0;
+}
+#bookmark .modal-body h4{
+  font-size:15px;
+  margin:0;
+  padding: 20px;
+  color:#444;
+}
+.bookmark_check_list_wrap{
+  width:40%;
+  height:400px;
+  float:left;
+  border-right: .5px solid #d1d1d1;
+}
+.check_list ul li:first-child{
+  border-top:0.5px solid #d1d1d1;
+}
+.check_list ul li{
+  padding: 10px;
+  border-bottom: 0.5px solid #d1d1d1;
+  font-size:12px;
+  color:#888;
+}
+.folder_list{
+  width:60%;
+  height:400px;
+  float:left;
+  overflow-y:auto;
+}
+.map_board_list {
+  position: relative;
+  width: 100%;
+  padding: 15px;
+  line-height:22px;
+  font-size: 14px;
+  color:#666;
+  background:#f7f7f7;
+  border-top: 0.5px solid #d1d1d1;
+  cursor: pointer;
+  overflow:hidden;
+}
+.map_board_list:last-child{
+  border-bottom:.5px solid #d1d1d1;
+}
+.map_board_list:hover{
+  font-weight: 700;
+}
+.list_check_label{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:70px;
+  line-height:70px;
+  display:none;
+  text-align:center;
+  font-size:25px;
+  color:#fff;
+  background: rgba(0,0,0,0.5);
+  cursor:pointer;
+}
+.folder_add_btn{
+  width: 20%;
+  height:56px;
+  float:right;
+  line-height:40px;
+  padding : 10px;
+  font-size:20px;
+  color:#3b4db7;
+  text-align: center;
+  border-left: .5px solid #d1d1d1;
+  cursor:pointer;
+}
+.folder_add_wrap{
+  position: absolute;
+  top:55.5px;
+  left:498.5px;
+  width: 400px;
+  height: 400px;
+  border-left: .5px solid #d1d1d1;
+  background: #fff;
+  display:none;
+}
+.folder_add_wrap h4{
+  font-size:15px;
+  margin:0;
+  padding: 20px;
+  text-align: center;
+  color:#444;
+  border-bottom: .5px solid #d1d1d1;
+}
+.find_txt{
+  padding-top:4px;
+}
+.modal_sec{
+  padding: 20px;
+  border-bottom: 0.5px solid #ccc; 
+  overflow:hidden;
+}
+.modal_sec:last-child{
+  border:0;
+}
+.folder_add_wrap input[type=text]{
+  width:80%;
+  height: 50px;  
+  padding-left: 10px ;
+  font-size: 14px;
+  float:left;
+}
+.folder_add_wrap label:first-child{
+  width: 20%;
+  float:left;
+  padding-top:18px;
+  font-size: 14px;
+}
+.circle-nicelabel + label{
+  background-color: #3b4db7;
+}
+.margin_zero{
+  margin:0 !important;
+}
+.modal_footer{
+  position: absolute;
+  left:0;
+  bottom:0;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  font-size:16px;
+  color:#fff;
+  background: #3b4db7;
+  cursor: pointer;
 }
 </style>
 
@@ -761,21 +894,86 @@ include_once("$board_skin_path/lib/skin.lib.php");
                 </div>
               </div>
 
+
+
+              <div class="modal fade" id="bookmark" >
+                <div class="modal-dialog">
+                  <div class="modal-content" id="bookmark_con" style="min-width:500px !important; width:500px; margin-top:150px; margin:0 auto">
+                    <!-- header -->
+                    <div class="modal-header">
+                      <!-- 닫기(x) 버튼 -->
+                      <button type="button" class="close" data-dismiss="modal">×</button>
+                      <!-- header title -->
+                      <h4 class="modal-title">즐겨찾기 폴더 선택</h4>
+                    </div>
+                    <!-- body -->
+                    <div class="modal-body" style="padding:0; height: 400px;">
+                            <div class="bookmark_folder">
+                                <div class="bookmark_check_list_wrap">
+                                    <h4>선택한 매물</h4>
+                                    <div class="check_list">
+                                      <ul>
+                                      <!-- 체크한 리스트 매물 목록 -->
+                                    </ul>
+                                    </div> 
+                                  </div> 
+                                <div class="folder_list">
+                                    
+                                              
+                                </div>
+                            </div>
+                          
+                    </div>
                       </form>
+
+                    <div class="folder_add_wrap" >
+                    <h4>폴더추가</h4>
+
+                    <form id="folder_add_form" action="<?echo G5_BBS_URL?>/folder_update.php" method="post">
+                      <div class="modal_sec">
+                        <label >폴더이름</label>  
+                      <input type="text" placeholder="추가하실 폴더의 이름을 적어 주세요." name="folder_name">
+                        </div>
+                        <div class="modal_sec">
+                        <label >상단고정</label>  
+                        <input class="circle-nicelabel" name="folder_top" data-nicelabel="{&quot;position_class&quot;: &quot;circle-checkbox&quot;}" type="checkbox" id="nicelabel" value="0">
+                        <label class="circle-checkbox" for="nicelabel" style="margin-top:8px;"><div class="circle-btn"></div></label>
+                        </div>
+
+                      </form>
+                        <div class="modal_footer">
+                            추가 <i class="fa fa-plus"></i>
+                        </div>   
+
+
+                    </div>
+                    <!-- Footer -->
+                    <!-- <div class="modal-footer" style="padding:15px;">
+                      <button type="button" class="btn btn-default s2" data-dismiss="modal">승인거절</button>
+                      <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+                    </div> -->
+                  </div>
+                </div>
+              </div>
+
+
+
+
+
 
             <div class="chk_confirm_wrap">
               <? if ($wr_sold_out == '1'){ ?>
                 <span class="s1">사무실매물등록하기</span>
                 <span class="s6">마이노트로등록하기</span>
-                <span class="s8">즐겨찾기등록하기</span>
+                <span class="s8" data-target="#bookmark" data-toggle="modal">즐겨찾기등록하기</span>
                 <span class="s7">삭제</span>
               <?} else if (!$gr_admin && $bo_table == $gr_cp) { ?>
-                <span class="s8">즐겨찾기등록하기</span>
+                <span class="s8" data-target="#bookmark" data-toggle="modal">즐겨찾기등록하기</span>
               <?}else{?>
               <?if (!$gr_cp && !$gr_admin) {}else{?>
                 <?if ($wr_important == '1'){}else{ ?>
               <span class="s1">사무실매물등록하기</span>
-              <span class="s8">즐겨찾기등록하기</span>
+              <span class="s8" data-target="#bookmark" data-toggle="modal">즐겨찾기등록하기</span>
               <?}}?>
               <? if ($gr_admin && $wr_important == 1){?>
               <?if (!$gr_cp && !$gr_admin) {}else{?>
@@ -783,8 +981,9 @@ include_once("$board_skin_path/lib/skin.lib.php");
               <?}?>
               <?if (!$gr_cp && !$gr_admin) {}else{?>
               <span data-target="#layerpop" data-toggle="modal" style="display:none;" class="s5">거절하기</span>
+              <span class="s8" data-target="#bookmark" data-toggle="modal">즐겨찾기등록하기</span>
               <?}}?>
-
+              
               <span class="s3">거래종료등록하기</span>
               <span class="s7">삭제</span>
               <?}?>
@@ -813,11 +1012,65 @@ include_once("$board_skin_path/lib/skin.lib.php");
 
 
 <!-- js placed at the end of the document so the pages load faster -->
+<script src="<?=G5_URL?>/assets/js/jquery.nicelabel.js"></script>            
 <script src="<?php G5_PATH?>/assets/js/classie.js"></script>
 <script src="<?php G5_PATH?>/assets/js/demo3.js"></script>
+<script src="<?php G5_PATH?>/assets/js/toastr.min.js"></script>
 <script type="application/javascript">
 $(".tr:even").css("background", "white");
 // $(function() { $("input:text").keydown(function(evt) { if (evt.keyCode == 13) return false; }); });
+  
+
+// 즐겨찾기 클릭시 폴더 리스트 요청ajax
+$(function() { $("input[name=folder_name]").keydown(function(evt) { if (evt.keyCode == 13) return false; }); });
+$(".s8").click(function(){
+var folder_list = "<?=G5_BBS_URL?>/list_folder_list.php";
+$.ajax({
+type : "POST",
+url : folder_list,
+dataType : "text",
+error : function() {
+alert('통신실패!!');
+},
+success : function(data) {
+$('.folder_list').html(data);
+}
+});
+});
+
+
+// 즐겨찾기 폴더추가 ajax요청
+$(".modal_footer").click(function(){
+  var folder_list = "<?=G5_BBS_URL?>/list_folder_list.php";
+  if( $('#nicelabel').is(":checked")){
+      $('#nicelabel').val("1");
+    }
+  var formData =$('#folder_add_form').serializeArray();
+  console.log(formData);
+  $.ajax({
+  url: "<?echo G5_BBS_URL?>/folder_update.php",
+  type: "POST", 
+  data: formData,
+  dataType: 'text',
+  success: function (Data, textStatus, jqXHR) {
+// 폴더추가시 폴더리스트 새로고침 ajax
+$.ajax({
+type : "POST",
+url : folder_list,
+dataType : "text",
+error : function() {
+alert('통신실패!!');
+},
+success : function(data) {
+$('.folder_list').html(data);
+}
+});
+  },
+  error: function (jqXHR, textStatus, errorThrown) {
+  alert(errorThrown);
+  }
+  })
+  });
 
 
 $(".select").change(function(){
@@ -857,30 +1110,9 @@ $('.wrapper').css("height", $(document).height() );
 $('.td_chk').css("width", $(".tr").innerWidth() );
 $('.td_chk label').css("height", $(".tr").innerHeight() );
 $('.td_chk label').css("height", $(this).parents(".td_chk").siblings(".tr"))
-$(function() {
-    $("p.holder + input").focus(function() {
-      console.log($(this).val())
-        if($(this).val()) {
-            $(this).prev('p.holder').hide(350);
-        }
-        $(this).select();
-    });
-    // $("p.holder + input").blur(function() {
-    //     if(!$(this).val().length) {
-    //         $(this).prev('p.holder').show(350);
-    //     }else{
-    //       $(this).prev('p.holder').show(350);
-    //     }
-    // });
-    $("p.holder").click(function() {
-        $(this).next().focus();
-    });
-    $("p.holder + input").focus( function() {
-        $(this).prev('p.holder').addClass('active');
-    }).blur(function() {
-        $(this).prev('p.holder').removeClass('active');
-    });
-});
+
+
+
 //  숫자 천단위에 콤마를 찍기위한 함수
   for (var i =0 ; i <= $(".commaN").length;  i ++){
     $(".commaN").eq(i).text(numberWithCommas(parseInt($(".commaN").eq(i).html())));
@@ -921,6 +1153,10 @@ for (var i = 0; i < target.length; i++) {
    }
 }
     });
+
+
+
+
 // 리스트 체크했을때 , 중요매물 / 즐겨찾기 등록버튼
   $(".s1").click(function(){
     $("#fboardlist").submit();
@@ -941,10 +1177,10 @@ for (var i = 0; i < target.length; i++) {
     $("#fboardlist").attr("action", "./sale_recovery.php");
     $("#fboardlist").submit();
   });
-  $(".s8").click(function(){
-    $("#fboardlist").attr("action", "./insertBookmark.php");
-    $("#fboardlist").submit();
-  });
+  // $(".s8").click(function(){
+  //   $("#fboardlist").attr("action", "./insertBookmark.php");
+  //   $("#fboardlist").submit();
+  // });
   $(".s7").click(function(){
     $.confirm({
       theme: 'supervan',
@@ -999,7 +1235,6 @@ for (var i = 0; i < target.length; i++) {
     }
     if($(".import_chk").is(":checked")){
       $(".chk_confirm_wrap").css('display', 'block');
-      console.log($("dddd"))
     }
     });
 
@@ -1009,6 +1244,18 @@ for (var i = 0; i < target.length; i++) {
       var ddd = $(".td_chk input[type=checkbox]:checked + label").parents(".td_chk ").next(".tr").find("p");
       var check_target = $(this).next().parents(".td_chk ").next(".tr").find("p");
       var check_wrong = $(this).next().find(".fa-times") ;
+      var check_text = $.trim($(this).parent('.td_chk').next('.tr').find('.subject').html());
+      var chech_count = $(".td_chk input[type=checkbox]:checked").length;
+      
+      // 북마크 추가시 체크된 매물 리스트만 가져오기 
+      if ($(this).is(":checked")){
+      $(".check_list ul").append("<li id='add_list'>"+check_text+"</li>");
+      }else{
+        var  overlap_checklist = $("#add_list").text(check_text) ;
+        $("#add_list").val(overlap_checklist).remove();
+      }
+     
+
 
       if(check_target.length == 1){
         console.log(ddd.length)
@@ -1037,7 +1284,6 @@ for (var i = 0; i < target.length; i++) {
 
   
     });
-
 
 
 

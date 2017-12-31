@@ -11,6 +11,11 @@ include_once(G5_PATH.'/head.sub.php');
 if (!$board['bo_table']) {
    alert('회원가입후 이용해주세요.', G5_URL);
 }
+if (!$is_member) {
+    alert('회원가입후 이용해주세요.', G5_URL);
+ }
+
+
 $wr_id_list = '';
 if ($wr_id)
     $wr_id_list = $wr_id;
@@ -77,7 +82,10 @@ if ($sst) {
 
         $i++;
     }
-include_once($board_skin_path.'/bookmark.skin.php');
+
+
+
+include_once($board_skin_path.'/bookmark/bookmark.skin.php');
 
 
 if (G5_IS_MOBILE) {
@@ -86,3 +94,4 @@ if (G5_IS_MOBILE) {
 // include_once(G5_PATH.'/tail.sub.php');
 }
 ?>
+

@@ -604,6 +604,7 @@ if (G5_IS_MOBILE) {
 } else {
     $board_skin_path    = get_skin_path('board', $board['bo_skin']);
     $board_skin_url     = get_skin_url('board', $board['bo_skin']);
+    $bookmark_skin_url     = get_skin_url('board/basic/','bookmark');
     $member_skin_path   = get_skin_path('member', $config['cf_member_skin']);
     $member_skin_url    = get_skin_url('member', $config['cf_member_skin']);
     $new_skin_path      = get_skin_path('new', $config['cf_new_skin']);

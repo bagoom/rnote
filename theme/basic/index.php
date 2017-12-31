@@ -37,7 +37,7 @@ include_once(G5_THEME_PATH.'/head.php');
 <div class="row">
               <section id="visual_wrap">
               <div class="visual_contents">
-              <img src="<?echo G5_URL?>/img/main_img/visual_text.png" width="90%" style="margin: 0 0 10px 20px">
+              <img src="<?echo G5_URL?>/img/main_img/visual_text.png" width="100%" >
 
               <div class="register">
                 <?php echo outlogin('basic'); ?>
