@@ -94,7 +94,10 @@
 
 <script>
 $(function() { $("input:text").keydown(function(evt) { if (evt.keyCode == 13) return false; }); });
-
+// 맵로딩시 마커 초기값 숨김처리
+$(document).ready(function(){
+  initMarkers()
+})
 
 
 
@@ -198,7 +201,7 @@ $('#map_area_all,#map_board,#bookmark_wrap').css("height", $(window).height()-85
 
 
 
-<? $sql = "select * from `g5_write_test10` a, `bookmark_test10` b where a.wr_id = b.bm_match_id and b.bm_from = 1 UNION ALL select * from `g5_write_ekdna8284` a, `bookmark_test10` b where a.wr_id = b.bm_match_id and b.bm_from = 2 ";
+<? $sql = "select * from `g5_write_$member[mb_id]` a, `bookmark_$member[mb_id]` b where a.wr_id = b.bm_match_id and b.bm_from = 1 UNION ALL select * from `g5_write_ekdna8284` a, `bookmark_$member[mb_id]` b where a.wr_id = b.bm_match_id and b.bm_from = 2 ";
 $result = mysqli_query($con, $sql);
 while ($folder = mysqli_fetch_array($result)) {?>
   var title = "<?=$folder[wr_subject]?>";

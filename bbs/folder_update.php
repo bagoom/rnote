@@ -9,7 +9,7 @@ if ($w == 'u'){
 
     if($folder_top == "1")
     $folder_top_date = G5_TIME_YMDHIS;
-    $sql= "update `bookmark_test10_folder` 
+    $sql= "update `bookmark_$member[mb_id]_folder` 
     set bmf_name='$folder_name', 
     bmf_top = '$folder_top',  
     bmf_top_date = '$folder_top_date' where bmf_id = '$bmf_id' ";
@@ -18,7 +18,7 @@ if ($w == 'u'){
 
     if($folder_top == "1")
     $folder_top_date = G5_TIME_YMDHIS;
-    $sql = " insert into `bookmark_test10_folder`
+    $sql = " insert into `bookmark_$member[mb_id]_folder`
     set  bmf_name = '$folder_name',
          bmf_top = '$folder_top',
          bmf_top_date = '$folder_top_date',

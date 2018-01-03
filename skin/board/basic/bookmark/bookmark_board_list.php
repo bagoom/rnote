@@ -1,3 +1,5 @@
+<? include_once('../../../../common.php');?>
+
 <div class="bookmark_head">
 
 <i class="fa fa-bookmark" aria-hidden="true" style="font-size:22px; margin-right: 10px;"></i> 
@@ -15,10 +17,9 @@
 
 <form action="" id="bookmark_form" method="post">
 
-
 <? 
 $con = mysqli_connect("localhost","realnote","!dnwls1127","realnote"); 
-$sql = "select * from `bookmark_test10_folder` order by bmf_top desc , bmf_date desc";
+$sql = "select * from `bookmark_$member[mb_id]_folder` order by bmf_top desc , bmf_date desc";
 $result = mysqli_query($con , $sql);
 while ($folder = mysqli_fetch_array($result)) {?>
 
@@ -39,6 +40,7 @@ while ($folder = mysqli_fetch_array($result)) {?>
         <span style="height:20px; line-height:32px;"><?=$folder['bmf_name']?></span>
       </div>
 
+      
       <p class="dropdown_btn" >
         <!-- <p onclick="showMarkers()">마커 보이기</p> -->
            <i class="fa fa-pencil modify_folder" aria-hidden="false" style="margin-right:5px;"data-target="#modify_folder" data-toggle="modal" folder-name="<?=$folder['bmf_name']?>" folder-top="<?=$folder['bmf_top']?>" folder-id="<?=$folder['bmf_id']?>"></i>  
@@ -48,9 +50,12 @@ while ($folder = mysqli_fetch_array($result)) {?>
       </div>
     
 
-
     <?php
-    $sql2 = "select * from `g5_write_test10` a, `bookmark_test10` b where a.wr_id = b.bm_match_id and b.bm_from = 1 UNION ALL select * from `g5_write_ekdna8284` a, `bookmark_test10` b where a.wr_id = b.bm_match_id and b.bm_from = 2 ";
+    if( $gr_admin)
+    $group_table = $member[mb_id];
+    else
+    $group_table = $gr_cp;
+    $sql2 = "select * from `g5_write_$member[mb_id]` a, `bookmark_$member[mb_id]` b where a.wr_id = b.bm_match_id and b.bm_from = 1 UNION ALL select * from `g5_write_$group_table` a, `bookmark_$member[mb_id]` b where a.wr_id = b.bm_match_id and b.bm_from = 2 ";
     $result2 = mysqli_query($con , $sql2);
     ?>
 
@@ -72,7 +77,7 @@ while ($folder = mysqli_fetch_array($result)) {?>
  
     </div>
     <?}} ?>
-    <? $sql3 = " select count(*) as cnt  from bookmark_test10 where bm_bmf_id = '$folder[bmf_id]' ";
+    <? $sql3 = " select count(*) as cnt  from bookmark_$member[mb_id] where bm_bmf_id = '$folder[bmf_id]' ";
         $result3 = mysqli_query($con , $sql3);
         $row3 = mysqli_fetch_array($result3);  
         $child_cnt = $row3['cnt'];
@@ -88,7 +93,7 @@ while ($folder = mysqli_fetch_array($result)) {?>
 
 
         
-        <? $sql = " select count(*) as cnt  from bookmark_test10_folder ";
+        <? $sql = " select count(*) as cnt  from bookmark_$member[mb_id]_folder ";
         $result4 = mysqli_query($con , $sql);
         $row4 = mysqli_fetch_array($result4);
         $folder_cnt = $row4['cnt'];
@@ -131,10 +136,7 @@ if($('.list_check_label').css("display") == "none"){
 }
 })
 
-// 맵로딩시 마커 초기값 숨김처리
-$(document).ready(function(){
-  initMarkers()
-})
+
 //  마커 토글 버튼 클릭시 폴더 아이디값 넘겨주기 
 $(".map_toggle").click(function(){
   var toggle_id = $(this).parents('.map_board_list').find('.import_chk').val();

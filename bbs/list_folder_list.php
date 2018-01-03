@@ -13,7 +13,7 @@ include_once('./_common.php');
         </div>
 <? 
         $con = mysqli_connect("localhost","realnote","!dnwls1127","realnote"); 
-        $sql = "select * from `bookmark_test10_folder` order by bmf_top desc , bmf_date desc";
+        $sql = "select * from `bookmark_$member[mb_id]_folder` order by bmf_top desc , bmf_date desc";
         $result = mysqli_query($con , $sql);
         while ($folder = mysqli_fetch_array($result)) {
         ?>
@@ -31,7 +31,7 @@ include_once('./_common.php');
         </div>
         <?}?>
         <? 
-        $sql = " select count(*) as cnt  from bookmark_test10_folder ";
+        $sql = " select count(*) as cnt  from bookmark_$member[mb_id]_folder ";
         $row = sql_fetch($sql);
         $folder_cnt = $row['cnt'];
 
