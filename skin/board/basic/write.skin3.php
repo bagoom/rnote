@@ -338,10 +338,14 @@ input[type="text"],input[type="number"],input[type="tel"]{
                               <input type="hidden" name="wr_posy" id="wr_posy2" value="<?=$write[wr_posy]?>">
 
 
+                              <div class="right" style="color:#999; padding-left:5px; background:#f1f1f1;">관리번호 : <input type="text" id="wr_sale_code" name="wr_code" placeholder="No."value="<?=$write[wr_code] ?>" readonly style="border:0; padding:5px; color:#999; width:120px; background:#f1f1f1;"/></div>
+
+
                               <div class="form-title" style="margin-top:0;">
                                 기본정보
                               </div>
 
+                              
                               <table class="write_table">
                                 <tbody>
                                   <tr>
@@ -454,6 +458,10 @@ input[type="text"],input[type="number"],input[type="tel"]{
                                         <td><input type="text" name="wr_sale_price"  tabindex="6" value="<?php echo $write[wr_sale_price]  ?>" id="wr_sale_price2"  placeholder="" ></td>
                                         <th>평당가격</th>
                                         <td ><input type="text" name="wr_p_sale_price" value="<?php echo $write[wr_p_sale_price] ?>" id="wr_p_sale_price"  tabindex="7" placeholder=""></td>
+                                      </tr>
+                                      <tr>
+                                        <th>매도절충가격</th>
+                                        <td  style="border-right:1px solid #ddd;"><input type="text" name="wr_sale_price_b"  tabindex="6" value="<?php echo $write[wr_sale_price_b]  ?>" id="wr_sale_price_b"  placeholder="" ></td> 
                                       </tr>
                                     </tbody>
                                   </table>
@@ -796,6 +804,17 @@ $("#wr_premium_b").keyup(function(){
   $("#wr_code").val( generateSerial($("#wr_premium_b").val()))
 
 })
+
+$("#wr_sale_price_b").keyup(function(){
+
+  $("#wr_sale_code").val( generateSerial($("#wr_sale_price_b").val()))
+
+})
+
+
+
+
+
 // 코드  랜덤생성
          var option = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
          var option2 = "BCDFGHJKMPQRSTUVWZ123456789"

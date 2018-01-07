@@ -52,8 +52,28 @@ include_once('./_common.php');
     data: formData,
     dataType: 'text',
     success: function (Data, textStatus, jqXHR) {
+        // alert(Data);
+ 
+        var temp = [];
+        var overlap = [];
+        overlap = Data.split(',');
+        temp = overlap.pop(); 
 
-        if(Data == "overlap"){
+ 
+        var list_val = $('.check_list li').map(function() { return $(this).text() }).get().join(',');
+        var list_text = [];
+        list_text = list_val.split(',');
+
+        for (i=0; i<overlap.length; i++) {
+
+           var d= $.inArray(overlap[i],list_text)
+           var c = $(".check_list li")[d];
+           $(".check_list ul").prepend($(c))
+           $(c).css("color","red");
+        }    
+
+
+        if(overlap.length>0){
             toastr.error( "해당매물은 선택한 폴더에 이미 등록되어<br> 있는 매물입니다.");
         } 
         else{
@@ -66,7 +86,7 @@ include_once('./_common.php');
             showMethod: 'slideDown',
             position: 'bottom',
             };
-            toastr.success( "해당 폴더에 즐겨찾기가 추가 되었습니다.");
+            toastr.success( Data,"해당 폴더에 즐겨찾기가 추가 되었습니다.");
         }
 
     },
@@ -74,6 +94,7 @@ include_once('./_common.php');
     alert(errorThrown);
     }
     })
+     
     })
 
 

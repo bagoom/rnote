@@ -315,7 +315,11 @@ $arr_search = array();
     $arr_search[name][] = "contact";
     $arr_search[val][] = $_GET["contact"];
   }
-
+  if(($_GET["board_list"])) {
+    $arr_search[name][] = "board_list";
+    $arr_search[val][] = $_GET["board_list"];
+  }
+ 
 
 
 

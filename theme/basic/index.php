@@ -65,25 +65,25 @@ include_once(G5_THEME_PATH.'/head.php');
               <section id="main_contents">
                   <div class="main_con_wrap table" style="box-shadow:none;">
                     <ul>
-                      <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_id']?>&sfl=board_list&stx=1">
+                      <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_id']?>&board_list=1&wr_sale_type=1&wr_writer_id=<?=$member[mb_id]?>">
                         <li>
                           <i class=" icon-home-outlined"  aria-hidden="true"></i>
                           <p class="icon_02">원룸/오피스텔</p>
                         </li>
                       </a>
-                      <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_id']?>&sfl=board_list&stx=2">
+                      <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_id']?>&board_list=2&wr_sale_type=1&wr_writer_id=<?=$member[mb_id]?>">
                         <li>
                           <i class="icon-residential-area-outlined"  aria-hidden="true"></i>
                             <p class="icon_02"> 아파트</p>
                         </li>
                       </a>
-                      <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_id']?>&sfl=board_list&stx=3&wr_sale_type=1&wr_writer=<?=$member[mb_id]?>">
+                      <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_id']?>&board_list=3&wr_sale_type=1&wr_writer_id=<?=$member[mb_id]?>">
                         <li>
                           <i class="icon-money-outlined"  aria-hidden="true"></i>
                             <p class="icon_02"> 상가</p>
                         </li>
                       </a>
-                      <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_id']?>&sfl=board_list&stx=1">
+                      <a href="<?php echo G5_BBS_URL?>/board.php?bo_table=<? echo $member['mb_id']?>&board_list=4&wr_sale_type=1&wr_writer_id=<?=$member[mb_id]?>">
                         <li>
                           <i class="icon-layout-outlined"  aria-hidden="true"></i>
                             <p class="icon_02"> 토지</p>

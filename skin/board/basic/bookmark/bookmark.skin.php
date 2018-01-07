@@ -208,7 +208,7 @@ while ($folder = mysqli_fetch_array($result)) {?>
   var posx = <?=$folder[wr_posx]?>;
   var posy = <?=$folder[wr_posy]?>;
   var wr_floor = <?=$folder[wr_floor]?>;
-  var wr_area_p = <?=$folder[wr_area_p]?>;
+  var wr_area_p = <?=($folder[wr_area_p] == "") ? $folder[wr_area_p] = "0" :  $folder[wr_area_p]?>;
   var wr_rent_deposit = <?=$folder[wr_rent_deposit]?>;
   var wr_m_rate = <?=$folder[wr_m_rate]?>;
   var wr_premium_o = <?=$folder[wr_premium_o]?>;

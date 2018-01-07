@@ -592,7 +592,7 @@ include_once("$board_skin_path/lib/skin.lib.php");
           <?}?>
 
           <? if ( !$_GET[wr_important] == 1 && !$wr_sold_out == 1){?>
-            <a href="<?echo G5_BBS_URL?>/write.php?bo_table=<?=$bo_table?>&board_list=<?=$member[mb_3]?>" class="btn btn-theme03 right sg_cate_list active" style="background:#3b4db7; color:#fff;">
+            <a href="<?echo G5_BBS_URL?>/write.php?bo_table=<?=$bo_table?>&board_list=<?=$board_list?>" class="btn btn-theme03 right sg_cate_list active" style="background:#3b4db7; color:#fff;">
           <i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:18px; "></i>
            매물등록하기
           </a> 
@@ -1046,7 +1046,7 @@ $(".modal_footer").click(function(){
       $('#nicelabel').val("1");
     }
   var formData =$('#folder_add_form').serializeArray();
-  console.log(formData);
+  // console.log(formData);
   $.ajax({
   url: "<?echo G5_BBS_URL?>/folder_update.php",
   type: "POST", 
@@ -1254,6 +1254,8 @@ for (var i = 0; i < target.length; i++) {
         var  overlap_checklist = $("#add_list").text(check_text) ;
         $("#add_list").val(overlap_checklist).remove();
       }
+
+
      
 
 

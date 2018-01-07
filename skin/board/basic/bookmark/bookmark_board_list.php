@@ -15,6 +15,15 @@
 </div>
 </div>
 
+<div class="bookmark_state">
+    <p>
+      <span class="slect_child_count"></span>개의 매물이 선택 되었습니다.
+    <span>
+    <i class="fa fa-trash-o" aria-hidden="true" id="child_list_del"/></i>
+    </span>
+    </p>
+</div>
+
 <form action="" id="bookmark_form" method="post">
 
 <? 
@@ -26,7 +35,7 @@ while ($folder = mysqli_fetch_array($result)) {?>
     <div class="map_board_list" >
       <!-- 체크버튼 -->
       <input type="checkbox" name="chk_wr_id[]" class="import_chk" style="display:none;" value="<?php echo $folder['bmf_id'] ?>" id="chk_wr_id_<?php echo $folder['bmf_id']?>" >
-      <label for="chk_wr_id_<?php echo $folder['bmf_id'] ?>" class="list_check_label">
+      <label for="chk_wr_id_<?php echo $folder['bmf_id'] ?>" class="folder_list_check_label">
        <i class="fa fa-check" aria-hidden="true"></i>
       </label>
 
@@ -44,7 +53,7 @@ while ($folder = mysqli_fetch_array($result)) {?>
       <p class="dropdown_btn" >
         <!-- <p onclick="showMarkers()">마커 보이기</p> -->
            <i class="fa fa-pencil modify_folder" aria-hidden="false" style="margin-right:5px;"data-target="#modify_folder" data-toggle="modal" folder-name="<?=$folder['bmf_name']?>" folder-top="<?=$folder['bmf_top']?>" folder-id="<?=$folder['bmf_id']?>"></i>  
-          <i class="fa fa-map-o map_toggle" aria-hidden="true" style="margin-right:10px;"></i>
+          <i class="fa fa-map-o map_toggle" aria-hidden="true" style="margin-right:5px;"></i>
           <!-- <i class="fa fa-chevron-down" aria-hidden="true"></i> -->
         </p> 
       </div>
@@ -64,6 +73,11 @@ while ($folder = mysqli_fetch_array($result)) {?>
     <?if( $folder['bmf_id'] == $child['bm_bmf_id']){ ?>
     <div class="child_list">
           <p>
+          <span class="list_del_btn" data-value = "<?=$child['bm_id']?>">
+          <input type="checkbox" name="chk_child_id[]" class="child_check" style="display:none;" value="<?=$child['bm_id']?>" id="chk_child_id_<?=$child['bm_id']?>" >
+          <label for="chk_child_id_<?=$child['bm_id']?>" class="list_check_label">
+          </label>
+          </span>
           <span class="find_txt"><?=$child['wr_subject']?></span>
           <span class="child_list_info">
             <?=$child['wr_premium_o']?>만 /
@@ -106,6 +120,7 @@ while ($folder = mysqli_fetch_array($result)) {?>
 
 
 
+
 <script>
 
 
@@ -127,7 +142,7 @@ $(".modify_folder").click(function(){
 // 폴더 클릭시 자식 매물 보여주기 : if(폴더 설정중이 아닐떄만)
 $(".map_board_list  .registerated").click(function(){
 
-if($('.list_check_label').css("display") == "none"){
+if($('.folder_list_check_label').css("display") == "none"){
   $(this).parent('.map_board_list').next(".child_list_wrap").slideToggle(200);
   $(".folder_icon", this).toggleClass("fa-folder fa-folder-open");
 }else{
@@ -149,6 +164,27 @@ $(".map_toggle").click(function(){
 })
 
 
+// 매물 삭제 버튼
+
+$(".child_check").click(function(){
+  var n = $( ".child_check:checked" ).length;
+  $( ".slect_child_count" ).text(n);
+
+  if ( $(this).is(":checked")){
+    $(this).parents(".child_list").addClass("child_select");
+  }else{ 
+    $(this).parents(".child_list").removeClass("child_select");
+  }
+
+  if ( n>0){
+      $(".bookmark_state").fadeIn();
+  }else{
+      $(".bookmark_state").hide();
+  }
+});
+
+
+
 
 
 $(".child_list").each(function(index) {
@@ -166,7 +202,7 @@ panTo($(this))
 
 
 $(".bookmark_config_btn").click(function(){
-    $(".list_check_label").fadeToggle(300,'swing');
+    $(".folder_list_check_label").fadeToggle(300,'swing');
     $(".bookmark_delete_btn").hide();
 })
 
@@ -179,7 +215,7 @@ $(".import_chk").click(function(){
   }
 })
 
-$(".bookmark_delete_btn").click(function(){
+$(".bookmark_delete_btn , #child_list_del").click(function(){
     var con = confirm("정말로 삭제 하시겠습니까?");
     if (con == true){
     $("#bookmark_form").attr("action", "./bookmark_update.php");

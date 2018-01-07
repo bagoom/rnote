@@ -232,7 +232,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                           <?if ($gr_admin&& $view['wr_renter_contact']){?>
                                
                                 <li>임차인연락처
-                                  <span>
+                                  <span class="info_sm_span">
                                   <?=$view['wr_renter_contact'];?>
                                   </span>
                                 </li>

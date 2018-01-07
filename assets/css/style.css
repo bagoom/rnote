@@ -473,6 +473,7 @@ li{
   text-align: center;
   font-size: 15px;
   background: #f5f5f5;
+  border-left:1px solid #ddd;
   border-right:1px solid #ddd;
   line-height: 22px;
 }

@@ -173,7 +173,7 @@ function Profit_Rate() {
      parseInt($('#wr_loan2').val()) -
      parseInt($('#wr_sale_deposit').val()) );
     //  var bbb = d;
-    $('#wr_profit_rate').val((aaa / bbb).toFixed(2));
+    $('#wr_profit_rate').val((aaa / bbb).toFixed(1));
 }
 
   //   $('#wr_int_rate2').on('keyup', function(){

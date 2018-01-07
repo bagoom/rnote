@@ -171,6 +171,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                             <!-- 지번정보 -->
                             <div class="info_top">
                               <ul>
+
                                 <? $m2 = $view['wr_area_p'] *3.3;?>
                                 <li class="wr_writer">대지면적
                                 <span>
@@ -195,9 +196,15 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                                   <span class="sale_price" style="margin-right:5px;"></span>
                               </li>
 
+                              <!-- <li>매도절충가
+                                  <?=$view['wr_sale_price_b']?>
+                              </li> -->
+
                                 <li>실인수가
                                   <span class="wr_silinsu"> </span>
                                 </li>
+
+                            
                               </ul>
                             </div>
 
@@ -236,10 +243,29 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
 
                
                             <div class="info_top ">
+                              <li>매물번호
+                                  <span class="info_sm_span">
+                                  <?=$view['wr_code'];?>
+                                  </span>
+                                </li>
+                              <li class="wr_writer">담당자
+                                <span class="info_sm_span">
+                                <?=$view['wr_writer']?>
+                                <i class="fa fa-caret-square-o-down" aria-hidden="true"></i>
+                                </span>
+                              </li>
+                              
+                                <li class="wr_writer_contact">담당자연락처<span class="info_sm_span"><?=$view['wr_hp']?></span> </li>
+                              <li>매도인연락처
+                                   <span class="info_sm_span">
+                                  <?=$view['wr_seller_contact'];?>
+                                  </span>
+                                </li>
                               <li style=""><p>메모</p>
                                 <p style="margin-bottom:0;">
                                   <span class="wr_memo"><?=nl2br($view['wr_memo']);?></span></p>
                               </li>
+
                             </div>
                                 <?php
                                 // 파일 출력
