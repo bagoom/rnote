@@ -9,38 +9,13 @@ check_write_token($bo_table);
 
 $g5['title'] = '게시글 저장';
 
-
-// 클론된 평수의 값을 멀티벨류값으로 저장
-$multivalues = array();
-for ($i=99; $i<120; $i++ ){
-    if (${"wr_area_p" . $i}){
-        array_push($multivalues,${"wr_area_p" . $i});
-    }
-}
-// 클론된 m2의 값을 멀티벨류값으로 저장
-$multivalues2 = array();
-for ($i=99; $i<120; $i++ ){
-    if (${"wr_area_m" . $i}){
-        array_push($multivalues2,${"wr_area_m" . $i});
-    }
-}
-// 클론된 address_sale의 값을 멀티벨류값으로 저장
-$multivalues3 = array();
-for ($i=99; $i<120; $i++ ){
-    if (${"wr_address_sale" . $i}){
-        array_push($multivalues3,${"wr_address_sale" . $i});
-    }
-}
-
-if ($wr_sale_type == "1"){
-    $wr_area_p_sale = $wr_area_p;
-    $wr_area_m_sale = $wr_area_m;
-    $wr_address_sale = $wr_address_sale;
-}else if ($wr_sale_type =="2"){
-    $wr_area_p_sale = implode(",",$multivalues);
-    $wr_area_m_sale = implode(",",$multivalues2);
-    $wr_address_sale = implode(",",$multivalues3);
-}
+// echo "<br>";
+// echo "<br>";
+// echo "<br>";
+// echo "<br>";
+// echo "<br>";
+// echo "<br>";
+// print_r($_POST);
 
 
 
@@ -289,8 +264,8 @@ if ($w == '' || $w == 'r') {
                      wr_floor = '$wr_floor',
                      wr_sale_area = '$wr_sale_area',
                      wr_rent_p = '$wr_rent_p',
-                     wr_area_p = '$wr_area_p_sale',
-                     wr_area_m = '$wr_area_m_sale',
+                     wr_area_p = '$wr_area_p',
+                     wr_area_m = '$wr_area_m',
                      wr_area_p_all = '$wr_area_p_all',
                      wr_area_m_all = '$wr_area_m_all',
                      wr_sale_price = '$wr_sale_price',
@@ -311,6 +286,13 @@ if ($w == '' || $w == 'r') {
                      wr_gross_area = '$wr_gross_area',
                      wr_m_rate = '$wr_m_rate',
                      wr_mt_cost = '$wr_mt_cost',
+                     wr_mt_cost_p = '$wr_mt_cost_p',
+                     wr_mt_separate = '$wr_mt_separate',
+                     wr_mt_elec = '$wr_mt_elec',
+                     wr_mt_water = '$wr_mt_water',
+                     wr_mt_gas = '$wr_mt_gas',
+                     wr_mt_tv = '$wr_mt_tv',
+                     wr_mt_internet = '$wr_mt_internet',
                      wr_premium_o = '$wr_premium_o',
                      wr_premium_b = '$wr_premium_b',
                      wr_renter_contact = '$wr_renter_contact',
@@ -320,6 +302,8 @@ if ($w == '' || $w == 'r') {
                      wr_rand_type = '$wr_rand_type',
                      wr_zoning_district = '$wr_zoning_district',
                      wr_room_type = '$wr_room_type',
+                     wr_rent_type = '$wr_rent_type',
+                     wr_room_number = '$wr_room_number',
                      wr_room_count = '$wr_room_count',
                      wr_rest_count = '$wr_rest_count',
                      wr_o_air_cond = '$wr_o_air_cond',
@@ -334,12 +318,12 @@ if ($w == '' || $w == 'r') {
                      wr_o_closet = '$wr_o_closet',
                      wr_o_shoe_rack = '$wr_o_shoe_rack',
                      wr_o_sink = '$wr_o_sink',
-                     wr_o_heating = '$wr_o_heating',
-                     wr_o_subway = '$wr_o_subway',
-                     wr_o_parking = '$wr_o_parking',
+                     wr_o_stove = '$wr_o_stove',
+                     wr_o_elock = '$wr_o_elock',
+                     wr_o_ind = '$wr_o_ind',
                      wr_o_elevator = '$wr_o_elevator',
                      wr_o_vacant = '$wr_o_vacant',
-                     wr_direction = '$wr_direction',
+                     wr_o_bidet = '$wr_o_bidet',
                      wr_memo = '$wr_memo',
                      wr_rec_sectors = '$wr_rec_sectors',
                      wr_code = '$wr_code',
@@ -349,6 +333,8 @@ if ($w == '' || $w == 'r') {
                      wr_important = '2',
                      wr_posy = '$wr_posy',
                      wr_posx = '$wr_posx',
+                     wr_bld_match_id = '$wr_bld_match_id',
+                     wr_room_inactive = '$wr_room_inactive',
                      wr_datetime = '".G5_TIME_YMDHIS."' ";
 
     sql_query($sql);
@@ -453,8 +439,8 @@ if ($w == '' || $w == 'r') {
                          wr_floor = '$wr_floor',
                          wr_sale_area = '$wr_sale_area',
                          wr_rent_p = '$wr_rent_p',
-                         wr_area_p = '$wr_area_p_sale',
-                         wr_area_m = '$wr_area_m_sale',
+                         wr_area_p = '$wr_area_p',
+                         wr_area_m = '$wr_area_m',
                          wr_area_p_all = '$wr_area_p_all',
                          wr_area_m_all = '$wr_area_m_all',
                          wr_sale_price = '$wr_sale_price',
@@ -475,6 +461,13 @@ if ($w == '' || $w == 'r') {
                          wr_gross_area = '$wr_gross_area',
                          wr_m_rate = '$wr_m_rate',
                          wr_mt_cost = '$wr_mt_cost',
+                         wr_mt_cost_p = '$wr_mt_cost_p',
+                         wr_mt_separate = '$wr_mt_separate',
+                         wr_mt_elec = '$wr_mt_elec',
+                         wr_mt_water = '$wr_mt_water',
+                         wr_mt_gas = '$wr_mt_gas',
+                         wr_mt_tv = '$wr_mt_tv',
+                         wr_mt_internet = '$wr_mt_internet',
                          wr_premium_o = '$wr_premium_o',
                          wr_premium_b = '$wr_premium_b',
                          wr_renter_contact = '$wr_renter_contact',
@@ -484,6 +477,8 @@ if ($w == '' || $w == 'r') {
                          wr_rand_type = '$wr_rand_type',
                          wr_zoning_district = '$wr_zoning_district',
                          wr_room_type = '$wr_room_type',
+                         wr_rent_type = '$wr_rent_type',
+                         wr_room_number = '$wr_room_number',
                          wr_room_count = '$wr_room_count',
                          wr_rest_count = '$wr_rest_count',
                          wr_o_air_cond = '$wr_o_air_cond',
@@ -498,19 +493,21 @@ if ($w == '' || $w == 'r') {
                          wr_o_closet = '$wr_o_closet',
                          wr_o_shoe_rack = '$wr_o_shoe_rack',
                          wr_o_sink = '$wr_o_sink',
-                         wr_o_heating = '$wr_o_heating',
-                         wr_o_subway = '$wr_o_subway',
-                         wr_o_parking = '$wr_o_parking',
+                         wr_o_stove = '$wr_o_stove',
+                         wr_o_elock = '$wr_o_elock',
+                         wr_o_ind = '$wr_o_ind',
                          wr_o_elevator = '$wr_o_elevator',
                          wr_o_vacant = '$wr_o_vacant',
-                         wr_direction = '$wr_direction',
+                         wr_o_bidet = '$wr_o_bidet',
                          wr_memo = '$wr_memo',
                          wr_rec_sectors = '$wr_rec_sectors',
                          wr_code = '$wr_code',
                          wr_extra_exp = '$wr_extra_exp',
                          board_list = '$board_list',
                          wr_posy = '$wr_posy',
-                         wr_posx = '$wr_posx'
+                         wr_posx = '$wr_posx',
+                         wr_bld_match_id = '$wr_bld_match_id',
+                        wr_room_inactive = '$wr_room_inactive'
                          {$sql_ip}
                          {$sql_password}
                   where wr_id = '{$wr['wr_id']}' ";
@@ -821,11 +818,11 @@ if (!($w == 'u' || $w == 'cu') && $config['cf_email_use'] && $board['bo_use_emai
 
 delete_cache_latest($bo_table);
 
-//
-// if(($_POST["wr_type"]) == "rent") {
-//   echo "dddd";
-//
-// }
+
+if(($_POST["wr_type"]) == "rent") {
+  echo "dddd";
+
+}
 
 
 if ($file_upload_msg)

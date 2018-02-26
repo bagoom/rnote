@@ -80,6 +80,7 @@ var g5_bo_table  = "<?php echo isset($bo_table)?$bo_table:''; ?>";
 var g5_sca       = "<?php echo isset($sca)?$sca:''; ?>";
 var g5_editor    = "<?php echo ($config['cf_editor'] && $board['bo_use_dhtml_editor'])?$config['cf_editor']:''; ?>";
 var g5_cookie_domain = "<?php echo G5_COOKIE_DOMAIN ?>";
+var wr_id = "<?php echo $wr_id ?>";
 var wr_important = "<?php echo $wr_important ?>";
 var wr_office_permission = "<?php echo $wr_office_permission ?>";
 var wr_sold_out = "<?php echo $wr_sold_out ?>";
@@ -213,7 +214,7 @@ if(!defined('G5_IS_ADMIN'))
         </div> -->
 
 <div class="user_info">
-  <i class="fa fa-user" aria-hidden="true"></i>
+  <i class="fa fa-cog" aria-hidden="true"></i>
   <ul>
     <p class="tri2"></p>
     <li id="arm_title">사용자설정</li>
@@ -256,15 +257,19 @@ if(!defined('G5_IS_ADMIN'))
 
   <?php include_once(G5_PATH.'/plugin/srd-pushmsg/pushmsg_view.php'); ?>
 </div>
+
       <!--header end-->
       <script type="text/javascript">
         
         $(window).on("scroll", function() {
       if($(window).scrollTop() > 100) {
           $("header").addClass("active");
+          // $(".wrapper").css("background","#3b4db7")
+          
       } else {
           //remove the background property so it comes transparent again (defined in your css)
          $(".header").removeClass("active");
+        //  $(".wrapper").css("background","#f5f9fc")
             }
         });
 

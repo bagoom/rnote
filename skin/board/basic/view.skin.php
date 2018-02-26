@@ -5,6 +5,7 @@ include_once(G5_LIB_PATH.'/thumbnail.lib.php');
 add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0);
 ?>
 <link rel="stylesheet" type="text/css" href="<?php G5_PATH?>/assets/css/map_style.css">
+<link rel="stylesheet" href="<?php G5_PATH?>/assets/css/toastr.min.css">
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=322cba0807c729368c6cc0ec6e84585c"></script>
 
 <!-- <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=306678a15ccad514fa75a3b1ae02b091"></script> -->
@@ -63,7 +64,137 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
   background: #aaa;
   cursor:pointer;
 }
-
+#bookmark .modal-body h4{
+  font-size:15px;
+  margin:0;
+  padding: 20px;
+  color:#444;
+}
+.bookmark_check_list_wrap{
+  width:40%;
+  height:400px;
+  float:left;
+  border-right: .5px solid #d1d1d1;
+}
+.check_list ul li:first-child{
+  border-top:0.5px solid #d1d1d1;
+}
+.check_list ul li{
+  padding: 10px;
+  border-bottom: 0.5px solid #d1d1d1;
+  font-size:12px;
+  color:#888;
+}
+.folder_list{
+  width:60%;
+  height:400px;
+  float:left;
+  overflow-y:auto;
+}
+.map_board_list {
+  position: relative;
+  width: 100%;
+  padding: 15px;
+  line-height:22px;
+  font-size: 14px;
+  color:#666;
+  background:#f7f7f7;
+  border-top: 0.5px solid #d1d1d1;
+  cursor: pointer;
+  overflow:hidden;
+}
+.map_board_list:last-child{
+  border-bottom:.5px solid #d1d1d1;
+}
+.map_board_list:hover{
+  font-weight: 700;
+}
+.list_check_label{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:70px;
+  line-height:70px;
+  display:none;
+  text-align:center;
+  font-size:25px;
+  color:#fff;
+  background: rgba(0,0,0,0.5);
+  cursor:pointer;
+}
+.folder_add_btn{
+  width: 20%;
+  height:56px;
+  float:right;
+  line-height:40px;
+  padding : 10px;
+  font-size:20px;
+  color:#3b4db7;
+  text-align: center;
+  border-left: .5px solid #d1d1d1;
+  cursor:pointer;
+}
+.folder_add_wrap{
+  position: absolute;
+  top:55.5px;
+  left:498.5px;
+  width: 400px;
+  height: 400px;
+  border-left: .5px solid #d1d1d1;
+  background: #fff;
+  display:none;
+}
+.folder_add_wrap h4{
+  font-size:15px;
+  margin:0;
+  padding: 20px;
+  text-align: center;
+  color:#444;
+  border-bottom: .5px solid #d1d1d1;
+}
+.find_txt{
+  padding-top:4px;
+}
+.modal_sec{
+  padding: 20px;
+  border-bottom: 0.5px solid #ccc; 
+  overflow:hidden;
+}
+.modal_sec:last-child{
+  border:0;
+}
+.folder_add_wrap input[type=text]{
+  width:80%;
+  height: 50px;  
+  padding-left: 10px ;
+  font-size: 14px;
+  float:left;
+}
+.folder_add_wrap label:first-child{
+  width: 20%;
+  float:left;
+  padding-top:18px;
+  font-size: 14px;
+}
+.circle-nicelabel + label{
+  background-color: #3b4db7;
+}
+.margin_zero{
+  margin:0 !important;
+}
+.modal_footer{
+  position: absolute;
+  left:0;
+  bottom:0;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  font-size:16px;
+  color:#fff;
+  background: #3b4db7;
+  cursor: pointer;
+}
 
 </style>
 <script src="<?php echo G5_JS_URL; ?>/viewimageresize.js"></script>
@@ -214,7 +345,6 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                                     $str2 = explode(' ', $str);
                                     $str3 = sizeof($str2)-1 ; ?>
 
-
                               <li><p>추천업종</p>  
                               <ul class="rec_list_wrap" style-"overflow:hidden;">
                                 
@@ -244,7 +374,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                                 </span>
                               </li>
                               
-                                <li class="wr_writer_contact">담당자연락처<span class="info_sm_span"><?=$view['wr_hp']?></span> </li>
+                                <li class="wr_writer_contact" style="display:none;">담당자연락처<span class="info_sm_span"><?=$view['wr_hp']?></span> </li>
 
                             <!-- 임대인연락처가 있을경우 -->
                             <?}else if($gr_admin&& $view['wr_lessor_contact']){?>
@@ -255,7 +385,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                                     <?=$view['wr_writer']?>
                                   <i class="fa fa-caret-square-o-down" aria-hidden="true"></i>
                                   </span></li>
-                                <li class="wr_writer_contact">담당자연락처<span class="info_sm_span"><?=$view['wr_hp']?></span> </li>
+                                <li class="wr_writer_contact"  style="display:none;">담당자연락처<span class="info_sm_span"><?=$view['wr_hp']?></span> </li>
 
                             <!-- 직원일경우 -->
                             <?}else if(!$gr_admin){?>
@@ -264,7 +394,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                                 <?=$view['wr_writer']?>
                               <i class="fa fa-caret-square-o-down" aria-hidden="true"></i>
                               </span></li>
-                                <li class="wr_writer_contact">담당자연락처<span class="info_sm_span"><?=$view['wr_hp']?></span> </li>
+                                <li class="wr_writer_contact"  style="display:none;">담당자연락처<span class="info_sm_span"><?=$view['wr_hp']?></span> </li>
                               <?}?>
 
                               <?}else{ ?>
@@ -390,8 +520,76 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                         </div>
                       </div>
 
+
+                      <div class="modal fade" id="bookmark" >
+                <div class="modal-dialog">
+                  <div class="modal-content" id="bookmark_con" style="min-width:500px !important; width:500px; margin-top:150px; margin:0 auto">
+                    <!-- header -->
+                    <div class="modal-header">
+                      <!-- 닫기(x) 버튼 -->
+                      <button type="button" class="close" data-dismiss="modal">×</button>
+                      <!-- header title -->
+                      <h4 class="modal-title">즐겨찾기 폴더 선택</h4>
+                    </div>
+                    <!-- body -->
+                    <div class="modal-body" style="padding:0; height: 400px;">
+                            <div class="bookmark_folder">
+                                <div class="bookmark_check_list_wrap">
+                                    <h4>선택한 매물</h4>
+                                    <div class="check_list">
+                                      <ul>
+                                      <!-- 체크한 리스트 매물 목록 -->
+                                    </ul>
+                                    </div> 
+                                  </div> 
+                                <div class="folder_list">
+                                    
+                                              
+                                </div>
+                            </div>
+                          
+                    </div>
+                      </form>
+
+                    <div class="folder_add_wrap" >
+                    <h4>폴더추가</h4>
+
+                    <form id="folder_add_form" action="<?echo G5_BBS_URL?>/folder_update.php" method="post">
+                      <div class="modal_sec">
+                        <label >폴더이름</label>  
+                      <input type="text" placeholder="추가하실 폴더의 이름을 적어 주세요." name="folder_name">
+                        </div>
+                        <div class="modal_sec">
+                        <label >상단고정</label>  
+                        <input class="circle-nicelabel" name="folder_top" data-nicelabel="{&quot;position_class&quot;: &quot;circle-checkbox&quot;}" type="checkbox" id="nicelabel" value="0">
+                        <label class="circle-checkbox" for="nicelabel" style="margin-top:8px;"><div class="circle-btn"></div></label>
+                        </div>
+
+                      </form>
+                        <div class="modal_footer">
+                            추가 <i class="fa fa-plus"></i>
+                        </div>   
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
                       
                       <div class="chk_confirm_wrap" >
+                      <? if ($view['wr_sold_out'] == "1"){
+                          if($gr_admin){    
+                          ?>
+                          <!-- 소장일경우  -->
+                            <span class="s1">오피스매물등록하기</span>
+                        <?}else{?>
+                          <!-- 직원일경우 -->
+                            <span class="s9">마이노트로등록하기</span>
+                            <?}?>
+                            <span class="s8">즐겨찾기등록하기</span>
+                            <span class="s7">삭제</span>
+                        <?}else{ ?>
+                      
                         <?if ($gr_admin && $wr_important == 1){}else{ ?>
                         <span class="s1">사무실매물등록</span>
                         <?}?>
@@ -399,11 +597,15 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                         <span class="s6" >사무실매물로수락</span>
                         <span data-target="#layerpop" data-toggle="modal" class="s5">거절하기</span>
                         <?}else{}?>
-                        <span class="s2">즐겨찾기등록</span>
+                        <span class="s8" data-target="#bookmark" data-toggle="modal">즐겨찾기등록하기</span>
                         <span class="s3">거래종료등록</span>
                         <span class="s4"><a href=" <?echo G5_HTTP_BBS_URL?>/write.php?bo_table=<?echo $bo_table?>&board_list= <?echo $view[board_list] ?>&wr_id=<?echo $view[wr_id]?>&w=u" style="color:#fff;">수정</a></span>
                         <span class="s5"><a href="<?php echo $delete_href ?>"  onclick="del(this.href); return false;" style="color:#fff;">삭제</a></span>
+                      <?}?>
                       </div>
+
+
+<script src="<?php G5_PATH?>/assets/js/toastr.min.js"></script>
                      
 <script>
 $(".sale_view_drop").click(function(){
@@ -411,27 +613,59 @@ $(".sale_view_drop").click(function(){
 })
 
 
-
-
-// 퍼미션 상태 업데이트 ajax
-$("input[name=wr_office_permission]").on('click',function () {
-var formData = $('#view_state').serializeArray();
+// 즐겨찾기 클릭시 폴더 리스트 요청ajax
+$(function() { $("input[name=folder_name]").keydown(function(evt) { if (evt.keyCode == 13) return false; }); });
+$(".s8").click(function(){
+var folder_list = "<?=G5_BBS_URL?>/list_folder_list.php";
 $.ajax({
-url: "<?echo G5_BBS_URL?>/view_permission_update.php",
-type: "POST",
-data: formData,
-dataType: 'text',
-success: function (response) {
-  location.reload();
+type : "POST",
+url : folder_list,
+dataType : "text",
+error : function() {
+alert('통신실패!!');
 },
-error: function (jqXHR, textStatus, errorThrown) {
-alert(errorThrown);
+success : function(data) {
+$('.folder_list').html(data);
 }
-})
+});
 });
 
+// 즐겨찾기 폴더추가 ajax요청
+$(".modal_footer").click(function(){
+  var folder_list = "<?=G5_BBS_URL?>/list_folder_list.php";
+  if( $('#nicelabel').is(":checked")){
+      $('#nicelabel').val("1");
+    }
+  var formData =$('#folder_add_form').serializeArray();
+  // console.log(formData);
+  $.ajax({
+  url: "<?echo G5_BBS_URL?>/folder_update.php",
+  type: "POST", 
+  data: formData,
+  dataType: 'text',
+  success: function (Data, textStatus, jqXHR) {
+// 폴더추가시 폴더리스트 새로고침 ajax
+$.ajax({
+type : "POST",
+url : folder_list,
+dataType : "text",
+error : function() {
+alert('통신실패!!');
+},
+success : function(data) {
+$('.folder_list').html(data);
+}
+});
+  },
+  error: function (jqXHR, textStatus, errorThrown) {
+  alert(errorThrown);
+  }
+  })
+  });
 
-
+  // 북마크 추가시 체크된 매물 리스트만 가져오기 
+    var check_text = "<?=$view[wr_subject]?>";
+  $(".check_list ul").append("<li id='add_list'>"+check_text+"</li>");
 
 
 
@@ -452,6 +686,10 @@ alert(errorThrown);
   });
   $(".s6").click(function(){
     $("#fboardlist").attr("action", "./office_update.php");
+    $("#fboardlist").submit();
+  });
+  $(".s9").click(function(){
+    $("#fboardlist").attr("action", "./sale_recovery.php");
     $("#fboardlist").submit();
   });
 

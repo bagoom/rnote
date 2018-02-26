@@ -1,10 +1,11 @@
 <script type="text/javascript" src="http://code.jquerygeo.com/jquery.geo-1.0.0-b1.5.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=322cba0807c729368c6cc0ec6e84585c"></script>
 <script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link href="<?=G5_URL?>/assets/css/jquery-nicelabel.css" rel="stylesheet" type="text/css" />
 <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
 <link href="<?=$bookmark_skin_url?>/bookmark_style.css" rel="stylesheet" type="text/css">
-
+<!-- <link href="<?php echo G5_URL?>/assets/icon_font/css/fontello.css" rel="stylesheet"> -->
 
 
 <? $con = mysqli_connect("localhost","realnote","!dnwls1127","realnote"); ?>
@@ -207,14 +208,15 @@ while ($folder = mysqli_fetch_array($result)) {?>
   var title = "<?=$folder[wr_subject]?>";
   var posx = <?=$folder[wr_posx]?>;
   var posy = <?=$folder[wr_posy]?>;
-  var wr_floor = <?=$folder[wr_floor]?>;
+  var wr_floor = "<?=$folder[wr_floor]?>";
   var wr_area_p = <?=($folder[wr_area_p] == "") ? $folder[wr_area_p] = "0" :  $folder[wr_area_p]?>;
   var wr_rent_deposit = <?=$folder[wr_rent_deposit]?>;
   var wr_m_rate = <?=$folder[wr_m_rate]?>;
   var wr_premium_o = <?=$folder[wr_premium_o]?>;
+  var wr_sale_type =" <?=$folder[wr_sale_type]?>";
   var bm_bmf_id = <?=$folder['bm_bmf_id']?>;
   var url = "<?=$folder['href']?>";
-  positions.push( [title,posy,posx,url,wr_floor,wr_area_p,wr_rent_deposit,wr_m_rate,wr_premium_o,bm_bmf_id] )
+  positions.push( [title,posy,posx,url,wr_floor,wr_area_p,wr_rent_deposit,wr_m_rate,wr_premium_o,wr_sale_type,bm_bmf_id] )
   center_position.push( [posy,posx] )
 <?}?>
 
@@ -228,7 +230,8 @@ var newPositions = positions.map(function(d)
   wr_rent_deposit: d[6],
   wr_m_rate: d[7],
   wr_premium_o: d[8],
-  bm_bmf_id: d[9]
+  wr_sale_type: d[9],
+  bm_bmf_id: d[10]
   }
 });
 

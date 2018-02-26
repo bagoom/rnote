@@ -38,26 +38,67 @@ add_stylesheet('<link rel="stylesheet" href="'.$outlogin_skin_url.'/style.css">'
   font-size: 16px;
   text-align: center;
   color: #fff !important;
-  border: 1px solid #fff;
+  border: .5px solid #fff;
 
+}
+input[type=submit]{
+  width: 48%;
+  height: 40px;
+  margin-top: 20px;
+  border:.5px solid #fff;
+  background: #1c2975;
+  border-radius: 50px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.19);
+  border:none;
+  color: rgba(255,255,255,0.75);
+  margin-right: 4%;
+  float:left;
 }
 input[type=button]{
-  width: 100%;
-  height:50px;
+    width: 48% !important;
+    height: 40px;
   background: transparent;
+  margin-top: 20px;
+  border-radius: 50px; 
   color: #fff;
-
+  background: #1c2975;
+  border-radius: 50px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.19);
+  border:none !important;
+  color: rgba(255,255,255,0.75);
+  float:left;
 }
 .visual_contents{
-  position: absolute;
-  top: 220px !important;
-  left: 50%;
-  margin-left: -165px;
-  width: 330px;
+  margin-top: 230px;
+}
+ h3.repre_title{
+  margin-top: 35px;
+  margin-bottom: 30px;
+  font-size: 35px; 
+  font-weight: bolder;
+  letter-spacing: 0.05em;
+  color: #fff;
+  text-align:center;
+}
+.slider div{
+  cursor: pointer;
+}
+.slider{
+  width: 50%;
+  margin: 0 auto;
 }
 
 </style>
 <!-- 로그인 후 아웃로그인 시작 { -->
+               <!-- <h3 class="repre_title">대표부동산설정</h3>
+                <section class="center slider">
+                <div >원룸</div>
+                <div>아파트/오피스텔</div>
+                <div>상가</div>
+                <div>토지</div>
+                </section> -->
+
+
 <section id="ol_after" class="ol">
 <?
 $gr_mb = sql_fetch(" select * from {$g5['group_member_table']} where mb_id = '$member[mb_id]' ");

@@ -176,16 +176,16 @@ $sql_common = " gr_id               = '$gr_id',
 
 
                 // 회원가입 임시로 막음 풀때는 밑에 구문 주석 해제 18-01-02
-    // $row = sql_fetch(" select count(*) as cnt from {$g5['board_table']} where bo_table = '{$bo_table}' ");
-    // if ($row['cnt'])
-    //     alert($bo_table.' 은(는) 이미 존재하는 TABLE 입니다.');
+    $row = sql_fetch(" select count(*) as cnt from {$g5['board_table']} where bo_table = '{$bo_table}' ");
+    if ($row['cnt'])
+        alert($bo_table.' 은(는) 이미 존재하는 TABLE 입니다.');
 
-    // $sql = " insert into {$g5['board_table']}
-    //             set bo_table = '{$bo_table}',
-    //                 bo_count_write = '0',
-    //                 bo_count_comment = '0',
-    //                 $sql_common ";
-    // sql_query($sql);
+    $sql = " insert into {$g5['board_table']}
+                set bo_table = '{$bo_table}',
+                    bo_count_write = '0',
+                    bo_count_comment = '0',
+                    $sql_common ";  
+    sql_query($sql);
      
 
     // 게시판 테이블 생성

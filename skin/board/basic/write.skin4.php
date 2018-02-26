@@ -7,7 +7,7 @@
 
 // add_stylesheet('css 구문', 출력순서); 숫자가 작을 수록 먼저 출력됨
 // add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0);
-$board_list=3;
+$board_list=4;
 ?>
 
 
@@ -142,77 +142,44 @@ input[type="text"],input[type="number"],input[type="tel"]{
                                 <!-- 지번 및  -->
                                 면적
                               </div>
-<!-- 
-                              <table class="write_table">
-                                <tbody class="sale_rand_wrap rand_wrap_basic" style="display:table-header-group;" >
+
+                              <table class="write_table clone_wrap">
+                                <tbody class="rand_wrap" style="display:table-header-group;" >
+                                
                                   <tr>
-                                    <th>지번</th>
+                                    <th style="position:relative;"> 지번 <div class="box_del">x</div></th>
                                     <td colspan="3">
-                                      <input type="text" name="wr_address_sale99" value="<?=$write[wr_address_sale]?>" tabindex="4">
+                                      <input type="text" class="address_sale"  tabindex="4">
                                       </div>
                                     </td>
                                   </tr>
                                   <tr>
+                                  
                                     <th>면적</th>
-                                    <td><input type="text" name="wr_area_p99" id="wr_area_p2"  value="<?php echo $write[wr_area_p] ?>"    tabindex="5" placeholder="평"/></td>
+                                    <td><input type="text" class="area_p"  value="<?php echo $write[wr_area_p] ?>"    tabindex="5" placeholder="평"/></td>
                                     <th style="text-align:center;"><i class="fa fa-arrows-h" aria-hidden="true"></i></th>
-                                    <td><input type="text" name="wr_area_m99" id="wr_area_m2" value="<?php echo $write[wr_area_m] ?>"   tabindex="6" placeholder="㎡"/></td>
+                                    <td><input type="text" name="wr_area_m99" id="wr_area_m2" class="area_m" value="<?php echo $write[wr_area_m] ?>"   tabindex="6" placeholder="㎡"/></td>
                                   </tr>
                                 </tbody>
-
-                                <tbody class="rand_wrap " style="display:none;" id="doo">
-                                  <tr>
-                                    <th style="position:relative;">지번 <div class="box_del">x</div></th>
-                                    <td colspan="3"><input type="text" name="wr_address_sale" id="wr_address_sale3" value=""  tabindex="999" /></td>
-                                  </tr>
-                                  <tr class="sale_rand">
-                                    <th>면적</th>
-                                    <td>
-                                    <input type="text" name="wr_area_p" id="wr_area_p3"  value=""  tabindex="999" placeholder="평"/>
-                                    </td>
-                                    <th style="text-align:center;"><i class="fa fa-arrows-h" aria-hidden="true"></i></th>
-                                    <td><input type="text" name="wr_area_m" id="wr_area_m3" value=""  tabindex="999" placeholder="㎡" /></td>
-                                    
-                                  </tr>
-                                </tbody>
-
-                              </table> -->
+                              </table>
 
                                   <!-- 기존 지번밎면적 총면적부분 -->
-                              <!-- <div style="position:relative; padding-bottom:45px;"> -->
-                              <div style="position:relative; ">
-                                  <!-- <table class="write_table">
-                                    <tbody >
-                                      <tr>
-                                        <th style="background:#ddd;">총면적(평)</th>
-                                        <td><input type="text"  name="wr_area_p_all" value="<?php echo $write[wr_area_p_all]  ?>" id="wr_area_p_all"  tabindex="999" placeholder="평" readonly ></td>
-                                        <th style="background:#ddd;">총면적(㎡)</th>
-                                        <td><input type="text"  name="wr_area_m_all" value="<?php echo $write[wr_area_m_all]  ?>" id="wr_area_m_all"  tabindex="999" placeholder="㎡" readonly></td>
-                                      </tr>
-                                    </tbody>
-                                  </table> -->
                                   <table class="write_table">
                                     <tbody >
                                       <tr>
-                                        <th >면적(평)</th>
+                                        <th  style="background:#ddd;" >총면적(평)</th>
                                         <td><input type="text"  name="wr_area_p_all" value="<?php echo $write[wr_area_p_all]  ?>" id="wr_area_p_all"  tabindex="4" placeholder="평"  ></td>
-                                        <th>면적(㎡)</th>
+                                        <th style="background:#ddd;">총면적(㎡)</th>
                                         <td><input type="text"  name="wr_area_m_all" value="<?php echo $write[wr_area_m_all]  ?>" id="wr_area_m_all"  tabindex="5" placeholder="㎡" ></td>
+                                    <input type="hidden" name="wr_area_p" id="wr_area_p" value="<?php echo $write[wr_area_p] ?>">
+                                    <input type="hidden" name="wr_area_m" id="wr_area_m" value="<?php echo $write[wr_area_m] ?>">
+                                    <input type="hidden" name="wr_address_sale" id="wr_address_sale" value="<?php echo $write[wr_address_sale] ?>">
                                       </tr>
 
-                        <script>
-                          $("#wr_area_p_all").keyup(function(){
-                            $("#wr_area_m_all").val( ($(this).val() * 3.3).toFixed(2))
-                          });
-                          $("#wr_area_m_all").keyup(function(){
-                            $("#wr_area_p_all").val( ($(this).val() / 3.3).toFixed(2))
-                          });
-                        </script>
                                     </tbody>
                                   </table>
-                                  <!-- <div class="sale_rand_add">
+                                  <div class="sale_rand_add">
                                     항목추가하기 +
-                                  </div> -->
                                   </div>
 
                                   <div class="form-title">
@@ -412,7 +379,7 @@ input[type="text"],input[type="number"],input[type="tel"]{
 
 
 
-<script src="<?php G5_PATH?>/assets/js/pc_script2.js"></script>
+<script src="<?php G5_PATH?>/assets/js/pc_script3.js"></script>
 <script>
 
 $(".drop_sale_btn").click(function(){
@@ -429,8 +396,8 @@ $("#fwrite2").submit(function(){
   if($("#wr_int_rate2").val() =='' || $("#wr_int_rate2").val()== '0'){
     $("#wr_int_rate2").val('4');
   }
-
 })
+
 
 console.log($("#wr_int_rate2"))
   if( "<?=$wr_sale_type?>" == "1"){
@@ -581,7 +548,6 @@ $("#wr_sale_price_b").keyup(function(){
   $("#wr_sale_code").val( generateSerial($("#wr_sale_price_b").val()))
 
 })
-
 
 
 

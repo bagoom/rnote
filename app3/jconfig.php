@@ -1,0 +1,5 @@
+<?php
+
+$jwtKey = 'wdcv123'
+
+ ?>

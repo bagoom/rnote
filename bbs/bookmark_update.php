@@ -9,7 +9,7 @@ $bookmark_folder_table = 'bookmark_'.$member['mb_id'].'_folder'; // 북마크 �
 // 폴더삭제
 if( $_POST['chk_wr_id'] ){
 
-$wr_id_list = '';
+$wr_id_list = ''; 
 if ($wr_id)
     $wr_id_list = $wr_id;
 else {
@@ -46,22 +46,22 @@ sql_query("delete from `$bookmark_folder_table` where bmf_id = '$bmf_id' ");
 // 매물삭제
 else if ( $_POST['chk_child_id']){
 
-$child_id_list = '';
-if ($wr_id)
-    $child_id_list = $wr_id;
-else {
-    $comma = '';
-    for ($i=0; $i<count($_POST['chk_child_id']); $i++) {
-        $child_id_list .= $comma . $_POST['chk_child_id'][$i];
-        $comma = ',';
-    }
-}
-$child_id_list=explode(",",$child_id_list);
+// $child_id_list = '';
+// if ($wr_id)
+//     $child_id_list = $wr_id;
+// else {
+//     $comma = '';
+//     for ($i=0; $i<count($_POST['chk_child_id']); $i++) {
+//         $child_id_list .= $comma . $_POST['chk_child_id'][$i];
+//         $comma = ',';
+//     }
+// }
+// $child_id_list=explode(",",$child_id_list);
 
-for ($i=0; $i<count($child_id_list); $i++) {
+// for ($i=0; $i<count($child_id_list); $i++) {
     // 북마크 매물 삭제 쿼리
-    sql_query("delete from `$bookmark_table` where bm_id = '$child_id_list[$i]' ");
-    } //  for exit
+    sql_query("delete from `$bookmark_table` where bm_id = '$chk_child_id' ");
+    // } //  for exit
     alert("해당 매물이 삭제 되었습니다.");
 }  //  if exit
 

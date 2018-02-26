@@ -58,13 +58,14 @@ include_once('./_common.php');
         var overlap = [];
         overlap = Data.split(',');
         temp = overlap.pop(); 
-
+        
  
         var list_val = $('.check_list li').map(function() { return $(this).text() }).get().join(',');
         var list_text = [];
         list_text = list_val.split(',');
 
         for (i=0; i<overlap.length; i++) {
+            console.log(list_text);
 
            var d= $.inArray(overlap[i],list_text)
            var c = $(".check_list li")[d];

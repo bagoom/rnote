@@ -331,6 +331,8 @@ input[type=radio]:checked + label{
         // 회원아이디 검사
         if (f.w.value == "") {
             var msg = reg_mb_id_check();
+            msg = msg.replace(/\n/g, "");//행바꿈제거 
+            msg = msg.replace(/\r/g, "");//엔터제거 
             if (msg) {
                 alert(msg);
                 f.mb_id.select();
@@ -391,6 +393,8 @@ input[type=radio]:checked + label{
         // E-mail 검사
         if ((f.w.value == "") || (f.w.value == "u" && f.mb_email.defaultValue != f.mb_email.value)) {
             var msg = reg_mb_email_check();
+            msg = msg.replace(/\n/g, "");//행바꿈제거 
+            msg = msg.replace(/\r/g, "");//엔터제거 
             if (msg) {
                 alert(msg);
                 f.reg_mb_email.select();

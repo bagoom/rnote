@@ -19,25 +19,27 @@
     <p>
       <span class="slect_child_count"></span>개의 매물이 선택 되었습니다.
     <span>
-    <i class="fa fa-trash-o" aria-hidden="true" id="child_list_del"/></i>
+    <!-- <i class="fa fa-trash-o" aria-hidden="true" id="child_list_del"/></i> -->
     </span>
     </p>
 </div>
 
 <form action="" id="bookmark_form" method="post">
-
+<div id="board_list_wrap">
 <? 
 $con = mysqli_connect("localhost","realnote","!dnwls1127","realnote"); 
-$sql = "select * from `bookmark_$member[mb_id]_folder` order by bmf_top desc , bmf_date desc";
+$sql = "select * from `bookmark_$member[mb_id]_folder` order by bmf_top desc , bmf_order asc ,bmf_date desc";
 $result = mysqli_query($con , $sql);
 while ($folder = mysqli_fetch_array($result)) {?>
 
-    <div class="map_board_list" >
+    <div class="map_board_list" id="<?=$folder['bmf_id']?>">
+
       <!-- 체크버튼 -->
       <input type="checkbox" name="chk_wr_id[]" class="import_chk" style="display:none;" value="<?php echo $folder['bmf_id'] ?>" id="chk_wr_id_<?php echo $folder['bmf_id']?>" >
       <label for="chk_wr_id_<?php echo $folder['bmf_id'] ?>" class="folder_list_check_label">
        <i class="fa fa-check" aria-hidden="true"></i>
       </label>
+
 
       <!-- 리스트아이템 -->
       <div class="registerated">
@@ -72,19 +74,26 @@ while ($folder = mysqli_fetch_array($result)) {?>
    <? while ($child = mysqli_fetch_array($result2)) {?>
     <?if( $folder['bmf_id'] == $child['bm_bmf_id']){ ?>
     <div class="child_list">
-          <p>
-          <span class="list_del_btn" data-value = "<?=$child['bm_id']?>">
+          <i class="fa fa-trash-o" aria-hidden="true" id="child_list_del" style="display:none;"></i>
+          <input type="hidden" id="chk_child_id" value="<?=$child['bm_id']?>" >
+          <p> 
+          <!-- <?  ($child['wr_sale_type'] == '2') ? $wr_sale_type  = "<i class='icon-money-outlined '> </i>" : $wr_sale_type = "<i class='icon-home-outlined'> </i>" ?> -->
+          <?  ($child['wr_sale_type'] == '2') ? $wr_sale_type  = "[매매] " : $wr_sale_type = "" ?>
+          <?=$wr_sale_type;?>
+
+          <!-- <span class="list_del_btn" data-value = "<?=$child['bm_id']?>">
           <input type="checkbox" name="chk_child_id[]" class="child_check" style="display:none;" value="<?=$child['bm_id']?>" id="chk_child_id_<?=$child['bm_id']?>" >
           <label for="chk_child_id_<?=$child['bm_id']?>" class="list_check_label">
           </label>
-          </span>
+          </span> -->
+
           <span class="find_txt"><?=$child['wr_subject']?></span>
           <span class="child_list_info">
-            <?=$child['wr_premium_o']?>만 /
-            <?=$child['wr_rent_deposit']?>만 /
-            <?=$child['wr_m_rate']?>만 
             <?=$child['wr_floor']?>층  
-            <?=$child['wr_area_p']?>평
+            <?=$child['wr_area_p']?>평 / 
+            <?=$child['wr_rent_deposit']?>만 /
+            <?=$child['wr_m_rate']?>만 /  
+            <?=$child['wr_premium_o']?>만 
           </span>
         </p>
 
@@ -104,7 +113,7 @@ while ($folder = mysqli_fetch_array($result)) {?>
 
 <?}?>
   </form>
-
+  </div>
 
         
         <? $sql = " select count(*) as cnt  from bookmark_$member[mb_id]_folder ";
@@ -123,6 +132,119 @@ while ($folder = mysqli_fetch_array($result)) {?>
 
 <script>
 
+$(document).ready(function(){
+  var contact_url = "<?=$bookmark_skin_url?>/bookmark_board_list.php";
+  $("#board_list_wrap").sortable({
+    placeholder: 'highlight',
+    update : function(event, ui)
+    {
+        var page_id_array = new Array();
+        $('.map_board_list').each(function(){
+          page_id_array.push($(this).attr("id"));
+        });
+
+        $.ajax({
+            url: g5_bbs_url+"/folder_update.php",
+            method:"POST",
+            data : {page_id_array:page_id_array},
+            success: function(data)
+            {
+              $.ajax({
+              type : "POST",
+              url : contact_url,
+              dataType : "text",
+              error : function() {
+              alert('통신실패!!');
+              },
+              success : function(data) {
+              $('#map_board').html(data);
+              }
+              });
+            }
+        })
+    }
+       
+  })
+  
+})
+
+//  폴더 순서 ajax요청
+$(".folder_down").click(function(){
+  var contact_url = "<?=$bookmark_skin_url?>/bookmark_board_list.php";
+  var formData = {bmf_order :$(this).prev("#bmf_order").val()};
+  $.ajax({
+  url: g5_bbs_url+"/folder_update.php",
+  type: "POST", 
+  data: formData,
+  dataType: 'text',
+  success: function (data, textStatus, jqXHR) {
+
+    console.log(data);
+// 폴더 순서 수정 리스트 리로드 요청 
+  $.ajax({
+  type : "POST",
+  url : contact_url,
+  dataType : "text",
+  error : function() {
+  alert('통신실패!!');
+  },
+  success : function(data) {
+  $('#map_board').html(data);
+  }
+  });
+
+  },
+  error: function (jqXHR, textStatus, errorThrown) {
+  alert(errorThrown);
+  }
+  })
+  });
+
+
+  $(".bookmark_delete_btn").click(function(){
+    var con = confirm("정말로 삭제 하시겠습니까?");
+    if (con == true){
+    $("#bookmark_form").attr("action", "./bookmark_update.php");
+    $("#bookmark_form").submit();
+    }
+  });
+
+// 북마크 리스트 삭제 버튼 ajax요청
+$("#child_list_del").click(function(){
+    var con = confirm("정말로 삭제 하시겠습니까?");
+
+  if (con == true){
+  var contact_url = "<?=$bookmark_skin_url?>/bookmark_board_list.php";
+  var formData = {chk_child_id :$(this).next("#chk_child_id").val()};
+  $.ajax({
+  url: g5_bbs_url+"/bookmark_update.php",
+  type: "POST",  
+  data: formData,
+  dataType: 'text',
+  success: function (data, textStatus, jqXHR) {
+    console.log(data);
+// 북마크 리스트 리로드 요청  
+  $.ajax({
+  type : "POST",
+  url : contact_url,
+  dataType : "text",
+  error : function() {
+  alert('통신실패!!');
+  },
+  success : function(data) {
+  $('#map_board').html(data);
+  alert("해당 매물의 북마크가 해제 되었습니다.")
+  }
+  });
+  },
+  error: function (jqXHR, textStatus, errorThrown) {
+  alert(errorThrown);
+  }
+  })
+}
+  });
+
+
 
 $(".modify_folder").click(function(){
   $("#folder_name").val($(this).attr("folder-name"));
@@ -137,7 +259,10 @@ $(".modify_folder").click(function(){
   }
 })
 
-
+// 매물 마우스 오버시 휴지통 
+$(".child_list").hover(function(){
+  $(this).find(".fa-trash-o").toggle();
+})
 
 // 폴더 클릭시 자식 매물 보여주기 : if(폴더 설정중이 아닐떄만)
 $(".map_board_list  .registerated").click(function(){
@@ -166,22 +291,23 @@ $(".map_toggle").click(function(){
 
 // 매물 삭제 버튼
 
-$(".child_check").click(function(){
-  var n = $( ".child_check:checked" ).length;
-  $( ".slect_child_count" ).text(n);
+// $(".child_check").click(function(){
+//   console.log("ddd");
+//   var n = $( ".child_check:checked" ).length;
+//   $( ".slect_child_count" ).text(n);
 
-  if ( $(this).is(":checked")){
-    $(this).parents(".child_list").addClass("child_select");
-  }else{ 
-    $(this).parents(".child_list").removeClass("child_select");
-  }
+//   if ( $(this).is(":checked")){
+//     $(this).parents(".child_list").addClass("child_select");
+//   }else{ 
+//     $(this).parents(".child_list").removeClass("child_select");
+//   }
 
-  if ( n>0){
-      $(".bookmark_state").fadeIn();
-  }else{
-      $(".bookmark_state").hide();
-  }
-});
+//   if ( n>0){
+//       $(".bookmark_state").fadeIn();
+//   }else{
+//       $(".bookmark_state").hide();
+//   }
+// });
 
 
 
@@ -215,13 +341,7 @@ $(".import_chk").click(function(){
   }
 })
 
-$(".bookmark_delete_btn , #child_list_del").click(function(){
-    var con = confirm("정말로 삭제 하시겠습니까?");
-    if (con == true){
-    $("#bookmark_form").attr("action", "./bookmark_update.php");
-    $("#bookmark_form").submit();
-    }
-  });
+
   //  폴더 삭제 ajax요청
 
 // $(".bookmark_delete_btn").on('click',function () {

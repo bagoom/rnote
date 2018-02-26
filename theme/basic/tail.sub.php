@@ -25,7 +25,7 @@ $(function() {
 
 
 
-        <footer class="site-footer">
+        <!-- <footer class="site-footer">
         <div class="text-center">
         <ul>
         <li>RNote</li>
@@ -43,8 +43,16 @@ $(function() {
           </ul>
         </div>
         </div>
-        </footer>
+        </footer> -->
 
+        <!-- <?
+        $load = sys_getloadavg();
+        $load = $load[0] * 100;
+        
+        ?>
+        <p style="margin:20px 0;">현재 서버활동량: <?=$load;?>  ( 0~180 => 양호 , 180~250 => 가끔렉걸림, 250이상 렉쩔어, 400이상 서버다운직전)</p>
+
+         -->
 <input type="hidden" id="bo_table" value="<?php echo $member[mb_id]?>" ?>
 <!--footer end-->
 </section>
