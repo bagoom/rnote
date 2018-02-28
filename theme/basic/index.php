@@ -59,7 +59,11 @@ include_once(G5_THEME_PATH.'/main_head.php');
   padding-left: 10px;
 }
 .user_info{
-  font-size: 15px;
+  font-size: 20px;
+  color: #eee;
+}
+#tnb ul li{
+  font-size: 20px;
   color: #eee;
 }
 
@@ -219,7 +223,7 @@ switch ($member['mb_3']) {
         </header>
 
           <div class="user_info">
-            환경설정 <i class="fa fa-caret-down" aria-hidden="true"></i>
+          <i class="fa fa-cog"></i>
           </div>
 
         <div class="memo">

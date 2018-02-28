@@ -54,21 +54,21 @@ input[type="text"],input[type="number"],input[type="tel"]{
   position: relative;
   float: right;
   width: 100%;
-  height: 600px;
-  padding : 20px;
-  padding-left:250px;
+  min-height: 600px;
   background: #f7f7f7;
+  overflow:hidden;
 }
 .auto_room_output ul{
-  overflow: hidden;
+white-space: nowrap !important;
+width: 100%;
 }
-.auto_room_output ul:last-child{
-  border-bottom: 1px solid #ddd;
+.auto_room_output ul:last-child li{
+  border-bottom: .5px solid #ddd;
 }
 .auto_room_output li{
-  width: 84px;
+  width: 10%;
   height: 50px;
-  float:left;
+  display:inline-block;
   padding: 15px;
   text-align: center;
   line-height: 24px;
@@ -81,29 +81,136 @@ input[type="text"],input[type="number"],input[type="tel"]{
 }
 .auto_room_output li:hover{
   color:#eee;
-  background: #3b4db7;
+  background: #ffbe00;
 }
 .auto_room_output ul li:first-child{
   border-left: 0.5px solid #ddd;
 }
 .auto_room_input{
   position: absolute;
-  top: 80px;
-  left: -80px;
-  width: 300px;
-  height: 410px;
+  top: 200px;
+  left: 50%;
+  width: 500px;
+  margin-left: -250px;
+  height: 140px;
   padding : 25px;
   color : #e0e0e0;
-  border-radius: 5px; 
   background: #3b3b3b;
-  box-shadow: 0 0 40px rgba(50, 53, 56,0.4); 
+  box-shadow: 0 0 10px rgba(50, 53, 56,0.3); 
+}
+.auto_room_add{
+  width: 70%;
+  float:left;
+  overflow-x:auto;
+  
+}
+.auto_room_add li.active{
+  background: #ffbe00;
+  border-color: #ffbe00;
+  color: #fff;
+}
+.room_info_right{
+  width: 30%;
+  min-height: 600px;
+  float: left;
+  background: #fff;
+  border-left: 0.5px solid #ddd;
+  display: none;
+  overflow: hidden;
+  box-shadow : -3px 0 5px rgba(0,0,0,0.03);
+  z-index: 3;
+}
+.room_info_right h3{
+  padding: 15px;
+  text-align: left;
+  color: #222;
+  font-weight: bold;
+}
+.room_info_form{
+  padding: 5px 15px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+.room_info_form.price{
+  width: 50%;
+  float: left;
+}
+.room_info_form .rf_title{
+  font-size: 15px;
+  color: #000;
+  border-right: 0.5px solid #fff;
+  /* font-weight: bold; */
+}
+.room_info_right .room_info_form input[type="radio"]{
+  display:none;
+}
+.room_info_right .room_info_form label{
+  width: 20%;
+  text-align: center;
+  font-size: 13px;
+  float: left;
+  padding: 10px;
+  background: #fff;
+  border: 0.5px solid #e1e1e1;
+  cursor: pointer;
+}
+.room_info_right .room_info_form .option {
+  border-right: 0.5px solid #e1e1e1;
+  border-bottom: 1px solid #e1e1e1;
+  overflow: hidden;
+}
+.room_info_right .room_info_form .mt {
+  border-right: 0.5px solid #e1e1e1;
+  border-bottom: 0.5px solid #e1e1e1;
+  overflow: hidden;
+  margin-top:0;
+}
+.room_info_right .room_info_form .option label{
+width: 25% !important; 
+margin-bottom: 0;
+border-width: 0.5px 0 0 0.5px;
+color: #aaa;
+font-size: 12px;
+letter-spacing: -0.03em;
+}
+.room_info_right .room_info_form .mt label{
+margin-bottom: 0;
+border-width: 0.5px 0 0 0.5px;
+color: #aaa;
+font-size: 12px;
+letter-spacing: -0.03em;
+}
+.room_info_right .room_info_form input[type="radio"]:checked+label{
+  background: #000;
+  border-color: #000;
+  color: #fff;
+}
+.room_info_right .room_info_form input[type="checkbox"]{
+  display:none;
+}
+.room_info_right .room_info_form .mt_separate{
+  width: 100%;
+}
+.room_info_right .room_info_form input[type="checkbox"]:checked+.mt_separate{
+  background: #000;
+  color: #fff;
+  border-color: #000;
+}
+.room_info_right .room_info_form input[type="text"]{
+  height: 36px;
+  border-width: 0.5px;
+}
+.room_info_right .room_info_form input[type="checkbox"]:checked+label{
+  background: #000;
+  color: #fff;
+  border-color: #000;
 }
 .room_info_row{
   overflow:hidden;
 }
 .room_info_col {
   position: relative;
-  width : 40%;
+  width : 30%;
   float: left;
 }
 .room_info_col label{
@@ -117,7 +224,7 @@ input[type="text"],input[type="number"],input[type="tel"]{
   color: #444;
 }
 .room_info_range{
-  width: 20%;
+  width: 10%;
   float: left;
   line-height: 93px;
   text-align: center;
@@ -130,7 +237,7 @@ input[type="text"],input[type="number"],input[type="tel"]{
   background: #eee;
 }
 .room_btn_row{
-  margin-top: 40px;
+
 }
 .room_btn_col{
   overflow: hidden;
@@ -154,7 +261,10 @@ input[type="text"],input[type="number"],input[type="tel"]{
   margin-right: 10px;
 }
 .room_confirm_btn{
-  margin-top: 30px; 
+  width: 25%; 
+  float:left;
+  margin-top: 22.5px;
+  margin-left: 5%;
 }
 .room_confirm_btn input[type="button"]{
   width: 100%;
@@ -162,6 +272,14 @@ input[type="text"],input[type="number"],input[type="tel"]{
   font-weight: bold;
   border:0;
   background: #eab106;
+}
+.room_info_submit{
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  background: #ffbe00;
+  color: #fff;
 }
 </style> 
 
@@ -241,12 +359,11 @@ input[type="text"],input[type="number"],input[type="tel"]{
                                     <td ><input type="text" name="wr_renter_contact" required tabindex="10" value="<?=$write[wr_renter_contact] ?>" id="wr_renter_contact"  placeholder="숫자만입력"></td>
                                   </tr>
                                  <tr>
-                                    <td colspan="2">
+                                    <td colspan="2" style="padding:0px;">
                                             <div class="auto_room_wrap">
                                                   <div class="auto_room_output">
                                                   
                                                     <div class="auto_room_input">
-
                                                           <div class="room_info_row">
                                                           
                                                                 <div class="room_info_col">
@@ -265,47 +382,122 @@ input[type="text"],input[type="number"],input[type="tel"]{
                                                                 <input type="number" id="wr_input_col" placeholder=""  min="1" max="10">
                                                                 </div> 
                                                                 
+                                                                <div class="room_confirm_btn">
+                                                              <input type="button" id="room_confirm_btn" value="추가">
+                                                              </div>
                                                           </div>
 
                                                           <div class="room_btn_row">
                                                               
-                                                              <div class="room_btn_col">
+                                                              <!-- <div class="room_btn_col">
                                                                 <label for="wr_room_btn">
                                                                 <i class="fa fa-check" aria-hidden="true"></i> 전체공실</label>
                                                                 <input type="checkbox" id="wr_room_btn">
+                                                              </div> -->
 
-                                                                <label for="wr_room_btn">
-                                                                <i class="fa fa-check" aria-hidden="true"></i> 전체공실</label>
-                                                                <input type="checkbox" id="wr_room_btn">
-                                                              </div>
-
-                                                              <div class="room_btn_col">
-                                                                <label for="wr_room_btn">
-                                                                <i class="fa fa-check" aria-hidden="true"></i> 전체공실</label>
-                                                                <input type="checkbox" id="wr_room_btn">
-
-                                                                <label for="wr_room_btn">
-                                                                <i class="fa fa-check" aria-hidden="true"></i> 전체공실</label>
-                                                                <input type="checkbox" id="wr_room_btn">
-                                                              </div>
-
-                                                              <div class="room_btn_col">
-                                                                <label for="wr_room_btn">
-                                                                <i class="fa fa-check" aria-hidden="true"></i> 전체공실</label>
-                                                                <input type="checkbox" id="wr_room_btn">
-
-                                                                <label for="wr_room_btn">
-                                                                <i class="fa fa-check" aria-hidden="true"></i> 전체공실</label>
-                                                                <input type="checkbox" id="wr_room_btn">
-                                                              </div>
                                                           </div>
+                                                    </div>
 
-                                                          <div class="room_confirm_btn">
-                                                              <input type="button" id="room_confirm_btn" value="추가">
-                                                          </div>
+                                                    <div class="auto_room_add" >
+                                                    
+                                                    </div>
+
+                                                    <div class="room_info_right">
+                                                        <h3></h3>
+
+                                                        <div class="room_info_form">
+                                                            <p class="rf_title">매물형태</p>
+                                                            <input type="radio" id="rent_type1" name="wr_rent_type" value="1" checked>
+                                                            <label for="rent_type1">월세</label>
+                                                            <input type="radio" id="rent_type2" name="wr_rent_type" value="2">
+                                                            <label for="rent_type2">전세</label>
+                                                        </div>
+
+                                                         <div class="room_info_form">
+                                                            <p class="rf_title">방 구분</p>
+                                                            <input type="radio" id="room_type1" name="wr_room_type" value="1" checked>
+                                                            <label for="room_type1">원룸</label>
+                                                            <input type="radio" id="room_type2" name="wr_room_type" value="2">
+                                                            <label for="room_type2">1.5룸</label>
+                                                            <input type="radio" id="room_type3" name="wr_room_type" value="2">
+                                                            <label for="room_type3">투룸</label>
+                                                            <input type="radio" id="room_type4" name="wr_room_type" value="2">
+                                                            <label for="room_type4">쓰리룸</label>
+                                                        </div>
+
+
+                                                        <div class="room_info_form price">
+                                                            <p class="rf_title">보증금</p>
+                                                            <input type="text"  name="wr_rent_deposit" value="<?=$write['wr_rent_deposit']?>" >
+                                                        </div>
+                                                        <div class="room_info_form price">
+                                                            <p class="rf_title">월세</p>
+                                                            <input type="text"  name="wr_m_rate" value="<?=$write['wr_m_rate']?>" >
+                                                        </div>
+
+                                                        <div class="room_info_form price">
+                                                            <p class="rf_title">면적</p>
+                                                            <input type="text"  name="wr_area_p" value="<?=$write['wr_area_p']?>" >
+                                                        </div>
+                                                            <p class="rf_title">ㅤ</p>
+                                                        <div class="room_info_form price">
+                                                            <input type="text"  name="wr_area_m" value="<?=$write['wr_area_m']?>" >
+                                                        </div>
+
+
+                                                        <div class="room_info_form">
+                                                            <input type="checkbox" id="mt_separate" name="wr_mt_separate" value="<?=$write['wr_mt_separate']?>" >
+                                                            <label for="mt_separate" class="mt_separate">관리비별도</label>
+                                                            <input type="text"  name="wr_mt_cost" value="<?=$write['wr_mt_cost']?>" style="display:none;" >
+                                                        </div>
+
+                                                        <div class="room_info_form">
+                                                            <p class="rf_title">관리비포함항목</p>
+                                                            <div class="mt">
+                                                            <input type="checkbox" id="wr_mt_elec" name="wr_mt_elec" value="1">
+                                                            <label for="wr_mt_elec">전기</label>
+                                                            <input type="checkbox" id="wr_mt_water" name="wr_mt_water" value="1">
+                                                            <label for="wr_mt_water">수도</label>
+                                                            <input type="checkbox" id="wr_mt_gas" name="wr_mt_gas" value="1">
+                                                            <label for="wr_mt_gas">가스</label>
+                                                            <input type="checkbox" id="wr_mt_tv" name="wr_mt_tv" value="1">
+                                                            <label for="wr_mt_tv">TV</label>
+                                                            <input type="checkbox" id="wr_mt_internet" name="wr_mt_internet" value="1">
+                                                            <label for="wr_mt_internet">인터넷</label>
+                                                            </div>
+                                                        </div>  
+
+                                                        <?php
+
+                                                        $wr_o_input = [];
+                                                        $wr_o_label = [];
+
+                                                        $wr_o_input = ["wr_o_air_cond","wr_o_fridger","wr_o_stove","wr_o_ind","wr_o_microwave","wr_o_washer","wr_o_tv","wr_o_internet","wr_o_bed","wr_o_closet","wr_o_shoe_rack","wr_o_sink","wr_o_desk","wr_o_bookshelf","wr_o_elock","wr_o_bidet"];
+                                                        $wr_o_label = ["에어컨","냉장고","가스렌지","인덕션","전자렌지","세탁기","TV","인터넷","침대","옷장","신발장","싱크대","책상","책장","도어락","비데"];
+                                                        ?>
+
+                                                        <div class="room_info_form">
+                                                        <p class="rf_title">옵션</p>
+                                                        <div class="option">
+                                                        <? for($i=0; $i < count($wr_o_input);  $i++){?>
+                                                        <input type="checkbox" id="<?=$wr_o_input[$i]?>" name="<?=$wr_o_input[$i]?>" value="1">
+                                                        <label for="<?=$wr_o_input[$i]?>"><?=$wr_o_label[$i]?></label>
+                                                        <?}?>
+                                                        </div>
+                                                        </div>
+
+                                                        <div class="room_info_form option">
+                                                          <p class="rf_title">기타사항</p>
+                                                          <textarea name="wr_memo" id="wr_memo" cols="30" rows="5"></textarea>
+                                                        </div>
+
+                                                        <div class="room_info_form">
+                                                          <p class="room_info_submit">확인</p>
+                                                        </div>
 
 
                                                     </div>
+
                                                   </div>
                                             </div>
                                     </td>
@@ -1491,6 +1683,6 @@ $("#wr_sale_price_b").keyup(function(){
 
     </script>
     <script src="<?php G5_PATH?>/assets/js/classie.js"></script>
-    <script src="<?php G5_PATH?>/assets/js/demo2.js"></script>
+    <!-- <script src="<?php G5_PATH?>/assets/js/demo2.js"></script> -->
 
 </section>
