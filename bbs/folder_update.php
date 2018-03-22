@@ -41,6 +41,7 @@ if ($page_id_array){
         $sql = " insert into `bookmark_$member[mb_id]_folder`
         set  bmf_name = '$folder_name',
              bmf_top = '$folder_top',
+             bmf_2 = '$member[mb_3]',
              bmf_top_date = '$folder_top_date',
              bmf_date = '".G5_TIME_YMDHIS."' ";
         

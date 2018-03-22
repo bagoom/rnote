@@ -13,7 +13,7 @@ include_once("$board_skin_path/lib/skin.lib.php");
   background: transparent !important;
 }
   .modal-content{
-    margin-top: 150px !important;
+    margin-top: 120px !important;
   }
 .modal-body{
   padding-left:  40px;
@@ -28,6 +28,22 @@ include_once("$board_skin_path/lib/skin.lib.php");
   border:0;
   border-bottom: 1px solid #ddd;
 }
+
+.modal-body textarea{
+  width:100%;
+  min-height:50px;
+  max-height: 150px;
+  margin-bottom:0px;
+  text-align:left;
+  padding: 10px;
+  font-size:18px;
+  border:0;
+  border-bottom: 1px solid #ddd;
+  line-height: 30px;
+}
+.modal-body textarea::-webkit-scrollbar { width: 0 !important }
+.modal-body textarea { -ms-overflow-style: none; }
+.modal-body textarea { overflow: -moz-scrollbars-none; }
 .modal-body p{
   margin-top:25px;
   margin-bottom:0;
@@ -35,9 +51,6 @@ include_once("$board_skin_path/lib/skin.lib.php");
   font-size:13px;
   font-weight:bold;
 }
-
-
-
 .wrapper{
   padding: 0;
   margin-bottom:25px;
@@ -102,7 +115,6 @@ include_once("$board_skin_path/lib/skin.lib.php");
   background:#d0d7e8;
   border-bottom: 1px solid #b5bed4;
 }
-
 .contact_list_head p{
   padding-top: 5px;
   color: #7f8dab;
@@ -130,15 +142,23 @@ include_once("$board_skin_path/lib/skin.lib.php");
   height: 110px;
   letter-spacing: -0.03em;
 }
-.contact_list .list_number{
+.contact_list .rc_star{
   width: 10%;
   line-height:110px;
-  font-size: 20px;
+  font-size: 25px;
   float: left;
   color: #aaa;
 }
+.contact_list .rc_date{
+  width: 11%;
+  line-height:110px;
+  font-size: 14px;
+  float: left;
+  color: #aaa;
+  text-align: left;
+}
 .contact_list .list_subject{
-  width: 23%;
+  width: 25%;
   padding-top: 35px;
   padding-left: 20px;
   font-size: 20px;
@@ -153,35 +173,39 @@ include_once("$board_skin_path/lib/skin.lib.php");
   font-weight: normal;
   margin-top: 5px;
 }
-.contact_list .list_floor{
-  width: 22%; 
+.contact_list .list_name{
+  width: 17%; 
   height: 110px;
-  padding-top: 35px;
+  padding-top: 33px;
   float: left;
   font-size: 16px;
   color: #222;
   text-align: left;
+  line-height: 23px;
+  letter-spacing: 0.02em;
 }
-.contact_list .list_price{
-  width: 100%; 
-  padding-top: 5px;
-  font-size: 18px;
-  color: #333;
-  text-align: left;
-  letter-spacing: -0.06em;
+.contact_list .list_name .rc_hp{
+  font-weight: bold;
+  margin-top:5px;
 }
-.contact_list .sum_pay{
-  width: 13%;
+.contact_list .rc_content{
+  width: 50%;
   height: 110px;
   padding-top: 48px;
   padding-left: 20px;
   float:left;
-  font-size: 20px;
-  color: #273eb6;
+  font-size: 16px;
+  color: #666;
   text-align: left;  
 }
-.contact_list .list_address{
-  width: 18%;
+.contact_list .rc_content p {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space:nowrap;
+  padding-right: 30px;
+}
+.contact_list .rc_confirm{
+  width: 10%;
   margin:0;
   padding-top: 50px;
   font-size: 16px;
@@ -190,8 +214,11 @@ include_once("$board_skin_path/lib/skin.lib.php");
   overflow:hidden;
   color: #666;
   float:left;
-  text-align: left;  
+  text-align: center;  
   letter-spacing: -0.06em;
+}
+.contact_list .rc_confirm:hover{
+  color: #000;
 }
 .contact_list .list_date{
   width: 14%;
@@ -204,10 +231,6 @@ include_once("$board_skin_path/lib/skin.lib.php");
 .contact_list_body h5{
   font-size: 16px;
   font-weight: bold;
-}
-.contact_list_body .rc_content{
-  font-size: 12px;
-  color: #888;
 }
 .contact_list_footer{
   padding: 20px 0 ;
@@ -240,7 +263,6 @@ include_once("$board_skin_path/lib/skin.lib.php");
   overflow: hidden;
   
 }
-
 .list_head_tab{
   width: 25%;
   padding: 20px;
@@ -281,7 +303,7 @@ background:#ffbe00;
 .paging_wrap .page_list a{
   width: 55px;
   height: 55px;
-  line-height: 55px;
+  line-height: 55px; 
   text-align: center;
   font-size: 10px;
   font-weight: bold;
@@ -319,6 +341,9 @@ background:#ffbe00;
 .next_page a,.prev_page a{
   display: block;
 }
+.modal-backdrop{
+  display:none;
+}
 </style>
 
 
@@ -328,14 +353,12 @@ background:#ffbe00;
 <div class="board_search" >
 
     <div class="title_wrap">
-        마이노트
+        고객관리
         <p>고객내용을 기록하여 고객의 현상태와<br>  업무진행 상황을 한눈에 파악할 수 있습니다.</p>
     </div>
-
-    <div class="contact_add_btn" data-backdrop="static" data-target="#layerpop" data-toggle="modal">
+    <div class="contact_add_btn" data-backdrop="static" data-target="#insert_modal" data-toggle="modal">
     <h3  >연락처추가</h3>
-    </div>        
-
+    </div>   
   </div>
   </div>
 
@@ -349,16 +372,8 @@ $result = sql_query($sql);
 
 
 <div class="col-lg-12 main-list-wrap" >
+     
 
-  <div class="contact_left_header">
-    <div class="list_head_tab_wrap">
-      <div class="list_head_tab active">매물검색</div> 
-      <div class="list_head_tab">가격검색</div> 
-      <div class="list_head_tab">면적검색</div> 
-      <div class="list_head_tab">임대매물 <i class="fa fa-caret-down" aria-hidden="true"></i></div> 
-   </div>
-  
-  </div>
   <div class="contact_wrap">
   
   </div>
@@ -369,10 +384,7 @@ $result = sql_query($sql);
 
 
 <script>
-
 $('.main-list-wrap').css("min-height", $(window).height()-85);
-
-
         // 고객관리 ajax요청
         var contact_url = "<?echo G5_BBS_URL?>/list_test.php?page=<?=$page?>";
         $(document).ready(function(){
@@ -390,8 +402,24 @@ $('.main-list-wrap').css("min-height", $(window).height()-85);
         });
         })
 
+        $('.main-list-wrap').css("min-height", $(window).height()-85);
 
 
-
+// 고객관리 ajax요청
+var contact_url = "<?echo G5_BBS_URL?>/contact.php";
+$(document).ready(function(){
+  // $('.contact_wrap').fadeToggle(100);
+$.ajax({
+type : "POST",
+url : contact_url,
+dataType : "text",
+error : function() {
+    alert('통신실패!!');
+},
+success : function(data) {
+    $('.main-list-wrap').html(data);
+}
+});
+})
 
 </script>

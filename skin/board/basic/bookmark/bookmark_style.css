@@ -43,16 +43,24 @@ display:none;
 .info_window{
   border-radius: 3px;
 }
+#bm_wrap{
+  position: relative;
+  overflow: hidden;
+}
 .bookmark_head{
-  position:relative;
+  position:fixed; 
+  width: 100%;
+  z-index: 20;
   padding: 20px;
   font-size : 18px;
   color:#fff;
   background: #3b4db7; 
 }
+.bookmark_list_wrap{
+  margin-top: 65px;
+}
 .bookmark_config_btn{
-  position:absolute;
-  top:0;
+  position: fixed;;
   right:50px;
   width:40px;
   height:64px;
@@ -64,8 +72,7 @@ display:none;
   cursor:pointer;
 }
 .bookmark_delete_btn{
-  position:absolute;
-  top:0;
+  position: fixed;;
   right:90px;
   width:40px;
   height:64px;
@@ -78,8 +85,7 @@ display:none;
   cursor:pointer;
 }
 .add_folder_btn{
-  position:absolute;
-  top:0;
+  position: fixed;
   right:10px;
   width:40px;
   height:64px;

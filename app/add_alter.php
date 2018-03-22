@@ -8,14 +8,14 @@ include '../common.php';
 // echo "<br>";
 // print_r ($emparray);
 // echo "</br>";
-$sql="select mb_id from `g5_member` where mb_id = 'dm9329' ";
+$sql="select mb_id from `g5_member` where mb_id = 'jjhnene' ";
 $result = sql_query($sql);
 
         
 
 for ($i=0; $row=sql_fetch_array($result); $i++) {
 
-   $sql2 = "CREATE TABLE `g5_write_dm9329` (
+   $sql2 = "CREATE TABLE `g5_write_jjhnene` (
     `wr_id` int(11) NOT NULL AUTO_INCREMENT,
     `wr_o_id` int(11) NOT NULL,
     `wr_num` int(11) NOT NULL DEFAULT '0',

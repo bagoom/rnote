@@ -699,7 +699,8 @@ for (var i = 0; i < target.length; i++) {
 // 리스트 체크했을때 , 중요매물 / 즐겨찾기 등록버튼
   $(".s1").click(function(){
   if("<?=$gr_admin?>"){
-    $("#fboardlist").submit();
+    $("#fboardlist").attr("action", "./office_recovery.php");
+      $("#fboardlist").submit();
     // if(<?=$write_count?> >= "<?=$gr_write_permission?>"){
     // $("#fboardlist").submit();
     // }else{

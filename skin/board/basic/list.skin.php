@@ -960,7 +960,6 @@ include_once("$board_skin_path/lib/skin.lib.php");
 
 
 
-
             <div class="chk_confirm_wrap">
               <? if ($wr_sold_out == '1'){ ?>
                 <span class="s1">사무실매물등록하기</span>

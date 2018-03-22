@@ -1,9 +1,5 @@
 <? include_once('../../../../common.php');?>
-
-<div class="bookmark_head">
-
-<i class="fa fa-bookmark" aria-hidden="true" style="font-size:22px; margin-right: 10px;"></i> 
-즐겨찾기 
+<div id="bm_wrap">
 <div class="add_folder_btn" data-target="#layerpop" data-toggle="modal">
 <i class="fa fa-plus-circle" aria-hidden="true" style="margin-left:2px;"></i>
 </div>
@@ -13,9 +9,13 @@
 <div class="bookmark_delete_btn">
 <i class="fa fa-trash-o" aria-hidden="true"></i>
 </div>
+
+<div class="bookmark_head">
+<i class="fa fa-bookmark" aria-hidden="true" style="font-size:22px; margin-right: 10px;"></i> 
+즐겨찾기 
 </div>
 
-<div class="bookmark_state">
+<div class="bookmark_state"> 
     <p>
       <span class="slect_child_count"></span>개의 매물이 선택 되었습니다.
     <span>
@@ -23,12 +23,12 @@
     </span>
     </p>
 </div>
-
+<div class="bookmark_list_wrap">
 <form action="" id="bookmark_form" method="post">
 <div id="board_list_wrap">
 <? 
 $con = mysqli_connect("localhost","realnote","!dnwls1127","realnote"); 
-$sql = "select * from `bookmark_$member[mb_id]_folder` order by bmf_top desc , bmf_order asc ,bmf_date desc";
+$sql = "select * from `bookmark_$member[mb_id]_folder` where bmf_2 = '$member[mb_3]' order by bmf_top desc , bmf_order asc ,bmf_date desc";
 $result = mysqli_query($con , $sql);
 while ($folder = mysqli_fetch_array($result)) {?>
 
@@ -74,7 +74,7 @@ while ($folder = mysqli_fetch_array($result)) {?>
    <? while ($child = mysqli_fetch_array($result2)) {?>
     <?if( $folder['bmf_id'] == $child['bm_bmf_id']){ ?>
     <div class="child_list">
-          <i class="fa fa-trash-o" aria-hidden="true" id="child_list_del" style="display:none;"></i>
+          <i class="fa fa-trash-o child_list_del" aria-hidden="true" id="" style="display:none;"></i>
           <input type="hidden" id="chk_child_id" value="<?=$child['bm_id']?>" >
           <p> 
           <!-- <?  ($child['wr_sale_type'] == '2') ? $wr_sale_type  = "<i class='icon-money-outlined '> </i>" : $wr_sale_type = "<i class='icon-home-outlined'> </i>" ?> -->
@@ -114,7 +114,8 @@ while ($folder = mysqli_fetch_array($result)) {?>
 <?}?>
   </form>
   </div>
-
+  </div>
+  </div>
         
         <? $sql = " select count(*) as cnt  from bookmark_$member[mb_id]_folder ";
         $result4 = mysqli_query($con , $sql);
@@ -210,7 +211,8 @@ $(".folder_down").click(function(){
   });
 
 // 북마크 리스트 삭제 버튼 ajax요청
-$("#child_list_del").click(function(){
+$(".child_list_del").click(function(){
+  console.log("ddd");
     var con = confirm("정말로 삭제 하시겠습니까?");
 
   if (con == true){

@@ -42,6 +42,7 @@ $wr_id_list=explode(",",$wr_id_list);
 
 
 for ($i=0; $i<count($wr_id_list); $i++) {
+
 $chk_sql = sql_fetch("select count(*) as cnt  from bookmark_$member[mb_id] where bm_bmf_id = '$bmf_id' and bm_match_id = '$wr_id_list[$i]' and (bm_from = '1' or bm_from = '2') ");
 
 $sql10 = "select * from `g5_write_$member[mb_id]` a, `bookmark_$member[mb_id]` b where a.wr_id = bm_match_id and  b.bm_bmf_id = '$bmf_id' and b.bm_from = 1 and a.wr_id = '$wr_id_list[$i]' UNION ALL select * from `g5_write_ekdna8284` a, `bookmark_$member[mb_id]` b where a.wr_id = bm_match_id and b.bm_from = 2 and a.wr_id = '$wr_id_list[$i]'";
@@ -54,7 +55,7 @@ while($row2=mysqli_fetch_array($result)){
 
 
 if ($chk_sql['cnt']>0){
-    // return;
+    echo $chk_sql[cnt];
 }else{
     $sql5 = ("update {$write_table}
     set wr_bookmark = '1' where wr_id =$wr_id_list[$i]");

@@ -507,6 +507,8 @@ letter-spacing: -0.03em;
 
                               <div class="form-title">
                                 매물정보
+
+                                <p class="ddong" style="font-size: 30px;">똥</p>
                               </div>
                             <table class="write_table">
                                 <tbody>
@@ -992,6 +994,23 @@ for(var i=0; i<=arr.length-1; i++) {
     if (arr[i] == obj) return true;
     }
 }
+
+var contact = '#wr_renter_contact,#wr_lessor_contact,#wr_seller_contact';
+$(contact).on('blur' ,function(){
+var contact_val = $(this).val();
+if(contact_val.length ==11){
+$(this).val($(this).val().replace(/(\d{3})\-?(\d{4})\-?(\d{4})/,'$1-$2-$3'))
+}
+else if(contact_val.length ==10){
+$(this).val($(this).val().replace(/(\d{3})\-?(\d{3})\-?(\d{4})/,'$1-$2-$3'))
+}
+});
+
+// 매물등록시 메모 br태그 입력
+$("#fwrite").submit(function(){
+  $('#wr_memo').val().replace(/\n/g, "<br>")
+})
+
 
 var contact = '#wr_renter_contact,#wr_lessor_contact,#wr_seller_contact';
 $(contact).on('blur' ,function(){

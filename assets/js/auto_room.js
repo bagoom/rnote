@@ -29,7 +29,7 @@ $("#room_confirm_btn").click(function(){
                 $(this).addClass("active");
 
                 $(".room_info_submit").click(function(){
-                   var data5 = $(li_this).data( floor_default,  { 
+                   var data5 = $(li_this).data( "key",  {
                        wr_rent_type: $("input[name='wr_rent_type']:checked").val(), 
                        wr_room_type: $("input[name='wr_room_type']:checked").val(), 
                        wr_rent_deposit: $("input[name='wr_rent_deposit']").val(), 
@@ -43,14 +43,11 @@ $("#room_confirm_btn").click(function(){
                        wr_mt_tv: $("input[name='wr_mt_tv']:checked").val(), 
                        wr_mt_internet: $("input[name='wr_mt_internet']:checked").val()
                     });
-                   $(li_this).attr("data",JSON.stringify( $(li_this).data( floor_default)));
-
+                   $(li_this).attr("data",JSON.stringify( $(li_this).data("key")));
+                   
                    console.log( $(li_this).attr("data"))
                 });
             })
-            
-          
- 
 
         })
         $(this).css("display","none") ;
@@ -58,3 +55,32 @@ $("#room_confirm_btn").click(function(){
     
 });
 
+
+$(".ddong").click(function(){
+    var tags = Array.from($('.auto_room_add li'));
+    var foo = [];
+
+    for ( var i = 0; i < tags.length; i++){
+        if($(tags[i]).attr('data').length==0){
+            foo.push({})
+        }
+        else{
+            foo.push(JSON.parse($(tags[i]).attr('data')))
+        }
+    }
+  console.log(foo)
+    $.ajax({
+        type : "POST",
+        url : g5_bbs_url+"/ddong.php",
+        data: JSON.stringify({"myData": foo}),
+        dataType : "text",
+        // traditional: true,
+        error : function(error) {
+        alert(JSON.stringify(error));
+        },
+        success : function(data) {
+            $('.auto_room_output').html(data);
+            console.log(data);
+        }
+        });
+});

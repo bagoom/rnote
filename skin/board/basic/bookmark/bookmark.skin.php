@@ -4,7 +4,7 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link href="<?=G5_URL?>/assets/css/jquery-nicelabel.css" rel="stylesheet" type="text/css" />
 <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
-<link href="<?=$bookmark_skin_url?>/bookmark_style.css" rel="stylesheet" type="text/css">
+<link href="<?=$bookmark_skin_url?>/bookmark_style.css?ver=2" rel="stylesheet" type="text/css">
 <!-- <link href="<?php echo G5_URL?>/assets/icon_font/css/fontello.css" rel="stylesheet"> -->
 
 
@@ -47,9 +47,11 @@
                       </form>
                       </div>
                       <!-- Footer -->
+                      <?=$board_list?>
                       <div class="modal-footer" style="padding:15px;">
                         <button type="button" class="btn btn-default add" data-dismiss="modal">폴더추가</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+                        <button type="button" class="btn btn-default" 
+                        data-dismiss="modal">닫기</button>
                       </div>
                   </div>
                 </div>
@@ -118,6 +120,14 @@ error : function() {
 },
 success : function(data) {
     $('#map_board').html(data);
+    
+      $(".child_list").mouseover(function(){
+      console.log("ddd");
+      hoverList($(this))
+    });
+    $(".child_list").mouseleave(function(){
+      leaveList($(this))
+    });
 }
 });
 })
@@ -151,7 +161,7 @@ $('#map_board').html(data);
 
   },
   error: function (jqXHR, textStatus, errorThrown) {
-  alert(errorThrown);
+  alert(errorThrown); 
   }
   })
   });
@@ -342,19 +352,15 @@ function showMarkers(toggle_id) {
 
 
 
-$(".child_list").hover(function(){
-  console.log("ddd")
-  hoverList($(this))
-});
-$(".child_list").mouseleave(function(){
-  leaveList($(this))
-});
+
+
 
 
 // 맵 오버레이 마우스오버시 보더 / z-index 증가
 $(".customoverlay").hover(function() {
   $(this).children('a').addClass("ddong_border");
   $(this).parent().css("z-index","10");
+  
 });
 
 $(".customoverlay").mouseleave(function() {
@@ -374,17 +380,17 @@ function hoverList(d){
   var ddong =$('span.title').parent();
   var ddong = d3.selectAll('.customoverlay').select('a').select('span.subj')._groups[0]
   var ddd =  ddong.filter(function(a){
-  return a.innerHTML.replace(' ','') == text})
+  return a.innerHTML.replace(/^\s|\s$/,'') == text})
 $(ddd).parents('a').addClass("ddong_border");
 $(ddd).parents('.customoverlay').parent().css("z-index","10");
-console.log(ddong);
+console.log(ddd);
   };
 function leaveList(d){
   var text = d.find('.find_txt').text();
   var ddong =$('span.title').parent();
   var ddong = d3.selectAll('.customoverlay').select('a').select('span.subj')._groups[0]
   var ddd =  ddong.filter(function(a){
-  return a.innerHTML.replace(' ','') == text})
+  return a.innerHTML.replace(/^\s|\s$/,'') == text})
 $(ddd).parents('a').removeClass("ddong_border");
 $(ddd).parents('.customoverlay').parent().css("z-index","0");
   };
@@ -400,8 +406,7 @@ function panTo(d) {
   // console.log('works')
 var text = d.find('.find_txt').text();
 var filtered = newPositions.filter(function(a){return a.title == text})
-console.log(text)
-
+// console.log(text)
 var moveLatLon = filtered[0].latlng;
 map.panTo(moveLatLon);
 }

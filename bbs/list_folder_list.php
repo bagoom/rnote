@@ -13,7 +13,7 @@ include_once('./_common.php');
         </div>
 <? 
         $con = mysqli_connect("localhost","realnote","!dnwls1127","realnote"); 
-        $sql = "select * from `bookmark_$member[mb_id]_folder` order by bmf_top desc , bmf_date desc";
+        $sql = "select * from `bookmark_$member[mb_id]_folder`  where bmf_2 = '$member[mb_3]' order by bmf_top desc , bmf_date desc" ;
         $result = mysqli_query($con , $sql);
         while ($folder = mysqli_fetch_array($result)) {
         ?>
@@ -52,42 +52,46 @@ include_once('./_common.php');
     data: formData,
     dataType: 'text',
     success: function (Data, textStatus, jqXHR) {
-        // alert(Data);
- 
+        alert(Data);
+        
         var temp = [];
         var overlap = [];
         overlap = Data.split(',');
+        overlap[0] = overlap[0].replace(/^\s/, "").replace("\n", '')
         temp = overlap.pop(); 
-        
  
         var list_val = $('.check_list li').map(function() { return $(this).text() }).get().join(',');
         var list_text = [];
         list_text = list_val.split(',');
 
         for (i=0; i<overlap.length; i++) {
-            console.log(list_text);
-
+            // console.log(list_text);
+            
            var d= $.inArray(overlap[i],list_text)
            var c = $(".check_list li")[d];
            $(".check_list ul").prepend($(c))
            $(c).css("color","red");
+           console.log(overlap)
+        //    console.log(list_text)
+        //    console.log(d)
         }    
 
 
         if(overlap.length>0){
-            toastr.error( "해당매물은 선택한 폴더에 이미 등록되어<br> 있는 매물입니다.");
+            toastr.error( "이미 등록한 매물이 포함 되어 있습니다.");
         } 
         else{
             $("#bookmark").modal('hide');
             $(".td_chk ").hide();
             $(".chk_confirm_wrap ").hide();
-            toastr.options = {
-            closeButton: true,
-            progressBar: true,
-            showMethod: 'slideDown',
-            position: 'bottom',
-            };
-            toastr.success( Data,"해당 폴더에 즐겨찾기가 추가 되었습니다.");
+            alert("해당 폴더에 즐겨찾기가 추가 되었습니다.")
+            // toastr.options = {
+            // closeButton: true,
+            // progressBar: true,
+            // showMethod: 'slideDown',
+            // position: 'bottom',
+            // };
+            // toastr.success( Data,"해당 폴더에 즐겨찾기가 추가 되었습니다.");
         }
 
     },
